@@ -1,0 +1,14 @@
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\YuYan.API.dll.config
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\YuYan.API.dll
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\YuYan.API.pdb
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\Newtonsoft.Json.dll
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\System.Net.Http.Formatting.dll
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\System.Web.Http.dll
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\System.Web.Http.WebHost.dll
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\Newtonsoft.Json.xml
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\System.Net.Http.Formatting.xml
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\System.Web.Http.xml
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\System.Web.Http.WebHost.xml
+C:\Git\YuYan\YuYan.API\YuYan.API\obj\Debug\YuYan.API.csprojResolveAssemblyReference.cache
+C:\Git\YuYan\YuYan.API\YuYan.API\obj\Debug\YuYan.API.dll
+C:\Git\YuYan\YuYan.API\YuYan.API\obj\Debug\YuYan.API.pdb
