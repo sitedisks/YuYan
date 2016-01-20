@@ -3,3 +3,4 @@ C:\Git\YuYan\YuYan.API\YuYan.Interface\bin\Debug\YuYan.Interface.dll
 C:\Git\YuYan\YuYan.API\YuYan.Interface\bin\Debug\YuYan.Interface.pdb
 C:\Git\YuYan\YuYan.API\YuYan.Interface\obj\Debug\YuYan.Interface.dll
 C:\Git\YuYan\YuYan.API\YuYan.Interface\obj\Debug\YuYan.Interface.pdb
+C:\Git\YuYan\YuYan.API\YuYan.Interface\obj\Debug\YuYan.Interface.csprojResolveAssemblyReference.cache

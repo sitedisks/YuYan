@@ -12,3 +12,7 @@ C:\Git\YuYan\YuYan.API\YuYan.API\bin\System.Web.Http.WebHost.xml
 C:\Git\YuYan\YuYan.API\YuYan.API\obj\Debug\YuYan.API.csprojResolveAssemblyReference.cache
 C:\Git\YuYan\YuYan.API\YuYan.API\obj\Debug\YuYan.API.dll
 C:\Git\YuYan\YuYan.API\YuYan.API\obj\Debug\YuYan.API.pdb
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\EntityFramework.dll
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\EntityFramework.SqlServer.dll
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\EntityFramework.xml
+C:\Git\YuYan\YuYan.API\YuYan.API\bin\EntityFramework.SqlServer.xml
