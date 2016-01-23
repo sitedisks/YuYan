@@ -1,16 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace YuYan.Data.Database
+
+namespace YuYan.Domain.Database
 {
     [Table("Survey")]
-    public class tbSurvey
+    public class tbSurvey: tbTbase
     {
-        [Key]
-        [Column("Id")]
+        [Key, Column("Id")]
         public int SurveyId { get; set; }
+        public string Title { get; set; }
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
+        [Column("UpdatedByUserId")]
+        public Guid UserId { get; set; }
+
     }
 }

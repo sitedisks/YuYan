@@ -1,0 +1,5 @@
+C:\Git\YuYan\YuYan.API\YuYan.Service\bin\Debug\YuYuan.Service.dll.config
+C:\Git\YuYan\YuYan.API\YuYan.Service\bin\Debug\YuYuan.Service.dll
+C:\Git\YuYan\YuYan.API\YuYan.Service\bin\Debug\YuYuan.Service.pdb
+C:\Git\YuYan\YuYan.API\YuYan.Service\obj\Debug\YuYuan.Service.dll
+C:\Git\YuYan\YuYan.API\YuYan.Service\obj\Debug\YuYuan.Service.pdb
