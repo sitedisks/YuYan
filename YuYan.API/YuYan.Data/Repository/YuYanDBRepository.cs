@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace YuYan.Data.Repository
 {
-    public class YuYanDBRepository : IYuYunDBRepository
+    public class YuYanDBRepository : IYuYanDBRepository
     {
         private readonly IYuYanDBContext _db;
         public YuYanDBRepository(IYuYanDBContext db)

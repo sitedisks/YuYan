@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="RepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -78,6 +79,10 @@
     <ProjectReference Include="..\YuYan.Interface\YuYan.Interface.csproj">
       <Project>{9a786d5f-5729-4948-a70e-ecbd8c2c2cd2}</Project>
       <Name>YuYan.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YuYan.Service\YuYan.Service.csproj">
+      <Project>{fcf3eb00-3943-457e-a613-96e2e391163e}</Project>
+      <Name>YuYan.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

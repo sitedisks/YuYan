@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 namespace YuYan.Domain.DTO
 {
     public class dtoSurveyQuestion
@@ -8,5 +9,7 @@ namespace YuYan.Domain.DTO
         public string Question { get; set; }
         public int QuestionOrder { get; set; }
         public int QuestionType { get; set; }
+
+        public virtual ICollection<dtoSurveyQuestionItem> dtoItems { get; set; }
     }
 }

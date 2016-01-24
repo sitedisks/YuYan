@@ -3,9 +3,9 @@ C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\YuYan.Data.dll
 C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\YuYan.Data.pdb
 C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\EntityFramework.dll
 C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\YuYan.Domain.dll
 C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\YuYan.Interface.dll
-C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\YuYuan.Domain.dll
-C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\YuYuan.Domain.pdb
+C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\YuYan.Domain.pdb
 C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\YuYan.Interface.pdb
 C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\EntityFramework.xml
 C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\EntityFramework.SqlServer.xml

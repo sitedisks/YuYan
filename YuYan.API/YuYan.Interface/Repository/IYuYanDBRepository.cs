@@ -5,7 +5,7 @@ using YuYan.Domain.Database;
 
 namespace YuYan.Interface.Repository
 {
-    public interface IYuYunDBRepository: IDisposable
+    public interface IYuYanDBRepository: IDisposable
     {
         #region survey
         Task<tbSurvey> GetSurveyBySurveyId(int surveyId);

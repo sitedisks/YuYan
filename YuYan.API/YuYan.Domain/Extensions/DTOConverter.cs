@@ -1,4 +1,5 @@
-﻿using YuYan.Domain.Database;
+﻿using System.Collections.Generic;
+using YuYan.Domain.Database;
 using YuYan.Domain.DTO;
 
 namespace YuYan.Domain.Extensions

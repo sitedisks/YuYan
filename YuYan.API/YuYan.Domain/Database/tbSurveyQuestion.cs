@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using YuYan.Domain.Enum;
 
 namespace YuYan.Domain.Database
 {
@@ -12,7 +13,7 @@ namespace YuYan.Domain.Database
         public int SurveyId { get; set; }
         public string Question { get; set; }
         public int QuestionOrder { get; set; }
-        public int QuestionType { get; set; }
+        public QuestionType QuestionType { get; set; }
 
         [ForeignKey("SurveyId")]
         public virtual tbSurvey tbSuvery { get; set; }

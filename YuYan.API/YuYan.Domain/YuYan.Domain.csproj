@@ -7,8 +7,8 @@
     <ProjectGuid>{F930C648-B409-4C69-8172-36AD22BED8E4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>YuYuan.Domain</RootNamespace>
-    <AssemblyName>YuYuan.Domain</AssemblyName>
+    <RootNamespace>YuYan.Domain</RootNamespace>
+    <AssemblyName>YuYan.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -40,7 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbContext\IYuYanDBContext.cs" />
-    <Compile Include="Repository\IYuYunDBRepository.cs" />
+    <Compile Include="Repository\IYuYanDBRepository.cs" />
+    <Compile Include="Service\IYuYanService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -54,9 +55,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Service\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\YuYan.Domain\YuYan.Domain.csproj">
       <Project>{f930c648-b409-4c69-8172-36ad22bed8e4}</Project>
