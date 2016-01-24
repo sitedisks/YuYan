@@ -29,7 +29,7 @@ namespace YuYan.Data.DbContext
 
 
         #region entities
-        public DbSet<tbSurvey> tbSurveies { get; set; }
+        public DbSet<tbSurvey> tbSurveys { get; set; }
         public DbSet<tbSurveyQuestion> tbSurveyQuestions { get; set; }
         public DbSet<tbSurveyQuestionItem> tbSurveyQuestionItems { get; set; }
         #endregion

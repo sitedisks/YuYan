@@ -49,13 +49,15 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbContext\YuYanDBContext.cs" />
+    <Compile Include="Repository\YuYanDBRepository.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\YuYan.Domain\YuYan.Domain.csproj">
       <Project>{f930c648-b409-4c69-8172-36ad22bed8e4}</Project>

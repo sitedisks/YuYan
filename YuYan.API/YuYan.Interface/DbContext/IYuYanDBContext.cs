@@ -18,7 +18,7 @@ namespace YuYan.Interface.DbContext
         ObjectContext BaseContext { get; }
 
         #region entities
-        DbSet<tbSurvey> tbSurveies { get; set; }
+        DbSet<tbSurvey> tbSurveys { get; set; }
         DbSet<tbSurveyQuestion> tbSurveyQuestions { get; set; }
         DbSet<tbSurveyQuestionItem> tbSurveyQuestionItems { get; set; }
         #endregion

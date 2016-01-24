@@ -1,4 +1,3 @@
-C:\Git\YuYan\YuYan.API\YuYan.Data\obj\Debug\YuYan.Data.csprojResolveAssemblyReference.cache
 C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\YuYan.Data.dll.config
 C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\YuYan.Data.dll
 C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\YuYan.Data.pdb
@@ -10,5 +9,6 @@ C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\YuYuan.Domain.pdb
 C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\YuYan.Interface.pdb
 C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\EntityFramework.xml
 C:\Git\YuYan\YuYan.API\YuYan.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Git\YuYan\YuYan.API\YuYan.Data\obj\Debug\YuYan.Data.csprojResolveAssemblyReference.cache
 C:\Git\YuYan\YuYan.API\YuYan.Data\obj\Debug\YuYan.Data.dll
 C:\Git\YuYan\YuYan.API\YuYan.Data\obj\Debug\YuYan.Data.pdb

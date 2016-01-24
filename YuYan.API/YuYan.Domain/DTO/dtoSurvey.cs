@@ -8,6 +8,6 @@ namespace YuYan.Domain.DTO
         public string Title { get; set; }
         public string ShortDesc { get; set; }
         public string LongDesc { get; set; }
-        public Guid UserId { get; set; }
+        public Nullable<Guid> UserId { get; set; }
     }
 }

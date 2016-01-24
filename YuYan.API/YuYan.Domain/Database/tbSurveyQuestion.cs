@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace YuYan.Domain.Database
@@ -12,6 +13,10 @@ namespace YuYan.Domain.Database
         public string Question { get; set; }
         public int QuestionOrder { get; set; }
         public int QuestionType { get; set; }
+
+        [ForeignKey("SurveyId")]
+        public virtual tbSurvey tbSuvery { get; set; }
+        public virtual ICollection<tbSurveyQuestionItem> tbSurveyQuestionItems { get; set; }
         
     }
 }

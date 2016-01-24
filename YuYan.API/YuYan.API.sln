@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuYan.Domain", "YuYan.Domai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuYan.Service", "YuYan.Service\YuYan.Service.csproj", "{FCF3EB00-3943-457E-A613-96E2E391163E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuYan.Test", "YuYan.Test\YuYan.Test.csproj", "{C1F96EEC-0C39-449C-85AE-B92E5E3633F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{FCF3EB00-3943-457E-A613-96E2E391163E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCF3EB00-3943-457E-A613-96E2E391163E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCF3EB00-3943-457E-A613-96E2E391163E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1F96EEC-0C39-449C-85AE-B92E5E3633F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1F96EEC-0C39-449C-85AE-B92E5E3633F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1F96EEC-0C39-449C-85AE-B92E5E3633F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1F96EEC-0C39-449C-85AE-B92E5E3633F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

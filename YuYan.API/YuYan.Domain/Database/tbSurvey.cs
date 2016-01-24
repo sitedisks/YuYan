@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,7 +14,9 @@ namespace YuYan.Domain.Database
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
         [Column("UpdatedByUserId")]
-        public Guid UserId { get; set; }
+        public Nullable<Guid> UserId { get; set; }
+
+        public virtual ICollection<tbSurveyQuestion> tbSurveyQuestions { get; set; }
 
     }
 }

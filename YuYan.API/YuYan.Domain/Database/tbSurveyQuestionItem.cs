@@ -11,5 +11,8 @@ namespace YuYan.Domain.Database
         public int QuestionId { get; set; }
         public string ItemDescription { get; set; }
         public int ItemOrder { get; set; }
+
+        [ForeignKey("QuestionId")]
+        public virtual tbSurveyQuestion tbSurveyQuestion { get; set; }
     }
 }
