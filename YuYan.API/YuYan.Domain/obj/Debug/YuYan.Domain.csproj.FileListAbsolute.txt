@@ -1,5 +1,0 @@
-C:\Git\YuYan\YuYan.API\YuYan.Domain\bin\Debug\YuYan.Domain.dll.config
-C:\Git\YuYan\YuYan.API\YuYan.Domain\bin\Debug\YuYan.Domain.dll
-C:\Git\YuYan\YuYan.API\YuYan.Domain\bin\Debug\YuYan.Domain.pdb
-C:\Git\YuYan\YuYan.API\YuYan.Domain\obj\Debug\YuYan.Domain.dll
-C:\Git\YuYan\YuYan.API\YuYan.Domain\obj\Debug\YuYan.Domain.pdb

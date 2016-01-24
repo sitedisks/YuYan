@@ -2,3 +2,7 @@ YuYan.API/packages/
 YuYan.API/YuYan.API/obj/
 YuYan.API/YuYan.Test/obj/
 
+YuYan.API/YuYan.Data/obj/
+YuYan.API/YuYan.Domain/obj/
+YuYan.API/YuYan.Interface/obj/
+YuYan.API/YuYan.Service/obj/
