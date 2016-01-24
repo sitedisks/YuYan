@@ -7,8 +7,8 @@
     <ProjectGuid>{FCF3EB00-3943-457E-A613-96E2E391163E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>YuYuan.Service</RootNamespace>
-    <AssemblyName>YuYuan.Service</AssemblyName>
+    <RootNamespace>YuYan.Service</RootNamespace>
+    <AssemblyName>YuYan.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,6 +36,22 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="YuYanService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YuYan.Domain\YuYan.Domain.csproj">
+      <Project>{f930c648-b409-4c69-8172-36ad22bed8e4}</Project>
+      <Name>YuYan.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YuYan.Interface\YuYan.Interface.csproj">
+      <Project>{9a786d5f-5729-4948-a70e-ecbd8c2c2cd2}</Project>
+      <Name>YuYan.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

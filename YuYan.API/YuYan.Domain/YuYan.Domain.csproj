@@ -7,8 +7,8 @@
     <ProjectGuid>{F930C648-B409-4C69-8172-36AD22BED8E4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>YuYuan.Domain</RootNamespace>
-    <AssemblyName>YuYuan.Domain</AssemblyName>
+    <RootNamespace>YuYan.Domain</RootNamespace>
+    <AssemblyName>YuYan.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,6 +36,24 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Database\tbSurvey.cs" />
+    <Compile Include="Database\tbSurveyQuestion.cs" />
+    <Compile Include="Database\tbSurveyQuestionItem.cs" />
+    <Compile Include="Database\tbTbase.cs" />
+    <Compile Include="DTO\dtoSurvey.cs" />
+    <Compile Include="DTO\dtoSurveyQuestion.cs" />
+    <Compile Include="DTO\dtoSurveyQuestionItem.cs" />
+    <Compile Include="Enum\Enum.cs" />
+    <Compile Include="Extensions\DTOConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Constants\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
