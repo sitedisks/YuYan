@@ -50,7 +50,9 @@ namespace YuYan.Data.Repository
 
             return surveyList;
         }
+        #endregion
 
+        #region question
         public async Task<IEnumerable<tbSurveyQuestion>> GetSurveyQuestionsBySurveyId(int surveyId)
         {
             IList<tbSurveyQuestion> surveyQuestionList = new List<tbSurveyQuestion>();
@@ -67,6 +69,27 @@ namespace YuYan.Data.Repository
             return surveyQuestionList;
         }
         #endregion
+
+        #region item
+        public async Task<IEnumerable<tbSurveyQuestionItem>> GetQuestionItemsByQuestionId(int questionId)
+        {
+            IList<tbSurveyQuestionItem> itemList = new List<tbSurveyQuestionItem>();
+
+            try
+            {
+                itemList = await _db.tbSurveyQuestionItems.Where(x => x.QuestionId == questionId && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return itemList;
+        }
+        #endregion
+
+
+
 
 
         #region dispose

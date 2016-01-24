@@ -22,8 +22,9 @@ namespace YuYan.Test
         [TestMethod]
         public async Task TestGetSurveyBySurveyId()
         {
-            using(YuYanDBContext db = new YuYanDBContext()) 
-            using(YuYanDBRepository repos = new YuYanDBRepository(db)){
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
 
                 tbSurvey obj = await repos.GetSurveyBySurveyId(1);
                 Assert.IsNotNull(obj);
@@ -32,12 +33,26 @@ namespace YuYan.Test
         }
 
         [TestMethod]
-        public async Task TestGetSurveyQuestionBySurveyId() { 
-        
-            using(YuYanDBContext db= new YuYanDBContext())
-            using (YuYanDBRepository repos = new YuYanDBRepository(db)) {
+        public async Task TestGetSurveyQuestionBySurveyId()
+        {
+
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
 
                 var obj = await repos.GetSurveyQuestionsBySurveyId(1);
+                Assert.IsNotNull(obj);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestGetQuestionItemsByQuestionId()
+        {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+
+                var obj = await repos.GetQuestionItemsByQuestionId(1);
                 Assert.IsNotNull(obj);
             }
         }
