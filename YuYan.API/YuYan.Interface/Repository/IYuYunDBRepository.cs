@@ -10,6 +10,8 @@ namespace YuYan.Interface.Repository
         #region survey
         Task<tbSurvey> GetSurveyBySurveyId(int surveyId);
         Task<IEnumerable<tbSurvey>> GetSurveysByUserId(Guid userId);
+
+        Task<IEnumerable<tbSurveyQuestion>> GetSurveyQuestionsBySurveyId(int surveyId);
         #endregion
     }
 }

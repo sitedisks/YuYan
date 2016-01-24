@@ -31,7 +31,16 @@ namespace YuYan.Test
             }
         }
 
-       
+        [TestMethod]
+        public async Task TestGetSurveyQuestionBySurveyId() { 
+        
+            using(YuYanDBContext db= new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db)) {
+
+                var obj = await repos.GetSurveyQuestionsBySurveyId(1);
+                Assert.IsNotNull(obj);
+            }
+        }
 
     }
 }

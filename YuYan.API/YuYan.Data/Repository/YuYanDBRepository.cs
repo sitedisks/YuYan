@@ -50,6 +50,22 @@ namespace YuYan.Data.Repository
 
             return surveyList;
         }
+
+        public async Task<IEnumerable<tbSurveyQuestion>> GetSurveyQuestionsBySurveyId(int surveyId)
+        {
+            IList<tbSurveyQuestion> surveyQuestionList = new List<tbSurveyQuestion>();
+
+            try
+            {
+                surveyQuestionList = await _db.tbSurveyQuestions.Where(x => x.SurveyId == surveyId && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return surveyQuestionList;
+        }
         #endregion
 
 
