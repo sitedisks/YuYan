@@ -3,6 +3,7 @@ using YuYan.Data.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using YuYan.Domain.Database;
 using System.Threading.Tasks;
+using YuYan.Domain.DTO;
 
 namespace YuYan.Test
 {
@@ -18,7 +19,7 @@ namespace YuYan.Test
             Assert.AreEqual(z, x + y);
         }
 
-
+        #region survey
         [TestMethod]
         public async Task TestGetSurveyBySurveyId()
         {
@@ -31,7 +32,9 @@ namespace YuYan.Test
                 Assert.AreEqual("Test Survey", obj.Title, true);
             }
         }
+        #endregion
 
+        #region question
         [TestMethod]
         public async Task TestGetSurveyQuestionBySurveyId()
         {
@@ -44,7 +47,9 @@ namespace YuYan.Test
                 Assert.IsNotNull(obj);
             }
         }
+        #endregion
 
+        #region item
         [TestMethod]
         public async Task TestGetQuestionItemsByQuestionId()
         {
@@ -56,6 +61,53 @@ namespace YuYan.Test
                 Assert.IsNotNull(obj);
             }
         }
+
+        [TestMethod]
+        public async Task TestCreateItem()
+        {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                dtoSurveyQuestionItem newItem = new dtoSurveyQuestionItem();
+                newItem.QuestionId = 1;
+                newItem.ItemDescription = "The first choice";
+
+                var obj = await repos.CreateNewItem(newItem);
+                Assert.IsNotNull(obj);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestUpdateItem() {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                dtoSurveyQuestionItem newItem = new dtoSurveyQuestionItem();
+                newItem.QuestionItemId = 2;
+                newItem.ItemDescription = "The second choice";
+
+                var obj = await repos.UpdateItem(newItem);
+                Assert.IsNotNull(obj);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestDeleteItem()
+        {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                dtoSurveyQuestionItem newItem = new dtoSurveyQuestionItem();
+                newItem.QuestionItemId = 3; // please reorder 
+                newItem.IsDeleted = true;
+                newItem.ItemDescription = "The second choice";
+
+                var obj = await repos.UpdateItem(newItem);
+                Assert.IsNotNull(obj);
+            }
+        }
+
+        #endregion
 
     }
 }

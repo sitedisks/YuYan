@@ -120,12 +120,12 @@ namespace YuYan.Data.Repository
             tbSurveyQuestionItem theItem = null;
             try
             {
-                theItem = await _db.tbSurveyQuestionItems.FirstOrDefaultAsync(x => x.QuestionItemId == item.QuestionItemId);
+                theItem = _db.tbSurveyQuestionItems.FirstOrDefault(x => x.QuestionItemId == item.QuestionItemId);
                 if (theItem != null)
                 {
-                    theItem.QuestionId = item.QuestionId;
+                    //theItem.QuestionId = item.QuestionId;
                     theItem.ItemDescription = item.ItemDescription;
-                    theItem.ItemOrder = item.ItemOrder;
+                    //theItem.ItemOrder = item.ItemOrder;
                     theItem.UpdatedDate = DateTime.UtcNow;
                     theItem.IsActive = item.IsActive;
                     theItem.IsDeleted = item.IsDeleted;
