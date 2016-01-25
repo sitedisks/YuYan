@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 using YuYan.Data.DbContext;
 using YuYan.Data.Repository;
 using YuYan.Service;
-using YuYan.Domain.DTO;
+using YuYan.API.Controllers;
 
 namespace YuYan.Test
 {
     [TestClass]
-    public class ServiceTest
+    public class ControllerTest
     {
         [TestMethod]
         public async Task TestGetSurveyBySurveyId()
@@ -21,8 +18,10 @@ namespace YuYan.Test
             using (YuYanDBRepository repos = new YuYanDBRepository(db))
             {
                 YuYanService svc = new YuYanService(repos);
-                dtoSurvey obj = await svc.GetSurveyBySurveyId(1);
-                Assert.IsNotNull(obj);
+                var controller = new SurveyController(svc);
+
+                var result = await controller.GetSurveyBySurveyId(1);
+                Assert.IsNotNull(result);
             }
         }
     }

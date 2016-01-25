@@ -6,8 +6,9 @@ namespace YuYan.Domain.Extensions
 {
     public static class DTOConverter
     {
-        public static tbSurvey ConverToTbSurvey(this dtoSurvey source, tbSurvey data = null) {
-
+        #region dto to table
+        public static tbSurvey ConverToTbSurvey(this dtoSurvey source, tbSurvey data = null)
+        {
             if (data == null)
                 data = new tbSurvey();
 
@@ -22,8 +23,56 @@ namespace YuYan.Domain.Extensions
 
             return data;
         }
+        #endregion
 
-        public static dtoSurvey ConvertToDtoSurvey(this tbSurvey source, dtoSurvey data = null) {
+        #region table to dto
+        public static dtoSurveyQuestionItem ConvertToDtoSurveyQuestionItem(this tbSurveyQuestionItem source, dtoSurveyQuestionItem data = null)
+        {
+            if (data == null)
+                data = new dtoSurveyQuestionItem();
+
+            if (source == null)
+                return null;
+
+            data.QuestionItemId = source.QuestionItemId;
+            data.QuestionId = source.QuestionId;
+            data.ItemDescription = source.ItemDescription;
+            data.ItemOrder = source.ItemOrder;
+
+            return data;
+        }
+
+        public static dtoSurveyQuestion ConvertToDtoSurveyQuestion(this tbSurveyQuestion source, dtoSurveyQuestion data = null)
+        {
+
+            if (data == null)
+                data = new dtoSurveyQuestion();
+
+            if (source == null)
+                return null;
+
+            data.QuestionId = source.QuestionId;
+            data.SurveryId = source.SurveyId;
+            data.Question = source.Question;
+            data.QuestionOrder = source.QuestionOrder;
+            data.QuestionType = source.QuestionType;
+
+            IList<dtoSurveyQuestionItem> itemList = new List<dtoSurveyQuestionItem>();
+            if (source.tbSurveyQuestionItems.Count > 0)
+            {
+                foreach (tbSurveyQuestionItem item in source.tbSurveyQuestionItems) {
+                    itemList.Add(item.ConvertToDtoSurveyQuestionItem());
+                }
+            }
+            data.dtoItems = itemList;
+
+            return data;
+        }
+
+
+
+        public static dtoSurvey ConvertToDtoSurvey(this tbSurvey source, dtoSurvey data = null)
+        {
             if (data == null)
                 data = new dtoSurvey();
 
@@ -36,9 +85,19 @@ namespace YuYan.Domain.Extensions
             data.LongDesc = source.LongDescription;
             data.UserId = source.UserId;
 
+            IList<dtoSurveyQuestion> questionList = new List<dtoSurveyQuestion>();
+            if (source.tbSurveyQuestions.Count > 0)
+            {
+                foreach (tbSurveyQuestion question in source.tbSurveyQuestions)
+                {
+                    questionList.Add(question.ConvertToDtoSurveyQuestion());
+                }
+            }
+            data.dtoQuestions = questionList;
+
             return data;
         }
+        #endregion
 
-     
     }
 }
