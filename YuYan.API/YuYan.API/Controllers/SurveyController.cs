@@ -15,7 +15,7 @@ namespace YuYan.API.Controllers
             _yuyanSvc = yuyanSvc;
         }
 
-        [Route("{id}"), HttpGet]
+        [Route("{surveyid}"), HttpGet]
         public async Task<IHttpActionResult> GetSurveyBySurveyId(int surveyId) {
             dtoSurvey dtoSurvey = new dtoSurvey();
 
