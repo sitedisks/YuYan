@@ -45,6 +45,7 @@
     <Compile Include="DTO\dtoSurvey.cs" />
     <Compile Include="DTO\dtoSurveyQuestion.cs" />
     <Compile Include="DTO\dtoSurveyQuestionItem.cs" />
+    <Compile Include="DTO\dtoTbase.cs" />
     <Compile Include="Enum\Enum.cs" />
     <Compile Include="Extensions\DTOConverter.cs" />
   </ItemGroup>

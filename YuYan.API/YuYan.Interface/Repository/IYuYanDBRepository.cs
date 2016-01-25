@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using YuYan.Domain.Database;
+using YuYan.Domain.DTO;
 
 namespace YuYan.Interface.Repository
 {
@@ -18,6 +19,9 @@ namespace YuYan.Interface.Repository
 
         #region item
         Task<IEnumerable<tbSurveyQuestionItem>> GetQuestionItemsByQuestionId(int questionId);
+        Task<tbSurveyQuestionItem> CreateNewItem(dtoSurveyQuestionItem item);
+        Task<tbSurveyQuestionItem> UpdateItem(dtoSurveyQuestionItem item);
+
         #endregion 
     }
 }

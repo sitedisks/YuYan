@@ -7,6 +7,7 @@ using YuYan.Domain.Database;
 using YuYan.Interface.Repository;
 using YuYan.Interface.DbContext;
 using System.Collections.Generic;
+using YuYan.Domain.DTO;
 
 namespace YuYan.Data.Repository
 {
@@ -77,7 +78,8 @@ namespace YuYan.Data.Repository
 
             try
             {
-                itemList = await _db.tbSurveyQuestionItems.Where(x => x.QuestionId == questionId && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
+                itemList = await _db.tbSurveyQuestionItems.Where(x => x.QuestionId ==
+                    questionId && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
             }
             catch (DataException dex)
             {
@@ -86,11 +88,59 @@ namespace YuYan.Data.Repository
 
             return itemList;
         }
+
+        public async Task<tbSurveyQuestionItem> CreateNewItem(dtoSurveyQuestionItem item)
+        {
+
+            tbSurveyQuestionItem newItem = new tbSurveyQuestionItem();
+            try
+            {
+                var itemCount = _db.tbSurveyQuestionItems.Where(x => x.QuestionId ==
+                    item.QuestionId && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).Count();
+                newItem.QuestionId = item.QuestionId;
+                newItem.ItemDescription = item.ItemDescription;
+                newItem.ItemOrder = itemCount + 1;
+                newItem.CreatedDate = DateTime.UtcNow;
+                newItem.IsActive = true;
+                newItem.IsDeleted = false;
+
+                _db.tbSurveyQuestionItems.Add(newItem);
+                await _db.SaveChangesAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return newItem;
+        }
+
+        public async Task<tbSurveyQuestionItem> UpdateItem(dtoSurveyQuestionItem item)
+        {
+            tbSurveyQuestionItem theItem = null;
+            try
+            {
+                theItem = await _db.tbSurveyQuestionItems.FirstOrDefaultAsync(x => x.QuestionItemId == item.QuestionItemId);
+                if (theItem != null)
+                {
+                    theItem.QuestionId = item.QuestionId;
+                    theItem.ItemDescription = item.ItemDescription;
+                    theItem.ItemOrder = item.ItemOrder;
+                    theItem.UpdatedDate = DateTime.UtcNow;
+                    theItem.IsActive = item.IsActive;
+                    theItem.IsDeleted = item.IsDeleted;
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return theItem;
+        }
+
         #endregion
-
-
-
-
 
         #region dispose
         public void Dispose()

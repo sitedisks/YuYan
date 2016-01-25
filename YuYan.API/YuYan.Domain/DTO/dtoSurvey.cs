@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace YuYan.Domain.DTO
 {
-    public class dtoSurvey
+    public class dtoSurvey: dtoTbase
     {
         public int SurveryId { get; set; }
         public string Title { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YuYan.Domain.DTO
 {
-    public class dtoSurveyQuestionItem
+    public class dtoSurveyQuestionItem: dtoTbase
     {
         public int QuestionItemId { get; set; }
         public int QuestionId { get; set; }
