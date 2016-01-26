@@ -69,6 +69,88 @@ namespace YuYan.Data.Repository
 
             return surveyQuestionList;
         }
+
+        public async Task<tbSurveyQuestion> CreateNewQuestion(dtoSurveyQuestion question) {
+            tbSurveyQuestion newQuestion = new tbSurveyQuestion();
+
+            try {
+                var questionCount = _db.tbSurveyQuestions.Where(x => x.SurveyId == question.SurveryId 
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).Count();
+                newQuestion.SurveyId = question.SurveryId;
+                newQuestion.Question = question.Question;
+                newQuestion.QuestionType = question.QuestionType;
+                newQuestion.QuestionOrder = questionCount + 1;
+                newQuestion.CreatedDate = DateTime.UtcNow;
+                newQuestion.IsActive = true;
+                newQuestion.IsDeleted = false;
+
+                _db.tbSurveyQuestions.Add(newQuestion);
+                await _db.SaveChangesAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return newQuestion;
+        }
+
+        public async Task<tbSurveyQuestion> UpdateQuestion(dtoSurveyQuestion question) {
+            tbSurveyQuestion theQuestion = null;
+
+            try {
+                theQuestion = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == question.QuestionId 
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (theQuestion != null) {
+                    theQuestion.Question = question.Question;
+                    theQuestion.UpdatedDate = DateTime.UtcNow;
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return theQuestion;
+        }
+
+        public async Task DeleteQuestion(int questionId) {
+            try {
+                tbSurveyQuestion theQuestion = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == questionId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (theQuestion != null)
+                {
+                    theQuestion.IsDeleted = true;
+                    theQuestion.UpdatedDate = DateTime.UtcNow;
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+        }
+
+        public async Task DeactiveQuestion(int questionId) {
+            try
+            {
+                tbSurveyQuestion theQuestion = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == questionId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (theQuestion != null)
+                {
+                    theQuestion.IsActive = false;
+                    theQuestion.UpdatedDate = DateTime.UtcNow;
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+        }
+
         #endregion
 
         #region item
@@ -95,8 +177,8 @@ namespace YuYan.Data.Repository
             tbSurveyQuestionItem newItem = new tbSurveyQuestionItem();
             try
             {
-                var itemCount = _db.tbSurveyQuestionItems.Where(x => x.QuestionId ==
-                    item.QuestionId && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).Count();
+                var itemCount = _db.tbSurveyQuestionItems.Where(x => x.QuestionId == item.QuestionId 
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).Count();
                 newItem.QuestionId = item.QuestionId;
                 newItem.ItemDescription = item.ItemDescription;
                 newItem.ItemOrder = itemCount + 1;
@@ -120,15 +202,12 @@ namespace YuYan.Data.Repository
             tbSurveyQuestionItem theItem = null;
             try
             {
-                theItem = _db.tbSurveyQuestionItems.FirstOrDefault(x => x.QuestionItemId == item.QuestionItemId);
+                theItem = await _db.tbSurveyQuestionItems.FirstOrDefaultAsync(x => x.QuestionItemId == item.QuestionItemId 
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
                 if (theItem != null)
                 {
-                    //theItem.QuestionId = item.QuestionId;
                     theItem.ItemDescription = item.ItemDescription;
-                    //theItem.ItemOrder = item.ItemOrder;
                     theItem.UpdatedDate = DateTime.UtcNow;
-                    theItem.IsActive = item.IsActive;
-                    theItem.IsDeleted = item.IsDeleted;
                     await _db.SaveChangesAsync();
                 }
             }
@@ -138,6 +217,39 @@ namespace YuYan.Data.Repository
             }
 
             return theItem;
+        }
+
+        public async Task DeleteItem(int itemId) {
+            try {
+                tbSurveyQuestionItem theItem = await _db.tbSurveyQuestionItems.FirstOrDefaultAsync(x => x.QuestionItemId == itemId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+                if (theItem != null)
+                {
+                    theItem.IsDeleted = true;
+                    theItem.UpdatedDate = DateTime.UtcNow;
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+        }
+
+        public async Task DeactiveItem(int itemId) {
+            try
+            {
+                tbSurveyQuestionItem theItem = await _db.tbSurveyQuestionItems.FirstOrDefaultAsync(x => x.QuestionItemId == itemId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+                if (theItem != null)
+                {
+                    theItem.IsActive = false;
+                    theItem.UpdatedDate = DateTime.UtcNow;
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
         }
 
         #endregion

@@ -70,7 +70,7 @@ namespace YuYan.Test
             {
                 dtoSurveyQuestionItem newItem = new dtoSurveyQuestionItem();
                 newItem.QuestionId = 1;
-                newItem.ItemDescription = "The first choice";
+                newItem.ItemDescription = "The third choice";
 
                 var obj = await repos.CreateNewItem(newItem);
                 Assert.IsNotNull(obj);
@@ -84,7 +84,7 @@ namespace YuYan.Test
             {
                 dtoSurveyQuestionItem newItem = new dtoSurveyQuestionItem();
                 newItem.QuestionItemId = 2;
-                newItem.ItemDescription = "The second choice";
+                newItem.ItemDescription = "The ddddd choice";
 
                 var obj = await repos.UpdateItem(newItem);
                 Assert.IsNotNull(obj);
@@ -98,12 +98,9 @@ namespace YuYan.Test
             using (YuYanDBRepository repos = new YuYanDBRepository(db))
             {
                 dtoSurveyQuestionItem newItem = new dtoSurveyQuestionItem();
-                newItem.QuestionItemId = 3; // please reorder 
-                newItem.IsDeleted = true;
-                newItem.ItemDescription = "The second choice";
 
-                var obj = await repos.UpdateItem(newItem);
-                Assert.IsNotNull(obj);
+                await repos.DeleteItem(4);
+          
             }
         }
 

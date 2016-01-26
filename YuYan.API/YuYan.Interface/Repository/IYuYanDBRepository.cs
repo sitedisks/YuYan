@@ -15,12 +15,19 @@ namespace YuYan.Interface.Repository
 
         #region question
         Task<IEnumerable<tbSurveyQuestion>> GetSurveyQuestionsBySurveyId(int surveyId);
+        Task<tbSurveyQuestion> CreateNewQuestion(dtoSurveyQuestion question);
+        Task<tbSurveyQuestion> UpdateQuestion(dtoSurveyQuestion question);
+        Task DeleteQuestion(int questionId);
+        Task DeactiveQuestion(int questionId);
+
         #endregion
 
         #region item
         Task<IEnumerable<tbSurveyQuestionItem>> GetQuestionItemsByQuestionId(int questionId);
         Task<tbSurveyQuestionItem> CreateNewItem(dtoSurveyQuestionItem item);
         Task<tbSurveyQuestionItem> UpdateItem(dtoSurveyQuestionItem item);
+        Task DeleteItem(int itemId);
+        Task DeactiveItem(int itemId);
 
         #endregion 
     }
