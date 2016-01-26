@@ -25,5 +25,16 @@ namespace YuYan.Test
                 Assert.IsNotNull(obj);
             }
         }
+
+        [TestMethod]
+        public async Task TestDeleteSurveyQuestion() {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                YuYanService svc = new YuYanService(repos);
+                await svc.DeleteSurveyQuestion(1);
+                
+            }
+        }
     }
 }

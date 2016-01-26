@@ -102,6 +102,14 @@ namespace YuYan.Data.Repository
                 if (theSurvey != null) {
                     theSurvey.IsDeleted = true;
                     theSurvey.UpdatedDate = DateTime.UtcNow;
+
+                    // Set all question (under this survey) to delete
+                    var questionList = await GetSurveyQuestionsBySurveyId(surveyId);
+                    foreach (var question in questionList)
+                    {
+                        await DeleteQuestion(question.QuestionId);
+                    }
+
                     await _db.SaveChangesAsync();
                 }
             }
@@ -201,6 +209,12 @@ namespace YuYan.Data.Repository
                 {
                     theQuestion.IsDeleted = true;
                     theQuestion.UpdatedDate = DateTime.UtcNow;
+                    // Set all items (under this question) to delete
+                    var itemList = await GetQuestionItemsByQuestionId(questionId);
+                    foreach (var item in itemList) {
+                        await DeleteItem(item.QuestionItemId);
+                    }
+
                     await _db.SaveChangesAsync();
                 }
             }

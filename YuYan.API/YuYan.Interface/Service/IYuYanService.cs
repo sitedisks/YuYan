@@ -8,13 +8,13 @@ namespace YuYan.Interface.Service
         #region survey
         Task<dtoSurvey> GetSurveyBySurveyId(int surveyId);
 
-        //Task<dtoSurvey> CreateSurvey(dtoSurvey survey);
+        Task<dtoSurvey> CreateSurvey(dtoSurvey survey);
 
-        //Task<dtoSurvey> UpdateSurvey(dtoSurvey survey);
+        Task<dtoSurvey> UpdateSurvey(dtoSurvey survey);
 
-        //Task DeleteSurvey(int surveyId);
+        Task DeleteSurvey(int surveyId);
 
-        //Task DeactiveSurvey(int surveyId);
+        Task DeactiveSurvey(int surveyId);
         #endregion
 
         #region question
@@ -24,7 +24,7 @@ namespace YuYan.Interface.Service
 
         Task DeleteSurveyQuestion(int questionId);
 
-        //Task DeactiveSurveyQuestion(int questionId);
+        Task DeactiveSurveyQuestion(int questionId);
         #endregion
 
         #region item
