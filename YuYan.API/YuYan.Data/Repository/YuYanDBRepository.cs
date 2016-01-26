@@ -3,10 +3,10 @@ using System.Linq;
 using System.Data;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using YuYan.Domain.Database;
 using YuYan.Interface.Repository;
 using YuYan.Interface.DbContext;
-using System.Collections.Generic;
 using YuYan.Domain.DTO;
 
 namespace YuYan.Data.Repository
