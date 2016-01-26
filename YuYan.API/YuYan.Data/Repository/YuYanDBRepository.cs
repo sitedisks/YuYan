@@ -51,6 +51,83 @@ namespace YuYan.Data.Repository
 
             return surveyList;
         }
+
+        public async Task<tbSurvey> CreateNewSurvey(dtoSurvey survey) {
+            tbSurvey newSurvey = new tbSurvey();
+
+            try{
+                newSurvey.Title = survey.Title;
+                newSurvey.ShortDescription = survey.ShortDesc;
+                newSurvey.LongDescription = survey.LongDesc;
+                newSurvey.CreatedDate = DateTime.UtcNow;
+                newSurvey.IsActive = true;
+                newSurvey.IsDeleted = false;
+
+                _db.tbSurveys.Add(newSurvey);
+                await _db.SaveChangesAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+            return newSurvey;
+        }
+
+        public async Task<tbSurvey> UpdateSurvey(dtoSurvey survey) {
+            tbSurvey theSurvey = null;
+
+            try {
+                theSurvey = await _db.tbSurveys.FirstOrDefaultAsync(x => x.SurveyId == survey.SurveryId 
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (theSurvey != null) {
+                    theSurvey.Title = survey.Title;
+                    theSurvey.ShortDescription = survey.ShortDesc;
+                    theSurvey.LongDescription = survey.LongDesc;
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+            return theSurvey;
+        }
+
+        public async Task DeleteSurvey(int surveyId)
+        {
+            try {
+                tbSurvey theSurvey = await _db.tbSurveys.FirstOrDefaultAsync(x => x.SurveyId == surveyId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (theSurvey != null) {
+                    theSurvey.IsDeleted = true;
+                    theSurvey.UpdatedDate = DateTime.UtcNow;
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+        }
+
+        public async Task DeactiveSurvey(int surveyId) {
+            try
+            {
+                tbSurvey theSurvey = await _db.tbSurveys.FirstOrDefaultAsync(x => x.SurveyId == surveyId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (theSurvey != null)
+                {
+                    theSurvey.IsActive = false;
+                    theSurvey.UpdatedDate = DateTime.UtcNow;
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+        }
         #endregion
 
         #region question
