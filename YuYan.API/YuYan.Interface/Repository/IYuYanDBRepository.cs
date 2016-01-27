@@ -10,8 +10,9 @@ namespace YuYan.Interface.Repository
     {
         #region survey
         Task<IEnumerable<tbSurvey>> GetAllActiveSurveys();
-        Task<tbSurvey> GetSurveyBySurveyId(int surveyId);
+
         Task<IEnumerable<tbSurvey>> GetSurveysByUserId(Guid userId);
+        Task<tbSurvey> GetSurveyBySurveyId(int surveyId);
         Task<tbSurvey> CreateNewSurvey(dtoSurvey survey);
         Task<tbSurvey> UpdateSurvey(dtoSurvey survey);
         Task DeleteSurvey(int surveyId);
@@ -21,6 +22,7 @@ namespace YuYan.Interface.Repository
 
         #region question
         Task<IEnumerable<tbSurveyQuestion>> GetSurveyQuestionsBySurveyId(int surveyId);
+        Task<tbSurveyQuestion> GetSurveyQuestionByQuestionId(int questionId);
         Task<tbSurveyQuestion> CreateNewQuestion(dtoSurveyQuestion question);
         Task<tbSurveyQuestion> UpdateQuestion(dtoSurveyQuestion question);
         Task DeleteQuestion(int questionId);
@@ -30,11 +32,12 @@ namespace YuYan.Interface.Repository
 
         #region item
         Task<IEnumerable<tbSurveyQuestionItem>> GetQuestionItemsByQuestionId(int questionId);
+        Task<tbSurveyQuestionItem> GetQuestionItemByItemId(int itemId);
         Task<tbSurveyQuestionItem> CreateNewItem(dtoSurveyQuestionItem item);
         Task<tbSurveyQuestionItem> UpdateItem(dtoSurveyQuestionItem item);
         Task DeleteItem(int itemId);
         Task DeactiveItem(int itemId);
-
+        //Task ActiveItem(int itemId);
         #endregion 
     }
 }

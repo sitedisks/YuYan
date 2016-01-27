@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using YuYan.Domain.DTO;
 
 namespace YuYan.Interface.Service
@@ -18,6 +19,10 @@ namespace YuYan.Interface.Service
         #endregion
 
         #region question
+        Task<IList<dtoSurveyQuestion>> GetSurveyQuestionsBySurveyId(int surveyId);
+
+        Task<dtoSurveyQuestion> GetSurveyQuestionByQuestionId(int questionId);
+
         Task<dtoSurveyQuestion> CreateSurveyQuestion(dtoSurveyQuestion question);
 
         Task<dtoSurveyQuestion> UpdateSurveyQuestion(dtoSurveyQuestion question);
@@ -28,6 +33,10 @@ namespace YuYan.Interface.Service
         #endregion
 
         #region item
+        Task<IList<dtoSurveyQuestionItem>> GetQuestionItemsByQuestionId(int questionId);
+
+        Task<dtoSurveyQuestionItem> GetQuestionItemByItemId(int itemId);
+
         Task<dtoSurveyQuestionItem> CreateSurveyQuestionItem(dtoSurveyQuestionItem questionItem);
 
         Task<dtoSurveyQuestionItem> UpdateSurveyQuestionItem(dtoSurveyQuestionItem questionItem);

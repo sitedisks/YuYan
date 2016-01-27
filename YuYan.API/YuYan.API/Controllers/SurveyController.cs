@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using YuYan.Domain.DTO;
@@ -16,6 +17,7 @@ namespace YuYan.API.Controllers
         }
 
         #region survey
+        // GET /surveys/2
         [Route("{surveyid}"), HttpGet]
         public async Task<IHttpActionResult> GetSurveyBySurveyId(int surveyId) {
             dtoSurvey dtoSurvey = new dtoSurvey();
@@ -57,12 +59,13 @@ namespace YuYan.API.Controllers
             return Ok(dtoSurvey);
         }
 
-        [Route(""), HttpPut]
-        public async Task<IHttpActionResult> UpdateSurvey([FromBody] dtoSurvey survey)
+        [Route("{surveyid}"), HttpPut]
+        public async Task<IHttpActionResult> UpdateSurvey(int surveyId, [FromBody] dtoSurvey survey)
         {
             dtoSurvey dtoSurvey = new dtoSurvey();
 
             try {
+                survey.SurveyId = surveyId;
                 dtoSurvey = await _yuyanSvc.UpdateSurvey(survey);
             }
             catch (ApplicationException aex)
@@ -105,8 +108,40 @@ namespace YuYan.API.Controllers
         #region question
         [Route("{surveyid}/questions"), HttpGet]
         public async Task<IHttpActionResult> GetQuestionBySurveyId(int surveyId) {
+            IList<dtoSurveyQuestion> questionList = new List<dtoSurveyQuestion>();
 
-            return Ok();
+            try {
+                questionList = await _yuyanSvc.GetSurveyQuestionsBySurveyId(surveyId);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(questionList);
+        }
+
+        [Route("{surveyid}/questions/{questionid}"), HttpGet]
+        public async Task<IHttpActionResult> GetQuestionByQuestionId(int surveyId, int questionId) {
+            dtoSurveyQuestion question = new dtoSurveyQuestion();
+
+            try {
+                question = await _yuyanSvc.GetSurveyQuestionByQuestionId(questionId);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(question);
         }
 
         [Route("{surveyid}/questions"), HttpPost]
@@ -128,7 +163,7 @@ namespace YuYan.API.Controllers
             return Ok(dtoQuestion);
         }
 
-        [Route("{surveyid}/questions"), HttpPut]
+        [Route("{surveyid}/questions/{questionid}"), HttpPut]
         public async Task<IHttpActionResult> UpdateQuestion(int surveyId, [FromBody] dtoSurveyQuestion question)
         {
             dtoSurveyQuestion dtoSurveyQuestion = new dtoSurveyQuestion();
@@ -149,8 +184,8 @@ namespace YuYan.API.Controllers
             return Ok(dtoSurveyQuestion);
         }
 
-        [Route("{surveyid}/questions/{questionId}"), HttpDelete]
-        public async Task<IHttpActionResult> DeleteQuestion(int questionId) {
+        [Route("{surveyid}/questions/{questionid}"), HttpDelete]
+        public async Task<IHttpActionResult> DeleteQuestion(int surveyId, int questionId) {
             try {
                 await _yuyanSvc.DeleteSurveyQuestion(questionId);
             }

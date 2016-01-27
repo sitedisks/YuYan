@@ -34,6 +34,22 @@ namespace YuYan.Data.Repository
             return surveyList;
         }
 
+        public async Task<IEnumerable<tbSurvey>> GetSurveysByUserId(Guid userId)
+        {
+            IList<tbSurvey> surveyList = new List<tbSurvey>();
+
+            try
+            {
+                surveyList = await _db.tbSurveys.Where(x => x.UserId == userId && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return surveyList;
+        }
+
         public async Task<tbSurvey> GetSurveyBySurveyId(int surveyId)
         {
             tbSurvey survey = null;
@@ -49,22 +65,6 @@ namespace YuYan.Data.Repository
             }
 
             return survey;
-        }
-
-        public async Task<IEnumerable<tbSurvey>> GetSurveysByUserId(Guid userId)
-        {
-            IList<tbSurvey> surveyList = new List<tbSurvey>();
-
-            try
-            {
-                surveyList = await _db.tbSurveys.Where(x => x.UserId == userId && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
-            }
-            catch (DataException dex)
-            {
-                throw new ApplicationException("Data error!", dex);
-            }
-
-            return surveyList;
         }
 
         public async Task<tbSurvey> CreateNewSurvey(dtoSurvey survey)
@@ -169,7 +169,8 @@ namespace YuYan.Data.Repository
 
             try
             {
-                surveyQuestionList = await _db.tbSurveyQuestions.Where(x => x.SurveyId == surveyId && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
+                surveyQuestionList = await _db.tbSurveyQuestions.Where(x => x.SurveyId == surveyId 
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
             }
             catch (DataException dex)
             {
@@ -177,6 +178,22 @@ namespace YuYan.Data.Repository
             }
 
             return surveyQuestionList;
+        }
+
+        public async Task<tbSurveyQuestion> GetSurveyQuestionByQuestionId(int questionId)
+        {
+            tbSurveyQuestion question = new tbSurveyQuestion();
+
+            try
+            {
+                question = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == questionId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return question;
         }
 
         public async Task<tbSurveyQuestion> CreateNewQuestion(dtoSurveyQuestion question)
@@ -284,8 +301,8 @@ namespace YuYan.Data.Repository
 
             try
             {
-                itemList = await _db.tbSurveyQuestionItems.Where(x => x.QuestionId ==
-                    questionId && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
+                itemList = await _db.tbSurveyQuestionItems.Where(x => x.QuestionId == questionId 
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
             }
             catch (DataException dex)
             {
@@ -293,6 +310,21 @@ namespace YuYan.Data.Repository
             }
 
             return itemList;
+        }
+
+        public async Task<tbSurveyQuestionItem> GetQuestionItemByItemId(int itemId) {
+            tbSurveyQuestionItem item = new tbSurveyQuestionItem();
+
+            try {
+                item = await _db.tbSurveyQuestionItems.FirstOrDefaultAsync(x => x.QuestionItemId == itemId 
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return item;
         }
 
         public async Task<tbSurveyQuestionItem> CreateNewItem(dtoSurveyQuestionItem item)
