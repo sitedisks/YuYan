@@ -176,7 +176,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyid}/questions/{questionid}"), HttpPut]
-        public async Task<IHttpActionResult> UpdateQuestion(int surveyId, [FromBody] dtoSurveyQuestion question)
+        public async Task<IHttpActionResult> UpdateQuestion(int surveyId, int questionId, [FromBody] dtoSurveyQuestion question)
         {
             dtoSurveyQuestion dtoSurveyQuestion = new dtoSurveyQuestion();
 
@@ -278,6 +278,42 @@ namespace YuYan.API.Controllers
             }
 
             return Ok(dtoItem);
+        }
+
+        [Route("{surveyid}/questions/{questionid}/items/{itemid}"), HttpPut]
+        public async Task<IHttpActionResult> UpdateItem(int surveyId, int questionId, int itemId, [FromBody] dtoSurveyQuestionItem item) {
+            dtoSurveyQuestionItem dtoItem = new dtoSurveyQuestionItem();
+
+            try {
+                item.QuestionId = questionId;
+                dtoItem = await _yuyanSvc.UpdateSurveyQuestionItem(item);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(dtoItem);
+        }
+
+        [Route("{surveyid}/questions/{questionid}/items/{itemid}"), HttpDelete]
+        public async Task<IHttpActionResult> DeleteItem(int surveyId, int questionId, int itemId) {
+            try {
+                await _yuyanSvc.DeleteSurveyQuestionItem(itemId);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+            return Ok();
         }
 
         #endregion
