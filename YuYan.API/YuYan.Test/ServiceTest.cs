@@ -15,7 +15,7 @@ namespace YuYan.Test
     public class ServiceTest
     {
         [TestMethod]
-        public async Task TestGetSurveyBySurveyId()
+        public async Task TestService_GetSurveyBySurveyId()
         {
             using (YuYanDBContext db = new YuYanDBContext())
             using (YuYanDBRepository repos = new YuYanDBRepository(db))
@@ -27,7 +27,7 @@ namespace YuYan.Test
         }
 
         [TestMethod]
-        public async Task TestDeleteSurveyQuestion() {
+        public async Task TestService_DeleteSurveyQuestion() {
             using (YuYanDBContext db = new YuYanDBContext())
             using (YuYanDBRepository repos = new YuYanDBRepository(db))
             {

@@ -6,6 +6,7 @@ using YuYan.Data.Repository;
 using YuYan.Service;
 using YuYan.API.Controllers;
 using YuYan.Domain.DTO;
+using YuYan.Domain.Enum;
 
 namespace YuYan.Test
 {
@@ -13,7 +14,7 @@ namespace YuYan.Test
     public class ControllerTest
     {
         [TestMethod]
-        public async Task TestGetSurveyBySurveyId()
+        public async Task TestController_GetSurveyBySurveyId()
         {
             using (YuYanDBContext db = new YuYanDBContext())
             using (YuYanDBRepository repos = new YuYanDBRepository(db))
@@ -27,7 +28,7 @@ namespace YuYan.Test
         }
 
         [TestMethod]
-        public async Task TestCreateSurvey() {
+        public async Task TestController_CreateSurvey() {
             using (YuYanDBContext db = new YuYanDBContext())
             using (YuYanDBRepository repos = new YuYanDBRepository(db))
             {
@@ -39,6 +40,23 @@ namespace YuYan.Test
                 testObj.ShortDesc = "No short description";
 
                 var result = await controller.CreateSurvey(testObj);
+                Assert.IsNotNull(result);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestController_CreateQuestion() { 
+            using(YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db)) {
+                YuYanService svc = new YuYanService(repos);
+                var controller = new SurveyController(svc);
+
+                dtoSurveyQuestion questionObj = new dtoSurveyQuestion();
+                questionObj.Question = "Add from Test";
+                questionObj.QuestionType = QuestionType.checkbox;
+                //questionObj.SurveyId = 6;
+
+                var result = await controller.CreateQuestion(6, questionObj);
                 Assert.IsNotNull(result);
             }
         }
