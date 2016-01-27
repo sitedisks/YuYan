@@ -20,13 +20,28 @@ namespace YuYan.Data.Repository
         }
 
         #region survey
+        public async Task<IEnumerable<tbSurvey>> GetAllActiveSurveys()
+        {
+            IList<tbSurvey> surveyList = new List<tbSurvey>();
+            try
+            {
+                surveyList = await _db.tbSurveys.Where(x => x.IsActive == true).ToListAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+            return surveyList;
+        }
+
         public async Task<tbSurvey> GetSurveyBySurveyId(int surveyId)
         {
             tbSurvey survey = null;
 
             try
             {
-                survey = await _db.tbSurveys.FirstOrDefaultAsync(x => x.SurveyId == surveyId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+                survey = await _db.tbSurveys.FirstOrDefaultAsync(x => x.SurveyId == surveyId
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
             }
             catch (DataException dex)
             {
@@ -52,10 +67,12 @@ namespace YuYan.Data.Repository
             return surveyList;
         }
 
-        public async Task<tbSurvey> CreateNewSurvey(dtoSurvey survey) {
+        public async Task<tbSurvey> CreateNewSurvey(dtoSurvey survey)
+        {
             tbSurvey newSurvey = new tbSurvey();
 
-            try{
+            try
+            {
                 newSurvey.Title = survey.Title;
                 newSurvey.ShortDescription = survey.ShortDesc;
                 newSurvey.LongDescription = survey.LongDesc;
@@ -73,17 +90,21 @@ namespace YuYan.Data.Repository
             return newSurvey;
         }
 
-        public async Task<tbSurvey> UpdateSurvey(dtoSurvey survey) {
+        public async Task<tbSurvey> UpdateSurvey(dtoSurvey survey)
+        {
             tbSurvey theSurvey = null;
 
-            try {
-                theSurvey = await _db.tbSurveys.FirstOrDefaultAsync(x => x.SurveyId == survey.SurveryId 
+            try
+            {
+                theSurvey = await _db.tbSurveys.FirstOrDefaultAsync(x => x.SurveyId == survey.SurveyId
                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
 
-                if (theSurvey != null) {
+                if (theSurvey != null)
+                {
                     theSurvey.Title = survey.Title;
                     theSurvey.ShortDescription = survey.ShortDesc;
                     theSurvey.LongDescription = survey.LongDesc;
+                    theSurvey.UpdatedDate = DateTime.UtcNow;
                     await _db.SaveChangesAsync();
                 }
             }
@@ -96,10 +117,12 @@ namespace YuYan.Data.Repository
 
         public async Task DeleteSurvey(int surveyId)
         {
-            try {
+            try
+            {
                 tbSurvey theSurvey = await _db.tbSurveys.FirstOrDefaultAsync(x => x.SurveyId == surveyId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
 
-                if (theSurvey != null) {
+                if (theSurvey != null)
+                {
                     theSurvey.IsDeleted = true;
                     theSurvey.UpdatedDate = DateTime.UtcNow;
 
@@ -119,7 +142,8 @@ namespace YuYan.Data.Repository
             }
         }
 
-        public async Task DeactiveSurvey(int surveyId) {
+        public async Task DeactiveSurvey(int surveyId)
+        {
             try
             {
                 tbSurvey theSurvey = await _db.tbSurveys.FirstOrDefaultAsync(x => x.SurveyId == surveyId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
@@ -155,13 +179,15 @@ namespace YuYan.Data.Repository
             return surveyQuestionList;
         }
 
-        public async Task<tbSurveyQuestion> CreateNewQuestion(dtoSurveyQuestion question) {
+        public async Task<tbSurveyQuestion> CreateNewQuestion(dtoSurveyQuestion question)
+        {
             tbSurveyQuestion newQuestion = new tbSurveyQuestion();
 
-            try {
-                var questionCount = _db.tbSurveyQuestions.Where(x => x.SurveyId == question.SurveryId 
+            try
+            {
+                var questionCount = _db.tbSurveyQuestions.Where(x => x.SurveyId == question.SurveyId
                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).Count();
-                newQuestion.SurveyId = question.SurveryId;
+                newQuestion.SurveyId = question.SurveyId;
                 newQuestion.Question = question.Question;
                 newQuestion.QuestionType = question.QuestionType;
                 newQuestion.QuestionOrder = questionCount + 1;
@@ -180,14 +206,17 @@ namespace YuYan.Data.Repository
             return newQuestion;
         }
 
-        public async Task<tbSurveyQuestion> UpdateQuestion(dtoSurveyQuestion question) {
+        public async Task<tbSurveyQuestion> UpdateQuestion(dtoSurveyQuestion question)
+        {
             tbSurveyQuestion theQuestion = null;
 
-            try {
-                theQuestion = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == question.QuestionId 
+            try
+            {
+                theQuestion = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == question.QuestionId
                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
 
-                if (theQuestion != null) {
+                if (theQuestion != null)
+                {
                     theQuestion.Question = question.Question;
                     theQuestion.UpdatedDate = DateTime.UtcNow;
                     await _db.SaveChangesAsync();
@@ -201,8 +230,10 @@ namespace YuYan.Data.Repository
             return theQuestion;
         }
 
-        public async Task DeleteQuestion(int questionId) {
-            try {
+        public async Task DeleteQuestion(int questionId)
+        {
+            try
+            {
                 tbSurveyQuestion theQuestion = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == questionId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
 
                 if (theQuestion != null)
@@ -211,7 +242,8 @@ namespace YuYan.Data.Repository
                     theQuestion.UpdatedDate = DateTime.UtcNow;
                     // Set all items (under this question) to delete
                     var itemList = await GetQuestionItemsByQuestionId(questionId);
-                    foreach (var item in itemList) {
+                    foreach (var item in itemList)
+                    {
                         await DeleteItem(item.QuestionItemId);
                     }
 
@@ -224,7 +256,8 @@ namespace YuYan.Data.Repository
             }
         }
 
-        public async Task DeactiveQuestion(int questionId) {
+        public async Task DeactiveQuestion(int questionId)
+        {
             try
             {
                 tbSurveyQuestion theQuestion = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == questionId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
@@ -268,7 +301,7 @@ namespace YuYan.Data.Repository
             tbSurveyQuestionItem newItem = new tbSurveyQuestionItem();
             try
             {
-                var itemCount = _db.tbSurveyQuestionItems.Where(x => x.QuestionId == item.QuestionId 
+                var itemCount = _db.tbSurveyQuestionItems.Where(x => x.QuestionId == item.QuestionId
                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).Count();
                 newItem.QuestionId = item.QuestionId;
                 newItem.ItemDescription = item.ItemDescription;
@@ -293,7 +326,7 @@ namespace YuYan.Data.Repository
             tbSurveyQuestionItem theItem = null;
             try
             {
-                theItem = await _db.tbSurveyQuestionItems.FirstOrDefaultAsync(x => x.QuestionItemId == item.QuestionItemId 
+                theItem = await _db.tbSurveyQuestionItems.FirstOrDefaultAsync(x => x.QuestionItemId == item.QuestionItemId
                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
                 if (theItem != null)
                 {
@@ -310,8 +343,10 @@ namespace YuYan.Data.Repository
             return theItem;
         }
 
-        public async Task DeleteItem(int itemId) {
-            try {
+        public async Task DeleteItem(int itemId)
+        {
+            try
+            {
                 tbSurveyQuestionItem theItem = await _db.tbSurveyQuestionItems.FirstOrDefaultAsync(x => x.QuestionItemId == itemId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
                 if (theItem != null)
                 {
@@ -326,7 +361,8 @@ namespace YuYan.Data.Repository
             }
         }
 
-        public async Task DeactiveItem(int itemId) {
+        public async Task DeactiveItem(int itemId)
+        {
             try
             {
                 tbSurveyQuestionItem theItem = await _db.tbSurveyQuestionItems.FirstOrDefaultAsync(x => x.QuestionItemId == itemId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));

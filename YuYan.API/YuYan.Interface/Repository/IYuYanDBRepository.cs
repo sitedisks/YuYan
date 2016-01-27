@@ -9,6 +9,7 @@ namespace YuYan.Interface.Repository
     public interface IYuYanDBRepository: IDisposable
     {
         #region survey
+        Task<IEnumerable<tbSurvey>> GetAllActiveSurveys();
         Task<tbSurvey> GetSurveyBySurveyId(int surveyId);
         Task<IEnumerable<tbSurvey>> GetSurveysByUserId(Guid userId);
         Task<tbSurvey> CreateNewSurvey(dtoSurvey survey);

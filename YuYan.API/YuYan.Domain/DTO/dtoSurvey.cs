@@ -5,7 +5,7 @@ namespace YuYan.Domain.DTO
 {
     public class dtoSurvey: dtoTbase
     {
-        public int SurveryId { get; set; }
+        public int SurveyId { get; set; }
         public string Title { get; set; }
         public string ShortDesc { get; set; }
         public string LongDesc { get; set; } 

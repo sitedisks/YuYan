@@ -10,6 +10,30 @@ namespace YuYan.Test
     [TestClass]
     public class RepositoryTest
     {
+        /*
+        [TestMethod]
+        public async void TestInitialize()
+        {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                var surveys = await repos.GetAllActiveSurveys();
+                foreach (var survey in surveys) {
+                    survey.IsDeleted = false;
+                    var questions = await repos.GetSurveyQuestionsBySurveyId(survey.SurveyId);
+                    foreach (var question in questions) {
+                        question.IsDeleted = false;
+                        var items = await repos.GetQuestionItemsByQuestionId(question.QuestionId);
+                        foreach (var item in items) {
+                            item.IsDeleted = false;
+                        }
+                    }
+                }
+                await db.SaveChangesAsync();
+            }
+        }
+         */
+
         [TestMethod]
         public void TestSelf()
         {
@@ -78,13 +102,14 @@ namespace YuYan.Test
         }
 
         [TestMethod]
-        public async Task TestUpdateItem() {
+        public async Task TestUpdateItem()
+        {
             using (YuYanDBContext db = new YuYanDBContext())
             using (YuYanDBRepository repos = new YuYanDBRepository(db))
             {
                 dtoSurveyQuestionItem newItem = new dtoSurveyQuestionItem();
-                newItem.QuestionItemId = 2;
-                newItem.ItemDescription = "The ddddd choice";
+                newItem.QuestionItemId = 7;
+                newItem.ItemDescription = "The ddddd chdfdsfsdsfoice";
 
                 var obj = await repos.UpdateItem(newItem);
                 Assert.IsNotNull(obj);
@@ -100,7 +125,7 @@ namespace YuYan.Test
                 dtoSurveyQuestionItem newItem = new dtoSurveyQuestionItem();
 
                 await repos.DeleteItem(4);
-          
+
             }
         }
 

@@ -15,11 +15,13 @@ namespace YuYan.Domain.Extensions
             if (source == null)
                 return null;
 
-            data.SurveyId = source.SurveryId;
+            data.SurveyId = source.SurveyId;
             data.Title = source.Title;
             data.ShortDescription = source.ShortDesc;
             data.LongDescription = source.LongDesc;
             data.UserId = source.UserId;
+            data.IsActive = source.IsActive;
+            data.IsDeleted = source.IsDeleted;
 
             return data;
         }
@@ -38,6 +40,8 @@ namespace YuYan.Domain.Extensions
             data.QuestionId = source.QuestionId;
             data.ItemDescription = source.ItemDescription;
             data.ItemOrder = source.ItemOrder;
+            data.IsActive = source.IsActive;
+            data.IsDeleted = source.IsDeleted;
 
             return data;
         }
@@ -52,24 +56,26 @@ namespace YuYan.Domain.Extensions
                 return null;
 
             data.QuestionId = source.QuestionId;
-            data.SurveryId = source.SurveyId;
+            data.SurveyId = source.SurveyId;
             data.Question = source.Question;
             data.QuestionOrder = source.QuestionOrder;
             data.QuestionType = source.QuestionType;
+            data.IsActive = source.IsActive;
+            data.IsDeleted = source.IsDeleted;
 
             IList<dtoSurveyQuestionItem> itemList = new List<dtoSurveyQuestionItem>();
-            if (source.tbSurveyQuestionItems.Count > 0)
+            if (source.tbSurveyQuestionItems != null)
             {
-                foreach (tbSurveyQuestionItem item in source.tbSurveyQuestionItems) {
-                    itemList.Add(item.ConvertToDtoSurveyQuestionItem());
+                foreach (tbSurveyQuestionItem item in source.tbSurveyQuestionItems)
+                {
+                    if ((item.IsActive ?? true) && !(item.IsDeleted ?? false))
+                        itemList.Add(item.ConvertToDtoSurveyQuestionItem());
                 }
             }
             data.dtoItems = itemList;
 
             return data;
         }
-
-
 
         public static dtoSurvey ConvertToDtoSurvey(this tbSurvey source, dtoSurvey data = null)
         {
@@ -79,18 +85,21 @@ namespace YuYan.Domain.Extensions
             if (source == null)
                 return null;
 
-            data.SurveryId = source.SurveyId;
+            data.SurveyId = source.SurveyId;
             data.Title = source.Title;
             data.ShortDesc = source.ShortDescription;
             data.LongDesc = source.LongDescription;
             data.UserId = source.UserId;
+            data.IsActive = source.IsActive;
+            data.IsDeleted = source.IsDeleted;
 
             IList<dtoSurveyQuestion> questionList = new List<dtoSurveyQuestion>();
-            if (source.tbSurveyQuestions.Count > 0)
+            if (source.tbSurveyQuestions != null)
             {
                 foreach (tbSurveyQuestion question in source.tbSurveyQuestions)
                 {
-                    questionList.Add(question.ConvertToDtoSurveyQuestion());
+                    if ((question.IsActive ?? true) && !(question.IsDeleted ?? false))
+                        questionList.Add(question.ConvertToDtoSurveyQuestion());
                 }
             }
             data.dtoQuestions = questionList;
