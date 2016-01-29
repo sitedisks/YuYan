@@ -8,6 +8,9 @@ namespace YuYan.Domain.Database
     [Table("SurveyQuestion")]
     public class tbSurveyQuestion: tbTbase
     {
+        public tbSurveyQuestion() {
+            tbSurveyQuestionItems = new HashSet<tbSurveyQuestionItem>();
+        }
         [Key, Column("Id")]
         public int QuestionId { get; set; }
         public int SurveyId { get; set; }
