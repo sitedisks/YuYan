@@ -8,7 +8,7 @@ namespace YuYan.Domain.Database
     public class tbSession : tbTbase
     {
         [Key, Column("Id")]
-        public int SessionId { get; set; }
+        public Guid SessionId { get; set; }
         public Guid UserId { get; set; }
         public DateTime Expiry { get; set; }
         public string IPAddress { get; set; }

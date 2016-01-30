@@ -78,6 +78,60 @@ namespace YuYan.Data.Repository
             return user;
         }
 
+        public async Task<tbUser> LoginUser(dtoUser user)
+        {
+            tbUser userObj = null;
+
+            try
+            {
+
+                if (!string.IsNullOrEmpty(user.Email))
+                    userObj = await GetUserByEmail(user.Email);
+                else if (!string.IsNullOrEmpty(user.Username))
+                    userObj = await GetUserByUserName(user.Username);
+
+                if (userObj == null)
+                    return userObj;
+
+                if (!Crypter.CheckPassword(user.Password, userObj.Password))
+                {
+                    return new tbUser(); // password not match
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return userObj;
+        }
+
+        public async Task<bool> LogoutUser(Guid sessionId)
+        {
+            bool IsLogout = false;
+            try
+            {
+                tbSession session = await _db.tbSessions.FirstOrDefaultAsync(x => x.SessionId == sessionId
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (session != null)
+                {
+                    session.IsDeleted = true;
+                    session.IsActive = false;
+                    session.UpdatedDate = DateTime.UtcNow;
+                    await _db.SaveChangesAsync();
+
+                    IsLogout = true;
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return IsLogout;
+        }
+
         public async Task CreateUpdateUserSession(tbUser user)
         {
             try
@@ -86,28 +140,59 @@ namespace YuYan.Data.Repository
                 if (session != null)
                 {
                     session.UpdatedDate = DateTime.UtcNow;
-                    session.IPAddress = user.IPAddress;
-                    session.Expiry = DateTime.UtcNow.AddHours(2); // extend next 2 hours
                 }
                 else
                 {
                     // new session
                     session = new tbSession();
-                    session.IPAddress = user.IPAddress;
-                    session.Expiry = DateTime.UtcNow.AddHours(2); // extend next 2 hours
                     session.UserId = user.UserId;
                     session.CreatedDate = DateTime.UtcNow;
-
                     _db.tbSessions.Add(session);
                 }
-                await _db.SaveChangesAsync();
 
+                session.IPAddress = user.IPAddress;
+                session.Expiry = DateTime.UtcNow.AddHours(2); // extend next 2 hours
+                session.IsDeleted = false;
+                session.IsActive = true;
+                await _db.SaveChangesAsync();
 
             }
             catch (DataException dex)
             {
                 throw new ApplicationException("Data error!", dex);
             }
+        }
+
+        private async Task<tbUser> GetUserByEmail(string email)
+        {
+            tbUser user = null;
+
+            try
+            {
+                user = await _db.tbUsers.FirstOrDefaultAsync(u => u.Email == email && !(u.IsDeleted ?? false));
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return user;
+        }
+
+        private async Task<tbUser> GetUserByUserName(string username)
+        {
+            tbUser user = null;
+
+            try
+            {
+                user = await _db.tbUsers.FirstOrDefaultAsync(u => u.Username == username && !(u.IsDeleted ?? false));
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return user;
         }
         #endregion
 

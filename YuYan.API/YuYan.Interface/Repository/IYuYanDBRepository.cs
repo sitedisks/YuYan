@@ -6,12 +6,14 @@ using YuYan.Domain.DTO;
 
 namespace YuYan.Interface.Repository
 {
-    public interface IYuYanDBRepository: IDisposable
+    public interface IYuYanDBRepository : IDisposable
     {
         #region user
 
         Task<tbUser> CreateUser(dtoUser user);
         Task<tbUser> UpdateUser(dtoUserProfile profile);
+        Task<tbUser> LoginUser(dtoUser user);
+        Task<bool> LogoutUser(Guid sessionId);
         Task CreateUpdateUserSession(tbUser user);
         #endregion
 
@@ -45,6 +47,6 @@ namespace YuYan.Interface.Repository
         Task DeleteItem(int itemId);
         Task DeactiveItem(int itemId);
         //Task ActiveItem(int itemId);
-        #endregion 
+        #endregion
     }
 }

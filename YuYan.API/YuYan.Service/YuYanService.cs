@@ -18,6 +18,78 @@ namespace YuYan.Service
             _yuyanRepos = yuyanRepos;
         }
 
+        #region user
+        public async Task<dtoUserProfile> RegisterNewUser(dtoUser user)
+        {
+            dtoUserProfile userProfile = new dtoUserProfile();
+
+            try
+            {
+                var userObj = await _yuyanRepos.CreateUser(user);
+                userProfile = userObj.ConvertToDtoUserProfile();
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error create user", ex);
+            }
+
+            return userProfile;
+        }
+
+        public async Task<dtoUserProfile> LoginUser(dtoUser user)
+        {
+            dtoUserProfile userProfile = null;
+
+            try
+            {
+                tbUser userObj = await _yuyanRepos.LoginUser(user);
+                if (userObj == null)
+                    return userProfile; //user not exist
+
+                if (userObj.UserId == Guid.Empty)
+                    return new dtoUserProfile();  // password not match
+
+                await _yuyanRepos.CreateUpdateUserSession(userObj); // create the session
+                userProfile = userObj.ConvertToDtoUserProfile();
+
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error Login user", ex);
+            }
+
+            return userProfile;
+        }
+
+        public async Task<bool> LogoutUser(Guid sessionId)
+        {
+            bool IsLogout = false;
+
+            try
+            {
+                IsLogout = await _yuyanRepos.LogoutUser(sessionId);
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error Login user", ex);
+            }
+
+            return IsLogout;
+        }
+        #endregion
+
         #region survey
         public async Task<dtoSurvey> GetSurveyBySurveyId(int surveyId)
         {
@@ -40,10 +112,12 @@ namespace YuYan.Service
             return survey;
         }
 
-        public async Task<dtoSurvey> CreateSurvey(dtoSurvey survey) {
+        public async Task<dtoSurvey> CreateSurvey(dtoSurvey survey)
+        {
             dtoSurvey s = null;
 
-            try {
+            try
+            {
                 var surveyObj = await _yuyanRepos.CreateNewSurvey(survey);
                 s = surveyObj.ConvertToDtoSurvey();
             }
@@ -59,10 +133,12 @@ namespace YuYan.Service
             return s;
         }
 
-        public async Task<dtoSurvey> UpdateSurvey(dtoSurvey survey) {
+        public async Task<dtoSurvey> UpdateSurvey(dtoSurvey survey)
+        {
             dtoSurvey s = null;
 
-            try {
+            try
+            {
                 var surveyObj = await _yuyanRepos.UpdateSurvey(survey);
                 s = surveyObj.ConvertToDtoSurvey();
             }
@@ -78,7 +154,8 @@ namespace YuYan.Service
             return s;
         }
 
-        public async Task DeleteSurvey(int surveyId) {
+        public async Task DeleteSurvey(int surveyId)
+        {
             try
             {
                 await _yuyanRepos.DeleteSurvey(surveyId);
@@ -111,12 +188,15 @@ namespace YuYan.Service
         #endregion
 
         #region question
-        public async Task<IList<dtoSurveyQuestion>> GetSurveyQuestionsBySurveyId(int surveyId) {
+        public async Task<IList<dtoSurveyQuestion>> GetSurveyQuestionsBySurveyId(int surveyId)
+        {
             IList<dtoSurveyQuestion> questionList = new List<dtoSurveyQuestion>();
 
-            try {
+            try
+            {
                 var questions = await _yuyanRepos.GetSurveyQuestionsBySurveyId(surveyId);
-                foreach (var question in questions) {
+                foreach (var question in questions)
+                {
                     questionList.Add(question.ConvertToDtoSurveyQuestion());
                 }
             }
@@ -132,10 +212,12 @@ namespace YuYan.Service
             return questionList;
         }
 
-        public async Task<dtoSurveyQuestion> GetSurveyQuestionByQuestionId(int questionId) {
+        public async Task<dtoSurveyQuestion> GetSurveyQuestionByQuestionId(int questionId)
+        {
             dtoSurveyQuestion question = new dtoSurveyQuestion();
 
-            try { 
+            try
+            {
                 var questionObj = await _yuyanRepos.GetSurveyQuestionByQuestionId(questionId);
                 question = questionObj.ConvertToDtoSurveyQuestion();
             }
@@ -227,12 +309,15 @@ namespace YuYan.Service
         #endregion
 
         #region item
-        public async Task<IList<dtoSurveyQuestionItem>> GetQuestionItemsByQuestionId(int questionId) {
+        public async Task<IList<dtoSurveyQuestionItem>> GetQuestionItemsByQuestionId(int questionId)
+        {
             IList<dtoSurveyQuestionItem> itemList = new List<dtoSurveyQuestionItem>();
 
-            try {
+            try
+            {
                 var items = await _yuyanRepos.GetQuestionItemsByQuestionId(questionId);
-                foreach (var item in items) {
+                foreach (var item in items)
+                {
                     itemList.Add(item.ConvertToDtoSurveyQuestionItem());
                 }
             }
@@ -252,7 +337,8 @@ namespace YuYan.Service
         {
             dtoSurveyQuestionItem item = new dtoSurveyQuestionItem();
 
-            try {
+            try
+            {
                 var itemObj = await _yuyanRepos.GetQuestionItemByItemId(itemId);
                 item = itemObj.ConvertToDtoSurveyQuestionItem();
             }

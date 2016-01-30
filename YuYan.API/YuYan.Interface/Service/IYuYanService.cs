@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using YuYan.Domain.DTO;
 
@@ -6,6 +7,17 @@ namespace YuYan.Interface.Service
 {
     public interface IYuYanService
     {
+        #region user
+
+        Task<dtoUserProfile> RegisterNewUser(dtoUser user);
+
+        Task<dtoUserProfile> LoginUser(dtoUser user);
+
+        Task<bool> LogoutUser(Guid sessionId);
+
+        //Task<dtoUserProfile> UpdateUserProfile(dtoUserProfile userprofile);
+        #endregion
+
         #region survey
         Task<dtoSurvey> GetSurveyBySurveyId(int surveyId);
 

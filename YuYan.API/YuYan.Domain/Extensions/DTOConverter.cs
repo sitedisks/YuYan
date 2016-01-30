@@ -28,6 +28,26 @@ namespace YuYan.Domain.Extensions
         #endregion
 
         #region table to dto
+        public static dtoUserProfile ConvertToDtoUserProfile(this tbUser source, dtoUserProfile data = null) {
+            if (data == null)
+                data = new dtoUserProfile();
+
+            if (source == null)
+                return null;
+
+            data.UserId = source.UserId;
+            data.Email = source.Email;
+            data.Username = source.Username;
+            data.UserRole = source.UserRole;
+            data.StreetNo = source.StreetNo;
+            data.Street = source.Street;
+            data.City = source.City;
+            data.State = source.State;
+            data.Country = source.Country;
+
+            return data;
+        }
+
         public static dtoSurveyQuestionItem ConvertToDtoSurveyQuestionItem(this tbSurveyQuestionItem source, dtoSurveyQuestionItem data = null)
         {
             if (data == null)
