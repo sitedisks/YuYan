@@ -18,6 +18,8 @@ namespace YuYan.Interface.DbContext
         ObjectContext BaseContext { get; }
 
         #region entities
+        DbSet<tbUser> tbUsers { get; set; }
+        DbSet<tbSession> tbSessions { get; set; }
         DbSet<tbSurvey> tbSurveys { get; set; }
         DbSet<tbSurveyQuestion> tbSurveyQuestions { get; set; }
         DbSet<tbSurveyQuestionItem> tbSurveyQuestionItems { get; set; }

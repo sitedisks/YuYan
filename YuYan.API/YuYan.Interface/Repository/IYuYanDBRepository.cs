@@ -8,6 +8,13 @@ namespace YuYan.Interface.Repository
 {
     public interface IYuYanDBRepository: IDisposable
     {
+        #region user
+
+        Task<tbUser> CreateUser(dtoUser user);
+        Task<tbUser> UpdateUser(dtoUserProfile profile);
+        Task CreateUpdateUserSession(tbUser user);
+        #endregion
+
         #region survey
         Task<IEnumerable<tbSurvey>> GetAllActiveSurveys();
 

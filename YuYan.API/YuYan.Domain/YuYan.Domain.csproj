@@ -38,6 +38,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\tbSession.cs" />
     <Compile Include="Database\tbSurvey.cs" />
     <Compile Include="Database\tbSurveyQuestion.cs" />
     <Compile Include="Database\tbSurveyQuestionItem.cs" />
@@ -47,6 +48,8 @@
     <Compile Include="DTO\dtoSurveyQuestion.cs" />
     <Compile Include="DTO\dtoSurveyQuestionItem.cs" />
     <Compile Include="DTO\dtoTbase.cs" />
+    <Compile Include="DTO\dtoUser.cs" />
+    <Compile Include="DTO\dtoUserProfile.cs" />
     <Compile Include="Enum\Enum.cs" />
     <Compile Include="Extensions\DTOConverter.cs" />
   </ItemGroup>

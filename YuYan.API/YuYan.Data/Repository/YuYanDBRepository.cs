@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CryptSharp;
+using System;
 using System.Linq;
 using System.Data;
 using System.Data.Entity;
@@ -8,6 +9,7 @@ using YuYan.Domain.Database;
 using YuYan.Interface.Repository;
 using YuYan.Interface.DbContext;
 using YuYan.Domain.DTO;
+using YuYan.Domain.Enum;
 
 namespace YuYan.Data.Repository
 {
@@ -18,6 +20,96 @@ namespace YuYan.Data.Repository
         {
             _db = db;
         }
+
+        #region user
+        public async Task<tbUser> CreateUser(dtoUser user)
+        {
+            tbUser newUser = new tbUser();
+
+            try
+            {
+                newUser.Email = user.Email;
+                newUser.UserRole = UserRole.User;
+                newUser.Password = Crypter.Blowfish.Crypt(user.Password);
+                newUser.CreatedDate = DateTime.UtcNow;
+                newUser.IsDeleted = false;
+                newUser.IsActive = true;
+
+                _db.tbUsers.Add(newUser);
+                await _db.SaveChangesAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return newUser;
+        }
+
+        public async Task<tbUser> UpdateUser(dtoUserProfile profile)
+        {
+            tbUser user = new tbUser();
+
+            try
+            {
+                user = await _db.tbUsers.FirstOrDefaultAsync(x => x.UserId == profile.UserId
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (user != null)
+                {
+                    // the user exist
+                    user.Username = profile.Username;
+                    user.IPAddress = profile.IPAddress;
+                    user.StreetNo = profile.StreetNo;
+                    user.Street = profile.Street;
+                    user.City = profile.City;
+                    user.State = profile.State;
+                    user.Country = profile.Country;
+                    user.UpdatedDate = DateTime.UtcNow;
+
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return user;
+        }
+
+        public async Task CreateUpdateUserSession(tbUser user)
+        {
+            try
+            {
+                tbSession session = await _db.tbSessions.FirstOrDefaultAsync(x => x.UserId == user.UserId && !(x.IsDeleted ?? false));
+                if (session != null)
+                {
+                    session.UpdatedDate = DateTime.UtcNow;
+                    session.IPAddress = user.IPAddress;
+                    session.Expiry = DateTime.UtcNow.AddHours(2); // extend next 2 hours
+                }
+                else
+                {
+                    // new session
+                    session = new tbSession();
+                    session.IPAddress = user.IPAddress;
+                    session.Expiry = DateTime.UtcNow.AddHours(2); // extend next 2 hours
+                    session.UserId = user.UserId;
+                    session.CreatedDate = DateTime.UtcNow;
+
+                    _db.tbSessions.Add(session);
+                }
+                await _db.SaveChangesAsync();
+
+
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+        }
+        #endregion
 
         #region survey
         public async Task<IEnumerable<tbSurvey>> GetAllActiveSurveys()
@@ -40,7 +132,8 @@ namespace YuYan.Data.Repository
 
             try
             {
-                surveyList = await _db.tbSurveys.Where(x => x.UserId == userId && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
+                surveyList = await _db.tbSurveys.Where(x => x.UserId == userId
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
             }
             catch (DataException dex)
             {
@@ -169,7 +262,7 @@ namespace YuYan.Data.Repository
 
             try
             {
-                surveyQuestionList = await _db.tbSurveyQuestions.Where(x => x.SurveyId == surveyId 
+                surveyQuestionList = await _db.tbSurveyQuestions.Where(x => x.SurveyId == surveyId
                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
             }
             catch (DataException dex)
@@ -301,7 +394,7 @@ namespace YuYan.Data.Repository
 
             try
             {
-                itemList = await _db.tbSurveyQuestionItems.Where(x => x.QuestionId == questionId 
+                itemList = await _db.tbSurveyQuestionItems.Where(x => x.QuestionId == questionId
                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
             }
             catch (DataException dex)
@@ -312,11 +405,13 @@ namespace YuYan.Data.Repository
             return itemList;
         }
 
-        public async Task<tbSurveyQuestionItem> GetQuestionItemByItemId(int itemId) {
+        public async Task<tbSurveyQuestionItem> GetQuestionItemByItemId(int itemId)
+        {
             tbSurveyQuestionItem item = new tbSurveyQuestionItem();
 
-            try {
-                item = await _db.tbSurveyQuestionItems.FirstOrDefaultAsync(x => x.QuestionItemId == itemId 
+            try
+            {
+                item = await _db.tbSurveyQuestionItems.FirstOrDefaultAsync(x => x.QuestionItemId == itemId
                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
             }
             catch (DataException dex)

@@ -29,6 +29,8 @@ namespace YuYan.Data.DbContext
 
 
         #region entities
+        public DbSet<tbUser> tbUsers { get; set; }
+        public DbSet<tbSession> tbSessions { get; set; }
         public DbSet<tbSurvey> tbSurveys { get; set; }
         public DbSet<tbSurveyQuestion> tbSurveyQuestions { get; set; }
         public DbSet<tbSurveyQuestionItem> tbSurveyQuestionItems { get; set; }
