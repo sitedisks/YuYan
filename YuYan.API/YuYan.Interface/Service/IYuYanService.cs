@@ -15,7 +15,7 @@ namespace YuYan.Interface.Service
 
         Task<bool> LogoutUser(Guid sessionId);
 
-        //Task<dtoUserProfile> UpdateUserProfile(dtoUserProfile userprofile);
+        Task<dtoUserProfile> UpdateUserProfile(dtoUserProfile userProfile);
         #endregion
 
         #region survey

@@ -34,7 +34,7 @@ namespace YuYan.Service
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Error create user", ex);
+                throw new ApplicationException("Error create user.", ex);
             }
 
             return userProfile;
@@ -64,7 +64,7 @@ namespace YuYan.Service
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Error Login user", ex);
+                throw new ApplicationException("Error Login user.", ex);
             }
 
             return userProfile;
@@ -84,10 +84,30 @@ namespace YuYan.Service
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Error Login user", ex);
+                throw new ApplicationException("Error Logout user.", ex);
             }
 
             return IsLogout;
+        }
+
+        public async Task<dtoUserProfile> UpdateUserProfile(dtoUserProfile userProfile) {
+            dtoUserProfile profile = null;
+
+            try {
+                tbUser uprofile = await _yuyanRepos.UpdateUser(userProfile);
+                if (uprofile != null)
+                    profile = uprofile.ConvertToDtoUserProfile();
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error update user profile.", ex);
+            }
+
+            return profile;
         }
         #endregion
 
@@ -149,7 +169,7 @@ namespace YuYan.Service
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Error update survey", ex);
+                throw new ApplicationException("Error update survey.", ex);
             }
 
             return s;

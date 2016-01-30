@@ -44,6 +44,8 @@ namespace YuYan.Domain.Extensions
             data.City = source.City;
             data.State = source.State;
             data.Country = source.Country;
+            data.IsDeleted = source.IsDeleted;
+            data.IsActive = source.IsActive;
 
             return data;
         }

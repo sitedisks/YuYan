@@ -88,6 +88,27 @@ namespace YuYan.API.Controllers
             return Ok(IsLogout);
         }
 
+        [Route("update"), HttpPut]
+        public async Task<IHttpActionResult> UpdateUserProfile(dtoUserProfile userProfile){
+            dtoUserProfile profile = null;
+
+            try {
+                userProfile.IPAddress = GetClientIp();
+                profile = await _yuyanSvc.UpdateUserProfile(userProfile);
+                if (profile == null)
+                    return Content(HttpStatusCode.NotFound, "User not found.");
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(profile);
+        }
         #endregion
 
         #region private functions

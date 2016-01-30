@@ -50,7 +50,7 @@ namespace YuYan.Data.Repository
 
         public async Task<tbUser> UpdateUser(dtoUserProfile profile)
         {
-            tbUser user = new tbUser();
+            tbUser user = null;
 
             try
             {
