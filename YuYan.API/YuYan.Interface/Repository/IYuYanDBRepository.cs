@@ -10,7 +10,7 @@ namespace YuYan.Interface.Repository
     {
         #region user
 
-        Task<tbUser> CreateUser(dtoUser user);
+        Task<tbUser> CreateNewUser(dtoUser user);
         Task<tbUser> UpdateUser(dtoUserProfile profile);
         Task<tbUser> LoginUser(dtoUser user);
         Task<bool> LogoutUser(Guid sessionId);

@@ -22,12 +22,13 @@ namespace YuYan.Data.Repository
         }
 
         #region user
-        public async Task<tbUser> CreateUser(dtoUser user)
+        public async Task<tbUser> CreateNewUser(dtoUser user)
         {
             tbUser newUser = new tbUser();
 
             try
             {
+                newUser.UserId = Guid.NewGuid();
                 newUser.Email = user.Email;
                 newUser.UserRole = UserRole.User;
                 newUser.Password = Crypter.Blowfish.Crypt(user.Password);

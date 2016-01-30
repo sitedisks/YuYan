@@ -43,9 +43,25 @@ namespace YuYan.Test
             Assert.AreEqual(z, x + y);
         }
 
+        #region user
+        [TestMethod]
+        public async Task TestRepo_CreateUser()
+        {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                dtoUser testuser = new dtoUser() { Email = "test001@test.com", Password = "qwerty" };
+
+                tbUser userobj = await repos.CreateNewUser(testuser);
+                Assert.IsNotNull(userobj);
+                Assert.AreEqual("test001@test.com", userobj.Email, true);
+            }
+        }
+        #endregion
+
         #region survey
         [TestMethod]
-        public async Task TestGetSurveyBySurveyId()
+        public async Task TestRepo_GetSurveyBySurveyId()
         {
             using (YuYanDBContext db = new YuYanDBContext())
             using (YuYanDBRepository repos = new YuYanDBRepository(db))
@@ -60,7 +76,7 @@ namespace YuYan.Test
 
         #region question
         [TestMethod]
-        public async Task TestGetSurveyQuestionBySurveyId()
+        public async Task TestRepo_GetSurveyQuestionBySurveyId()
         {
 
             using (YuYanDBContext db = new YuYanDBContext())
@@ -75,7 +91,7 @@ namespace YuYan.Test
 
         #region item
         [TestMethod]
-        public async Task TestGetQuestionItemsByQuestionId()
+        public async Task TestRepo_GetQuestionItemsByQuestionId()
         {
             using (YuYanDBContext db = new YuYanDBContext())
             using (YuYanDBRepository repos = new YuYanDBRepository(db))
@@ -87,7 +103,7 @@ namespace YuYan.Test
         }
 
         [TestMethod]
-        public async Task TestCreateItem()
+        public async Task TestRepo_CreateItem()
         {
             using (YuYanDBContext db = new YuYanDBContext())
             using (YuYanDBRepository repos = new YuYanDBRepository(db))
@@ -102,7 +118,7 @@ namespace YuYan.Test
         }
 
         [TestMethod]
-        public async Task TestUpdateItem()
+        public async Task TestRepo_UpdateItem()
         {
             using (YuYanDBContext db = new YuYanDBContext())
             using (YuYanDBRepository repos = new YuYanDBRepository(db))
@@ -117,7 +133,7 @@ namespace YuYan.Test
         }
 
         [TestMethod]
-        public async Task TestDeleteItem()
+        public async Task TestRepo_DeleteItem()
         {
             using (YuYanDBContext db = new YuYanDBContext())
             using (YuYanDBRepository repos = new YuYanDBRepository(db))

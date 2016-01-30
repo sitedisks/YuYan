@@ -25,7 +25,7 @@ namespace YuYan.Service
 
             try
             {
-                var userObj = await _yuyanRepos.CreateUser(user);
+                var userObj = await _yuyanRepos.CreateNewUser(user);
                 userProfile = userObj.ConvertToDtoUserProfile();
             }
             catch (ApplicationException aex)

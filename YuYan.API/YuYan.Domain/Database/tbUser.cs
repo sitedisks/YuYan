@@ -15,6 +15,7 @@ namespace YuYan.Domain.Database
         }
         [Key, Column("Id")]
         public Guid UserId { get; set; }
+        [Column("UserRoleId")]
         public UserRole UserRole { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
