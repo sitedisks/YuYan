@@ -14,6 +14,77 @@ namespace YuYan.Test
     [TestClass]
     public class ServiceTest
     {
+        #region user
+
+        [TestMethod]
+        public async Task TestService_RegisterNewUser() {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                YuYanService svc = new YuYanService(repos);
+                dtoUser newUser = new dtoUser() { Email = "fromService@test.com", Password = "qwerty" };
+                dtoUserProfile userObj = await svc.RegisterNewUser(newUser);
+                Assert.IsNotNull(userObj);
+                Assert.AreEqual("fromService@test.com", userObj.Email);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestService_LoginUser_Success() {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                YuYanService svc = new YuYanService(repos);
+                dtoUser newUser = new dtoUser() { Email = "fromService@test.com", Password = "qwerty" };
+                dtoUserProfile userObj = await svc.LoginUser(newUser);
+                Assert.IsNotNull(userObj);
+                Assert.AreEqual("fromService@test.com", userObj.Email);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestService_LoginUser_Failed_NoUser()
+        {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                YuYanService svc = new YuYanService(repos);
+                dtoUser newUser = new dtoUser() { Email = "xxxxxx@test.com", Password = "qwerty" };
+                dtoUserProfile userObj = await svc.LoginUser(newUser);
+                Assert.IsNull(userObj);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestService_LoginUser_Failed_WrongPassword()
+        {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                YuYanService svc = new YuYanService(repos);
+                dtoUser newUser = new dtoUser() { Email = "fromService@test.com", Password = "123123123" };
+                dtoUserProfile userObj = await svc.LoginUser(newUser);
+                Assert.IsNotNull(userObj);
+                Assert.AreEqual(Guid.Empty, userObj.UserId);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestService_LogoutUser_Success() {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                YuYanService svc = new YuYanService(repos);
+
+                bool isLogout = await svc.LogoutUser(new Guid("1A737355-2BF8-4CF6-AB28-A2694CD2A0D8"));
+
+                Assert.AreEqual(true, isLogout);
+            }
+        }
+
+        #endregion
+
+        #region survey
         [TestMethod]
         public async Task TestService_GetSurveyBySurveyId()
         {
@@ -36,5 +107,7 @@ namespace YuYan.Test
                 
             }
         }
+
+        #endregion
     }
 }

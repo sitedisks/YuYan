@@ -25,7 +25,7 @@ namespace YuYan.Service
 
             try
             {
-                var userObj = await _yuyanRepos.CreateNewUser(user);
+                tbUser userObj = await _yuyanRepos.CreateNewUser(user);
                 userProfile = userObj.ConvertToDtoUserProfile();
             }
             catch (ApplicationException aex)
@@ -53,6 +53,7 @@ namespace YuYan.Service
                 if (userObj.UserId == Guid.Empty)
                     return new dtoUserProfile();  // password not match
 
+                userObj.IPAddress = user.IPAddress; //set the current Login IP for Session
                 await _yuyanRepos.CreateUpdateUserSession(userObj); // create the session
                 userProfile = userObj.ConvertToDtoUserProfile();
 

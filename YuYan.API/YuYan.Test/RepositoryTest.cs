@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using YuYan.Domain.Database;
 using System.Threading.Tasks;
 using YuYan.Domain.DTO;
+using System;
 
 namespace YuYan.Test
 {
@@ -57,6 +58,49 @@ namespace YuYan.Test
                 Assert.AreEqual("test001@test.com", userobj.Email, true);
             }
         }
+
+        [TestMethod]
+        public async Task TestRepo_SuccessLogin_User()
+        {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                dtoUser testuser = new dtoUser() { Email = "test001@test.com", Password = "qwerty" };
+
+                tbUser userobj = await repos.LoginUser(testuser);
+                Assert.IsNotNull(userobj);
+                Assert.AreEqual("test001@test.com", userobj.Email, true);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestRepo_FailedLogin_UnknownUser()
+        {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                dtoUser testuser = new dtoUser() { Email = "test001@unknown.com", Password = "qwerty" };
+
+                tbUser userobj = await repos.LoginUser(testuser);
+                Assert.IsNull(userobj); // is null means the user not existed in the database
+            }
+        }
+
+        [TestMethod]
+        public async Task TestRepo_FailedLogin_WrongPasswordUser()
+        {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                dtoUser testuser = new dtoUser() { Email = "test001@test.com", Password = "12341234" };
+
+                tbUser userobj = await repos.LoginUser(testuser);
+                Assert.IsNotNull(userobj); // is new tbUser means the password not match
+                Assert.AreEqual(Guid.Empty, userobj.UserId);
+            }
+        }
+
+
         #endregion
 
         #region survey
