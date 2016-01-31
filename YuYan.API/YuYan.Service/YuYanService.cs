@@ -109,6 +109,49 @@ namespace YuYan.Service
 
             return profile;
         }
+
+        public bool ValidateSession(Guid sessionId) {
+            bool IsExpired = true;
+
+            try {
+                tbSession session = _yuyanRepos.GetSessionBySessionId(sessionId);
+                if (session != null)
+                {
+                    if (session.Expiry > DateTime.UtcNow)
+                        IsExpired = false;
+                }
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("ERROR: Unable to validate session expiry!", ex);
+            }
+
+            return IsExpired;
+        }
+
+        public dtoUserProfile GetUserBySessionId(Guid sessionId) {
+            dtoUserProfile userProfile = null;
+
+            try {
+                var u = _yuyanRepos.GetUserBySessionId(sessionId);
+                if (u != null)
+                    userProfile = u.ConvertToDtoUserProfile();
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error retriving Survey", ex);
+            }
+
+            return userProfile;
+        }
         #endregion
 
         #region survey

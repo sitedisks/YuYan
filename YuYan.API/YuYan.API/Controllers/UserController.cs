@@ -21,6 +21,11 @@ namespace YuYan.API.Controllers
             _yuyanSvc = yuyanSvc;
         }
 
+        [Route("ipaddress"), HttpGet]
+        public string GetIP() {
+            return GetClientIp();
+        }
+
         #region user
         [Route("register"), HttpPost]
         public async Task<IHttpActionResult> Register(dtoUser user) {

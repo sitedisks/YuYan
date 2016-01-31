@@ -164,6 +164,38 @@ namespace YuYan.Data.Repository
             }
         }
 
+        public tbSession GetSessionBySessionId(Guid sessionId) {
+            tbSession session = null;
+
+            try {
+                session = _db.tbSessions.FirstOrDefault(x => x.SessionId == sessionId
+                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return session;
+        }
+
+        public tbUser GetUserBySessionId(Guid sessionId) {
+            tbUser user = null;
+
+            try
+            {
+                var session = _db.tbSessions.FirstOrDefault(x => x.SessionId == sessionId
+                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+                user = session.tbUser;
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return user;
+        }
+
         private async Task<tbUser> GetUserByEmail(string email)
         {
             tbUser user = null;
@@ -365,7 +397,8 @@ namespace YuYan.Data.Repository
 
             try
             {
-                question = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == questionId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+                question = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == questionId 
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
             }
             catch (DataException dex)
             {
