@@ -12,41 +12,20 @@ using YuYan.Interface.Service;
 
 namespace YuYan.API.Filter
 {
-
-    public class YYUser : IPrincipal
-    {
-        public bool Authenticated { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public Guid UserId { get; set; }
-        public Guid SessionId { get; set; }
-
-        public bool IsInRole(string role)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IIdentity Identity
-        {
-            get { return null; }
-        }
-    }
-
-    public class AuthenticationFilter : AuthorizationFilterAttribute
+    public class AuthFilter : ActionFilterAttribute
     {
         public IYuYanService _yuyanSvc;
         public const string AUTH_HEADER = "yuyan.header.token";
         public bool AllowAnonymous = false;
 
-        public override void OnAuthorization(HttpActionContext actionContext)
+        public override void OnActionExecuting(HttpActionContext actionContext)
         {
             var requestScope = actionContext.Request.GetDependencyScope();
             _yuyanSvc = requestScope.GetService(typeof(IYuYanService)) as IYuYanService;
-            YYUser principle = new YYUser() { Authenticated = false };
 
             try
             {
-                string token = string.Empty; // token = {session}
+                string token = string.Empty;
                 Guid session = Guid.Empty;
 
                 if (!AllowAnonymous)
@@ -63,25 +42,13 @@ namespace YuYan.API.Filter
                         throw new UnauthorizedAccessException("Invalid security token!");
 
                     var isExpired = _yuyanSvc.ValidateSession(session);
-                    if (isExpired && !AllowAnonymous)
+                    if (isExpired)
                         throw new UnauthorizedAccessException("Invalid session!");
 
                     var user = _yuyanSvc.GetUserBySessionId(session);
-                    if (user == null && !AllowAnonymous)
+                    if (user == null)
                         throw new UnauthorizedAccessException("Invalid user!");
-
-                    if (user != null)
-                    {
-                        principle.Authenticated = true;
-                        principle.UserId = user.UserId;
-                        principle.Username = user.Username;
-                        principle.Email = user.Email;
-                        principle.SessionId = session;
-                    }
-
-                    HttpContext.Current.User = principle;
                 }
-
 
             }
             catch (UnauthorizedAccessException uex)
@@ -97,6 +64,12 @@ namespace YuYan.API.Filter
                 if (actionContext.Response.Headers.Contains(AUTH_HEADER))
                     actionContext.Response.Headers.Remove(AUTH_HEADER);
             }
+
+        }
+
+        public void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

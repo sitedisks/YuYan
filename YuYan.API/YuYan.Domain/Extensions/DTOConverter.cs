@@ -17,6 +17,8 @@ namespace YuYan.Domain.Extensions
 
             data.SurveyId = source.SurveyId;
             data.Title = source.Title;
+            data.Slug = source.Slug;
+            data.URLToken = source.URLToken;
             data.ShortDescription = source.ShortDesc;
             data.LongDescription = source.LongDesc;
             data.UserId = source.UserId;
@@ -109,6 +111,8 @@ namespace YuYan.Domain.Extensions
 
             data.SurveyId = source.SurveyId;
             data.Title = source.Title;
+            data.Slug = source.Slug;
+            data.URLToken = source.URLToken;
             data.ShortDesc = source.ShortDescription;
             data.LongDesc = source.LongDescription;
             data.UserId = source.UserId;

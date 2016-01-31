@@ -7,6 +7,7 @@ using System.ServiceModel.Channels;
 using YuYan.Interface.Service;
 using YuYan.Domain.DTO;
 using System.Net;
+using YuYan.API.Filter;
 
 
 namespace YuYan.API.Controllers
@@ -94,6 +95,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("update"), HttpPut]
+        [AuthFilter]
         public async Task<IHttpActionResult> UpdateUserProfile(dtoUserProfile userProfile){
             dtoUserProfile profile = null;
 

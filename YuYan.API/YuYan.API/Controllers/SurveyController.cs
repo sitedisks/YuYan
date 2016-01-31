@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using YuYan.Domain.DTO;
+using YuYan.API.Filter;
 using YuYan.Interface.Service;
 
 namespace YuYan.API.Controllers
@@ -43,6 +44,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route(""), HttpPost]
+        [AuthFilter(AllowAnonymous = true)]
         public async Task<IHttpActionResult> CreateSurvey([FromBody] dtoSurvey survey)
         {
             dtoSurvey dtoSurvey = new dtoSurvey();

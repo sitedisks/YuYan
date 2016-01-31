@@ -285,6 +285,8 @@ namespace YuYan.Data.Repository
             try
             {
                 newSurvey.Title = survey.Title;
+                newSurvey.Slug = survey.Slug;
+                newSurvey.URLToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("=","").Replace("/","").Replace("+","");
                 newSurvey.ShortDescription = survey.ShortDesc;
                 newSurvey.LongDescription = survey.LongDesc;
                 newSurvey.CreatedDate = DateTime.UtcNow;

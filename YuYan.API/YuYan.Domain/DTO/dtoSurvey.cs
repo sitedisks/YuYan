@@ -7,6 +7,8 @@ namespace YuYan.Domain.DTO
     {
         public int SurveyId { get; set; }
         public string Title { get; set; }
+        public string Slug { get; set; }
+        public string URLToken { get; set; }
         public string ShortDesc { get; set; }
         public string LongDesc { get; set; } 
         public Nullable<Guid> UserId { get; set; }
