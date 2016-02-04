@@ -294,6 +294,17 @@ namespace YuYan.Data.Repository
                 newSurvey.IsDeleted = false;
 
                 _db.tbSurveys.Add(newSurvey);
+
+                if (survey.dtoQuestions.Count() > 0)
+                {
+                    // do the question create
+                    foreach (dtoSurveyQuestion question in survey.dtoQuestions)
+                    {
+                        question.SurveyId = newSurvey.SurveyId;
+                        await CreateNewQuestion(question);
+                    }
+                }
+
                 await _db.SaveChangesAsync();
             }
             catch (DataException dex)
@@ -427,6 +438,14 @@ namespace YuYan.Data.Repository
                 newQuestion.IsDeleted = false;
 
                 _db.tbSurveyQuestions.Add(newQuestion);
+
+                if (question.dtoItems.Count() > 0) {
+                    foreach (dtoSurveyQuestionItem item in question.dtoItems) {
+                        item.QuestionId = newQuestion.QuestionId;
+                        await CreateNewItem(item);
+                    }
+                }
+
                 await _db.SaveChangesAsync();
             }
             catch (DataException dex)
