@@ -164,10 +164,12 @@ namespace YuYan.Data.Repository
             }
         }
 
-        public tbSession GetSessionBySessionId(Guid sessionId) {
+        public tbSession GetSessionBySessionId(Guid sessionId)
+        {
             tbSession session = null;
 
-            try {
+            try
+            {
                 session = _db.tbSessions.FirstOrDefault(x => x.SessionId == sessionId
                      && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
             }
@@ -179,7 +181,8 @@ namespace YuYan.Data.Repository
             return session;
         }
 
-        public tbUser GetUserBySessionId(Guid sessionId) {
+        public tbUser GetUserBySessionId(Guid sessionId)
+        {
             tbUser user = null;
 
             try
@@ -196,7 +199,7 @@ namespace YuYan.Data.Repository
             return user;
         }
 
-        private async Task<tbUser> GetUserByEmail(string email)
+        public async Task<tbUser> GetUserByEmail(string email)
         {
             tbUser user = null;
 
@@ -286,7 +289,7 @@ namespace YuYan.Data.Repository
             {
                 newSurvey.Title = survey.Title;
                 newSurvey.Slug = survey.Slug;
-                newSurvey.URLToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("=","").Replace("/","").Replace("+","");
+                newSurvey.URLToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("=", "").Replace("/", "").Replace("+", "");
                 newSurvey.ShortDescription = survey.ShortDesc;
                 newSurvey.LongDescription = survey.LongDesc;
                 newSurvey.CreatedDate = DateTime.UtcNow;
@@ -399,7 +402,7 @@ namespace YuYan.Data.Repository
 
             try
             {
-                question = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == questionId 
+                question = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == questionId
                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
             }
             catch (DataException dex)

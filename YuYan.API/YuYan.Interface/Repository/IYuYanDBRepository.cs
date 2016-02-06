@@ -9,7 +9,7 @@ namespace YuYan.Interface.Repository
     public interface IYuYanDBRepository : IDisposable
     {
         #region user
-
+        Task<tbUser> GetUserByEmail(string email);
         Task<tbUser> CreateNewUser(dtoUser user);
         Task<tbUser> UpdateUser(dtoUserProfile profile);
         Task<tbUser> LoginUser(dtoUser user);

@@ -23,16 +23,38 @@ namespace YuYan.API.Controllers
         }
 
         [Route("ipaddress"), HttpGet]
-        public string GetIP() {
+        public string GetIP()
+        {
             return GetClientIp();
         }
 
         #region user
+        [Route("check"), HttpPost]
+        public async Task<IHttpActionResult> CheckUser(dtoUser user)
+        {
+            bool isAvailable = true;
+            try
+            {
+                isAvailable = await _yuyanSvc.CheckUserAvailability(user.Email);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+            return Ok(isAvailable);
+        }
+
         [Route("register"), HttpPost]
-        public async Task<IHttpActionResult> Register(dtoUser user) {
+        public async Task<IHttpActionResult> Register(dtoUser user)
+        {
             dtoUserProfile userProfile = new dtoUserProfile();
 
-            try {
+            try
+            {
                 user.IPAddress = GetClientIp();
                 userProfile = await _yuyanSvc.RegisterNewUser(user);
             }
@@ -49,17 +71,19 @@ namespace YuYan.API.Controllers
         }
 
         [Route("login"), HttpPost]
-        public async Task<IHttpActionResult> Login(dtoUser user) {
+        public async Task<IHttpActionResult> Login(dtoUser user)
+        {
             dtoUserProfile userProfile = new dtoUserProfile();
 
-            try {
+            try
+            {
                 user.IPAddress = GetClientIp();
                 userProfile = await _yuyanSvc.LoginUser(user);
 
-                if(userProfile == null)
+                if (userProfile == null)
                     return Content(HttpStatusCode.NotFound, "User not found.");
 
-                if(userProfile.UserId == Guid.Empty)
+                if (userProfile.UserId == Guid.Empty)
                     return Content(HttpStatusCode.Unauthorized, "Username and Password not match.");
             }
             catch (ApplicationException aex)
@@ -75,7 +99,8 @@ namespace YuYan.API.Controllers
         }
 
         [Route("logout"), HttpPost]
-        public async Task<IHttpActionResult> Logout(Guid sessionId) {
+        public async Task<IHttpActionResult> Logout(Guid sessionId)
+        {
             bool IsLogout = false;
 
             try
@@ -96,10 +121,12 @@ namespace YuYan.API.Controllers
 
         [Route("update"), HttpPut]
         [AuthFilter]
-        public async Task<IHttpActionResult> UpdateUserProfile(dtoUserProfile userProfile){
+        public async Task<IHttpActionResult> UpdateUserProfile(dtoUserProfile userProfile)
+        {
             dtoUserProfile profile = null;
 
-            try {
+            try
+            {
                 userProfile.IPAddress = GetClientIp();
                 profile = await _yuyanSvc.UpdateUserProfile(userProfile);
                 if (profile == null)

@@ -19,6 +19,26 @@ namespace YuYan.Service
         }
 
         #region user
+        public async Task<bool> CheckUserAvailability(string email) {
+            bool isAvailable = true;
+
+            try {
+                var user = await _yuyanRepos.GetUserByEmail(email);
+                if (user != null)
+                    isAvailable = false;
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error get user By email.", ex);
+            }
+
+            return isAvailable;
+        }
+
         public async Task<dtoUserProfile> RegisterNewUser(dtoUser user)
         {
             dtoUserProfile userProfile = new dtoUserProfile();

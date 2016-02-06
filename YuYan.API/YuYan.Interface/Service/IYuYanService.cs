@@ -8,6 +8,7 @@ namespace YuYan.Interface.Service
     public interface IYuYanService
     {
         #region user
+        Task<bool> CheckUserAvailability(string email);
 
         Task<dtoUserProfile> RegisterNewUser(dtoUser user);
 
