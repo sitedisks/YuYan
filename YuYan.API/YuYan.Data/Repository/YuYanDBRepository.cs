@@ -133,11 +133,12 @@ namespace YuYan.Data.Repository
             return IsLogout;
         }
 
-        public async Task CreateUpdateUserSession(tbUser user)
+        public async Task<tbSession> CreateUpdateUserSession(tbUser user)
         {
+            tbSession session = null;
             try
             {
-                tbSession session = await _db.tbSessions.FirstOrDefaultAsync(x => x.UserId == user.UserId && !(x.IsDeleted ?? false));
+                session = await _db.tbSessions.FirstOrDefaultAsync(x => x.UserId == user.UserId && !(x.IsDeleted ?? false));
                 if (session != null)
                 {
                     session.IsDeleted = true;
@@ -162,6 +163,8 @@ namespace YuYan.Data.Repository
             {
                 throw new ApplicationException("Data error!", dex);
             }
+
+            return session;
         }
 
         public tbSession GetSessionBySessionId(Guid sessionId)

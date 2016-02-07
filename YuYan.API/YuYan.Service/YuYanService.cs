@@ -74,8 +74,9 @@ namespace YuYan.Service
                     return new dtoUserProfile();  // password not match
 
                 userObj.IPAddress = user.IPAddress; //set the current Login IP for Session
-                await _yuyanRepos.CreateUpdateUserSession(userObj); // create the session
+                tbSession session = await _yuyanRepos.CreateUpdateUserSession(userObj); // create the session
                 userProfile = userObj.ConvertToDtoUserProfile();
+                userProfile.CurrentSession = session.ConverToDtoSession();
 
             }
             catch (ApplicationException aex)
@@ -130,16 +131,21 @@ namespace YuYan.Service
             return profile;
         }
 
-        public bool ValidateSession(Guid sessionId) {
-            bool IsExpired = true;
+        public dtoSession ValidateSession(Guid sessionId) {
+
+            dtoSession sessionObj = null;
 
             try {
                 tbSession session = _yuyanRepos.GetSessionBySessionId(sessionId);
                 if (session != null)
                 {
                     if (session.Expiry > DateTime.UtcNow)
-                        IsExpired = false;
+                        sessionObj = session.ConverToDtoSession();
+                    else
+                        return new dtoSession();
+                    
                 }
+                
             }
             catch (ApplicationException aex)
             {
@@ -150,7 +156,7 @@ namespace YuYan.Service
                 throw new ApplicationException("ERROR: Unable to validate session expiry!", ex);
             }
 
-            return IsExpired;
+            return sessionObj;
         }
 
         public dtoUserProfile GetUserBySessionId(Guid sessionId) {

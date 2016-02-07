@@ -9,5 +9,6 @@ namespace YuYan.Domain.DTO
         public string Email { get; set; }
         public string IPAddress { get; set; }
         public string  Password { get; set; }
+        public dtoSession CurrentSession { get; set; }
     }
 }

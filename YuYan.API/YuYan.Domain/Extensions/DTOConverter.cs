@@ -147,6 +147,21 @@ namespace YuYan.Domain.Extensions
 
             return data;
         }
+
+        public static dtoSession ConverToDtoSession(this tbSession source, dtoSession data = null) {
+            if (data == null)
+                data = new dtoSession();
+
+            if (source == null)
+                return null;
+
+            data.SessionId = source.SessionId;
+            data.UserId = source.UserId;
+            data.Expiry = source.Expiry;
+            data.IPAddress = source.IPAddress;
+
+            return data;
+        }
         #endregion
 
     }

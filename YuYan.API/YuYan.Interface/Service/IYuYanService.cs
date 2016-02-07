@@ -18,7 +18,7 @@ namespace YuYan.Interface.Service
 
         Task<dtoUserProfile> UpdateUserProfile(dtoUserProfile userProfile);
 
-        bool ValidateSession(Guid sessionId);
+        dtoSession ValidateSession(Guid sessionId);
 
         dtoUserProfile GetUserBySessionId(Guid sessionId);
 

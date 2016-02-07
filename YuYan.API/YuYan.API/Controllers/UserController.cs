@@ -98,7 +98,7 @@ namespace YuYan.API.Controllers
             return Ok(userProfile);
         }
 
-        [Route("logout"), HttpPost]
+        [Route("logout"), HttpDelete]
         public async Task<IHttpActionResult> Logout(Guid sessionId)
         {
             bool IsLogout = false;
@@ -117,6 +117,25 @@ namespace YuYan.API.Controllers
             }
 
             return Ok(IsLogout);
+        }
+
+        [Route("status"), HttpGet]
+        public IHttpActionResult CheckSession(Guid sessionId) {
+            dtoSession session = null;
+
+            try {
+                session = _yuyanSvc.ValidateSession(sessionId);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(session);
         }
 
         [Route("update"), HttpPut]

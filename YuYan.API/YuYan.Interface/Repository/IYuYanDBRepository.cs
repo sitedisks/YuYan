@@ -14,7 +14,7 @@ namespace YuYan.Interface.Repository
         Task<tbUser> UpdateUser(dtoUserProfile profile);
         Task<tbUser> LoginUser(dtoUser user);
         Task<bool> LogoutUser(Guid sessionId);
-        Task CreateUpdateUserSession(tbUser user);
+        Task<tbSession> CreateUpdateUserSession(tbUser user);
         tbSession GetSessionBySessionId(Guid sessionId);
         tbUser GetUserBySessionId(Guid sessionId);
         #endregion

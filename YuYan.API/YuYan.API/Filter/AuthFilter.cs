@@ -41,9 +41,12 @@ namespace YuYan.API.Filter
                     if (!Guid.TryParse(token, out session))
                         throw new UnauthorizedAccessException("Invalid security token!");
 
-                    var isExpired = _yuyanSvc.ValidateSession(session);
-                    if (isExpired)
+                    var sessionObj = _yuyanSvc.ValidateSession(session);
+                    if (sessionObj == null)
                         throw new UnauthorizedAccessException("Invalid session!");
+                    else if(sessionObj.SessionId == Guid.Empty) {
+                        throw new UnauthorizedAccessException("Session expired!");
+                    }
 
                     var user = _yuyanSvc.GetUserBySessionId(session);
                     if (user == null)
