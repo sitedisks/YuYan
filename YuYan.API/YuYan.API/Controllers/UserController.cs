@@ -32,10 +32,10 @@ namespace YuYan.API.Controllers
         [Route("check"), HttpPost]
         public async Task<IHttpActionResult> CheckUser(dtoUser user)
         {
-            bool isAvailable = true;
+            dtoUser userObj = null;
             try
             {
-                isAvailable = await _yuyanSvc.CheckUserAvailability(user.Email);
+                userObj = await _yuyanSvc.CheckUserAvailability(user.Email);
             }
             catch (ApplicationException aex)
             {
@@ -45,7 +45,7 @@ namespace YuYan.API.Controllers
             {
                 return InternalServerError(ex);
             }
-            return Ok(isAvailable);
+            return Ok(userObj);
         }
 
         [Route("register"), HttpPost]

@@ -30,6 +30,21 @@ namespace YuYan.Domain.Extensions
         #endregion
 
         #region table to dto
+        public static dtoUser ConvertToDtoUser(this tbUser source, dtoUser data = null) {
+            if (data == null)
+                data = new dtoUser();
+
+            if (source == null)
+                return null;
+
+            data.UserId = source.UserId;
+            data.Username = source.Username;
+            data.Email = source.Email;
+            data.IPAddress = source.IPAddress;
+
+            return data;
+        }
+
         public static dtoUserProfile ConvertToDtoUserProfile(this tbUser source, dtoUserProfile data = null) {
             if (data == null)
                 data = new dtoUserProfile();
