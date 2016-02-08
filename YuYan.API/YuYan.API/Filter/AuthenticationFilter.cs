@@ -16,9 +16,9 @@ namespace YuYan.API.Filter
     public class YYUser : IPrincipal
     {
         public bool Authenticated { get; set; }
+        public Guid UserId { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
-        public Guid UserId { get; set; }
         public Guid SessionId { get; set; }
 
         public bool IsInRole(string role)
@@ -62,9 +62,12 @@ namespace YuYan.API.Filter
                     if (!Guid.TryParse(token, out session))
                         throw new UnauthorizedAccessException("Invalid security token!");
 
-                    var isExpired = _yuyanSvc.ValidateSession(session);
-                    if (isExpired && !AllowAnonymous)
+                    var sessionObj = _yuyanSvc.ValidateSession(session);
+                    if (sessionObj == null)
                         throw new UnauthorizedAccessException("Invalid session!");
+                    else if (sessionObj.SessionId == Guid.Empty)
+                        throw new UnauthorizedAccessException("Session expired!");
+                    
 
                     var user = _yuyanSvc.GetUserBySessionId(session);
                     if (user == null && !AllowAnonymous)

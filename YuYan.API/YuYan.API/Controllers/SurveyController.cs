@@ -44,13 +44,16 @@ namespace YuYan.API.Controllers
         }
 
         [Route(""), HttpPost]
-        [AuthFilter(AllowAnonymous = true)]
+        [AuthenticationFilter(AllowAnonymous = true)]
         public async Task<IHttpActionResult> CreateSurvey([FromBody] dtoSurvey survey)
         {
             dtoSurvey dtoSurvey = new dtoSurvey();
 
             try
             {
+                var user = ControllerContext.RequestContext.Principal as YYUser;
+                if(user!=null)
+                    survey.UserId = user.UserId;
                 dtoSurvey = await _yuyanSvc.CreateSurvey(survey);
             }
             catch (ApplicationException aex)

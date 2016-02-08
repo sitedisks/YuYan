@@ -192,7 +192,9 @@ namespace YuYan.Data.Repository
             {
                 var session = _db.tbSessions.FirstOrDefault(x => x.SessionId == sessionId
                      && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
-                user = session.tbUser;
+                if (session != null)
+                    user = _db.tbUsers.FirstOrDefault(x => x.UserId == session.UserId
+                        && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
             }
             catch (DataException dex)
             {
@@ -293,6 +295,7 @@ namespace YuYan.Data.Repository
                 newSurvey.Title = survey.Title;
                 newSurvey.Slug = survey.Slug;
                 newSurvey.URLToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("=", "").Replace("/", "").Replace("+", "");
+                newSurvey.UserId = survey.UserId;
                 newSurvey.ShortDescription = survey.ShortDesc;
                 newSurvey.LongDescription = survey.LongDesc;
                 newSurvey.CreatedDate = DateTime.UtcNow;
@@ -445,8 +448,10 @@ namespace YuYan.Data.Repository
 
                 _db.tbSurveyQuestions.Add(newQuestion);
 
-                if (question.dtoItems.Count() > 0) {
-                    foreach (dtoSurveyQuestionItem item in question.dtoItems) {
+                if (question.dtoItems.Count() > 0)
+                {
+                    foreach (dtoSurveyQuestionItem item in question.dtoItems)
+                    {
                         item.QuestionId = newQuestion.QuestionId;
                         await CreateNewItem(item);
                     }
