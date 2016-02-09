@@ -27,6 +27,8 @@ namespace YuYan.Interface.Service
         #region survey
         Task<dtoSurvey> GetSurveyBySurveyId(int surveyId);
 
+        Task<dtoSurvey> GetSurveyByURLToken(string url);
+
         Task<dtoSurvey> CreateSurvey(dtoSurvey survey);
 
         Task<dtoSurvey> UpdateSurvey(dtoSurvey survey);

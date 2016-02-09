@@ -286,6 +286,23 @@ namespace YuYan.Data.Repository
             return survey;
         }
 
+        public async Task<tbSurvey> GetSurveyByUrlToken(string url)
+        {
+            tbSurvey survey = null;
+
+            try
+            {
+                survey = await _db.tbSurveys.FirstOrDefaultAsync(x => x.URLToken == url
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return survey;
+        }
+
         public async Task<tbSurvey> CreateNewSurvey(dtoSurvey survey)
         {
             tbSurvey newSurvey = new tbSurvey();

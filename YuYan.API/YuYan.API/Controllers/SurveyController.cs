@@ -52,7 +52,7 @@ namespace YuYan.API.Controllers
             try
             {
                 var user = ControllerContext.RequestContext.Principal as YYUser;
-                if(user!=null)
+                if (user != null)
                     survey.UserId = user.UserId;
                 dtoSurvey = await _yuyanSvc.CreateSurvey(survey);
             }
@@ -269,7 +269,8 @@ namespace YuYan.API.Controllers
         {
             dtoSurveyQuestionItem dtoItem = new dtoSurveyQuestionItem();
 
-            try {
+            try
+            {
                 item.QuestionId = questionId;
                 dtoItem = await _yuyanSvc.CreateSurveyQuestionItem(item);
             }
@@ -286,10 +287,12 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyid}/questions/{questionid}/items/{itemid}"), HttpPut]
-        public async Task<IHttpActionResult> UpdateItem(int surveyId, int questionId, int itemId, [FromBody] dtoSurveyQuestionItem item) {
+        public async Task<IHttpActionResult> UpdateItem(int surveyId, int questionId, int itemId, [FromBody] dtoSurveyQuestionItem item)
+        {
             dtoSurveyQuestionItem dtoItem = new dtoSurveyQuestionItem();
 
-            try {
+            try
+            {
                 item.QuestionId = questionId;
                 dtoItem = await _yuyanSvc.UpdateSurveyQuestionItem(item);
             }
@@ -306,8 +309,10 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyid}/questions/{questionid}/items/{itemid}"), HttpDelete]
-        public async Task<IHttpActionResult> DeleteItem(int surveyId, int questionId, int itemId) {
-            try {
+        public async Task<IHttpActionResult> DeleteItem(int surveyId, int questionId, int itemId)
+        {
+            try
+            {
                 await _yuyanSvc.DeleteSurveyQuestionItem(itemId);
             }
             catch (ApplicationException aex)
