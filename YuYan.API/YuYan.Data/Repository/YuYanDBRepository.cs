@@ -237,6 +237,62 @@ namespace YuYan.Data.Repository
         }
         #endregion
 
+        #region client
+        public async Task<tbSurveyClient> SaveSurveyClient(dtoSurveyClient surveyClient) {
+            tbSurveyClient sc = new tbSurveyClient();
+
+            try {
+                sc.Email = surveyClient.Email;
+                sc.IPAddress = surveyClient.IPAddress;
+                sc.City = surveyClient.City;
+                sc.State = surveyClient.State;
+                sc.Country = surveyClient.Country;
+                sc.CreatedDate = DateTime.UtcNow;
+
+                _db.tbSurveyClients.Add(sc);
+
+                if (surveyClient.dtoClientAnswers.Count() > 0)
+                {
+                    foreach (dtoSurveyClientAnswer clientAnswer in surveyClient.dtoClientAnswers) {
+                        clientAnswer.ClientId = sc.ClientId;
+                        await SaveClientAnswer(clientAnswer);
+                    }
+                }
+
+                await _db.SaveChangesAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return sc;
+        }
+
+        private async Task<tbSurveyClientAnswer> SaveClientAnswer(dtoSurveyClientAnswer clientAnswer)
+        {
+            tbSurveyClientAnswer ca = new tbSurveyClientAnswer();
+
+            try{
+                ca.ClientId = clientAnswer.ClientId;
+                ca.QuestionId = clientAnswer.QuestionId;
+                ca.QuestionItemId = clientAnswer.QuestionItemId;
+                ca.IsChecked = clientAnswer.IsChecked;
+                ca.CreatedDate = DateTime.UtcNow;
+
+                _db.tbSurveyClientAnswers.Add(ca);
+                await _db.SaveChangesAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return ca;
+        }
+
+        #endregion
+
         #region survey
         public async Task<IEnumerable<tbSurvey>> GetAllActiveSurveys()
         {

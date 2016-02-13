@@ -7,7 +7,7 @@ using YuYan.Domain.Database;
 
 namespace YuYan.Interface.DbContext
 {
-    public interface IYuYanDBContext: IDisposable
+    public interface IYuYanDBContext : IDisposable
     {
         Database Database { get; }
         int SaveChanges();
@@ -23,6 +23,8 @@ namespace YuYan.Interface.DbContext
         DbSet<tbSurvey> tbSurveys { get; set; }
         DbSet<tbSurveyQuestion> tbSurveyQuestions { get; set; }
         DbSet<tbSurveyQuestionItem> tbSurveyQuestionItems { get; set; }
+        DbSet<tbSurveyClient> tbSurveyClients { get; set; }
+        DbSet<tbSurveyClientAnswer> tbSurveyClientAnswers { get; set; }
         #endregion
     }
 }

@@ -19,6 +19,11 @@ namespace YuYan.Interface.Repository
         tbUser GetUserBySessionId(Guid sessionId);
         #endregion
 
+        #region client
+        Task<tbSurveyClient> SaveSurveyClient(dtoSurveyClient surveyClient);
+
+        #endregion
+
         #region survey
         Task<IEnumerable<tbSurvey>> GetAllActiveSurveys();
         Task<IEnumerable<tbSurvey>> GetSurveysByUserId(Guid userId);

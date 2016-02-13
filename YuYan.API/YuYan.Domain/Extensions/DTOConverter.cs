@@ -162,6 +162,51 @@ namespace YuYan.Domain.Extensions
 
             return data;
         }
+
+        public static dtoSurveyClient ConverToDtoSurveyClient(this tbSurveyClient source, dtoSurveyClient data = null) {
+
+            if (data == null)
+                data = new dtoSurveyClient();
+
+            if (source == null)
+                return null;
+
+            data.ClientId = source.ClientId;
+            data.Email = source.Email;
+            data.IPAddress = source.IPAddress;
+            data.City = source.City;
+            data.State = source.State;
+            data.Country = source.Country;
+
+            IList<dtoSurveyClientAnswer> answerList = new List<dtoSurveyClientAnswer>();
+            if (source.tbClientAnswers != null)
+            {
+                foreach (tbSurveyClientAnswer answer in source.tbClientAnswers) {
+                    answerList.Add(answer.ConverToDtoAnswwer());
+                }
+            }
+
+            data.dtoClientAnswers = answerList;
+
+            return data;
+        }
+
+        private static dtoSurveyClientAnswer ConverToDtoAnswwer(this tbSurveyClientAnswer source, dtoSurveyClientAnswer data = null) {
+            if (data == null)
+                data = new dtoSurveyClientAnswer();
+
+            if (source == null)
+                return null;
+
+            data.AnswerId = source.AnswerId;
+            data.ClientId = source.ClientId;
+            data.QuestionId = source.QuestionId;
+            data.QuestionItemId = source.QuestionItemId;
+            data.IsChecked = source.IsChecked;
+
+            return data;
+        }
+
         #endregion
 
     }
