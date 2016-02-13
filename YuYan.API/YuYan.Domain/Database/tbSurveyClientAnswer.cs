@@ -17,7 +17,7 @@ namespace YuYan.Domain.Database
         public bool IsChecked { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        [ForeignKey("SurveyClientId")]
+        [ForeignKey("ClientId")]
         public virtual tbSurveyClient tbSurveyClient { get; set; }
     }
 }
