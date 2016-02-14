@@ -41,6 +41,8 @@ namespace YuYan.Domain.Extensions
             data.Username = source.Username;
             data.Email = source.Email;
             data.IPAddress = source.IPAddress;
+            data.IsActive = source.IsActive;
+            data.IsDeleted = source.IsDeleted;
 
             return data;
         }
@@ -159,6 +161,8 @@ namespace YuYan.Domain.Extensions
             data.UserId = source.UserId;
             data.Expiry = source.Expiry;
             data.IPAddress = source.IPAddress;
+            data.IsActive = source.IsActive;
+            data.IsDeleted = source.IsDeleted;
 
             return data;
         }
