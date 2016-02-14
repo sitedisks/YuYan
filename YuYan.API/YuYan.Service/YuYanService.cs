@@ -182,12 +182,13 @@ namespace YuYan.Service
 
         #region client
 
-        public async Task<dtoSurveyClient> SaveSurveyClient(dtoSurveyClient surveyClient) {
-            dtoSurveyClient sc = null;
+        public async Task<dtoSurvey> SaveSurveyClient(dtoSurveyClient surveyClient) {
+            dtoSurvey survey = null;
 
             try {
-                var scObj = await _yuyanRepos.SaveSurveyClient(surveyClient);
-                sc = scObj.ConverToDtoSurveyClient();
+                var scObj = await _yuyanRepos.SaveSurveyClient(surveyClient); 
+                var surveyObj = await _yuyanRepos.GetSurveyBySurveyId(scObj.SurveyId);
+                survey = surveyObj.ConvertToDtoSurvey();
             }
             catch (ApplicationException aex)
             {

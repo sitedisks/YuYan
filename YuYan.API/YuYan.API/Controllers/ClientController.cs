@@ -42,5 +42,25 @@ namespace YuYan.API.Controllers
 
             return Ok(dtoSurvey);
         }
+
+        [Route(""), HttpPost]
+        public async Task<IHttpActionResult> SubmitSurvey(dtoSurveyClient surveyClient) {
+            dtoSurvey dtoSurvey = null;
+
+            try {
+                dtoSurvey = await _yuyanSvc.SaveSurveyClient(surveyClient);
+
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(dtoSurvey);
+        }
     }
 }

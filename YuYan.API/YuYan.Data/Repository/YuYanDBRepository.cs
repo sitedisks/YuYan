@@ -244,6 +244,7 @@ namespace YuYan.Data.Repository
             try {
                 sc.Email = surveyClient.Email;
                 sc.IPAddress = surveyClient.IPAddress;
+                sc.SurveyId = surveyClient.SurveyId;
                 sc.City = surveyClient.City;
                 sc.State = surveyClient.State;
                 sc.Country = surveyClient.Country;

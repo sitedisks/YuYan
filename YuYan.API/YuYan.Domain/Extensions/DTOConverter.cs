@@ -174,6 +174,7 @@ namespace YuYan.Domain.Extensions
             data.ClientId = source.ClientId;
             data.Email = source.Email;
             data.IPAddress = source.IPAddress;
+            data.SurveyId = source.SurveyId;
             data.City = source.City;
             data.State = source.State;
             data.Country = source.Country;

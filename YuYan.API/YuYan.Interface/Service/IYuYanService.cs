@@ -26,7 +26,7 @@ namespace YuYan.Interface.Service
 
         #region client
 
-        Task<dtoSurveyClient> SaveSurveyClient(dtoSurveyClient surveyClient);
+        Task<dtoSurvey> SaveSurveyClient(dtoSurveyClient surveyClient);
 
         #endregion
 
