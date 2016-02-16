@@ -20,7 +20,8 @@ namespace YuYan.API.Controllers
 
         #region survey
         // GET /surveys/2
-        [Route("{surveyid}"), HttpGet]  
+        [Route("{surveyid}"), HttpGet]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> GetSurveyBySurveyId(int surveyId)
         {
             dtoSurvey dtoSurvey = new dtoSurvey();
@@ -69,6 +70,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyid}"), HttpPut]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> UpdateSurvey(int surveyId, [FromBody] dtoSurvey survey)
         {
             dtoSurvey dtoSurvey = new dtoSurvey();
@@ -91,6 +93,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyid}"), HttpDelete]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> DeleteSurvey(int surveyId)
         {
             try
@@ -119,6 +122,7 @@ namespace YuYan.API.Controllers
 
         #region question
         [Route("{surveyid}/questions"), HttpGet]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> GetQuestionBySurveyId(int surveyId)
         {
             IList<dtoSurveyQuestion> questionList = new List<dtoSurveyQuestion>();
@@ -140,6 +144,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyid}/questions/{questionid}"), HttpGet]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> GetQuestionByQuestionId(int surveyId, int questionId)
         {
             dtoSurveyQuestion question = new dtoSurveyQuestion();
@@ -161,6 +166,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyid}/questions"), HttpPost]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> CreateQuestion(int surveyId, [FromBody] dtoSurveyQuestion question)
         {
             dtoSurveyQuestion dtoQuestion = new dtoSurveyQuestion();
@@ -181,6 +187,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyid}/questions/{questionid}"), HttpPut]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> UpdateQuestion(int surveyId, int questionId, [FromBody] dtoSurveyQuestion question)
         {
             dtoSurveyQuestion dtoSurveyQuestion = new dtoSurveyQuestion();
@@ -203,6 +210,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyid}/questions/{questionid}"), HttpDelete]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> DeleteQuestion(int surveyId, int questionId)
         {
             try
@@ -223,6 +231,7 @@ namespace YuYan.API.Controllers
 
         #region item
         [Route("{surveyid}/questions/{questionid}/items"), HttpGet]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> GetItemsByQuestionId(int surveyid, int questionId)
         {
             IList<dtoSurveyQuestionItem> itemList = new List<dtoSurveyQuestionItem>();
@@ -244,6 +253,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyid}/questions/{questionid}/items/{itemid}"), HttpGet]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> GetItemByItemId(int surveyid, int questionid, int itemId)
         {
             dtoSurveyQuestionItem item = new dtoSurveyQuestionItem();
@@ -265,6 +275,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyid}/questions/{questionid}/items"), HttpPost]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> CreateItem(int surveyId, int questionId, [FromBody] dtoSurveyQuestionItem item)
         {
             dtoSurveyQuestionItem dtoItem = new dtoSurveyQuestionItem();
@@ -287,6 +298,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyid}/questions/{questionid}/items/{itemid}"), HttpPut]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> UpdateItem(int surveyId, int questionId, int itemId, [FromBody] dtoSurveyQuestionItem item)
         {
             dtoSurveyQuestionItem dtoItem = new dtoSurveyQuestionItem();
@@ -309,6 +321,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyid}/questions/{questionid}/items/{itemid}"), HttpDelete]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> DeleteItem(int surveyId, int questionId, int itemId)
         {
             try
