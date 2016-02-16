@@ -46,7 +46,11 @@ namespace YuYan.Service
             try
             {
                 tbUser userObj = await _yuyanRepos.CreateNewUser(user);
+
+                userObj.IPAddress = user.IPAddress; //set the current Login IP for Session
+                tbSession session = await _yuyanRepos.CreateUpdateUserSession(userObj); // create the session
                 userProfile = userObj.ConvertToDtoUserProfile();
+                userProfile.CurrentSession = session.ConverToDtoSession();
             }
             catch (ApplicationException aex)
             {
