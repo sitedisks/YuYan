@@ -184,6 +184,39 @@ namespace YuYan.Data.Repository
             return session;
         }
 
+        public tbSession ExtendSession(tbSession session) {
+         
+            try {
+                session.Expiry = DateTime.UtcNow.AddHours(2); 
+                session.UpdatedDate = DateTime.UtcNow;
+                _db.SaveChanges();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return session;
+        }
+
+        public bool DeleteSession(tbSession session) {
+            bool isDeleted = false;
+
+            try {
+                session.IsDeleted = true;
+                session.IsActive = false;
+                session.UpdatedDate = DateTime.UtcNow;
+
+                _db.SaveChanges();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return isDeleted;
+        }
+
         public tbUser GetUserBySessionId(Guid sessionId)
         {
             tbUser user = null;

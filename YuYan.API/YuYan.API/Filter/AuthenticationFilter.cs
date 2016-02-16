@@ -66,7 +66,7 @@ namespace YuYan.API.Filter
                     if (sessionObj == null)
                         throw new UnauthorizedAccessException("Invalid session!");
                     else if (sessionObj.SessionId == Guid.Empty)
-                        throw new UnauthorizedAccessException("Session expired!");
+                        throw new UnauthorizedAccessException("Expired session!");
                     
 
                     var user = _yuyanSvc.GetUserBySessionId(session);

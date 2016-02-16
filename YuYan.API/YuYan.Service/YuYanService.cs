@@ -144,10 +144,17 @@ namespace YuYan.Service
                 if (session != null)
                 {
                     if (session.Expiry > DateTime.UtcNow)
+                    {
+                        // session valided - update the session to next 2hr
+                        session = _yuyanRepos.ExtendSession(session);
                         sessionObj = session.ConverToDtoSession();
+                    }
                     else
+                    {
+                        // session expiried - delete the session then
+                        var isDeleted = _yuyanRepos.DeleteSession(session);
                         return new dtoSession();
-                    
+                    }
                 }
                 
             }

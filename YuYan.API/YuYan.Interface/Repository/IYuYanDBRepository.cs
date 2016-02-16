@@ -16,6 +16,8 @@ namespace YuYan.Interface.Repository
         Task<bool> LogoutUser(Guid sessionId);
         Task<tbSession> CreateUpdateUserSession(tbUser user);
         tbSession GetSessionBySessionId(Guid sessionId);
+        tbSession ExtendSession(tbSession session);
+        bool DeleteSession(tbSession session);
         tbUser GetUserBySessionId(Guid sessionId);
         #endregion
 
