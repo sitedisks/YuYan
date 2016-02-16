@@ -20,7 +20,7 @@ namespace YuYan.API.Controllers
 
         #region survey
         // GET /surveys/2
-        [Route("{surveyid}"), HttpGet]
+        [Route("{surveyid}"), HttpGet]  
         public async Task<IHttpActionResult> GetSurveyBySurveyId(int surveyId)
         {
             dtoSurvey dtoSurvey = new dtoSurvey();
@@ -44,7 +44,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route(""), HttpPost]
-        [AuthenticationFilter(AllowAnonymous = true)]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> CreateSurvey([FromBody] dtoSurvey survey)
         {
             dtoSurvey dtoSurvey = new dtoSurvey();
