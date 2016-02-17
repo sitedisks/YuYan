@@ -120,7 +120,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("status"), HttpGet]
-        [AuthenticationFilter(AllowAnonymous = false)]
+        [AuthenticationFilter(AllowAnonymous = true)]
         public IHttpActionResult CheckSession(Guid sessionId) {
             dtoSession session = null;
 
@@ -140,7 +140,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("update"), HttpPut]
-        [AuthenticationFilter(AllowAnonymous = true)]
+        [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> UpdateUserProfile(dtoUserProfile userProfile)
         {
             dtoUserProfile profile = null;
