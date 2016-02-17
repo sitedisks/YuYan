@@ -27,8 +27,8 @@ namespace YuYan.Interface.Repository
         #endregion
 
         #region survey
-        Task<IEnumerable<tbSurvey>> GetAllActiveSurveys();
-        Task<IEnumerable<tbSurvey>> GetSurveysByUserId(Guid userId);
+        Task<IList<tbSurvey>> GetAllActiveSurveys();
+        Task<IList<tbSurvey>> GetSurveysByUserId(Guid userId);
         Task<tbSurvey> GetSurveyBySurveyId(int surveyId);
         Task<tbSurvey> GetSurveyByUrlToken(string url);
         Task<tbSurvey> CreateNewSurvey(dtoSurvey survey);
@@ -39,7 +39,7 @@ namespace YuYan.Interface.Repository
         #endregion
 
         #region question
-        Task<IEnumerable<tbSurveyQuestion>> GetSurveyQuestionsBySurveyId(int surveyId);
+        Task<IList<tbSurveyQuestion>> GetSurveyQuestionsBySurveyId(int surveyId);
         Task<tbSurveyQuestion> GetSurveyQuestionByQuestionId(int questionId);
         Task<tbSurveyQuestion> CreateNewQuestion(dtoSurveyQuestion question);
         Task<tbSurveyQuestion> UpdateQuestion(dtoSurveyQuestion question);
@@ -49,7 +49,7 @@ namespace YuYan.Interface.Repository
         #endregion
 
         #region item
-        Task<IEnumerable<tbSurveyQuestionItem>> GetQuestionItemsByQuestionId(int questionId);
+        Task<IList<tbSurveyQuestionItem>> GetQuestionItemsByQuestionId(int questionId);
         Task<tbSurveyQuestionItem> GetQuestionItemByItemId(int itemId);
         Task<tbSurveyQuestionItem> CreateNewItem(dtoSurveyQuestionItem item);
         Task<tbSurveyQuestionItem> UpdateItem(dtoSurveyQuestionItem item);

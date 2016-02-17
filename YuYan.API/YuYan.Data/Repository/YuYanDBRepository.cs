@@ -328,7 +328,7 @@ namespace YuYan.Data.Repository
         #endregion
 
         #region survey
-        public async Task<IEnumerable<tbSurvey>> GetAllActiveSurveys()
+        public async Task<IList<tbSurvey>> GetAllActiveSurveys()
         {
             IList<tbSurvey> surveyList = new List<tbSurvey>();
             try
@@ -342,7 +342,7 @@ namespace YuYan.Data.Repository
             return surveyList;
         }
 
-        public async Task<IEnumerable<tbSurvey>> GetSurveysByUserId(Guid userId)
+        public async Task<IList<tbSurvey>> GetSurveysByUserId(Guid userId)
         {
             IList<tbSurvey> surveyList = new List<tbSurvey>();
 
@@ -503,7 +503,7 @@ namespace YuYan.Data.Repository
         #endregion
 
         #region question
-        public async Task<IEnumerable<tbSurveyQuestion>> GetSurveyQuestionsBySurveyId(int surveyId)
+        public async Task<IList<tbSurveyQuestion>> GetSurveyQuestionsBySurveyId(int surveyId)
         {
             IList<tbSurveyQuestion> surveyQuestionList = new List<tbSurveyQuestion>();
 
@@ -646,7 +646,7 @@ namespace YuYan.Data.Repository
         #endregion
 
         #region item
-        public async Task<IEnumerable<tbSurveyQuestionItem>> GetQuestionItemsByQuestionId(int questionId)
+        public async Task<IList<tbSurveyQuestionItem>> GetQuestionItemsByQuestionId(int questionId)
         {
             IList<tbSurveyQuestionItem> itemList = new List<tbSurveyQuestionItem>();
 

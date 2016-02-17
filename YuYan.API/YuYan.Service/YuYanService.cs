@@ -19,10 +19,12 @@ namespace YuYan.Service
         }
 
         #region user
-        public async Task<dtoUser> CheckUserAvailability(string email) {
+        public async Task<dtoUser> CheckUserAvailability(string email)
+        {
             dtoUser userObj = null;
 
-            try {
+            try
+            {
                 var user = await _yuyanRepos.GetUserByEmail(email);
                 if (user != null)
                     userObj = user.ConvertToDtoUser();
@@ -115,10 +117,12 @@ namespace YuYan.Service
             return IsLogout;
         }
 
-        public async Task<dtoUserProfile> UpdateUserProfile(dtoUserProfile userProfile) {
+        public async Task<dtoUserProfile> UpdateUserProfile(dtoUserProfile userProfile)
+        {
             dtoUserProfile profile = null;
 
-            try {
+            try
+            {
                 tbUser uprofile = await _yuyanRepos.UpdateUser(userProfile);
                 if (uprofile != null)
                     profile = uprofile.ConvertToDtoUserProfile();
@@ -135,11 +139,13 @@ namespace YuYan.Service
             return profile;
         }
 
-        public dtoSession ValidateSession(Guid sessionId) {
+        public dtoSession ValidateSession(Guid sessionId)
+        {
 
             dtoSession sessionObj = null;
 
-            try {
+            try
+            {
                 tbSession session = _yuyanRepos.GetSessionBySessionId(sessionId);
                 if (session != null)
                 {
@@ -156,7 +162,7 @@ namespace YuYan.Service
                         return new dtoSession();
                     }
                 }
-                
+
             }
             catch (ApplicationException aex)
             {
@@ -170,10 +176,12 @@ namespace YuYan.Service
             return sessionObj;
         }
 
-        public dtoUserProfile GetUserBySessionId(Guid sessionId) {
+        public dtoUserProfile GetUserBySessionId(Guid sessionId)
+        {
             dtoUserProfile userProfile = null;
 
-            try {
+            try
+            {
                 var u = _yuyanRepos.GetUserBySessionId(sessionId);
                 if (u != null)
                     userProfile = u.ConvertToDtoUserProfile();
@@ -193,11 +201,13 @@ namespace YuYan.Service
 
         #region client
 
-        public async Task<dtoSurvey> SaveSurveyClient(dtoSurveyClient surveyClient) {
+        public async Task<dtoSurvey> SaveSurveyClient(dtoSurveyClient surveyClient)
+        {
             dtoSurvey survey = null;
 
-            try {
-                var scObj = await _yuyanRepos.SaveSurveyClient(surveyClient); 
+            try
+            {
+                var scObj = await _yuyanRepos.SaveSurveyClient(surveyClient);
                 var surveyObj = await _yuyanRepos.GetSurveyBySurveyId(scObj.SurveyId);
                 survey = surveyObj.ConvertToDtoSurvey();
             }
@@ -215,6 +225,33 @@ namespace YuYan.Service
         #endregion
 
         #region survey
+        public async Task<IList<dtoSurvey>> GetSurveysByUserId(Guid userId)
+        {
+            IList<dtoSurvey> surveys = new List<dtoSurvey>();
+
+            try
+            {
+                var sList = await _yuyanRepos.GetSurveysByUserId(userId);
+                if (sList.Count > 0)
+                {
+                    foreach (tbSurvey survey in sList) {
+                        surveys.Add(survey.ConvertToDtoSurvey());
+                    }
+                }
+
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error retriving Surveys", ex);
+            }
+
+            return surveys;
+        }
+
         public async Task<dtoSurvey> GetSurveyBySurveyId(int surveyId)
         {
             dtoSurvey survey = new dtoSurvey();
@@ -236,7 +273,8 @@ namespace YuYan.Service
             return survey;
         }
 
-        public async Task<dtoSurvey> GetSurveyByURLToken(string url) {
+        public async Task<dtoSurvey> GetSurveyByURLToken(string url)
+        {
             dtoSurvey survey = new dtoSurvey();
 
             try

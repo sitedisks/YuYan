@@ -19,6 +19,28 @@ namespace YuYan.API.Controllers
         }
 
         #region survey
+        [Route("all"), HttpGet]
+        [AuthenticationFilter(AllowAnonymous = false)]
+        public async Task<IHttpActionResult> GetSurveysByOwner()
+        {
+            IList<dtoSurvey> surveyList = new List<dtoSurvey>();
+
+            try {
+                var user = ControllerContext.RequestContext.Principal as YYUser;
+                surveyList = await _yuyanSvc.GetSurveysByUserId(user.UserId);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(surveyList);
+        }
+
         // GET /surveys/2
         [Route("{surveyid}"), HttpGet]
         [AuthenticationFilter(AllowAnonymous = false)]
