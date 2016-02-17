@@ -120,7 +120,6 @@ namespace YuYan.API.Controllers
         }
 
         [Route("status"), HttpGet]
-        [AuthenticationFilter(AllowAnonymous = true)]
         public IHttpActionResult CheckSession(Guid sessionId) {
             dtoSession session = null;
 
