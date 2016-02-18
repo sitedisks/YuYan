@@ -184,10 +184,12 @@ namespace YuYan.Data.Repository
             return session;
         }
 
-        public tbSession ExtendSession(tbSession session) {
-         
-            try {
-                session.Expiry = DateTime.UtcNow.AddHours(2); 
+        public tbSession ExtendSession(tbSession session)
+        {
+
+            try
+            {
+                session.Expiry = DateTime.UtcNow.AddHours(2);
                 session.UpdatedDate = DateTime.UtcNow;
                 _db.SaveChanges();
             }
@@ -199,10 +201,12 @@ namespace YuYan.Data.Repository
             return session;
         }
 
-        public bool DeleteSession(tbSession session) {
+        public bool DeleteSession(tbSession session)
+        {
             bool isDeleted = false;
 
-            try {
+            try
+            {
                 session.IsDeleted = true;
                 session.IsActive = false;
                 session.UpdatedDate = DateTime.UtcNow;
@@ -271,10 +275,12 @@ namespace YuYan.Data.Repository
         #endregion
 
         #region client
-        public async Task<tbSurveyClient> SaveSurveyClient(dtoSurveyClient surveyClient) {
+        public async Task<tbSurveyClient> SaveSurveyClient(dtoSurveyClient surveyClient)
+        {
             tbSurveyClient sc = new tbSurveyClient();
 
-            try {
+            try
+            {
                 sc.Email = surveyClient.Email;
                 sc.IPAddress = surveyClient.IPAddress;
                 sc.SurveyId = surveyClient.SurveyId;
@@ -287,7 +293,8 @@ namespace YuYan.Data.Repository
 
                 if (surveyClient.dtoClientAnswers.Count() > 0)
                 {
-                    foreach (dtoSurveyClientAnswer clientAnswer in surveyClient.dtoClientAnswers) {
+                    foreach (dtoSurveyClientAnswer clientAnswer in surveyClient.dtoClientAnswers)
+                    {
                         clientAnswer.ClientId = sc.ClientId;
                         await SaveClientAnswer(clientAnswer);
                     }
@@ -307,7 +314,8 @@ namespace YuYan.Data.Repository
         {
             tbSurveyClientAnswer ca = new tbSurveyClientAnswer();
 
-            try{
+            try
+            {
                 ca.ClientId = clientAnswer.ClientId;
                 ca.QuestionId = clientAnswer.QuestionId;
                 ca.QuestionItemId = clientAnswer.QuestionItemId;
@@ -342,14 +350,28 @@ namespace YuYan.Data.Repository
             return surveyList;
         }
 
-        public async Task<IList<tbSurvey>> GetSurveysByUserId(Guid userId)
+        public async Task<IList<tbSurvey>> GetSurveysByUserId(Guid userId, int? page = null, int? row = null, bool? actived = null)
         {
             IList<tbSurvey> surveyList = new List<tbSurvey>();
 
             try
             {
-                surveyList = await _db.tbSurveys.Where(x => x.UserId == userId
-                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
+                var sList = _db.tbSurveys.Where(x => x.UserId == userId && !(x.IsDeleted ?? false));
+
+                if (actived.HasValue)
+                    sList = sList.Where(x => x.IsActive == actived);
+
+                // pagination
+                if (row.HasValue)
+                {
+                    int skip = 0;
+                    if (page.HasValue)
+                        skip = (page.Value - 1) * row.Value;
+
+                    sList = sList.OrderByDescending(x => x.UpdatedDate).Skip(skip).Take(row.Value);
+                }
+
+                surveyList = await sList.ToListAsync();
             }
             catch (DataException dex)
             {
@@ -406,6 +428,7 @@ namespace YuYan.Data.Repository
                 newSurvey.ShortDescription = survey.ShortDesc;
                 newSurvey.LongDescription = survey.LongDesc;
                 newSurvey.CreatedDate = DateTime.UtcNow;
+                newSurvey.UpdatedDate = DateTime.UtcNow;
                 newSurvey.IsActive = true;
                 newSurvey.IsDeleted = false;
 
@@ -550,6 +573,7 @@ namespace YuYan.Data.Repository
                 newQuestion.QuestionType = question.QuestionType;
                 newQuestion.QuestionOrder = questionCount + 1;
                 newQuestion.CreatedDate = DateTime.UtcNow;
+                newQuestion.UpdatedDate = DateTime.UtcNow;
                 newQuestion.IsActive = true;
                 newQuestion.IsDeleted = false;
 
@@ -692,6 +716,7 @@ namespace YuYan.Data.Repository
                 newItem.ItemDescription = item.ItemDescription;
                 newItem.ItemOrder = itemCount + 1;
                 newItem.CreatedDate = DateTime.UtcNow;
+                newItem.UpdatedDate = DateTime.UtcNow;
                 newItem.IsActive = true;
                 newItem.IsDeleted = false;
 

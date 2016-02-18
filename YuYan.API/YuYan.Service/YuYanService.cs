@@ -225,16 +225,17 @@ namespace YuYan.Service
         #endregion
 
         #region survey
-        public async Task<IList<dtoSurvey>> GetSurveysByUserId(Guid userId)
+        public async Task<IList<dtoSurvey>> GetSurveysByUserId(Guid userId, int? page = null, int? row = null, bool? actived = null)
         {
             IList<dtoSurvey> surveys = new List<dtoSurvey>();
 
             try
             {
-                var sList = await _yuyanRepos.GetSurveysByUserId(userId);
+                var sList = await _yuyanRepos.GetSurveysByUserId(userId, page, row, actived);
                 if (sList.Count > 0)
                 {
-                    foreach (tbSurvey survey in sList) {
+                    foreach (tbSurvey survey in sList)
+                    {
                         surveys.Add(survey.ConvertToDtoSurvey());
                     }
                 }

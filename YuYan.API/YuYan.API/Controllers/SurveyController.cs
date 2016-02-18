@@ -21,13 +21,14 @@ namespace YuYan.API.Controllers
         #region survey
         [Route("all"), HttpGet]
         [AuthenticationFilter(AllowAnonymous = false)]
-        public async Task<IHttpActionResult> GetSurveysByOwner()
+        public async Task<IHttpActionResult> GetSurveysByOwner(int? page = null, int? row = null, bool? actived = null)
         {
             IList<dtoSurvey> surveyList = new List<dtoSurvey>();
 
-            try {
+            try
+            {
                 var user = ControllerContext.RequestContext.Principal as YYUser;
-                surveyList = await _yuyanSvc.GetSurveysByUserId(user.UserId);
+                surveyList = await _yuyanSvc.GetSurveysByUserId(user.UserId, page, row, actived);
             }
             catch (ApplicationException aex)
             {
@@ -132,14 +133,6 @@ namespace YuYan.API.Controllers
             }
             return Ok();
         }
-
-        /*
-        [Route("user/{userid}"), HttpGet]
-        public IHttpActionResult GetAllSurveysByUserId(Guid userId) {
-
-            return Ok();
-        }
-         */
         #endregion
 
         #region question
