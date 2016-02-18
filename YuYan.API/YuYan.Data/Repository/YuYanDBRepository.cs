@@ -152,7 +152,7 @@ namespace YuYan.Data.Repository
                 session.UserId = user.UserId;
                 session.CreatedDate = DateTime.UtcNow;
                 session.IPAddress = user.IPAddress;
-                session.Expiry = DateTime.UtcNow.AddHours(2); // extend next 2 hours
+                session.Expiry = DateTime.UtcNow.AddDays(1); // extend one day
                 session.IsDeleted = false;
                 session.IsActive = true;
                 _db.tbSessions.Add(session);
@@ -189,7 +189,7 @@ namespace YuYan.Data.Repository
 
             try
             {
-                session.Expiry = DateTime.UtcNow.AddHours(2);
+                session.Expiry = DateTime.UtcNow.AddDays(1);
                 session.UpdatedDate = DateTime.UtcNow;
                 _db.SaveChanges();
             }
