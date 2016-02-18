@@ -361,6 +361,8 @@ namespace YuYan.Data.Repository
                 if (actived.HasValue)
                     sList = sList.Where(x => x.IsActive == actived);
 
+                sList = sList.OrderByDescending(x => x.UpdatedDate);
+
                 // pagination
                 if (row.HasValue)
                 {
@@ -368,7 +370,7 @@ namespace YuYan.Data.Repository
                     if (page.HasValue)
                         skip = (page.Value - 1) * row.Value;
 
-                    sList = sList.OrderByDescending(x => x.UpdatedDate).Skip(skip).Take(row.Value);
+                    sList = sList.Skip(skip).Take(row.Value);
                 }
 
                 surveyList = await sList.ToListAsync();
