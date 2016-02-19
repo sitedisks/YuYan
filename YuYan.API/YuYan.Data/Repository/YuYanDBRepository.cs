@@ -436,15 +436,18 @@ namespace YuYan.Data.Repository
 
                 _db.tbSurveys.Add(newSurvey);
 
-                if (survey.dtoQuestions.Count() > 0)
-                {
-                    // do the question create
-                    foreach (dtoSurveyQuestion question in survey.dtoQuestions)
+                if (survey.dtoQuestions != null) {
+                    if (survey.dtoQuestions.Count() > 0)
                     {
-                        question.SurveyId = newSurvey.SurveyId;
-                        await CreateNewQuestion(question);
+                        // do the question create
+                        foreach (dtoSurveyQuestion question in survey.dtoQuestions)
+                        {
+                            question.SurveyId = newSurvey.SurveyId;
+                            await CreateNewQuestion(question);
+                        }
                     }
                 }
+            
 
                 await _db.SaveChangesAsync();
             }
@@ -581,12 +584,15 @@ namespace YuYan.Data.Repository
 
                 _db.tbSurveyQuestions.Add(newQuestion);
 
-                if (question.dtoItems.Count() > 0)
+                if (question.dtoItems != null)
                 {
-                    foreach (dtoSurveyQuestionItem item in question.dtoItems)
+                    if (question.dtoItems.Count() > 0)
                     {
-                        item.QuestionId = newQuestion.QuestionId;
-                        await CreateNewItem(item);
+                        foreach (dtoSurveyQuestionItem item in question.dtoItems)
+                        {
+                            item.QuestionId = newQuestion.QuestionId;
+                            await CreateNewItem(item);
+                        }
                     }
                 }
 
