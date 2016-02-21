@@ -760,7 +760,7 @@ namespace YuYan.Data.Repository
                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).Count();
                 newItem.QuestionId = item.QuestionId;
                 newItem.ItemDescription = item.ItemDescription;
-                newItem.ItemOrder = item.ItemOrder != null ? item.ItemOrder : itemCount + 1;
+                newItem.ItemOrder = item.ItemOrder != 0 ? item.ItemOrder : itemCount + 1;
                 newItem.CreatedDate = DateTime.UtcNow;
                 newItem.UpdatedDate = DateTime.UtcNow;
                 newItem.IsActive = true;
