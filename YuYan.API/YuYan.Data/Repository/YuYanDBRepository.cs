@@ -436,7 +436,8 @@ namespace YuYan.Data.Repository
 
                 _db.tbSurveys.Add(newSurvey);
 
-                if (survey.dtoQuestions != null) {
+                if (survey.dtoQuestions != null)
+                {
                     if (survey.dtoQuestions.Count() > 0)
                     {
                         // do the question create
@@ -447,7 +448,7 @@ namespace YuYan.Data.Repository
                         }
                     }
                 }
-            
+
 
                 await _db.SaveChangesAsync();
             }
@@ -618,7 +619,44 @@ namespace YuYan.Data.Repository
                 if (theQuestion != null)
                 {
                     theQuestion.Question = question.Question;
+                    theQuestion.QuestionType = question.QuestionType;
                     theQuestion.UpdatedDate = DateTime.UtcNow;
+
+                    if (theQuestion.tbSurveyQuestionItems != null)
+                    {
+                        if (theQuestion.tbSurveyQuestionItems.Count() > 0)
+                        {
+                            IList<int> deleteItemIds = theQuestion.tbSurveyQuestionItems
+                                .Where(x=> (x.IsActive ?? true) && !(x.IsDeleted ?? false))
+                                .Select(x => x.QuestionItemId)
+                                .Except(question.dtoItems.Select(z => z.QuestionItemId)).ToList();
+                            foreach (int dItemId in deleteItemIds) {
+                                await DeleteItem(dItemId);
+                                await DeactiveItem(dItemId);
+                            }
+                        }
+                    }
+
+                    if (question.dtoItems != null)
+                    {
+                        if (question.dtoItems.Count() > 0)
+                        {
+                            foreach (dtoSurveyQuestionItem item in question.dtoItems)
+                            {
+                                if (item.QuestionItemId != 0)
+                                {
+                                    //update
+                                    await UpdateItem(item);
+                                }
+                                else
+                                {
+                                    //add new item
+                                    await CreateNewItem(item);
+                                }
+                            }
+                        }
+                    }
+
                     await _db.SaveChangesAsync();
                 }
             }
@@ -722,7 +760,7 @@ namespace YuYan.Data.Repository
                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).Count();
                 newItem.QuestionId = item.QuestionId;
                 newItem.ItemDescription = item.ItemDescription;
-                newItem.ItemOrder = itemCount + 1;
+                newItem.ItemOrder = item.ItemOrder != null ? item.ItemOrder : itemCount + 1;
                 newItem.CreatedDate = DateTime.UtcNow;
                 newItem.UpdatedDate = DateTime.UtcNow;
                 newItem.IsActive = true;
@@ -749,6 +787,7 @@ namespace YuYan.Data.Repository
                 if (theItem != null)
                 {
                     theItem.ItemDescription = item.ItemDescription;
+                    theItem.ItemOrder = item.ItemOrder;
                     theItem.UpdatedDate = DateTime.UtcNow;
                     await _db.SaveChangesAsync();
                 }
