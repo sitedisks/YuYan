@@ -24,6 +24,8 @@ namespace YuYan.Interface.Repository
         #region client
         Task<tbSurveyClient> SaveSurveyClient(dtoSurveyClient surveyClient);
 
+        Task<tbSurveyShare> SaveSurveyShare(dtoSurveyShare surveyShare);
+
         #endregion
 
         #region survey

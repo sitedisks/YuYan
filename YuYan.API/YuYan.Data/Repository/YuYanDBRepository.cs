@@ -310,6 +310,27 @@ namespace YuYan.Data.Repository
             return sc;
         }
 
+        public async Task<tbSurveyShare> SaveSurveyShare(dtoSurveyShare surveyShare)
+        {
+            tbSurveyShare sShare = new tbSurveyShare();
+
+            try
+            {
+                sShare.SurveyId = surveyShare.SurveyId;
+                sShare.IPAddress = surveyShare.IPAddress;
+                sShare.VisitedDate = DateTime.UtcNow;
+
+                _db.tbSurveyShares.Add(sShare);
+                await _db.SaveChangesAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return sShare;
+        }
+
         private async Task<tbSurveyClientAnswer> SaveClientAnswer(dtoSurveyClientAnswer clientAnswer)
         {
             tbSurveyClientAnswer ca = new tbSurveyClientAnswer();
@@ -627,10 +648,11 @@ namespace YuYan.Data.Repository
                         if (theQuestion.tbSurveyQuestionItems.Count() > 0)
                         {
                             IList<int> deleteItemIds = theQuestion.tbSurveyQuestionItems
-                                .Where(x=> (x.IsActive ?? true) && !(x.IsDeleted ?? false))
+                                .Where(x => (x.IsActive ?? true) && !(x.IsDeleted ?? false))
                                 .Select(x => x.QuestionItemId)
                                 .Except(question.dtoItems.Select(z => z.QuestionItemId)).ToList();
-                            foreach (int dItemId in deleteItemIds) {
+                            foreach (int dItemId in deleteItemIds)
+                            {
                                 await DeleteItem(dItemId);
                                 await DeactiveItem(dItemId);
                             }

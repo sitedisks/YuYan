@@ -222,6 +222,27 @@ namespace YuYan.Service
 
             return null;
         }
+
+        public async Task<dtoSurveyShare> AddSurveyShare(dtoSurveyShare surveyShare) {
+            dtoSurveyShare sShare = null;
+
+            try {
+                tbSurveyShare s = await _yuyanRepos.SaveSurveyShare(surveyShare);
+                sShare = s.ConverToDtoSurveyShare();
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error add survey share", ex);
+            }
+
+
+            return sShare;
+        }
+
         #endregion
 
         #region survey

@@ -30,7 +30,8 @@ namespace YuYan.Domain.Extensions
         #endregion
 
         #region table to dto
-        public static dtoUser ConvertToDtoUser(this tbUser source, dtoUser data = null) {
+        public static dtoUser ConvertToDtoUser(this tbUser source, dtoUser data = null)
+        {
             if (data == null)
                 data = new dtoUser();
 
@@ -47,7 +48,8 @@ namespace YuYan.Domain.Extensions
             return data;
         }
 
-        public static dtoUserProfile ConvertToDtoUserProfile(this tbUser source, dtoUserProfile data = null) {
+        public static dtoUserProfile ConvertToDtoUserProfile(this tbUser source, dtoUserProfile data = null)
+        {
             if (data == null)
                 data = new dtoUserProfile();
 
@@ -150,7 +152,8 @@ namespace YuYan.Domain.Extensions
             return data;
         }
 
-        public static dtoSession ConverToDtoSession(this tbSession source, dtoSession data = null) {
+        public static dtoSession ConverToDtoSession(this tbSession source, dtoSession data = null)
+        {
             if (data == null)
                 data = new dtoSession();
 
@@ -167,7 +170,8 @@ namespace YuYan.Domain.Extensions
             return data;
         }
 
-        public static dtoSurveyClient ConverToDtoSurveyClient(this tbSurveyClient source, dtoSurveyClient data = null) {
+        public static dtoSurveyClient ConverToDtoSurveyClient(this tbSurveyClient source, dtoSurveyClient data = null)
+        {
 
             if (data == null)
                 data = new dtoSurveyClient();
@@ -186,7 +190,8 @@ namespace YuYan.Domain.Extensions
             IList<dtoSurveyClientAnswer> answerList = new List<dtoSurveyClientAnswer>();
             if (source.tbClientAnswers != null)
             {
-                foreach (tbSurveyClientAnswer answer in source.tbClientAnswers) {
+                foreach (tbSurveyClientAnswer answer in source.tbClientAnswers)
+                {
                     answerList.Add(answer.ConverToDtoAnswwer());
                 }
             }
@@ -196,7 +201,8 @@ namespace YuYan.Domain.Extensions
             return data;
         }
 
-        private static dtoSurveyClientAnswer ConverToDtoAnswwer(this tbSurveyClientAnswer source, dtoSurveyClientAnswer data = null) {
+        private static dtoSurveyClientAnswer ConverToDtoAnswwer(this tbSurveyClientAnswer source, dtoSurveyClientAnswer data = null)
+        {
             if (data == null)
                 data = new dtoSurveyClientAnswer();
 
@@ -208,6 +214,22 @@ namespace YuYan.Domain.Extensions
             data.QuestionId = source.QuestionId;
             data.QuestionItemId = source.QuestionItemId;
             data.IsChecked = source.IsChecked;
+
+            return data;
+        }
+
+        public static dtoSurveyShare ConverToDtoSurveyShare(this tbSurveyShare source, dtoSurveyShare data = null)
+        {
+            if (data == null)
+                data = new dtoSurveyShare();
+
+            if (source == null)
+                return null;
+
+            data.SurveyShareId = source.SurveyShareId;
+            data.SurveyId = source.SurveyId;
+            data.IPAddress = source.IPAddress;
+            data.VisitedDate = source.VisitedDate;
 
             return data;
         }
