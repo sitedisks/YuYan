@@ -42,6 +42,27 @@ namespace YuYan.API.Controllers
             return Ok(surveyList);
         }
 
+        [Route("count"), HttpGet]
+        [AuthenticationFilter(AllowAnonymous = false)]
+        public async Task<IHttpActionResult> GetSurveyTotalCountByOwner() {
+            int count = 0;
+
+            try {
+                var user = ControllerContext.RequestContext.Principal as YYUser;
+                count = await _yuyanSvc.GetTotalSurveyCountByUserId(user.UserId); 
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(count);
+        }
+
         // GET /surveys/2
         [Route("{surveyid}"), HttpGet]
         [AuthenticationFilter(AllowAnonymous = false)]

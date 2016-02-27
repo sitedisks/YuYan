@@ -34,6 +34,8 @@ namespace YuYan.Interface.Service
         #region survey
         Task<IList<dtoSurvey>> GetSurveysByUserId(Guid userId, int? page = null, int? row = null, bool? actived = null);
 
+        Task<int> GetTotalSurveyCountByUserId(Guid userId);
+
         Task<dtoSurvey> GetSurveyBySurveyId(int surveyId);
 
         Task<dtoSurvey> GetSurveyByURLToken(string url);

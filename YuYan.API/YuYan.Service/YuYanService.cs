@@ -223,10 +223,12 @@ namespace YuYan.Service
             return null;
         }
 
-        public async Task<dtoSurveyShare> AddSurveyShare(dtoSurveyShare surveyShare) {
+        public async Task<dtoSurveyShare> AddSurveyShare(dtoSurveyShare surveyShare)
+        {
             dtoSurveyShare sShare = null;
 
-            try {
+            try
+            {
                 tbSurveyShare s = await _yuyanRepos.SaveSurveyShare(surveyShare);
                 sShare = s.ConverToDtoSurveyShare();
             }
@@ -277,6 +279,25 @@ namespace YuYan.Service
             }
 
             return surveys;
+        }
+
+        public async Task<int> GetTotalSurveyCountByUserId(Guid userId)
+        {
+            int count = 0;
+
+            try {
+                count = await _yuyanRepos.GetTotalSurveyCountByUserId(userId);
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error retriving Surveys", ex);
+            }
+
+            return count;
         }
 
         public async Task<dtoSurvey> GetSurveyBySurveyId(int surveyId)

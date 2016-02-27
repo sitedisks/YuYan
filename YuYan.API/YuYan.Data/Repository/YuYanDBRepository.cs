@@ -404,6 +404,20 @@ namespace YuYan.Data.Repository
             return surveyList;
         }
 
+        public async Task<int> GetTotalSurveyCountByUserId(Guid userId) {
+            int surveyCount = 0;
+            try {
+                var surveyList = await _db.tbSurveys.Where(x => x.UserId == userId && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
+                surveyCount = surveyList.Count();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return surveyCount;
+        }
+
         public async Task<tbSurvey> GetSurveyBySurveyId(int surveyId)
         {
             tbSurvey survey = null;
