@@ -32,6 +32,8 @@ namespace YuYan.Interface.Repository
         Task<IList<tbSurvey>> GetAllActiveSurveys();
         Task<IList<tbSurvey>> GetSurveysByUserId(Guid userId, int? page = null, int? row = null, bool? actived = null);
         Task<tbSurvey> GetSurveyBySurveyId(int surveyId);
+        Task<IList<tbSurveyShare>> GetSurveySharesBySurveyId(int surveyId);
+        Task<IList<tbSurveyClient>> GetSurveyClientBySurveyId(int surveyId);
         Task<tbSurvey> GetSurveyByUrlToken(string url);
         Task<tbSurvey> CreateNewSurvey(dtoSurvey survey);
         Task<tbSurvey> UpdateSurvey(dtoSurvey survey);

@@ -257,7 +257,12 @@ namespace YuYan.Service
                 {
                     foreach (tbSurvey survey in sList)
                     {
-                        surveys.Add(survey.ConvertToDtoSurvey());
+                        var visitCount = await _yuyanRepos.GetSurveySharesBySurveyId(survey.SurveyId);
+                        var completeCount = await _yuyanRepos.GetSurveyClientBySurveyId(survey.SurveyId);
+                        dtoSurvey tempSurvey = survey.ConvertToDtoSurvey();
+                        tempSurvey.VisitCount = visitCount.Count;
+                        tempSurvey.CompleteCount = completeCount.Count;
+                        surveys.Add(tempSurvey);
                     }
                 }
 

@@ -421,6 +421,34 @@ namespace YuYan.Data.Repository
             return survey;
         }
 
+        public async Task<IList<tbSurveyShare>> GetSurveySharesBySurveyId(int surveyId) {
+            IList<tbSurveyShare> surveyShareList = new List<tbSurveyShare>();
+
+            try {
+                surveyShareList = await _db.tbSurveyShares.Where(x => x.SurveyId == surveyId).ToListAsync(); 
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return surveyShareList;
+        }
+
+        public async Task<IList<tbSurveyClient>> GetSurveyClientBySurveyId(int surveyId) {
+            IList<tbSurveyClient> surveyClientList = new List<tbSurveyClient>();
+
+            try {
+                surveyClientList = await _db.tbSurveyClients.Where(x => x.SurveyId == surveyId).ToListAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return surveyClientList;
+        }
+
         public async Task<tbSurvey> GetSurveyByUrlToken(string url)
         {
             tbSurvey survey = null;
