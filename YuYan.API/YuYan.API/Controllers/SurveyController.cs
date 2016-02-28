@@ -45,11 +45,12 @@ namespace YuYan.API.Controllers
         [Route("count"), HttpGet]
         [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> GetSurveyTotalCountByOwner() {
-            int count = 0;
-
+    
+            var countObj = new { SurveyCount = 0 };
             try {
                 var user = ControllerContext.RequestContext.Principal as YYUser;
-                count = await _yuyanSvc.GetTotalSurveyCountByUserId(user.UserId); 
+                int count = await _yuyanSvc.GetTotalSurveyCountByUserId(user.UserId);
+                countObj = new { SurveyCount = count };
             }
             catch (ApplicationException aex)
             {
@@ -60,7 +61,7 @@ namespace YuYan.API.Controllers
                 return InternalServerError(ex);
             }
 
-            return Ok(count);
+            return Ok(countObj);
         }
 
         // GET /surveys/2
