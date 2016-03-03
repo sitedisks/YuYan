@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace YuYan.Domain.Database
@@ -11,6 +12,8 @@ namespace YuYan.Domain.Database
         public int QuestionId { get; set; }
         public string ItemDescription { get; set; }
         public int ItemOrder { get; set; }
+        public Nullable<int> Score { get; set; }
+        public Nullable<int> GotoQuestionId { get; set; }
 
         [ForeignKey("QuestionId")]
         public virtual tbSurveyQuestion tbSurveyQuestion { get; set; }

@@ -8,6 +8,7 @@ namespace YuYan.Domain.DTO
         public string Email { get; set; }
         public string IPAddress { get; set; }
         public int SurveyId { get; set; }
+        public int TotalScore { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }

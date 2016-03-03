@@ -83,6 +83,8 @@ namespace YuYan.Domain.Extensions
             data.QuestionId = source.QuestionId;
             data.ItemDescription = source.ItemDescription;
             data.ItemOrder = source.ItemOrder;
+            data.Score = source.Score;
+            data.GotoQuestionId = source.GotoQuestionId;
             data.IsActive = source.IsActive;
             data.IsDeleted = source.IsDeleted;
 
@@ -183,6 +185,7 @@ namespace YuYan.Domain.Extensions
             data.Email = source.Email;
             data.IPAddress = source.IPAddress;
             data.SurveyId = source.SurveyId;
+            data.TotalScore = source.TotalScore;
             data.City = source.City;
             data.State = source.State;
             data.Country = source.Country;
