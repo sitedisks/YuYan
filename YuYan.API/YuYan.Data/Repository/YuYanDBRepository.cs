@@ -284,6 +284,7 @@ namespace YuYan.Data.Repository
                 sc.Email = surveyClient.Email;
                 sc.IPAddress = surveyClient.IPAddress;
                 sc.SurveyId = surveyClient.SurveyId;
+                sc.TotalScore = surveyClient.TotalScore;
                 sc.City = surveyClient.City;
                 sc.State = surveyClient.State;
                 sc.Country = surveyClient.Country;
