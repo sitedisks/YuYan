@@ -24,6 +24,11 @@ namespace YuYan.Interface.Service
 
         #endregion
 
+        #region report
+        Task<IList<dtoSurveyClient>> GetSurveyClientBySurveyId(int surveyId);
+
+        #endregion
+
         #region client
 
         Task<dtoSurvey> SaveSurveyClient(dtoSurveyClient surveyClient);

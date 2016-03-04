@@ -33,9 +33,10 @@ namespace YuYan.API.Controllers
                 if (dtoSurvey == null)
                     return NotFound();
 
-                dtoSurveyShare newShare = new dtoSurveyShare() { 
+                dtoSurveyShare newShare = new dtoSurveyShare()
+                {
                     SurveyId = dtoSurvey.SurveyId,
-                    IPAddress = GetClientIp() 
+                    IPAddress = GetClientIp()
                 };
 
                 await _yuyanSvc.AddSurveyShare(newShare);
@@ -53,10 +54,12 @@ namespace YuYan.API.Controllers
         }
 
         [Route(""), HttpPost]
-        public async Task<IHttpActionResult> SubmitSurvey(dtoSurveyClient surveyClient) {
+        public async Task<IHttpActionResult> SubmitSurvey(dtoSurveyClient surveyClient)
+        {
             dtoSurvey dtoSurvey = null;
 
-            try {
+            try
+            {
                 surveyClient.IPAddress = GetClientIp();
                 dtoSurvey = await _yuyanSvc.SaveSurveyClient(surveyClient);
 

@@ -195,7 +195,8 @@ namespace YuYan.Domain.Extensions
             {
                 foreach (tbSurveyClientAnswer answer in source.tbClientAnswers)
                 {
-                    answerList.Add(answer.ConverToDtoAnswwer());
+                    if(answer.IsChecked)
+                        answerList.Add(answer.ConverToDtoAnswwer());
                 }
             }
 

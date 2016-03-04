@@ -354,7 +354,6 @@ namespace YuYan.Data.Repository
 
             return ca;
         }
-
         #endregion
 
         #region survey

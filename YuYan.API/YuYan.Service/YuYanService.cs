@@ -199,6 +199,32 @@ namespace YuYan.Service
         }
         #endregion
 
+        #region report
+        public async Task<IList<dtoSurveyClient>> GetSurveyClientBySurveyId(int surveyId)
+        {
+            IList<dtoSurveyClient> surveyClientList = new List<dtoSurveyClient>();
+
+            try
+            {
+                var scList = await _yuyanRepos.GetSurveyClientBySurveyId(surveyId);
+                foreach (var item in scList)
+                {
+                    surveyClientList.Add(item.ConverToDtoSurveyClient());
+                }
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error get survey client", ex);
+            }
+
+            return surveyClientList;
+        }
+        #endregion
+
         #region client
 
         public async Task<dtoSurvey> SaveSurveyClient(dtoSurveyClient surveyClient)
