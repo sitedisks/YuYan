@@ -404,9 +404,11 @@ namespace YuYan.Data.Repository
             return surveyList;
         }
 
-        public async Task<int> GetTotalSurveyCountByUserId(Guid userId) {
+        public async Task<int> GetTotalSurveyCountByUserId(Guid userId)
+        {
             int surveyCount = 0;
-            try {
+            try
+            {
                 var surveyList = await _db.tbSurveys.Where(x => x.UserId == userId && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
                 surveyCount = surveyList.Count();
             }
@@ -435,11 +437,13 @@ namespace YuYan.Data.Repository
             return survey;
         }
 
-        public async Task<IList<tbSurveyShare>> GetSurveySharesBySurveyId(int surveyId) {
+        public async Task<IList<tbSurveyShare>> GetSurveySharesBySurveyId(int surveyId)
+        {
             IList<tbSurveyShare> surveyShareList = new List<tbSurveyShare>();
 
-            try {
-                surveyShareList = await _db.tbSurveyShares.Where(x => x.SurveyId == surveyId).ToListAsync(); 
+            try
+            {
+                surveyShareList = await _db.tbSurveyShares.Where(x => x.SurveyId == surveyId).ToListAsync();
             }
             catch (DataException dex)
             {
@@ -449,10 +453,12 @@ namespace YuYan.Data.Repository
             return surveyShareList;
         }
 
-        public async Task<IList<tbSurveyClient>> GetSurveyClientBySurveyId(int surveyId) {
+        public async Task<IList<tbSurveyClient>> GetSurveyClientBySurveyId(int surveyId)
+        {
             IList<tbSurveyClient> surveyClientList = new List<tbSurveyClient>();
 
-            try {
+            try
+            {
                 surveyClientList = await _db.tbSurveyClients.Where(x => x.SurveyId == surveyId).ToListAsync();
             }
             catch (DataException dex)
@@ -736,7 +742,8 @@ namespace YuYan.Data.Repository
         {
             try
             {
-                tbSurveyQuestion theQuestion = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == questionId && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+                tbSurveyQuestion theQuestion = await _db.tbSurveyQuestions.FirstOrDefaultAsync(x => x.QuestionId == questionId
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
 
                 if (theQuestion != null)
                 {
@@ -902,6 +909,98 @@ namespace YuYan.Data.Repository
             }
         }
 
+        #endregion
+
+        #region result
+        public async Task<IList<tbSurveyResult>> GetSurveyResultsBySurveyId(int surveyId)
+        {
+            IList<tbSurveyResult> resultList = new List<tbSurveyResult>();
+
+            try
+            {
+                resultList = await _db.tbSurveyResults.Where(x => x.SurveyId == surveyId
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return resultList;
+        }
+
+        public async Task<tbSurveyResult> CreateNewSurveyResult(dtoSurveyResult result)
+        {
+            tbSurveyResult newResult = new tbSurveyResult();
+
+            try
+            {
+                newResult.MinScore = result.MinScore;
+                newResult.MaxScore = result.MaxScore;
+                newResult.SurveyId = result.SurveyId;
+                newResult.Title = result.Title;
+                newResult.Description = result.Description;
+
+                _db.tbSurveyResults.Add(newResult);
+                await _db.SaveChangesAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return newResult;
+        }
+
+        public async Task<tbSurveyResult> UpdateSurveyResult(dtoSurveyResult result)
+        {
+            tbSurveyResult theResult = null;
+
+            try
+            {
+                theResult = await _db.tbSurveyResults.FirstOrDefaultAsync(x => x.SurveyResultId == result.SurveyResultId
+                      && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (theResult != null)
+                {
+                    theResult.MinScore = result.MinScore;
+                    theResult.MaxScore = result.MaxScore;
+                    theResult.SurveyId = result.SurveyId;
+                    theResult.Title = result.Title;
+                    theResult.Description = result.Description;
+
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return theResult;
+        }
+
+        public async Task DeleteSurveyResult(int resultId)
+        {
+            try
+            {
+                tbSurveyResult theResult = await _db.tbSurveyResults.FirstOrDefaultAsync(x => x.SurveyResultId == resultId
+                      && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (theResult != null)
+                {
+                    theResult.IsDeleted = true;
+                    theResult.IsActive = false;
+                    theResult.UpdatedDate = DateTime.UtcNow;
+
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+        }
         #endregion
 
         #region dispose

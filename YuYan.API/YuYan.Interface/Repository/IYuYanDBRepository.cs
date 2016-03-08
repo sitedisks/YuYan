@@ -38,7 +38,6 @@ namespace YuYan.Interface.Repository
         Task<tbSurvey> UpdateSurvey(dtoSurvey survey);
         Task DeleteSurvey(int surveyId);
         Task DeactiveSurvey(int surveyId);
-
         #endregion
 
         #region question
@@ -59,6 +58,13 @@ namespace YuYan.Interface.Repository
         Task DeleteItem(int itemId);
         Task DeactiveItem(int itemId);
         //Task ActiveItem(int itemId);
+        #endregion
+
+        #region result
+        Task<IList<tbSurveyResult>> GetSurveyResultsBySurveyId(int surveyId);
+        Task<tbSurveyResult> CreateNewSurveyResult(dtoSurveyResult result);
+        Task<tbSurveyResult> UpdateSurveyResult(dtoSurveyResult result);
+        Task DeleteSurveyResult(int resultId);
         #endregion
     }
 }

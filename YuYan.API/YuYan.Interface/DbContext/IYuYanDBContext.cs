@@ -26,6 +26,7 @@ namespace YuYan.Interface.DbContext
         DbSet<tbSurveyClient> tbSurveyClients { get; set; }
         DbSet<tbSurveyClientAnswer> tbSurveyClientAnswers { get; set; }
         DbSet<tbSurveyShare> tbSurveyShares { get; set; }
+        DbSet<tbSurveyResult> tbSurveyResults { get; set; }
         #endregion
     }
 }

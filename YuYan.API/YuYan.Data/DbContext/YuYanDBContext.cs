@@ -37,6 +37,7 @@ namespace YuYan.Data.DbContext
         public DbSet<tbSurveyClient> tbSurveyClients { get; set; }
         public DbSet<tbSurveyClientAnswer> tbSurveyClientAnswers { get; set; }
         public DbSet<tbSurveyShare> tbSurveyShares { get; set; }
+        public DbSet<tbSurveyResult> tbSurveyResults { get; set; }
         #endregion
 
         public System.Data.Entity.Core.Objects.ObjectContext BaseContext

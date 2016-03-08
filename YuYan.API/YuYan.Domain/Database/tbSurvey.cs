@@ -22,7 +22,7 @@ namespace YuYan.Domain.Database
         public Nullable<Guid> UserId { get; set; }
 
         public virtual ICollection<tbSurveyQuestion> tbSurveyQuestions { get; set; }
-        public virtual ICollection<tbSurveyResult> tbSurveyResults { get; set; }
+        //public virtual ICollection<tbSurveyResult> tbSurveyResults { get; set; }
 
     }
 }
