@@ -44,6 +44,7 @@
     <Compile Include="Database\tbSurveyClientAnswer.cs" />
     <Compile Include="Database\tbSurveyQuestion.cs" />
     <Compile Include="Database\tbSurveyQuestionItem.cs" />
+    <Compile Include="Database\tbSurveyResult.cs" />
     <Compile Include="Database\tbSurveyShare.cs" />
     <Compile Include="Database\tbTbase.cs" />
     <Compile Include="Database\tbUser.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="DTO\dtoSurveyClientAnswer.cs" />
     <Compile Include="DTO\dtoSurveyQuestion.cs" />
     <Compile Include="DTO\dtoSurveyQuestionItem.cs" />
+    <Compile Include="DTO\dtoSurveyResult.cs" />
     <Compile Include="DTO\dtoSurveyShare.cs" />
     <Compile Include="DTO\dtoTbase.cs" />
     <Compile Include="DTO\dtoUser.cs" />

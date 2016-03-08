@@ -19,7 +19,7 @@ namespace YuYan.Domain.Database
         public QuestionType QuestionType { get; set; }
 
         [ForeignKey("SurveyId")]
-        public virtual tbSurvey tbSuvery { get; set; }
+        public virtual tbSurvey tbSurvey { get; set; }
         public virtual ICollection<tbSurveyQuestionItem> tbSurveyQuestionItems { get; set; }
         
     }
