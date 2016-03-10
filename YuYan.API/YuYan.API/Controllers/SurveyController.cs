@@ -44,10 +44,12 @@ namespace YuYan.API.Controllers
 
         [Route("count"), HttpGet]
         [AuthenticationFilter(AllowAnonymous = false)]
-        public async Task<IHttpActionResult> GetSurveyTotalCountByOwner() {
-    
+        public async Task<IHttpActionResult> GetSurveyTotalCountByOwner()
+        {
+
             var countObj = new { SurveyCount = 0 };
-            try {
+            try
+            {
                 var user = ControllerContext.RequestContext.Principal as YYUser;
                 int count = await _yuyanSvc.GetTotalSurveyCountByUserId(user.UserId);
                 countObj = new { SurveyCount = count };
@@ -376,6 +378,92 @@ namespace YuYan.API.Controllers
             return Ok();
         }
 
+        #endregion
+
+        #region result
+        [Route("{surveyid}/results"), HttpGet]
+        [AuthenticationFilter(AllowAnonymous = false)]
+        public async Task<IHttpActionResult> GetSurveyResultBySurveyId(int surveyId)
+        {
+            IList<dtoSurveyResult> resultList = new List<dtoSurveyResult>();
+
+            try
+            {
+                resultList = await _yuyanSvc.GetSurveyResultsBySurveyId(surveyId);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+            return Ok(resultList);
+        }
+
+        [Route("{surveyId}/results"), HttpPost]
+        [AuthenticationFilter(AllowAnonymous = false)]
+        public async Task<IHttpActionResult> CreateSurveyResult(int surveyId, [FromBody] dtoSurveyResult result)
+        {
+            dtoSurveyResult dtoResult = new dtoSurveyResult();
+            try
+            {
+                result.SurveyId = surveyId;
+                dtoResult = await _yuyanSvc.CreateSurveyResult(result);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+            return Ok(dtoResult);
+        }
+
+        [Route("{surveyid}/results/{resultId}"), HttpPut]
+        [AuthenticationFilter(AllowAnonymous = false)]
+        public async Task<IHttpActionResult> UpdateResult(int surveyId, int resultId, [FromBody] dtoSurveyResult result)
+        {
+            dtoSurveyResult dtoResult = new dtoSurveyResult();
+
+            try
+            {
+                result.SurveyId = surveyId;
+                dtoResult = await _yuyanSvc.UpdateSurveyResult(result);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(dtoResult);
+        }
+
+        [Route("{surveyid}/results/{questionid}"), HttpDelete]
+        [AuthenticationFilter(AllowAnonymous = false)]
+        public async Task<IHttpActionResult> DeleteResult(int surveyId, int resultId)
+        {
+            try
+            {
+                await _yuyanSvc.DeleteSurveyResult(resultId);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+            return Ok();
+        }
         #endregion
     }
 }
