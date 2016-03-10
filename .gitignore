@@ -9,3 +9,6 @@ YuYan.API/YuYan.Service/obj/
 YuYan.API/YuYan.Test/bin/
 YuYan.API/YuYan.API/bin/
 YuYan.API/YuYan.Data/bin/
+YuYan.API/YuYan.Domain/bin/
+YuYan.API/YuYan.Interface/bin/
+YuYan.API/YuYan.Service/bin/

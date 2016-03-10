@@ -52,7 +52,7 @@ namespace YuYan.Service
                 userObj.IPAddress = user.IPAddress; //set the current Login IP for Session
                 tbSession session = await _yuyanRepos.CreateUpdateUserSession(userObj); // create the session
                 userProfile = userObj.ConvertToDtoUserProfile();
-                userProfile.CurrentSession = session.ConverToDtoSession();
+                userProfile.CurrentSession = session.ConvertToDtoSession();
             }
             catch (ApplicationException aex)
             {
@@ -82,7 +82,7 @@ namespace YuYan.Service
                 userObj.IPAddress = user.IPAddress; //set the current Login IP for Session
                 tbSession session = await _yuyanRepos.CreateUpdateUserSession(userObj); // create the session
                 userProfile = userObj.ConvertToDtoUserProfile();
-                userProfile.CurrentSession = session.ConverToDtoSession();
+                userProfile.CurrentSession = session.ConvertToDtoSession();
 
             }
             catch (ApplicationException aex)
@@ -153,7 +153,7 @@ namespace YuYan.Service
                     {
                         // session valided - update the session to next 2hr
                         session = _yuyanRepos.ExtendSession(session);
-                        sessionObj = session.ConverToDtoSession();
+                        sessionObj = session.ConvertToDtoSession();
                     }
                     else
                     {
@@ -209,7 +209,7 @@ namespace YuYan.Service
                 var scList = await _yuyanRepos.GetSurveyClientBySurveyId(surveyId);
                 foreach (var item in scList)
                 {
-                    surveyClientList.Add(item.ConverToDtoSurveyClient());
+                    surveyClientList.Add(item.ConvertToDtoSurveyClient());
                 }
             }
             catch (ApplicationException aex)
@@ -256,7 +256,7 @@ namespace YuYan.Service
             try
             {
                 tbSurveyShare s = await _yuyanRepos.SaveSurveyShare(surveyShare);
-                sShare = s.ConverToDtoSurveyShare();
+                sShare = s.ConvertToDtoSurveyShare();
             }
             catch (ApplicationException aex)
             {
@@ -682,6 +682,79 @@ namespace YuYan.Service
             catch (Exception ex)
             {
                 throw new ApplicationException("Error deactive survey item", ex);
+            }
+        }
+
+        #endregion
+
+        #region result
+        public async Task<IList<dtoSurveyResult>> GetSurveyResultsBySurveyId(int surveyId) {
+            IList<dtoSurveyResult> surveyResultList = new List<dtoSurveyResult>();
+
+            try {
+                var srList = await _yuyanRepos.GetSurveyResultsBySurveyId(surveyId);
+                foreach (var item in srList) 
+                    surveyResultList.Add(item.ConvertToDtoSurveyResult());
+                
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error get survey result", ex);
+            }
+
+            return surveyResultList;
+        }
+        public async Task<dtoSurveyResult> CreateSurveyResult(dtoSurveyResult result) {
+            dtoSurveyResult resultObj = null;
+
+            try {
+                var r = await _yuyanRepos.CreateNewSurveyResult(result);
+                resultObj = r.ConvertToDtoSurveyResult();
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error create survey result", ex);
+            }
+
+            return resultObj;
+        }
+        public async Task<dtoSurveyResult> UpdateSurveyResult(dtoSurveyResult result) {
+            dtoSurveyResult resultObj = null;
+
+            try {
+                var r = await _yuyanRepos.UpdateSurveyResult(result);
+                resultObj = r.ConvertToDtoSurveyResult();
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error update survey result", ex);
+            }
+
+            return resultObj;
+        }
+        public async Task DeleteSurveyResult(int resultId) {
+            try {
+                await _yuyanRepos.DeleteSurveyResult(resultId);
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error delete survey item", ex);
             }
         }
 

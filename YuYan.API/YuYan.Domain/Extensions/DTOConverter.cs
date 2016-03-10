@@ -154,7 +154,7 @@ namespace YuYan.Domain.Extensions
             return data;
         }
 
-        public static dtoSession ConverToDtoSession(this tbSession source, dtoSession data = null)
+        public static dtoSession ConvertToDtoSession(this tbSession source, dtoSession data = null)
         {
             if (data == null)
                 data = new dtoSession();
@@ -172,7 +172,7 @@ namespace YuYan.Domain.Extensions
             return data;
         }
 
-        public static dtoSurveyClient ConverToDtoSurveyClient(this tbSurveyClient source, dtoSurveyClient data = null)
+        public static dtoSurveyClient ConvertToDtoSurveyClient(this tbSurveyClient source, dtoSurveyClient data = null)
         {
 
             if (data == null)
@@ -196,7 +196,7 @@ namespace YuYan.Domain.Extensions
                 foreach (tbSurveyClientAnswer answer in source.tbClientAnswers)
                 {
                     if(answer.IsChecked)
-                        answerList.Add(answer.ConverToDtoAnswwer());
+                        answerList.Add(answer.ConvertToDtoAnswwer());
                 }
             }
 
@@ -205,7 +205,7 @@ namespace YuYan.Domain.Extensions
             return data;
         }
 
-        private static dtoSurveyClientAnswer ConverToDtoAnswwer(this tbSurveyClientAnswer source, dtoSurveyClientAnswer data = null)
+        private static dtoSurveyClientAnswer ConvertToDtoAnswwer(this tbSurveyClientAnswer source, dtoSurveyClientAnswer data = null)
         {
             if (data == null)
                 data = new dtoSurveyClientAnswer();
@@ -222,7 +222,7 @@ namespace YuYan.Domain.Extensions
             return data;
         }
 
-        public static dtoSurveyShare ConverToDtoSurveyShare(this tbSurveyShare source, dtoSurveyShare data = null)
+        public static dtoSurveyShare ConvertToDtoSurveyShare(this tbSurveyShare source, dtoSurveyShare data = null)
         {
             if (data == null)
                 data = new dtoSurveyShare();
@@ -234,6 +234,23 @@ namespace YuYan.Domain.Extensions
             data.SurveyId = source.SurveyId;
             data.IPAddress = source.IPAddress;
             data.VisitedDate = source.VisitedDate;
+
+            return data;
+        }
+
+        public static dtoSurveyResult ConvertToDtoSurveyResult(this tbSurveyResult source, dtoSurveyResult data = null) {
+            if (data == null)
+                data = new dtoSurveyResult();
+
+            if (source == null)
+                return null;
+
+            data.SurveyResultId = source.SurveyResultId;
+            data.MinScore = source.MinScore;
+            data.MaxScore = source.MaxScore;
+            data.SurveyId = source.SurveyId;
+            data.Title = source.Title;
+            data.Description = source.Description;
 
             return data;
         }

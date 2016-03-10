@@ -81,5 +81,12 @@ namespace YuYan.Interface.Service
 
         Task DeactiveSurveyQuestionItem(int itemId);
         #endregion
+
+        #region result
+        Task<IList<dtoSurveyResult>> GetSurveyResultsBySurveyId(int surveyId);
+        Task<dtoSurveyResult> CreateSurveyResult(dtoSurveyResult result);
+        Task<dtoSurveyResult> UpdateSurveyResult(dtoSurveyResult result);
+        Task DeleteSurveyResult(int resultId);
+        #endregion
     }
 }
