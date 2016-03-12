@@ -929,6 +929,21 @@ namespace YuYan.Data.Repository
             return resultList;
         }
 
+        public async Task<tbSurveyResult> GetSurveyResultByResultId(int resultId) {
+            tbSurveyResult result = new tbSurveyResult();
+
+            try {
+                result = await _db.tbSurveyResults.FirstOrDefaultAsync(x => x.SurveyResultId == resultId 
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return result;
+        }
+
         public async Task<tbSurveyResult> CreateNewSurveyResult(dtoSurveyResult result)
         {
             tbSurveyResult newResult = new tbSurveyResult();
@@ -940,6 +955,10 @@ namespace YuYan.Data.Repository
                 newResult.SurveyId = result.SurveyId;
                 newResult.Title = result.Title;
                 newResult.Description = result.Description;
+                newResult.CreatedDate = DateTime.UtcNow;
+                newResult.UpdatedDate = DateTime.UtcNow;
+                newResult.IsActive = true;
+                newResult.IsDeleted = false;
 
                 _db.tbSurveyResults.Add(newResult);
                 await _db.SaveChangesAsync();
@@ -968,6 +987,7 @@ namespace YuYan.Data.Repository
                     theResult.SurveyId = result.SurveyId;
                     theResult.Title = result.Title;
                     theResult.Description = result.Description;
+                    theResult.UpdatedDate = DateTime.UtcNow;
 
                     await _db.SaveChangesAsync();
                 }
@@ -993,6 +1013,25 @@ namespace YuYan.Data.Repository
                     theResult.IsActive = false;
                     theResult.UpdatedDate = DateTime.UtcNow;
 
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+        }
+
+        public async Task DeactiveSurveyResult(int resultId) {
+            try
+            {
+                tbSurveyResult theResult = await _db.tbSurveyResults.FirstOrDefaultAsync(x => x.SurveyResultId == resultId 
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (theResult != null)
+                {
+                    theResult.IsActive = false;
+                    theResult.UpdatedDate = DateTime.UtcNow;
                     await _db.SaveChangesAsync();
                 }
             }

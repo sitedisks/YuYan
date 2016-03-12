@@ -56,15 +56,10 @@ namespace YuYan.Interface.Service
 
         #region question
         Task<IList<dtoSurveyQuestion>> GetSurveyQuestionsBySurveyId(int surveyId);
-
         Task<dtoSurveyQuestion> GetSurveyQuestionByQuestionId(int questionId);
-
         Task<dtoSurveyQuestion> CreateSurveyQuestion(dtoSurveyQuestion question);
-
         Task<dtoSurveyQuestion> UpdateSurveyQuestion(dtoSurveyQuestion question);
-
         Task DeleteSurveyQuestion(int questionId);
-
         Task DeactiveSurveyQuestion(int questionId);
         #endregion
 
@@ -84,9 +79,11 @@ namespace YuYan.Interface.Service
 
         #region result
         Task<IList<dtoSurveyResult>> GetSurveyResultsBySurveyId(int surveyId);
+        Task<dtoSurveyResult> GetSurveyResultByResultId(int resultId);
         Task<dtoSurveyResult> CreateSurveyResult(dtoSurveyResult result);
         Task<dtoSurveyResult> UpdateSurveyResult(dtoSurveyResult result);
         Task DeleteSurveyResult(int resultId);
+        Task DeactiveSurveyResult(int resultId);
         #endregion
     }
 }

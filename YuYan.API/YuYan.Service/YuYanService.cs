@@ -559,7 +559,7 @@ namespace YuYan.Service
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Error delete survey question", ex);
+                throw new ApplicationException("Error deactive survey question", ex);
             }
         }
         #endregion
@@ -708,6 +708,24 @@ namespace YuYan.Service
 
             return surveyResultList;
         }
+        public async Task<dtoSurveyResult> GetSurveyResultByResultId(int resultId) {
+            dtoSurveyResult result = new dtoSurveyResult();
+
+            try {
+                var resultObj = await _yuyanRepos.GetSurveyResultByResultId(resultId);
+                result = resultObj.ConvertToDtoSurveyResult();
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error get survey result", ex);
+            }
+
+            return result;
+        }
         public async Task<dtoSurveyResult> CreateSurveyResult(dtoSurveyResult result) {
             dtoSurveyResult resultObj = null;
 
@@ -757,7 +775,20 @@ namespace YuYan.Service
                 throw new ApplicationException("Error delete survey item", ex);
             }
         }
-
+        public async Task DeactiveSurveyResult(int resultId) {
+            try
+            {
+                await _yuyanRepos.DeactiveSurveyResult(resultId);
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error deactive survey result", ex);
+            }
+        }
         #endregion
     }
 }

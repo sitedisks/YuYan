@@ -62,9 +62,11 @@ namespace YuYan.Interface.Repository
 
         #region result
         Task<IList<tbSurveyResult>> GetSurveyResultsBySurveyId(int surveyId);
+        Task<tbSurveyResult> GetSurveyResultByResultId(int resultId);
         Task<tbSurveyResult> CreateNewSurveyResult(dtoSurveyResult result);
         Task<tbSurveyResult> UpdateSurveyResult(dtoSurveyResult result);
         Task DeleteSurveyResult(int resultId);
+        Task DeactiveSurveyResult(int resultId);
         #endregion
     }
 }

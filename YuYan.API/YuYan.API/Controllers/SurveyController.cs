@@ -19,7 +19,7 @@ namespace YuYan.API.Controllers
         }
 
         #region survey
-        [Route("all"), HttpGet]
+        [Route(""), HttpGet]
         [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> GetSurveysByOwner(int? page = null, int? row = null, bool? actived = null)
         {
@@ -66,7 +66,7 @@ namespace YuYan.API.Controllers
             return Ok(countObj);
         }
 
-        // GET /surveys/2
+        // Survey CRUD - Get
         [Route("{surveyid}"), HttpGet]
         [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> GetSurveyBySurveyId(int surveyId)
@@ -91,6 +91,7 @@ namespace YuYan.API.Controllers
             return Ok(dtoSurvey);
         }
 
+        // Survey CRUD - Create
         [Route(""), HttpPost]
         [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> CreateSurvey([FromBody] dtoSurvey survey)
@@ -116,6 +117,7 @@ namespace YuYan.API.Controllers
             return Ok(dtoSurvey);
         }
 
+        // Survey CRUD - Update
         [Route("{surveyid}"), HttpPut]
         [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> UpdateSurvey(int surveyId, [FromBody] dtoSurvey survey)
@@ -139,6 +141,7 @@ namespace YuYan.API.Controllers
             return Ok(dtoSurvey);
         }
 
+        // Survey CRUD - remove / delete
         [Route("{surveyid}"), HttpDelete]
         [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> DeleteSurvey(int surveyId)
@@ -162,7 +165,7 @@ namespace YuYan.API.Controllers
         #region question
         [Route("{surveyid}/questions"), HttpGet]
         [AuthenticationFilter(AllowAnonymous = false)]
-        public async Task<IHttpActionResult> GetQuestionBySurveyId(int surveyId)
+        public async Task<IHttpActionResult> GetQuestionsBySurveyId(int surveyId)
         {
             IList<dtoSurveyQuestion> questionList = new List<dtoSurveyQuestion>();
 
@@ -383,7 +386,7 @@ namespace YuYan.API.Controllers
         #region result
         [Route("{surveyid}/results"), HttpGet]
         [AuthenticationFilter(AllowAnonymous = false)]
-        public async Task<IHttpActionResult> GetSurveyResultBySurveyId(int surveyId)
+        public async Task<IHttpActionResult> GetSurveyResultsBySurveyId(int surveyId)
         {
             IList<dtoSurveyResult> resultList = new List<dtoSurveyResult>();
 
@@ -400,6 +403,28 @@ namespace YuYan.API.Controllers
                 return InternalServerError(ex);
             }
             return Ok(resultList);
+        }
+
+        [Route("{surveyId}/results/{resultId}"), HttpGet]
+        [AuthenticationFilter(AllowAnonymous = false)]
+        public async Task<IHttpActionResult> GetSurveyResultByResultId(int surveyId, int resultId)
+        {
+            dtoSurveyResult result = new dtoSurveyResult();
+
+            try
+            {
+                result = await _yuyanSvc.GetSurveyResultByResultId(resultId);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(result);
         }
 
         [Route("{surveyId}/results"), HttpPost]
@@ -446,7 +471,7 @@ namespace YuYan.API.Controllers
             return Ok(dtoResult);
         }
 
-        [Route("{surveyid}/results/{questionid}"), HttpDelete]
+        [Route("{surveyid}/results/{resultId}"), HttpDelete]
         [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> DeleteResult(int surveyId, int resultId)
         {
