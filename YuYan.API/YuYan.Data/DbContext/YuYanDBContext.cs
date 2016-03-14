@@ -23,7 +23,7 @@ namespace YuYan.Data.DbContext
             return db;
         }
 
-        public YuYanDBContext() : base("YuYanDbLocalContext") { }
+        public YuYanDBContext() : base("YuYanDbAzureContext") { }
 
         public YuYanDBContext(string connectionString) : base(connectionString) { }
 
