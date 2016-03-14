@@ -42,7 +42,7 @@ namespace YuYan.API
             // register db context
             containerBuilder.RegisterType<YuYanDBContext>()
                 .As<IYuYanDBContext>()
-                .WithParameter("connectionString", "YuYanDbAzureContext")
+                .WithParameter("connectionString", "YuYanDbLocalContext")
                 .InstancePerLifetimeScope();
             // register repository
             containerBuilder.RegisterType<YuYanDBRepository>().AsImplementedInterfaces();

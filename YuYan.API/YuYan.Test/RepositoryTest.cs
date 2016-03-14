@@ -111,9 +111,9 @@ namespace YuYan.Test
             using (YuYanDBRepository repos = new YuYanDBRepository(db))
             {
 
-                tbSurvey obj = await repos.GetSurveyBySurveyId(1);
+                tbSurvey obj = await repos.GetSurveyBySurveyId(92);
                 Assert.IsNotNull(obj);
-                Assert.AreEqual("Test Survey", obj.Title, true);
+                Assert.AreEqual("9292929292", obj.Title, true);
             }
         }
         #endregion

@@ -22,7 +22,7 @@ namespace YuYan.Test
                 YuYanService svc = new YuYanService(repos);
                 var controller = new SurveyController(svc);
 
-                var result = await controller.GetSurveyBySurveyId(1);
+                var result = await controller.GetSurveyBySurveyId(92);
                 Assert.IsNotNull(result);
             }
         }
