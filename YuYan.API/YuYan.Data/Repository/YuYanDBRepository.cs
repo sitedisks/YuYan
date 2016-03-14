@@ -469,6 +469,32 @@ namespace YuYan.Data.Repository
             return surveyClientList;
         }
 
+        public IDictionary<int, int> AnswerCount(int surveyId)
+        {
+            IDictionary<int, int> answerDic = new Dictionary<int, int>();
+
+            try
+            {
+                var selectedClientAnswers = from sca in _db.tbSurveyClientAnswers
+                                            join
+                                                sc in _db.tbSurveyClients on sca.ClientId equals sc.ClientId
+                                            where sc.SurveyId == surveyId
+                                            && sca.IsChecked
+                                            select sca;
+                                            //group sca by sca.QuestionItemId into pair
+                                            //select (new KeyValuePair<int, int>(pair.Key, pair.Count()));
+
+                var answerPair = selectedClientAnswers.ToList().GroupBy(x => x.QuestionItemId).Select(x => new KeyValuePair<int, int>(x.Key, x.Count()));
+                answerDic = answerPair.ToDictionary(x => x.Key, x => x.Value);
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return answerDic;
+        }
+
         public async Task<tbSurvey> GetSurveyByUrlToken(string url)
         {
             tbSurvey survey = null;
@@ -929,11 +955,13 @@ namespace YuYan.Data.Repository
             return resultList;
         }
 
-        public async Task<tbSurveyResult> GetSurveyResultByResultId(int resultId) {
+        public async Task<tbSurveyResult> GetSurveyResultByResultId(int resultId)
+        {
             tbSurveyResult result = new tbSurveyResult();
 
-            try {
-                result = await _db.tbSurveyResults.FirstOrDefaultAsync(x => x.SurveyResultId == resultId 
+            try
+            {
+                result = await _db.tbSurveyResults.FirstOrDefaultAsync(x => x.SurveyResultId == resultId
                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
             }
             catch (DataException dex)
@@ -1022,10 +1050,11 @@ namespace YuYan.Data.Repository
             }
         }
 
-        public async Task DeactiveSurveyResult(int resultId) {
+        public async Task DeactiveSurveyResult(int resultId)
+        {
             try
             {
-                tbSurveyResult theResult = await _db.tbSurveyResults.FirstOrDefaultAsync(x => x.SurveyResultId == resultId 
+                tbSurveyResult theResult = await _db.tbSurveyResults.FirstOrDefaultAsync(x => x.SurveyResultId == resultId
                     && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
 
                 if (theResult != null)

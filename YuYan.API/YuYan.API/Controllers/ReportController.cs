@@ -45,5 +45,25 @@ namespace YuYan.API.Controllers
 
             return Ok(dtoClientList);
         }
+
+        [Route("{surveyId}/answerdic"), HttpGet]
+        [AuthenticationFilter(AllowAnonymous = false)]
+        public async Task<IHttpActionResult> GetAnswerStatusBySurveyId(int surveyId) {
+            IDictionary<int, int> clientAnswerDictionary = new Dictionary<int, int>();
+
+            try {
+                clientAnswerDictionary = await _yuyanSvc.GetAnswerStatusBySurveyId(surveyId);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(clientAnswerDictionary);
+        }
     }
 }

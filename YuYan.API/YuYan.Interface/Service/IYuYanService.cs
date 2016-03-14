@@ -26,7 +26,7 @@ namespace YuYan.Interface.Service
 
         #region report
         Task<IList<dtoSurveyClient>> GetSurveyClientBySurveyId(int surveyId);
-
+        Task<IDictionary<int, int>> GetAnswerStatusBySurveyId(int surveyId);
         #endregion
 
         #region client

@@ -223,6 +223,26 @@ namespace YuYan.Service
 
             return surveyClientList;
         }
+
+        public async Task<IDictionary<int, int>> GetAnswerStatusBySurveyId(int surveyId)
+        {
+            IDictionary<int, int> answerDictionary = new Dictionary<int, int>();
+
+            try
+            {
+                answerDictionary = await Task.Run(() => _yuyanRepos.AnswerCount(surveyId));
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error get answer dictionary", ex);
+            }
+
+            return answerDictionary;
+        }
         #endregion
 
         #region client
@@ -311,7 +331,8 @@ namespace YuYan.Service
         {
             int count = 0;
 
-            try {
+            try
+            {
                 count = await _yuyanRepos.GetTotalSurveyCountByUserId(userId);
             }
             catch (ApplicationException aex)
@@ -688,14 +709,16 @@ namespace YuYan.Service
         #endregion
 
         #region result
-        public async Task<IList<dtoSurveyResult>> GetSurveyResultsBySurveyId(int surveyId) {
+        public async Task<IList<dtoSurveyResult>> GetSurveyResultsBySurveyId(int surveyId)
+        {
             IList<dtoSurveyResult> surveyResultList = new List<dtoSurveyResult>();
 
-            try {
+            try
+            {
                 var srList = await _yuyanRepos.GetSurveyResultsBySurveyId(surveyId);
-                foreach (var item in srList) 
+                foreach (var item in srList)
                     surveyResultList.Add(item.ConvertToDtoSurveyResult());
-                
+
             }
             catch (ApplicationException aex)
             {
@@ -708,10 +731,12 @@ namespace YuYan.Service
 
             return surveyResultList;
         }
-        public async Task<dtoSurveyResult> GetSurveyResultByResultId(int resultId) {
+        public async Task<dtoSurveyResult> GetSurveyResultByResultId(int resultId)
+        {
             dtoSurveyResult result = new dtoSurveyResult();
 
-            try {
+            try
+            {
                 var resultObj = await _yuyanRepos.GetSurveyResultByResultId(resultId);
                 result = resultObj.ConvertToDtoSurveyResult();
             }
@@ -726,10 +751,12 @@ namespace YuYan.Service
 
             return result;
         }
-        public async Task<dtoSurveyResult> CreateSurveyResult(dtoSurveyResult result) {
+        public async Task<dtoSurveyResult> CreateSurveyResult(dtoSurveyResult result)
+        {
             dtoSurveyResult resultObj = null;
 
-            try {
+            try
+            {
                 var r = await _yuyanRepos.CreateNewSurveyResult(result);
                 resultObj = r.ConvertToDtoSurveyResult();
             }
@@ -744,10 +771,12 @@ namespace YuYan.Service
 
             return resultObj;
         }
-        public async Task<dtoSurveyResult> UpdateSurveyResult(dtoSurveyResult result) {
+        public async Task<dtoSurveyResult> UpdateSurveyResult(dtoSurveyResult result)
+        {
             dtoSurveyResult resultObj = null;
 
-            try {
+            try
+            {
                 var r = await _yuyanRepos.UpdateSurveyResult(result);
                 resultObj = r.ConvertToDtoSurveyResult();
             }
@@ -762,8 +791,10 @@ namespace YuYan.Service
 
             return resultObj;
         }
-        public async Task DeleteSurveyResult(int resultId) {
-            try {
+        public async Task DeleteSurveyResult(int resultId)
+        {
+            try
+            {
                 await _yuyanRepos.DeleteSurveyResult(resultId);
             }
             catch (ApplicationException aex)
@@ -775,7 +806,8 @@ namespace YuYan.Service
                 throw new ApplicationException("Error delete survey item", ex);
             }
         }
-        public async Task DeactiveSurveyResult(int resultId) {
+        public async Task DeactiveSurveyResult(int resultId)
+        {
             try
             {
                 await _yuyanRepos.DeactiveSurveyResult(resultId);
