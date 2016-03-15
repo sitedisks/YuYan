@@ -76,16 +76,17 @@ namespace YuYan.API.Controllers
             return Ok(dtoSurvey);
         }
 
-        [Route("geoip/{ipaddress}"), HttpGet]
-        public async Task<IHttpActionResult> GetGeoIP(string ipaddress) {
+        [Route("geoip"), HttpGet]
+        public async Task<IHttpActionResult> GetGeoIP(string ip) {
             dtoLocationGeo geoLocation = null;
 
             try {
-                if (ipaddress == null)
+                if (ip == null)
                 {
-                    ipaddress = GetClientIp();
+                    ip = GetClientIp();
                 }
-                geoLocation = await _yuyanSvc.GetGeoLocationByIpAddress(ipaddress);
+                geoLocation = await _yuyanSvc.GetGeoLocationByIpAddress(ip);
+                geoLocation.IpAddress = ip;
             }
             catch (ApplicationException aex)
             {
