@@ -822,5 +822,27 @@ namespace YuYan.Service
             }
         }
         #endregion
+
+        #region geo2ip
+        public async Task<dtoLocationGeo> GetGeoLocationByIpAddress(string ipaddress) {
+            dtoLocationGeo geo = new dtoLocationGeo();
+
+            try
+            {
+                var geoObj = await _yuyanRepos.GetGeoLocationByIpAddress(ipaddress);
+                geo = geoObj.ConvertToLocationGeo();
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error get Geo Location", ex);
+            }
+
+            return geo;
+        }
+        #endregion
     }
 }

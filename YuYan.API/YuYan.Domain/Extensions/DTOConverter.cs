@@ -255,6 +255,20 @@ namespace YuYan.Domain.Extensions
             return data;
         }
 
+        public static dtoLocationGeo ConvertToLocationGeo(this ip2location_db3 source, dtoLocationGeo data = null) {
+            if (data == null)
+                data = new dtoLocationGeo();
+            if (source == null)
+                return null;
+
+            data.State = source.region_name;
+            data.City = source.city_name;
+            data.CountryCode = source.country_code;
+            data.Country = source.country_name;
+
+            return data;
+        }
+
         #endregion
 
     }

@@ -1071,6 +1071,55 @@ namespace YuYan.Data.Repository
         }
         #endregion
 
+        #region geo2ip
+        public async Task<ip2location_db3> GetGeoLocationByIpAddress(string ipaddress) {
+            ip2location_db3 geoIp = new ip2location_db3();
+
+            try
+            {
+                double longIp = Dot2LongIp(ipaddress);
+                geoIp = await _db.ip2locations.FirstOrDefaultAsync(i => i.ip_from <= longIp && i.ip_to >= longIp);
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return geoIp;
+        }
+
+        private static double Dot2LongIp(string dottedIp)
+        {
+            string key = string.Format("Dot2LongIp_{0}", dottedIp);
+            //object cachedValue = HttpRuntime.Cache.Get(key);
+            //if (cachedValue != null)
+            //{
+            //    return (double)cachedValue;
+            //}
+
+            if (string.IsNullOrWhiteSpace(dottedIp) || dottedIp == "::1" || dottedIp == "127.0.0.1")
+            {
+                return -1;
+            }
+
+            try
+            {
+                double num = 0;
+                string[] arrDec = dottedIp.Split('.');
+                for (int i = arrDec.Length - 1; i >= 0; i--)
+                {
+                    num += ((Int32.Parse(arrDec[i]) % 256) * Math.Pow(256, (3 - i)));
+                }
+                //HttpRuntime.Cache.Insert(key, num, null, DateTime.MaxValue, TimeSpan.FromHours(24));
+                return num;
+            }
+            catch (Exception exception)
+            {
+                return -1;
+            }
+        }
+        #endregion
+
         #region dispose
         public void Dispose()
         {

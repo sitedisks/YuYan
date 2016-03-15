@@ -85,5 +85,9 @@ namespace YuYan.Interface.Service
         Task DeleteSurveyResult(int resultId);
         Task DeactiveSurveyResult(int resultId);
         #endregion
+
+        #region geo2ip
+        Task<dtoLocationGeo> GetGeoLocationByIpAddress(string ipaddress);
+        #endregion
     }
 }
