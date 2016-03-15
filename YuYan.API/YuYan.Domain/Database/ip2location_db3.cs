@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace YuYan.Domain.Database
@@ -6,6 +7,7 @@ namespace YuYan.Domain.Database
     [Table("ip2location_db3")]
     public class ip2location_db3
     {
+        [Key]
         public double ip_from { get; set; }
         public double ip_to { get; set; }
         public string country_code { get; set; }

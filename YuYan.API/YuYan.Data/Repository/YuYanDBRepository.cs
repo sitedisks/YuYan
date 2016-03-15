@@ -290,6 +290,13 @@ namespace YuYan.Data.Repository
                 sc.Country = surveyClient.Country;
                 sc.CreatedDate = DateTime.UtcNow;
 
+                if (surveyClient.City == null) {
+                    ip2location_db3 geoIp = await GetGeoLocationByIpAddress(surveyClient.IPAddress);
+                    sc.City = geoIp.city_name;
+                    sc.State = geoIp.region_name;
+                    sc.Country = geoIp.country_name;
+                }
+            
                 _db.tbSurveyClients.Add(sc);
 
                 if (surveyClient.dtoClientAnswers.Count() > 0)
@@ -1091,12 +1098,7 @@ namespace YuYan.Data.Repository
         private static double Dot2LongIp(string dottedIp)
         {
             string key = string.Format("Dot2LongIp_{0}", dottedIp);
-            //object cachedValue = HttpRuntime.Cache.Get(key);
-            //if (cachedValue != null)
-            //{
-            //    return (double)cachedValue;
-            //}
-
+  
             if (string.IsNullOrWhiteSpace(dottedIp) || dottedIp == "::1" || dottedIp == "127.0.0.1")
             {
                 return -1;
@@ -1110,7 +1112,6 @@ namespace YuYan.Data.Repository
                 {
                     num += ((Int32.Parse(arrDec[i]) % 256) * Math.Pow(256, (3 - i)));
                 }
-                //HttpRuntime.Cache.Insert(key, num, null, DateTime.MaxValue, TimeSpan.FromHours(24));
                 return num;
             }
             catch (Exception exception)

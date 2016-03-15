@@ -76,6 +76,29 @@ namespace YuYan.API.Controllers
             return Ok(dtoSurvey);
         }
 
+        [Route("geoip/{ipaddress}"), HttpGet]
+        public async Task<IHttpActionResult> GetGeoIP(string ipaddress) {
+            dtoLocationGeo geoLocation = null;
+
+            try {
+                if (ipaddress == null)
+                {
+                    ipaddress = GetClientIp();
+                }
+                geoLocation = await _yuyanSvc.GetGeoLocationByIpAddress(ipaddress);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+             return Ok(geoLocation);
+        }
+
         #region private functions
         private string GetClientIp(HttpRequestMessage request = null)
         {

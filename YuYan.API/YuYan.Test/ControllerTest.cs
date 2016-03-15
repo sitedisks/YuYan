@@ -28,6 +28,19 @@ namespace YuYan.Test
         }
 
         [TestMethod]
+        public async Task TestGetGeoIP() {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                YuYanService svc = new YuYanService(repos);
+                var controller = new ClientController(svc);
+
+                var result = await controller.GetGeoIP("121.214.23.68");
+                Assert.IsNotNull(result);
+            }
+        }
+
+        [TestMethod]
         public async Task TestController_CreateSurvey() {
             using (YuYanDBContext db = new YuYanDBContext())
             using (YuYanDBRepository repos = new YuYanDBRepository(db))
