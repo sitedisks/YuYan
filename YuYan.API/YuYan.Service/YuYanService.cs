@@ -709,13 +709,13 @@ namespace YuYan.Service
         #endregion
 
         #region result
-        public async Task<IList<dtoSurveyResult>> GetSurveyResultsBySurveyId(int surveyId)
+        public async Task<IList<dtoSurveyResult>> GetSurveyResultsBySurveyId(int surveyId, int? score = null)
         {
             IList<dtoSurveyResult> surveyResultList = new List<dtoSurveyResult>();
 
             try
             {
-                var srList = await _yuyanRepos.GetSurveyResultsBySurveyId(surveyId);
+                var srList = await _yuyanRepos.GetSurveyResultsBySurveyId(surveyId, score);
                 foreach (var item in srList)
                     surveyResultList.Add(item.ConvertToDtoSurveyResult());
 
@@ -824,7 +824,8 @@ namespace YuYan.Service
         #endregion
 
         #region geo2ip
-        public async Task<dtoLocationGeo> GetGeoLocationByIpAddress(string ipaddress) {
+        public async Task<dtoLocationGeo> GetGeoLocationByIpAddress(string ipaddress)
+        {
             dtoLocationGeo geo = new dtoLocationGeo();
 
             try

@@ -78,7 +78,7 @@ namespace YuYan.Interface.Service
         #endregion
 
         #region result
-        Task<IList<dtoSurveyResult>> GetSurveyResultsBySurveyId(int surveyId);
+        Task<IList<dtoSurveyResult>> GetSurveyResultsBySurveyId(int surveyId, int? score = null);
         Task<dtoSurveyResult> GetSurveyResultByResultId(int resultId);
         Task<dtoSurveyResult> CreateSurveyResult(dtoSurveyResult result);
         Task<dtoSurveyResult> UpdateSurveyResult(dtoSurveyResult result);

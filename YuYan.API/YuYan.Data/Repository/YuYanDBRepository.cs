@@ -290,13 +290,14 @@ namespace YuYan.Data.Repository
                 sc.Country = surveyClient.Country;
                 sc.CreatedDate = DateTime.UtcNow;
 
-                if (surveyClient.City == null) {
+                if (surveyClient.City == null)
+                {
                     ip2location_db3 geoIp = await GetGeoLocationByIpAddress(surveyClient.IPAddress);
                     sc.City = geoIp.city_name;
                     sc.State = geoIp.region_name;
                     sc.Country = geoIp.country_name;
                 }
-            
+
                 _db.tbSurveyClients.Add(sc);
 
                 if (surveyClient.dtoClientAnswers.Count() > 0)
@@ -488,8 +489,8 @@ namespace YuYan.Data.Repository
                                             where sc.SurveyId == surveyId
                                             && sca.IsChecked
                                             select sca;
-                                            //group sca by sca.QuestionItemId into pair
-                                            //select (new KeyValuePair<int, int>(pair.Key, pair.Count()));
+                //group sca by sca.QuestionItemId into pair
+                //select (new KeyValuePair<int, int>(pair.Key, pair.Count()));
 
                 var answerPair = selectedClientAnswers.ToList().GroupBy(x => x.QuestionItemId).Select(x => new KeyValuePair<int, int>(x.Key, x.Count()));
                 answerDic = answerPair.ToDictionary(x => x.Key, x => x.Value);
@@ -945,14 +946,20 @@ namespace YuYan.Data.Repository
         #endregion
 
         #region result
-        public async Task<IList<tbSurveyResult>> GetSurveyResultsBySurveyId(int surveyId)
+        public async Task<IList<tbSurveyResult>> GetSurveyResultsBySurveyId(int surveyId, int? score = null)
         {
             IList<tbSurveyResult> resultList = new List<tbSurveyResult>();
 
             try
             {
-                resultList = await _db.tbSurveyResults.Where(x => x.SurveyId == surveyId
-                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
+                var tempList = _db.tbSurveyResults.Where(x => x.SurveyId == surveyId
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (score != null)
+                {
+                    tempList = tempList.Where(x => x.MinScore <= score && x.MaxScore >= score);
+                }
+                resultList = await tempList.ToListAsync();
             }
             catch (DataException dex)
             {
@@ -1079,7 +1086,8 @@ namespace YuYan.Data.Repository
         #endregion
 
         #region geo2ip
-        public async Task<ip2location_db3> GetGeoLocationByIpAddress(string ipaddress) {
+        public async Task<ip2location_db3> GetGeoLocationByIpAddress(string ipaddress)
+        {
             ip2location_db3 geoIp = new ip2location_db3();
 
             try
@@ -1098,7 +1106,7 @@ namespace YuYan.Data.Repository
         private static double Dot2LongIp(string dottedIp)
         {
             string key = string.Format("Dot2LongIp_{0}", dottedIp);
-  
+
             if (string.IsNullOrWhiteSpace(dottedIp) || dottedIp == "::1" || dottedIp == "127.0.0.1")
             {
                 return -1;

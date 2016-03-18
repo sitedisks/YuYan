@@ -76,6 +76,26 @@ namespace YuYan.API.Controllers
             return Ok(dtoSurvey);
         }
 
+        [Route("{surveyId}/{score}"), HttpGet]
+        public async Task<IHttpActionResult> GetSurveyResultByScore(int surveyId, int score) {
+            dtoSurveyResult dtoSurveyResult = null;
+
+            try {
+                var resultList = await _yuyanSvc.GetSurveyResultsBySurveyId(surveyId, score);
+                dtoSurveyResult = resultList.FirstOrDefault();
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(dtoSurveyResult);
+        }
+
         [Route("geoip"), HttpGet]
         public async Task<IHttpActionResult> GetGeoIP(string ip) {
             dtoLocationGeo geoLocation = null;
