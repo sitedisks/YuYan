@@ -1,0 +1,27 @@
+﻿<div class="modal-body">
+    <button type="button" class="close" data-ng-click="cancel()">&times;</button>
+
+    <div class="form-group">
+        <label>{{'TEXT_DELETE' | translate}} {{'BTN_CONFIRM' | translate}}?</label>
+    </div>
+
+    <div class="form-group">
+        <h3>{{result.Title}}</h3>
+        <p>{{result.Description}}</p>
+        
+    </div>
+    <div class="form-group">
+        <span class="badge alert-success">{{result.MinScore}}</span> - <span class="badge alert-danger">{{result.MaxScore}}</span>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="pull-right">
+        <button type="button" class="btn btn-danger btn-sm" data-ng-click="ok()">
+            <i class="glyphicon glyphicon-remove"></i> {{'BTN_CONFIRM' | translate}}
+        </button>
+        <button type="button" class="btn btn-link btn-sm" data-ng-click="cancel()">
+            {{'BTN_CANCEL' | translate}}
+        </button>
+    </div>
+    <div class="clearfix"></div>
+</div>

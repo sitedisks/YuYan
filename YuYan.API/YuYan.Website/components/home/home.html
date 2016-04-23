@@ -1,0 +1,93 @@
+﻿<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
+        <div data-ng-show="progressing">
+            <uib-progressbar class="progress-striped active" max="100" value="100" type="success"><i>progressing...</i></uib-progressbar>
+        </div>
+
+        <div data-ng-show="!progressing">
+            <div class="btn-group btn-group-sm pull-right">
+                <button type="button" class="btn btn-link" data-ng-click="reset()" data-ng-disabled="disableController">
+                    <i class="glyphicon glyphicon-refresh"></i> {{'BTN_RESET' | translate}}
+                </button>
+                <button type="button" class="btn btn-link" data-ng-click="previewSurvey()" data-ng-disabled="disableController">
+                    <i class="glyphicon glyphicon-eye-open"></i> {{'BTN_PREVIEW' | translate}}
+                </button>
+                <button type="button" class="btn btn-link" data-ng-click="saveSurvey()" data-ng-disabled="disableController">
+                    <i class="glyphicon glyphicon-floppy-disk"></i> {{'BTN_SAVE' | translate}}
+                </button>
+            </div>
+            <div class="clearfix"></div>
+
+            <div data-ng-repeat="q in dtoQuestions">
+                <h3 class="break-word">{{q.QuestionId}}. {{q.Question}}</h3>
+
+                <div style="padding-left: 40px;" data-ng-repeat="i in q.dtoItems" data-ng-class="{'checkbox checkbox-success':q.QuestionType==1, 'radio radio-success':q.QuestionType==2}">
+
+                    <input type="checkbox" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==1" />
+                    <input type="radio" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==2" />
+                    <label class="break-word" for="item{{i.QuestionItemId}}">{{i.ItemDescription}}</label>
+
+                </div>
+            </div>
+
+            <div style="padding-left: 20px;" data-ng-show="showAddItem">
+                <form name="itemForm" class="force-line" novalidate>
+                    <div class="form-group has-success has-feedback">
+                        <input type="text" class="form-control input-sm" name="itemInput" placeholder="some item" data-ng-model="item" data-ng-minlength="1" data-ng-maxlength="150" required />
+                        <span class="glyphicon glyphicon-check form-control-feedback" data-ng-if="DefaultQuestionType==1"></span>
+                        <span class="glyphicon glyphicon-record form-control-feedback" data-ng-if="DefaultQuestionType==2"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-sm" data-ng-disabled="itemForm.$invalid" data-ng-click="addItem(QID)"><i class="glyphicon glyphicon-plus hidden-xs"></i> {{'BTN_ADD' | translate}}</button>
+                </form>
+
+                <!--<button class="btn btn-info btn-lg" data-ng-click="previewSurvey()">Preview</button>-->
+                <button class="btn btn-link pull-right" data-ng-show="!disableNext" data-ng-disabled="disableNext" data-ng-click="nextQuestion()">{{'TEXT_NEXT' | translate}} {{'TEXT_QUESTION' | translate}} &raquo;</button>
+                <div class="clearfix"></div>
+            </div>
+
+            <br />
+
+            <div data-ng-show="!showAddItem">
+                <form name="questionForm" novalidate>
+                    <div class="form-group has-success has-feedback hidden-xs">
+                        <label class="control-label" for="IntQuestion">{{'TEXT_QUESTION' | translate}} {{'TEXT_TYPE' | translate}}</label>
+                        <span class="label label-info" data-ng-click="toggleType()" tooltip-placement="top-left" uib-tooltip="{{'TEXT_TYPETIP' | translate}}">
+                            <span data-ng-show="DefaultQuestionType==1"><i class="glyphicon glyphicon-check"></i> {{'TEXT_CHECKBOX' | translate}}</span>
+                            <span data-ng-show="DefaultQuestionType==2"><i class="glyphicon glyphicon-record"></i> {{'TEXT_RADIO' | translate}}</span>
+                        </span>
+
+                        <input type="text" class="form-control input-lg" id="IntQuestion" name="questionInput" autofocus="autofocus"
+                               placeholder="{{'TEXT_QUESTION' | translate}}" data-ng-model="question" data-ng-minlength="3" data-ng-maxlength="200" required />
+                        <span class="glyphicon glyphicon-check form-control-feedback" data-ng-if="DefaultQuestionType == 1"></span>
+                        <span class="glyphicon glyphicon-record form-control-feedback" data-ng-if="DefaultQuestionType == 2"></span>
+                    </div>
+                    <div class="form-group has-success has-feedback hidden-sm hidden-md hidden-lg">
+                        <label class="control-label" for="IntQuestion">{{'TEXT_QUESTION' | translate}}</label>
+                        <input type="text" class="form-control" id="IntQuestion" name="questionInput"
+                               placeholder="{{'TEXT_QUESTION' | translate}}" data-ng-model="question" data-ng-minlength="3" data-ng-maxlength="200" required />
+                        <span class="glyphicon glyphicon-check form-control-feedback" data-ng-if="DefaultQuestionType == 1"></span>
+                        <span class="glyphicon glyphicon-record form-control-feedback" data-ng-if="DefaultQuestionType == 2"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group" uib-dropdown>
+                            <button type="button" class="btn btn-success" data-ng-disabled="questionForm.$invalid" data-ng-click="addQuestion()">
+                                <i class="glyphicon glyphicon-plus"></i> {{'TEXT_ADD_QUESTION' | translate}}
+                            </button>
+                        </div>
+                        <!--<span class="btn-group btn-group-xs pull-right" style="padding-left:10px;">
+                            <label class="btn" data-ng-class="{'btn-success': DefaultQuestionType==1, 'btn-default': DefaultQuestionType==2}"
+                                   ng-model="DefaultQuestionType" uib-btn-radio="1"><i class="glyphicon glyphicon-check"></i>Checkbox</label>
+                            <label class="btn" data-ng-class="{'btn-success': DefaultQuestionType==2, 'btn-default': DefaultQuestionType==1}"
+                                   ng-model="DefaultQuestionType" uib-btn-radio="2"><i class="glyphicon glyphicon-record"></i>Radio</label>
+                        </span>-->
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

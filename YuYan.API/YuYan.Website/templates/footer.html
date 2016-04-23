@@ -1,0 +1,19 @@
+﻿<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <br class="xs-10" />
+        <p class="text-center">
+            <button type="button" class="btn btn-link" data-ng-click="goManagement()" data-ng-if="isLogin">
+                <i class="glyphicon glyphicon-th-list"></i>&nbsp;{{'BTN_MANAGE' | translate}}
+            </button>
+            <button type="button" class="btn btn-link" data-ng-click="userLogout()" data-ng-if="isLogin">
+                <i class="glyphicon glyphicon-log-out"></i>&nbsp;{{'BTN_LOGOUT' | translate}}
+            </button>
+            <button type="button" class="btn btn-link" data-ng-click="userLogin('login')" data-ng-if="!isLogin">
+                <i class="glyphicon glyphicon-log-in"></i>&nbsp;{{'BTN_LOGIN' | translate}}
+            </button>
+            <button type="button" class="btn btn-link" data-ng-click="userLogin('register')" data-ng-if="!isLogin">
+                <i class="glyphicon glyphicon-user"></i>&nbsp;{{'BTN_REGISTER' | translate}}
+            </button>
+        </p>
+    </div>
+</div>

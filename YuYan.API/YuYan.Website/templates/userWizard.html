@@ -1,0 +1,26 @@
+﻿<div class="modal-body">
+    <button type="button" class="close" data-ng-click="cancel()">&times;</button>
+
+    <br class="xs-10" />
+    <form name="wizardForm" novalidate>
+        <div class="form-group has-success has-feedback">
+            <label class="control-label" for="userEmail">Email address</label>
+            <input type="email" class="form-control input-lg" id="userEmail" name="userEmail" placeholder="Email" required />
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        </div>
+        <div class="form-group has-success has-feedback">
+            <label class="control-label" for="userPassword">Password</label>
+            <input type="password" class="form-control input-lg" id="userPassword" name="userPassword" required />
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <div class="pull-right">
+        <button type="submit" class="btn btn-link" data-ng-click="wizardNext()">
+            <i class="glyphicon glyphicon-arrow-right"></i> Next &raquo;
+        </button>
+    </div>
+    <div class="clearfix"></div>
+</div>

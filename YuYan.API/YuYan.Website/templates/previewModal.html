@@ -1,0 +1,49 @@
+﻿<!--<div class="modal-header">
+    <h2 class="modal-title">{{survey.Title}}</h2>
+</div>-->
+<div class="modal-body">
+    <button type="button" class="close" data-ng-click="cancel()">&times;</button>
+
+    <br class="xs-10" />
+
+    <div class="well">
+
+        <div data-ng-if="survey.URLToken && survey.dtoQuestions.length>0">
+            <div>
+                <code>One Page:</code>
+                <button type="button" data-ng-click="openLink(shareLink)" class="btn btn-primary btn-xs">{{survey.URLToken}}</button>
+            </div>
+            <div>
+                <code>Step:</code>
+                <button type="button" data-ng-click="openLink(sharePageLink)" class="btn btn-primary btn-xs">page/{{survey.URLToken}}</button>
+            </div>
+        </div>
+
+        <form novalidate>
+
+            <h2>{{survey.Title}}</h2>
+            <h4>{{survey.ShortDesc}}</h4>
+            <h5>{{survey.LongDesc}}</h5>
+            <div class="form-group" data-ng-repeat="q in survey.dtoQuestions">
+                <h3>
+                    <span class="badge alert-success" style="font-size:16px">{{q.QuestionOrder}}</span> {{q.Question}}
+                </h3>
+                <div style="padding-left: 40px;" data-ng-repeat="i in q.dtoItems" data-ng-class="{'checkbox checkbox-success':q.QuestionType==1, 'radio radio-success':q.QuestionType==2}">
+                    <input type="checkbox" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==1" />
+                    <input type="radio" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==2" />
+                    <label for="item{{i.QuestionItemId}}">{{i.ItemDescription}}</label>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <br class="xs-10" />
+
+</div>
+<div class="modal-footer">
+    <!--<button class="btn btn-primary" type="button" data-ng-click="ok()">OK</button>-->
+    <!--<button type="button" class="btn btn-primary"><i class="fa fa-share"></i> Share</button>-->
+    <button class="btn btn-link" type="button" data-ng-click="cancel()">{{'BTN_CANCEL' | translate}}</button>
+</div>

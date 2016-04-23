@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F4D378
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuYan.Website", "YuYan.Website\YuYan.Website.csproj", "{DAC1E6C3-E08A-4834-A491-3C7423ABC8AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{C1F96EEC-0C39-449C-85AE-B92E5E3633F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1F96EEC-0C39-449C-85AE-B92E5E3633F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1F96EEC-0C39-449C-85AE-B92E5E3633F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAC1E6C3-E08A-4834-A491-3C7423ABC8AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAC1E6C3-E08A-4834-A491-3C7423ABC8AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAC1E6C3-E08A-4834-A491-3C7423ABC8AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC1E6C3-E08A-4834-A491-3C7423ABC8AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

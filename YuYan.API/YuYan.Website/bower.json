@@ -1,0 +1,44 @@
+{
+  "name": "yuyan",
+  "homepage": "https://github.com/sitedisks/Lib",
+  "authors": [
+    "Peter.W"
+  ],
+  "description": "yuyan geo chat",
+  "main": "",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "geo",
+    "chat",
+    "ip",
+    "free",
+    "no-matter-how"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-google-maps": "~2.2.1",
+    "toastr": "~2.1.2",
+    "angular-bootstrap": "~1.0.3",
+    "bootstrap": "~3.3.6",
+    "angular-messages": "^1.5.0",
+    "angular-resource": "~1.5.0",
+    "angular-local-storage": "^0.2.3",
+    "angular-ui-router": "^0.2.18",
+    "font-awesome": "fontawesome#^4.5.0",
+    "angular-loading-bar": "^0.8.0",
+    "angular-translate": "^2.9.1",
+    "flag-icon-css": "^1.2.0",
+    "angular-translate-loader-static-files": "^2.9.2",
+    "angular-cookies": "^1.5.0",
+    "angularjs-slider": "^2.10.2"
+  }
+}

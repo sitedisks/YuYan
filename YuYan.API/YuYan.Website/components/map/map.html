@@ -1,0 +1,30 @@
+﻿<div id="map_canvas">
+
+    <script type="text/ng-template" id="control.tpl.html">
+        <button class="btn btn-sm btn-primary" ng-class="{'btn-warning': danger}" ng-click="controlClick()">{{controlText}}</button>
+    </script>
+
+    <!-- <button class="btn btn-default" data-ng-click="clickMe()">Click me</button> -->
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options" control="map.control">
+
+        <ui-gmap-map-control template="control.tpl.html" position="top-right" controller="controlCtrl" index="-1"></ui-gmap-map-control>
+
+
+        <ui-gmap-marker coords="marker.coords" options="marker.options" idkey="marker.id" events="marker.events" data-ng-if="marker">
+            <ui-gmap-window>
+                <div>
+                    IP: {{clocation.ip}} <br />
+                    {{clocation.city}}, {{clocation.region_name}} {{clocation.country_code}} {{clocation.zip_code}}
+                    <br />
+                    <button class="btn btn-default" data-ng-click="$parent.clickMe()">Click me</button>
+                </div>
+            </ui-gmap-window>
+        </ui-gmap-marker>
+
+        <!-- <ui-gmap-marker data-ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id" events="marker.events">
+            <ui-gmap-window>
+                <div>{{marker.info}} + {{clocation}}</div>
+            </ui-gmap-window>
+        </ui-gmap-marker> -->
+    </ui-gmap-google-map>
+</div>

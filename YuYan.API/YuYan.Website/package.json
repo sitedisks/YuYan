@@ -1,0 +1,22 @@
+{
+  "name": "chorice.yuyan",
+  "version": "1.0.0",
+  "description": "Chorice survey management platform",
+  "main": "index.html",
+  "scripts": {
+    "test": "make test"
+  },
+  "author": "Peter Wang",
+  "license": "ISC",
+  "devDependencies": {
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-if": "^1.2.5",
+    "gulp-load-plugins": "^1.0.0-rc.1",
+    "gulp-minify-css": "^0.3.13",
+    "gulp-rename": "^1.2.2",
+    "gulp-size": "^2.0.0",
+    "gulp-uglify": "^1.1.0"
+  }
+}

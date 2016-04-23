@@ -1,0 +1,76 @@
+﻿<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <button type="button" class="btn btn-link" data-ng-click="goHome()">
+            &laquo; {{'BTN_HOME' | translate}}
+        </button>
+        <span class="text-primary"> | </span>
+        <button type="button" class="btn btn-link" data-ng-click="goSurvey()">
+            {{'BTN_SURVEY' | translate}}
+        </button>
+
+        <div>
+            <div class="text-center text-primary" style="margin-top: 30px;" data-ng-show="APIMini > APIResolved">
+                <br class="xs-20" />
+                <i class="fa fa-refresh fa-spin" style="font-size:48px"></i>
+            </div>
+            <div data-ng-show="APIMini <= APIResolved">
+                <h2 class="text-primary">{{survey.Title}}</h2>
+                <button type="button" class="btn btn-link btn-lg pull-right" data-ng-click="addEditQuestion()" data-ng-show="survey.dtoQuestions.length>0"><i class="glyphicon glyphicon-plus"></i> {{'BTN_ADD' | translate}} {{'TEXT_QUESTION' | translate}}</button>
+                <div class="clearfix"></div>
+                <hr />
+                <!--{{survey}}-->
+                <div data-ng-show="survey.dtoQuestions.length<=0">
+                    <button type="button" class="btn btn-link btn-lg" data-ng-click="addEditQuestion()"><i class="glyphicon glyphicon-plus"></i> {{'BTN_ADD' | translate}} {{'TEXT_FIRST' | translate}} {{'TEXT_QUESTION' | translate}}</button>
+                </div>
+                <div class="table-responsive" data-ng-show="survey.dtoQuestions.length>0">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr class="text-primary">
+                                <!--<th style="width: 10%" class="hidden-xs"></th>-->
+                                <th style="width: 50%">{{'TEXT_QUESTION' | translate}}</th>
+                                <th style="width: 10%" class="text-center hidden-xs">{{'TEXT_TYPE' | translate}}</th>
+                                <th style="width: 40%" class="text-center"><i class="fa fa-cogs"></i> {{'BTN_MANAGE' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="q in survey.dtoQuestions | orderBy: q.QuestionOrder">
+                                <!--<td class="hidden-xs">
+                                    <span class="badge alert-info">{{q.QuestionOrder}}</span>
+                                </td>-->
+                                <td class="text-primary">
+                                    <small>
+                                        <span data-ng-click="q.isCollapsed = !q.isCollapsed">
+                                            <span class="badge alert-info">{{q.QuestionOrder}}</span> {{q.Question}} &nbsp;
+                                            <span class="label label-success">{{q.dtoItems.length}}</span>
+                                        </span>
+                                    </small>
+                                    <div uib-collapse="q.isCollapsed">
+                                        <div style="padding-left:40px;" data-ng-repeat="i in q.dtoItems" data-ng-class="{'checkbox checkbox-success': q.QuestionType==1, 'radio radio-success': q.QuestionType==2}">
+                                            <input type="checkbox" name="question{{i.QuestionId}}" id="item{{i.ItemOrder}}" data-ng-if="q.QuestionType==1" />
+                                            <input type="radio" name="question{{i.QuestionId}}" id="item{{i.ItemOrder}}" data-ng-if="q.QuestionType==2" />
+                                            <label class="break-word" for="item{{i.ItemOrder}}"><small>{{i.ItemDescription}}</small></label>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center text-primary hidden-xs">
+                                    <i class="glyphicon glyphicon-check" data-ng-if="q.QuestionType == 1"></i>
+                                    <i class="glyphicon glyphicon-record" data-ng-if="q.QuestionType == 2"></i>
+                                </td>
+                                <td class="text-center">
+
+                                    <button type="button" class="btn btn-link btn-sm" data-ng-click="addEditQuestion(q)"><i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm">{{'TEXT_EDIT' | translate}}</span></button>
+                                    <button type="button" class="btn btn-danger btn-sm" data-ng-click="deleteQuestion(q)"><i class="fa fa-remove"></i> <span class="hidden-xs hidden-sm">{{'TEXT_DELETE' | translate}}</span></button>
+                                    <!--<button type="button" class="btn btn-link btn-sm pull-right"><i class="fa fa-bars"></i> <span class="hidden-xs hidden-sm"></span></button>-->
+                                    <button type="button" class="btn btn-link btn-sm pull-right hidden-xs" data-ng-click="q.isCollapsed = !q.isCollapsed">
+                                        <i class="fa fa-chevron-left" data-ng-show="!q.isCollapsed"></i>
+                                        <i class="fa fa-chevron-down" data-ng-show="q.isCollapsed"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

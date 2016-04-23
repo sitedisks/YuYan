@@ -1,0 +1,36 @@
+﻿<div class="modal-body">
+    <button type="button" class="close" data-ng-click="cancel()">&times;</button>
+    <br class="xs-10" />
+    <div>
+        <form name="resultForm" novalidate>
+            <div class="form-group has-success">
+                <label class="control-label" for="resultTitle">{{'TEXT_RESULT' | translate}} {{'TEXT_TITLE' | translate}}</label>
+                <input type="text" class="form-control" id="resultTitle" name="resultTitle" autofocus="autofocus"
+                       data-ng-model="result.Title" placeholder="Title" required />
+                
+            </div>
+            <div class="form-group has-success">
+                <label class="control-label" for="resultDesc">{{'TEXT_RESULT' | translate}} {{'TEXT_DESC' | translate}}</label>
+                <textarea class="form-control" id="resultDesc" data-ng-model="result.Description" placeholder="Description" rows="4"></textarea>
+            </div>
+            <div class="form-group has-success">
+                <label class="control-label">{{'TEXT_SCORE' | translate}} {{'TEXT_RANGE' | translate}}</label>
+                <rzslider rz-slider-model="result.MinScore"
+                          rz-slider-high="result.MaxScore"
+                          rz-slider-options="slider.options"></rzslider>
+            </div>
+           
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="pull-right">
+        <button type="submit" class="btn btn-primary btn-sm" data-ng-disabled="resultForm.$invalid || saving" data-ng-click="ok()">
+            <i data-ng-show="!saving" class="glyphicon glyphicon-floppy-save"></i><i data-ng-show="saving" class="fa fa-refresh fa-spin"></i> {{'BTN_SAVE' | translate}}
+        </button>
+        <button type="button" class="btn btn-link btn-sm" data-ng-click="cancel()">
+            {{'BTN_CANCEL' | translate}}
+        </button>
+    </div>
+    <div class="clearfix"></div>
+</div>

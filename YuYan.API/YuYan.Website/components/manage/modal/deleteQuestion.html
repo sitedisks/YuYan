@@ -1,0 +1,28 @@
+﻿<div class="modal-body">
+    <button type="button" class="close" data-ng-click="cancel()">&times;</button>
+
+    <div class="form-group">
+        <label>{{'TEXT_DELETE' | translate}} {{'BTN_CONFIRM' | translate}}?</label>
+    </div>
+
+    <div class="form-group">
+        <h3>{{question.Question}}</h3>
+        <!--{{question}}-->
+        <div style="padding-left:40px;" data-ng-repeat="i in question.dtoItems" data-ng-class="{'checkbox checkbox-success': question.QuestionType==1, 'radio radio-success': question.QuestionType==2}">
+            <input type="checkbox" name="question{{i.QuestionId}}" id="item{{i.ItemOrder}}" data-ng-if="question.QuestionType==1" />
+            <input type="radio" name="question{{i.QuestionId}}" id="item{{i.ItemOrder}}" data-ng-if="question.QuestionType==2" />
+            <label class="break-word" for="item{{i.ItemOrder}}"><small>{{i.ItemDescription}}</small></label>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="pull-right">
+        <button type="button" class="btn btn-danger btn-sm" data-ng-click="ok()">
+            <i class="glyphicon glyphicon-remove"></i> {{'BTN_CONFIRM' | translate}}
+        </button>
+        <button type="button" class="btn btn-link btn-sm" data-ng-click="cancel()">
+            {{'BTN_CANCEL' | translate}}
+        </button>
+    </div>
+    <div class="clearfix"></div>
+</div>

@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link href="css/choriceClient.css" rel="stylesheet" />
+</head>
+<body data-ng-app="choriceApp" data-ng-cloak>
+    <div class="container">
+        <div ui-view></div>
+    </div>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-37554430-6', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="bower_components/ngCodesClient.js"></script>
+
+    <!-- chorice app -->
+    <script src="js/choriceClient.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+﻿<div class="modal-body">
+    <button type="button" class="close" data-ng-click="cancel()">&times;</button>
+    <br class="xs-10" />
+
+    <div>
+        <form name="questionForm" novalidate>
+
+            <div class="form-group has-success">
+
+                <lable class="control-label"><strong>{{'TEXT_QUESTION' | translate}} {{'TEXT_TYPE' | translate}} </strong></lable>
+
+                <!--<span class="text-success" data-ng-if="question.QuestionType==1">multiple choice</span>
+                <span class="text-success" data-ng-if="question.QuestionType==2">single choice</span>-->
+                <div class="btn-group btn-group-xs" style="padding-left:10px;">
+                    <label class="btn" data-ng-class="{'btn-success': question.QuestionType==1, 'btn-default': question.QuestionType==2}"
+                           ng-model="question.QuestionType" uib-btn-radio="1"><i class="glyphicon glyphicon-check"></i>{{'TEXT_CHECKBOX' | translate}}</label>
+                    <label class="btn" data-ng-class="{'btn-success': question.QuestionType==2, 'btn-default': question.QuestionType==1}"
+                           ng-model="question.QuestionType" uib-btn-radio="2"><i class="glyphicon glyphicon-record"></i>{{'TEXT_RADIO' | translate}}</label>
+                </div>
+            </div>
+
+            <div class="form-group has-success has-feedback">
+
+                <label class="control-label" for="questionTitle">{{'TEXT_QUESTION' | translate}}</label>
+                <input type="text" class="form-control input-lg" id="questionTitle" name="questionTitle" autofocus="autofocus"
+                       data-ng-model="question.Question" placeholder="Question" required />
+                <span class="fa fa-pencil form-control-feedback"></span>
+            </div>
+
+            <div class="form-group has-success">
+                <lable class="control-label"><strong>{{'TEXT_QUESTION' | translate}} {{'TEXT_ITEMS' | translate}} </strong></lable>
+                <div class="clearfix"></div>
+
+                <div class="form-group-sm" data-ng-repeat="i in question.dtoItems" data-ng-class="{'checkbox checkbox-success':question.QuestionType==1, 'radio radio-success':question.QuestionType==2}">
+
+                    <div class="row">
+                        <div class="col-xs-5 col-xs-offset-1">
+                            <div style="padding: 5px 10px;">
+                                <input class="form-control" type="checkbox" name="question{{i.QuestionId}}" id="item{{i.ItemOrder}}" data-ng-if="question.QuestionType==1" />
+                                <input class="form-control" type="radio" name="question{{i.QuestionId}}" id="item{{i.ItemOrder}}" data-ng-if="question.QuestionType==2" />
+                                <label class="break-word" for="item{{i.ItemOrder}}">{{i.ItemDescription}}</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <select name="ItemScore" class=" input-sm" data-ng-model="i.Score" convert-to-number>
+                                <option value="0">0</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                                <option value="60">60</option>
+                            </select>
+                            <!--<input type="number" class="form-control input-sm" name="itemScore" data-ng-model="i.Score" data-ng-min="0" data-ng-max="100" step="10" />-->
+                        </div>
+                        <div class="col-xs-3">
+                            <button class="btn btn-link btn-sm" data-ng-click="removeItem(i)"><span class="text-danger"><i class="glyphicon glyphicon-remove"></i> <span class="hidden-xs">{{'BTN_REMOVE' | translate}}</span></span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group-sm">
+                    <div class="row">
+                        <div data-ng-show="question.dtoItems.length<6" data-ng-class="{'checkbox checkbox-success':question.QuestionType==1, 'radio radio-success':question.QuestionType==2}">
+                            <div class="col-xs-1">
+                                <button class="btn btn-link btn-sm"><i class="fa fa-chevron-right"></i>&nbsp;</button>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control input-sm" name="itemInput" data-ng-model="item" placeholder="Add item" data-ng-minlength="1" data-ng-maxlength="150" />
+                            </div>
+                            <div class="col-xs-3">
+                                <button class="btn btn-link btn-sm" data-ng-click="addItem()" data-ng-disabled="!item"><i class="glyphicon glyphicon-plus"></i> {{'BTN_ADD' | translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+
+    <div class="pull-right">
+        <button type="submit" class="btn btn-primary btn-sm" data-ng-disabled="questionForm.$invalid || !isItemCountValid || saving" data-ng-click="ok()">
+            <i data-ng-show="!saving" class="glyphicon glyphicon-floppy-save"></i><i data-ng-show="saving" class="fa fa-refresh fa-spin"></i> {{'BTN_SAVE' | translate}}
+        </button>
+        <button type="button" class="btn btn-link btn-sm" data-ng-click="cancel()">
+            {{'BTN_CANCEL' | translate}}
+        </button>
+    </div>
+    <div class="clearfix"></div>
+</div>

@@ -1,0 +1,42 @@
+﻿<div class="modal-body">
+    <button type="button" class="close" data-ng-click="cancel()">&times;</button>
+
+    <br class="xs-10" />
+    <!--<div class="text-center text-primary" data-ng-show="saving">
+        <br />
+        <i class="fa fa-refresh fa-spin" style="font-size:48px"></i>
+    </div>-->
+    <div>
+        <form name="surveyForm" data-ng-submit novalidate>
+            <div class="form-group has-success has-feedback">
+
+                <label class="control-label" for="surveyTitle">{{'BTN_SURVEY' | translate}} {{'TEXT_TITLE' | translate}}</label>
+                <input type="text" class="form-control input-lg" id="surveyTitle" name="surveyTitle" autofocus="autofocus"
+                       data-ng-model="survey.Title" placeholder="Title" required />
+                <span class="fa fa-quote-right form-control-feedback"></span>
+            </div>
+            <div class="form-group has-success">
+                <label class="control-label" for="surveyShortDesc">{{'TEXT_SHORT' | translate}} {{'TEXT_DESC' | translate}}</label>
+                <textarea class="form-control" id="surveyShortDesc" data-ng-model="survey.ShortDesc" placeholder="Short Description" rows="3"></textarea>
+            </div>
+            <div class="form-group has-success">
+                <label class="control-label" for="surveyLongDesc">{{'TEXT_LONG' | translate}} {{'TEXT_DESC' | translate}}</label>
+                <textarea class="form-control" id="surveyLongDesc" data-ng-model="survey.LongDesc" placeholder="Long Description" rows="5"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-sm" data-ng-disabled="surveyForm.$invalid" data-ng-click="ok()" style="opacity:0;"></button>
+        </form>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <div class="pull-right">
+        <button type="submit" class="btn btn-primary btn-sm" data-ng-disabled="surveyForm.$invalid || saving" data-ng-click="ok()">
+            <i data-ng-show="!saving" class="glyphicon glyphicon-floppy-save"></i><i data-ng-show="saving" class="fa fa-refresh fa-spin"></i> {{'BTN_SAVE' | translate}}
+        </button>
+        <button type="button" class="btn btn-link btn-sm" data-ng-click="cancel()">
+            {{'BTN_CANCEL' | translate}}
+        </button>
+    </div>
+    <div class="clearfix"></div>
+</div>

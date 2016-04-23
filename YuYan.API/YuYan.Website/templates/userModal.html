@@ -1,0 +1,71 @@
+﻿<div class="modal-body">
+    <button type="button" class="close" data-ng-click="cancel()">&times;</button>
+
+    <div class="text-center text-success">
+        <h3>
+            <i class="glyphicon" ng-class="{'glyphicon-log-in': mode=='login', 'glyphicon-user': mode=='register'}"></i> {{mode}}
+        </h3>
+    </div>
+    <br class="xs-10" />
+    <form name="userForm" data-ng-submit novalidate>
+        <div class="form-group has-feedback"
+             data-ng-class="{'has-success':userForm.userEmail.$valid || userForm.userEmail.$pristine,
+                'has-error':!userAvailable || (userForm.userEmail.$invalid && !userForm.userEmail.$pristine)}">
+            <label class="control-label" for="userEmail">{{'TEXT_EMAIL' | translate}}</label>
+            <input type="email" class="form-control input-lg" id="userEmail" name="userEmail" data-ng-model="userObj.Email" autofocus="autofocus"
+                   data-ng-change="checkUser()" data-ng-blur="checkUser()" placeholder="Email" required>
+            <span class="glyphicon glyphicon-envelope form-control-feedback" data-ng-if="!checking"></span>
+            <span class="glyphicon glyphicon-refresh form-control-feedback" data-ng-if="checking"></span>
+            <div data-ng-messages="userForm.userEmail.$error" data-ng-show="userForm.userEmail.$dirty">
+                <div data-ng-messages-include="templates/messages.html"></div>
+            </div>
+            <div class="custom_messages" data-ng-show="!userAvailable">
+                <div><span class="glyphicon glyphicon-exclamation-sign"></span> User email existed</div>
+            </div>
+        </div>
+        <div class="form-group has-success has-feedback"
+             data-ng-class="{'has-success':userForm.userPassword.$valid || userForm.userPassword.$pristine,
+                'has-error': userForm.userPassword.$invalid && !userForm.userPassword.$pristine}">
+            <label class="control-label" for="userPassword">{{'TEXT_PASS' | translate}}</label>
+            <input type="password" class="form-control input-lg" id="userPassword" name="userPassword" data-ng-model="userObj.Password"
+                   data-ng-minlength="6" data-ng-change="dupPassword()" placeholder="Password" required>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <div data-ng-messages="userForm.userPassword.$error" data-ng-show="userForm.userPassword.$dirty">
+                <div data-ng-messages-include="templates/messages.html"></div>
+            </div>
+        </div>
+        <div class="form-group has-feedback" data-ng-show="mode=='register'"
+             data-ng-class="{'has-success':userForm.userConfirmPassword.$valid || userForm.userConfirmPassword.$pristine,
+                'has-error':userForm.userConfirmPassword.$invalid && !userForm.userConfirmPassword.$pristine}">
+            <label class="control-label" for="userConfirmPassword">{{'TEXT_CONFIRMPASS' | translate}}</label>
+            <input type="password" class="form-control input-lg" id="userConfirmPassword" name="userConfirmPassword"
+                   data-ng-model="userObj.PasswordConfirm" placeholder="Confirm Password" compare-to="userObj.Password" required>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <div data-ng-messages="userForm.userConfirmPassword.$error" data-ng-show="userForm.userConfirmPassword.$dirty">
+                <div data-ng-messages-include="templates/messages.html"></div>
+            </div>
+        </div>
+
+        <div class="from-group" ng-show="mode=='register'">
+            <span class="text-success">{{'TEXT_HAS_ACCOUNT' | translate}} </span>
+            <button type="button" class="btn btn-link btn-sm" data-ng-click="switchToLogin()"><i class="glyphicon glyphicon-log-in"></i> {{'BTN_LOGIN' | translate}}</button>
+        </div>
+
+        <div class="from-group" ng-show="mode=='login'">
+            <span class="text-success">{{'TEXT_LOGIN_PROMPT' | translate}} </span>
+            <button type="button" class="btn btn-link btn-sm" data-ng-click="switchToRegister()"><i class="glyphicon glyphicon-user"></i> {{'BTN_REGISTER' | translate}}</button>
+        </div>
+
+        <button type="submit" class="btn btn-link" ng-disabled="userForm.$invalid || !userAvailable" data-ng-click="ok()" style="opacity:0;"></button>
+
+    </form>
+
+</div>
+<div class="modal-footer">
+    <div class="pull-right">
+        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid || !userAvailable || saving" data-ng-click="ok()">
+            <i class="glyphicon" data-ng-show="!saving" ng-class="{'glyphicon-log-in': mode=='login', 'glyphicon-user': mode=='register'}"></i><i data-ng-show="saving" class="fa fa-refresh fa-spin"></i>&nbsp;{{mode}} &raquo;
+        </button>
+    </div>
+    <div class="clearfix"></div>
+</div>

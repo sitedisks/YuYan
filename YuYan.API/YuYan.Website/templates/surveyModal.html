@@ -1,0 +1,28 @@
+﻿<div class="modal-body">
+    <button type="button" class="close" data-ng-click="cancel()">&times;</button>
+
+    <br class="xs-10" />
+    <form name="surveyForm" novalidate>
+        <div class="form-group has-success has-feedback">
+            <label class="control-label" for="surveyTitle">{{'BTN_SURVEY' | translate}} {{'TEXT_TITLE' | translate}}</label>
+            <input type="text" class="form-control input-lg" id="surveyTitle" name="surveyTitle" data-ng-model="survey.Title" placeholder="Title" required />
+            <span class="fa fa-quote-right form-control-feedback"></span>
+        </div>
+        <a ng-click="isCollapsed = !isCollapsed"><i class="fa " data-ng-class="{'fa-angle-right': isCollapsed, 'fa-angle-down': !isCollapsed }"></i> {{'BTN_MORE' | translate}}</a>
+        <div uib-collapse="isCollapsed">
+            <div class="form-group has-success">
+                <textarea class="form-control" data-ng-model="survey.ShortDesc" placeholder="Short Description" rows="3"></textarea>
+            </div>
+        </div>
+      
+    </form>
+</div>
+<div class="modal-footer">
+    <div class="pull-right">
+        <button type="button" class="btn btn-link" data-ng-disabled="surveyForm.$invalid" data-ng-click="ok()">
+            <span data-ng-show="loggedIn"><i class="glyphicon glyphicon-floppy-disk"></i> {{'BTN_SAVE' | translate}} &raquo;</span>
+            <span data-ng-show="!loggedIn"><i class="glyphicon glyphicon-arrow-right"></i> {{'BTN_NEXT' | translate}} &raquo;</span>
+        </button>
+    </div>
+    <div class="clearfix"></div>
+</div>

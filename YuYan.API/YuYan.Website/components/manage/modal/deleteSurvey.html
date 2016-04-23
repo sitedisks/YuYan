@@ -1,0 +1,41 @@
+﻿<div class="modal-body">
+    <button type="button" class="close" data-ng-click="cancel()">&times;</button>
+    
+    <div class="form-group">
+        <label>{{'TEXT_DELETE' | translate}} {{'BTN_CONFIRM' | translate}}?</label>
+    </div>
+  
+    <div class="well">
+        <div class="">
+
+            <h2>{{survey.Title}}</h2>
+            <h4>{{survey.ShortDesc}}</h4>
+            <h5>{{survey.LongDesc}}</h5>
+            <div class="form-group" data-ng-repeat="q in survey.dtoQuestions">
+                <h3>
+                    <span class="badge alert-success" style="font-size:16px">{{q.QuestionOrder}}</span> {{q.Question}}
+                </h3>
+                <div style="padding-left: 40px;" data-ng-repeat="i in q.dtoItems" data-ng-class="{'checkbox checkbox-success':q.QuestionType==1, 'radio radio-success':q.QuestionType==2}">
+                    <input type="checkbox" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==1" />
+                    <input type="radio" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==2" />
+                    <label for="item{{i.QuestionItemId}}">{{i.ItemDescription}}</label>
+                </div>
+            </div>
+
+        </div>
+
+        <br class="xs-10" />
+
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="pull-right">
+        <button type="button" class="btn btn-danger btn-sm" data-ng-click="ok()">
+            <i class="glyphicon glyphicon-remove"></i> {{'BTN_CONFIRM' | translate}}
+        </button>
+        <button type="button" class="btn btn-link btn-sm" data-ng-click="cancel()">
+            {{'BTN_CANCEL' | translate}}
+        </button>
+    </div>
+    <div class="clearfix"></div>
+</div>
