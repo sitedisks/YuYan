@@ -1247,10 +1247,12 @@
     <Content Include="components\manage\modal\reportSurvey.html" />
     <Content Include="components\map\map.html" />
     <Content Include="css\build.css" />
+    <Content Include="css\carousel.css" />
     <Content Include="css\gapcss.css" />
     <Content Include="css\main.css" />
     <Content Include="css\survey.css" />
     <Content Include="gulpfile.js" />
+    <Content Include="howto.html" />
     <Content Include="img\chorice-logo.jpg" />
     <Content Include="img\QRcode.png" />
     <Content Include="index.html" />

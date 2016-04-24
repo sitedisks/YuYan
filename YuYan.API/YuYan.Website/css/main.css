@@ -1,4 +1,8 @@
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 
-.angular-google-map-container { 
-	height: 100% 
+.angular-google-map-container {
+    height: 100%;
 }
