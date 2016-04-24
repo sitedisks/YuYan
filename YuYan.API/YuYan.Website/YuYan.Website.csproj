@@ -1254,6 +1254,13 @@
     <Content Include="gulpfile.js" />
     <Content Include="howto.html" />
     <Content Include="img\chorice-logo.jpg" />
+    <Content Include="img\howto\chorice_howto_step1.jpg" />
+    <Content Include="img\howto\chorice_howto_step2.jpg" />
+    <Content Include="img\howto\chorice_howto_step3.jpg" />
+    <Content Include="img\howto\chorice_howto_step4.jpg" />
+    <Content Include="img\howto\chorice_howto_step5.jpg" />
+    <Content Include="img\howto\chorice_howto_step6.jpg" />
+    <Content Include="img\howto\chorice_step1.jpg" />
     <Content Include="img\QRcode.png" />
     <Content Include="index.html" />
     <Content Include="index_debug.html" />
