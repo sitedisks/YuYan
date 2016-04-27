@@ -49,6 +49,13 @@
     "TEXT_SCORE": "分值",
     "TEXT_RANGE": "范围",
 
+    "CHO_FEATURE1": "简单快捷",
+    "CHO_FEATURE2": "面对市场",
+    "CHO_FEATURE3": "地点结果",
+    "CHO_FEATURE1_TEXT": "",
+    "CHO_FEATURE2_TEXT": "",
+    "CHO_FEATURE3_TEXT": "",
+
     "CHO_STEP1_H1": "简单并且快捷",
     "CHO_STEP1_H2": "建立在线查询问卷",
     "CHO_STEP1_TEXT": "使用‘潮米’建立在线查询问卷非常简单，让我们从填写您希望问询的第一个问题开始。",
@@ -69,9 +76,11 @@
     "CHO_STEP5_H2": "适应手机及平板电脑",
     "CHO_STEP5_TEXT": "‘潮米’生成的问卷非常优雅并且自适应于任何尺寸的手机和平板电脑浏览器中",
 
-    "CHO_STEP6_H1": "收集和分析",
+    "CHO_STEP6_H1": "统筹和分析",
     "CHO_STEP6_H2": "大数据和统计",
     "CHO_STEP6_TEXT": "您的问卷调查分享次数和被问卷回答次数尽在掌握，‘潮米’还能根据用户地点做出报告更方便您对于市场的把握。",
+
+    "CHO_START_NOW": "现在就开始",
 
     "BTN_TEXT_EN": "英文",
     "BTN_TEXT_CN": "中文"

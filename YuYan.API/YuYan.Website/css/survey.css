@@ -5,16 +5,17 @@ html {
 
 body {
     margin: 0 0 60px; /* bottom = footer height */
+    color: #5a5a5a;
 }
 
 .footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  background-color: #fff;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #fff;
 }
 
 .pad20 {
@@ -32,23 +33,23 @@ body {
 }
 
 .break-word {
-  word-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .messages {
-  font-size: smaller;
-  padding-top: 5px;
-  padding-left: 5px;
-  color: #a94442;
+    font-size: smaller;
+    padding-top: 5px;
+    padding-left: 5px;
+    color: #a94442;
 }
 
 .custom_messages {
-  font-size: smaller;
-  padding-left: 5px;
-  color: #a94442;
+    font-size: smaller;
+    padding-left: 5px;
+    color: #a94442;
 }
 
 /* angularjs slider overwrite  #3c763d */
 rzslider .rz-pointer.rz-active:after {
-  background-color: #3c763d !important;
+    background-color: #3c763d !important;
 }
