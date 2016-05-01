@@ -92,6 +92,7 @@ gulp.task('ngCodes', function(){
 		,'bower_components/angular-loading-bar/src/loading-bar.js'
 		,'bower_components/angular-translate/angular-translate.min.js'
 		,'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js'
+		,'bower_components/angular-social-links/angular-social-links.js'
 		,'bower_components/angular-messages/angular-messages.min.js'
 		,'bower_components/angularjs-slider/dist/rzslider.min.js'])
 		.pipe($.if('*.js', $.concat('ngCodes.js'))) 
@@ -228,6 +229,7 @@ gulp.task('ngCodes_debug', function(){
 		,'bower_components/angular-loading-bar/src/loading-bar.js'
 		,'bower_components/angular-translate/angular-translate.min.js'
 		,'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js'
+		,'bower_components/angular-social-links/angular-social-links.js'
 		,'bower_components/angular-messages/angular-messages.min.js'
 		,'bower_components/angularjs-slider/dist/rzslider.min.js'])
 		// .pipe($.if('*.js', $.concat('ngCodes.js'))) 
