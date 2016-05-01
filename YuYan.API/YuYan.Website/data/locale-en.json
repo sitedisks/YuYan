@@ -52,9 +52,10 @@
     "CHO_FEATURE1": "Quick & Easy",
     "CHO_FEATURE2": "Market Oriented",
     "CHO_FEATURE3": "Geo Results",
-    "CHO_FEATURE1_TEXT": "",
-    "CHO_FEATURE2_TEXT": "",
-    "CHO_FEATURE3_TEXT": "",
+    "CHO_FEATURE4": "Data Collection",
+    "CHO_FEATURE1_TEXT": "Generate the online survey and questionary quick and easy.",
+    "CHO_FEATURE2_TEXT": "Grasp market trends, market dynamics and Big data collection.",
+    "CHO_FEATURE3_TEXT": "Based on user geographic location and distribution of the audience crowd.",
 
     "CHO_STEP1_H1": "Quick & Easy",
     "CHO_STEP1_H2": "Online Survey and Questionnaire ",
@@ -62,7 +63,7 @@
 
     "CHO_STEP2_H1": "Efficient & Automation",
     "CHO_STEP2_H2": "WYSIWYG",
-    "CHO_STEP2_TEXT": "Next is adding the options. 'CHORICE' provides what your see is what you get expeirence.",
+    "CHO_STEP2_TEXT": "Next is adding the options. 'CHORICE' provides what your see is what you get experience.",
 
     "CHO_STEP3_H1": "Save & Edit",
     "CHO_STEP3_H2": "Edit Anytime",
@@ -74,13 +75,14 @@
 
     "CHO_STEP5_H1": "Elegant & Concise",
     "CHO_STEP5_H2": "Responsive Mobile",
-    "CHO_STEP5_TEXT": "'CHORICE' generate elegant and responsive survey which are suit for any mobile phone or tablets.",
+    "CHO_STEP5_TEXT": "'CHORICE' generate elegant and responsive survey which is suit for any mobile phone or tablets.",
 
     "CHO_STEP6_H1": "Statistics & Analysis",
     "CHO_STEP6_H2": "Big Data",
-    "CHO_STEP6_TEXT": "Check the survey report by times of answer and shared statistics, analyze the market based on the user location.",
+    "CHO_STEP6_TEXT": "Check the survey report by times of answer and shared statistics; analyse the market based on the user location.",
 
     "CHO_START_NOW": "Start Your Survey Now",
+    "CHO_START": "Start",
 
     "BTN_TEXT_EN": "English",
     "BTN_TEXT_CN": "Chinese"

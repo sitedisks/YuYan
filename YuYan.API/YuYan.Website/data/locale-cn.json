@@ -19,7 +19,7 @@
     "TEXT_FIRST": "第一个",
     "TEXT_QUESTION": "问题",
     "TEXT_ADD_QUESTION": "添加问题",
-    "TEXT_HEAD_INTRO": "方便快捷地分享并收集调查问卷数据, 小测验，或大数据统计",
+    "TEXT_HEAD_INTRO": "方便快捷地分享并收集调查问卷数据, 小测验, 或大数据统计",
     "TEXT_EMAIL": "电子邮件",
     "TEXT_PASS": "登陆密码",
     "TEXT_CONFIRMPASS": "确认密码",
@@ -52,13 +52,14 @@
     "CHO_FEATURE1": "简单快捷",
     "CHO_FEATURE2": "面对市场",
     "CHO_FEATURE3": "地点结果",
-    "CHO_FEATURE1_TEXT": "",
-    "CHO_FEATURE2_TEXT": "",
-    "CHO_FEATURE3_TEXT": "",
+    "CHO_FEATURE4": "数据收集",
+    "CHO_FEATURE1_TEXT": "简单，快捷地生成在线优雅的调查问卷或测试。",
+    "CHO_FEATURE2_TEXT": "为市场而生快速掌握市场动向, 收集市场动态大数据。",
+    "CHO_FEATURE3_TEXT": "基于用户地理位置生成报告, 针对受众细分市场布局。",
 
     "CHO_STEP1_H1": "简单并且快捷",
-    "CHO_STEP1_H2": "建立在线查询问卷",
-    "CHO_STEP1_TEXT": "使用‘潮米’建立在线查询问卷非常简单，让我们从填写您希望问询的第一个问题开始。",
+    "CHO_STEP1_H2": "在线查询问卷",
+    "CHO_STEP1_TEXT": "使用‘潮米’建立在线查询问卷非常简单, 让我们从填写您希望问询的第一个问题开始。",
 
     "CHO_STEP2_H1": "高效及自动化",
     "CHO_STEP2_H2": "所见即所得",
@@ -66,21 +67,22 @@
 
     "CHO_STEP3_H1": "保持或修改",
     "CHO_STEP3_H2": "随时调整问卷",
-    "CHO_STEP3_TEXT": "保存并进入到管理界面，您会发现所有操作一目了然。‘潮米’提供简单易懂的操作界面。",
+    "CHO_STEP3_TEXT": "保存并进入到管理界面, 您会发现所有操作一目了然。‘潮米’提供简单易懂的操作界面。",
 
     "CHO_STEP4_H1": "分享并收集",
     "CHO_STEP4_H2": "激动人心的时刻",
-    "CHO_STEP4_TEXT": "使用‘分享’可以预览并提供分享用的链接，您只需要点击链接或者复制到Facebook,微信或者电子邮件中。",
+    "CHO_STEP4_TEXT": "使用‘分享’可以预览并提供分享用的链接, 您只需要点击链接或者复制到Facebook,微信或者电子邮件中。",
 
-    "CHO_STEP5_H1": "优雅而且简洁",
+    "CHO_STEP5_H1": "优雅且简洁",
     "CHO_STEP5_H2": "适应手机及平板电脑",
     "CHO_STEP5_TEXT": "‘潮米’生成的问卷非常优雅并且自适应于任何尺寸的手机和平板电脑浏览器中",
 
     "CHO_STEP6_H1": "统筹和分析",
     "CHO_STEP6_H2": "大数据和统计",
-    "CHO_STEP6_TEXT": "您的问卷调查分享次数和被问卷回答次数尽在掌握，‘潮米’还能根据用户地点做出报告更方便您对于市场的把握。",
+    "CHO_STEP6_TEXT": "您的问卷调查分享次数和被问卷回答次数尽在掌握, ‘潮米’还能根据用户地点做出报告更方便您对于市场的把握。",
 
     "CHO_START_NOW": "现在就开始",
+    "CHO_START": "开始",
 
     "BTN_TEXT_EN": "英文",
     "BTN_TEXT_CN": "中文"
