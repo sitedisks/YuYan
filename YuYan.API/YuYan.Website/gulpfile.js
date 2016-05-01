@@ -18,6 +18,12 @@ gulp.task('copyindex', function(){
 		.pipe(gulp.dest('dist'));
 });
 
+gulp.task('copyhowto', function(){
+	return gulp.src('howto_dist.html')
+		.pipe($.rename('howto.html'))
+		.pipe(gulp.dest('dist'));
+});
+
 gulp.task('copydata', function(){
 	return gulp.src('data/**/*')
 		.pipe(gulp.dest('dist/data'));
@@ -62,6 +68,16 @@ gulp.task('choricecss', function(){
 		.pipe(gulp.dest('dist/css'));	
 });
 
+gulp.task('howtocss', function(){
+	return gulp.src(['bower_components/bootstrap/dist/css/bootstrap.min.css'
+		,'bower_components/font-awesome/css/font-awesome.min.css'
+		,'bower_components/flag-icon-css/css/flag-icon.min.css'
+		,'css/gapcss.css', 'css/carousel.css'])
+	.pipe($.concat('howtocss.css'))
+	.pipe($.minifyCss())
+	.pipe(gulp.dest('dist/css'));	
+});
+
 gulp.task('ngCodes', function(){
 	return gulp.src(['bower_components/jquery/dist/jquery.min.js'
 		,'bower_components/toastr/toastr.min.js'
@@ -86,6 +102,17 @@ gulp.task('ngCodes', function(){
 gulp.task('choricejs', function(){
 	return gulp.src(['js/**/*.js', 'templates/**/*.js'])
 		.pipe($.if('*.js', $.concat('choricejs.js'))) 
+		.pipe($.uglify())
+		.pipe(gulp.dest('dist/js'));	
+});
+
+gulp.task('howtojs', function(){
+	return gulp.src([
+		,'bower_components/angular/angular.js'
+		,'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
+		,'bower_components/angular-translate/angular-translate.min.js'
+		,'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js'])
+		.pipe($.if('*.js', $.concat('howtojs.js'))) 
 		.pipe($.uglify())
 		.pipe(gulp.dest('dist/js'));	
 });
@@ -261,6 +288,10 @@ gulp.task('clean_debug', function(done) {
 
 gulp.task('build', ['clean', 'copyindex', 'copydata', 'copytemplate', 'copycomponents', 'choricecss', 'flag', 'fonts', 'ngCodes', 'choricejs', 'copyClientindex', 'copyClientcomponents', 'choriceClientcss', 'ngCodesClient', 'choriceClientjs'], function() {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
+});
+
+gulp.task('howto', ['copyhowto', 'howtocss', 'howtojs'], function(){ 
+  return gulp.src('dist/**/*').pipe($.size({title: 'howto', gzip: true}));
 });
 
 gulp.task('debug', ['clean_debug', 'copyindex_debug', 'copydata_debug', 'copytemplate_debug', 'copycomponents_debug', 'choricecss_debug', 'flag_debug', 'fonts_debug', 'ngCodes_debug', 'choricejs_debug', 'copyClientindex_debug', 'copyClientcomponents_debug', 'choriceClientcss_debug', 'ngCodesClient_debug', 'choriceClientjs_debug'], function() {

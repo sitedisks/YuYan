@@ -352,6 +352,7 @@
     <Content Include="client\js\controller.chorice.back" />
     <Content Include="data\locale-cn.json" />
     <Content Include="data\locale-en.json" />
+    <Content Include="howto_dist.html" />
     <Content Include="img\howto\chorice_step2.jpg" />
     <Content Include="img\howto\chorice_step3.jpg" />
     <Content Include="package.json" />

@@ -3,19 +3,14 @@
 <head>
     <title>CHORICE - Quick and Easy Survey</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="bower_components/flag-icon-css/css/flag-icon.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/gapcss.css" />
-    <link rel="stylesheet" type="text/css" href="css/carousel.css" />
-    <!--<link rel="stylesheet" type="text/css" href="css/main.css" />-->
+    <link rel="stylesheet" type="text/css" href="css/howtocss.css" />
 </head>
 <body data-ng-app="choriceApp" data-ng-cloak>
     <div data-ng-controller="howtoCtrl">
         <div class="btn-group pull-right">
             <a type="button" href="/" class="btn btn-link btn-sm"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
             <button type="button" class="btn btn-link btn-sm" ng-click="changeLanguage('en')"><span class="flag-icon flag-icon-gb"></span></button>
-            <button type="button" class="btn btn-link btn-sm" ng-click="changeLanguage('cn')"><span class="flag-icon flag-icon-cn"></span></button>
+            <button type="button" class="btn btn-link btn-sm" ng-click="changeLanguage('cn')"><span class="flag-icon flag-icon-cn"></span></button>        
         </div>
         <div class="clearfix"></div>
         <div class="container marketing">
@@ -50,7 +45,7 @@
 
             <div class="row featurette">
                 <div class="col-md-7">
-                    
+
                     <h2 class="featurette-heading"><span translate>CHO_STEP1_H2</span> <span class="text-muted small" translate>CHO_STEP1_H1</span></h2>
                     <p class="lead" translate>CHO_STEP1_TEXT</p>
                 </div>
@@ -124,10 +119,7 @@
         </div>
     </div>
 
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="bower_components/angular-translate/angular-translate.min.js"></script>
-    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    <script src="js/howtojs.js"></script>
 
     <script>
 
