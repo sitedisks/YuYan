@@ -145,6 +145,7 @@
     <Content Include="bower_components\angular-simple-logger\scripts\publish" />
     <Content Include="bower_components\angular-simple-logger\spec\logger.spec.coffee" />
     <Content Include="bower_components\angular-simple-logger\src\logger.coffee" />
+    <Content Include="bower_components\angular-social-links\angular-social-links.js" />
     <Content Include="bower_components\angular-translate-loader-static-files\.bower.json" />
     <Content Include="bower_components\angular-translate-loader-static-files\bower.json" />
     <Content Include="bower_components\angular-translate-loader-static-files\package.json" />
@@ -356,6 +357,12 @@
     <Content Include="img\howto\chorice_step2.jpg" />
     <Content Include="img\howto\chorice_step3.jpg" />
     <Content Include="package.json" />
+    <Content Include="bower_components\angular-social-links\.bower.json" />
+    <Content Include="bower_components\angular-social-links\angular-social-links.coffee" />
+    <Content Include="bower_components\angular-social-links\bower.json" />
+    <Content Include="bower_components\angular-social-links\Gruntfile.coffee" />
+    <Content Include="bower_components\angular-social-links\package.json" />
+    <Content Include="bower_components\angular-social-links\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

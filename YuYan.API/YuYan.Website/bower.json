@@ -39,6 +39,7 @@
     "flag-icon-css": "^1.2.0",
     "angular-translate-loader-static-files": "^2.9.2",
     "angular-cookies": "^1.5.0",
-    "angularjs-slider": "^2.10.2"
+    "angularjs-slider": "^2.10.2",
+    "angular-social-links": "^0.0.23"
   }
 }

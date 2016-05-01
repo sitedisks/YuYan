@@ -24,9 +24,9 @@
                             <tr class="text-primary">
                                 <th style="width: 40%">{{'TEXT_TITLE' | translate}}</th>
                                 <!--<th style="width: 10%" class="text-center">Questions</th>-->
-                                <th style="width: 10%" class="text-center hidden-xs">{{'TEXT_VISITED' | translate}}</th>
-                                <th style="width: 10%" class="text-center hidden-xs">{{'TEXT_ANSWERED' | translate}}</th>
-                                <th style="width: 50%" class="text-center"><i class="fa fa-cogs"></i> {{'TEXT_ACTION' | translate}}</th>
+                                <th style="width: 5%" class="text-center hidden-xs">{{'TEXT_VISITED' | translate}}</th>
+                                <th style="width: 5%" class="text-center hidden-xs">{{'TEXT_ANSWERED' | translate}}</th>
+                                <th style="width: 60%" class="text-center"><i class="fa fa-cogs"></i> {{'TEXT_ACTION' | translate}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,8 +41,10 @@
                                 <td class="text-center hidden-xs"><span class="badge alert-success">{{s.VisitCount}}</span></td>
                                 <td class="text-center hidden-xs"><span class="badge alert-info">{{s.CompleteCount}}</span></td>
                                 <td class="text-center">
+            
+                                    <button type="button" class="btn btn-link btn-sm" data-ng-click="addEditSurvey(s)"><i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm">{{'TEXT_EDIT' | translate}}</span></button>
                                     <div class="btn-group btn-group-sm" uib-dropdown>
-                                        <button type="button" class="btn btn-link btn-sm" uib-dropdown-toggle>
+                                        <button type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle>
                                             <i class="fa fa-cog"></i> <span class="hidden-xs hidden-sm">{{'BTN_MANAGE' | translate}}</span> <span class="caret"></span>
                                         </button>
                                         <ul uib-dropdown-menu role="menu">
@@ -50,16 +52,14 @@
                                             <li role="menuitem"><a href="" data-ng-click="goResult(s)"><i class="fa fa-newspaper-o"></i> {{'TEXT_RESULTS' | translate}}</a></li>
                                             <li class="divider"></li>
                                             <li role="menuitem"><a href="" data-ng-click="report(s)"><i class="fa fa-bar-chart"></i> {{'TEXT_REPORT' | translate}}</a></li>
-                                            <li role="menuitem"><a href="" data-ng-click="previewSurvey(s)"><i class="fa fa-share"></i> {{'TEXT_SHARE' | translate}}</a></li>
+                                            <!--<li role="menuitem"><a href="" data-ng-click="previewSurvey(s)"><i class="fa fa-share"></i> {{'TEXT_SHARE' | translate}}</a></li>-->
                                         </ul>
                                     </div>
-
-                                    <button type="button" class="btn btn-link btn-sm" data-ng-click="addEditSurvey(s)"><i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm">{{'TEXT_EDIT' | translate}}</span></button>
                                     <!--<button type="button" class="btn btn-link btn-sm" data-ng-click="goQuestion(s)"><i class="fa fa-list-ol"></i> <span class="hidden-xs hidden-sm">Question</span></button>
                                     <button type="button" class="btn btn-link btn-sm" data-ng-click="report(s)"><i class="fa fa-bar-chart"></i> <span class="hidden-xs hidden-sm">Report</span></button>
-                                    <button type="button" class="btn btn-link btn-sm" data-ng-click="goResult(s)"><i class="fa fa-lightbulb-o"></i> <span class="hidden-xs hidden-sm">Result</span></button>
-                                    <button type="button" class="btn btn-link btn-sm"><i class="fa fa-share"></i> <span class="hidden-xs hidden-sm">Share</span></button>-->
-                                    <button type="button" class="btn btn-danger btn-sm" data-ng-click="deleteSurvey(s)"><i class="fa fa-remove"></i> <span class="hidden-xs hidden-sm">{{'TEXT_DELETE' | translate}}</span></button> 
+                                    <button type="button" class="btn btn-link btn-sm" data-ng-click="goResult(s)"><i class="fa fa-lightbulb-o"></i> <span class="hidden-xs hidden-sm">Result</span></button>-->
+                                    <button type="button" class="btn btn-success btn-sm" data-ng-click="previewSurvey(s)"><i class="fa fa-share-alt"></i> <span class="hidden-xs hidden-sm">{{'TEXT_SHARE' | translate}}</span></button>
+                                    <button type="button" class="btn btn-danger btn-sm" data-ng-click="deleteSurvey(s)"><i class="fa fa-remove"></i> <span class="hidden-xs hidden-sm hidden-md">{{'TEXT_DELETE' | translate}}</span></button> 
                                 </td>
                             </tr>
                         </tbody>

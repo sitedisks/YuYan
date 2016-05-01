@@ -5,6 +5,7 @@ angular.module('yuyanApp', [
     'angular-loading-bar',
     'uiGmapgoogle-maps',
     'pascalprecht.translate',
+    'socialLinks',
     'ngResource',
     'ngMessages',
     'rzModule'

@@ -8,8 +8,10 @@
 			    $scope.survey = survey;
 			    $scope.openLink = openLink;
 
-			    $scope.shareLink = location.host + '/client/#/' + survey.URLToken;
-			    $scope.sharePageLink = location.host + '/client/#/page/' + survey.URLToken;
+			    $scope.shareLink = 'http://' + location.host + '/client/#/' + survey.URLToken;
+			    $scope.sharePageLink = 'http://' + location.host + '/client/#/page/' + survey.URLToken;
+			    $scope.shareLiveLink = 'http://www.chorice.net/client/#/' + survey.URLToken;
+			    $scope.shareLivePageLink = 'http://www.chorice.net/client/#/page/' + survey.URLToken;
 
 			    function openLink(url) {
 			        window.open('http://' + url, '_blank');
