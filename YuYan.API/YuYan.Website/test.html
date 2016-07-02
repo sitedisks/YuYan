@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>这是我们测试用的页面，那些题目可以分享？</title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="这是我们测试用的页面keywords，那些题目可以分享？" />
+    <meta name="description" content="这是我们测试用的页面description，那些题目可以分享？" />
+</head>
+<body>
+    <h1>这是内部的H1题目</h1>
+    <h2>这是内部的H2题目</h2>
+    <img src="img/pic_angular.jpg" />
+    <h3>这是内部的H3题目</h3>
+    <h4>这是内部的H4题目</h4>
+    <script src="bower_components/jquery.min.js"></script>
+    <script>
+        jQuery(function () {
+            //分享链接的缩略图
+            var mobileImgUrl = '';
+            //分享链接的链接地址
+            var mobileLineLink = 'http://m.expreview.com/44851.html';
+            //分享链接的描述信息
+            var mobileDescContent = "";
+            //分享链接的标题
+            var mobileShareTitle = "自称改变世界的三卡三待，Bluboo Xfire 2手机曝光";
+            //留空就好
+            var mobileAppid = '';
+            // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+            document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+                // 发送给好友
+                WeixinJSBridge.on('menu:share:appmessage', function (argv) { shareMobileFriend(); });
+                // 分享到朋友圈
+                WeixinJSBridge.on('menu:share:timeline', function (argv) { shareMobileTimeline(); });
+                // 分享到微博
+                WeixinJSBridge.on('menu:share:weibo', function (argv) { shareMobileWeibo(); });
+            }, false);
+        });
+
+        function shareMobileFriend() {
+            WeixinJSBridge.invoke('sendAppMessage', {
+                "appid": mobileAppid,
+                "img_url": mobileImgUrl,
+                "img_width": "640",
+                "img_height": "640",
+                "link": mobileLineLink,
+                "desc": mobileDescContent,
+                "title": mobileShareTitle
+            }, function (res) {
+                _report('send_msg', res.err_msg);
+            })
+        }
+        //分享到朋友圈
+        function shareMobileTimeline() {
+            WeixinJSBridge.invoke('shareTimeline', {
+                "img_url": mobileImgUrl,
+                "img_width": "640",
+                "img_height": "640",
+                "link": mobileLineLink,
+                "desc": mobileDescContent,
+                "title": mobileShareTitle
+            }, function (res) {
+                _report('timeline', res.err_msg);
+            });
+        }
+        //分享到腾讯微博
+        function shareMobileWeibo() {
+            WeixinJSBridge.invoke('shareWeibo', {
+                "content": mobileDescContent,
+                "url": mobileLineLink,
+            }, function (res) {
+                _report('weibo', res.err_msg);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -2,10 +2,11 @@
     'use strict';
     angular.module('choriceApp').service('choriceAPISvc', ['$resource', 'endpoint',
         function ($resource, endpoint) {
-            var clientAPI = endpoint.LiveAPI + 'client';
+            var clientAPI = endpoint.localAPI + 'client';
 
             var service = {
                 surveyRetreiveSvc: surveyRetreiveSvc,
+                surveyTitleSvc: surveyTitleSvc, 
                 surveySaveSvc: surveySaveSvc,
                 surveyResultSvc: surveyResultSvc
             };
@@ -14,6 +15,20 @@
 
             function surveyRetreiveSvc() {
                 return $resource(clientAPI + '/:urltoken', { urltoken: '@url' });
+            }
+
+            function surveyTitleSvc() {
+                return $resource(clientAPI + '/:urltoken/title', { urltoken: '@url' }, {
+                    get: {
+                        method: 'GET',
+                        isArray: false,
+                        transformResponse: function (data, headers) {
+                            if (data == '') 
+                                return;
+                            return { title: angular.fromJson(data) };
+                        }
+                    }
+                });
             }
 
             function surveySaveSvc() {

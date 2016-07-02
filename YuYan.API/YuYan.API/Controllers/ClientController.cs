@@ -53,6 +53,25 @@ namespace YuYan.API.Controllers
             return Ok(dtoSurvey);
         }
 
+        [Route("{urltoken}/title"), HttpGet]
+        public async Task<IHttpActionResult> GetSurveyTitleByURLToken(string urltoken) {
+            string title = "";
+
+            try {
+                title = await _yuyanSvc.GetSurveyTitleByURLToken(urltoken);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(title);
+        }
+
         [Route(""), HttpPost]
         public async Task<IHttpActionResult> SubmitSurvey(dtoSurveyClient surveyClient)
         {

@@ -45,6 +45,8 @@ namespace YuYan.Interface.Service
 
         Task<dtoSurvey> GetSurveyByURLToken(string url);
 
+        Task<string> GetSurveyTitleByURLToken(string url);
+
         Task<dtoSurvey> CreateSurvey(dtoSurvey survey);
 
         Task<dtoSurvey> UpdateSurvey(dtoSurvey survey);

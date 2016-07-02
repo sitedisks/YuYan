@@ -389,6 +389,28 @@ namespace YuYan.Service
             return survey;
         }
 
+        public async Task<string> GetSurveyTitleByURLToken(string url)
+        {
+            string surveyTitle = "Chorice - Easy Survey";
+
+            try
+            {
+                tbSurvey tbSurvey = await _yuyanRepos.GetSurveyByUrlToken(url);
+                surveyTitle = tbSurvey.Title;
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error retriving Survey Title", ex);
+            }
+
+            return surveyTitle;
+
+        }
+
         public async Task<dtoSurvey> CreateSurvey(dtoSurvey survey)
         {
             dtoSurvey s = null;

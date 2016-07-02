@@ -14,14 +14,6 @@
             <h5>{{survey.LongDesc}}</h5>
 
             <div data-ng-if="survey.URLToken && survey.dtoQuestions.length>0">
-                <!--<div>
-                    <code>One Page:</code>
-                    <button type="button" data-ng-click="openLink(shareLink)" class="btn btn-primary btn-xs">{{survey.URLToken}}</button>
-                </div>
-                <div>
-                    <code>Step:</code>
-                    <button type="button" data-ng-click="openLink(sharePageLink)" class="btn btn-primary btn-xs">page/{{survey.URLToken}}</button>
-                </div>-->
                 <div class="row">
                     <div class="col-md-6"><a social-facebook custom-url="{{shareLivePageLink}}"><i class="fa fa-facebook-square" aria-hidden="true"></i> share on facebook</a></div>
                     <div class="col-md-6"><a social-twitter custom-url="{{shareLivePageLink}}"><i class="fa fa-twitter" aria-hidden="true"></i> share on twitter</a></div>
@@ -32,7 +24,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6"><a social-stumbleupon custom-url="{{shareLivePageLink}}"><i class="fa fa-stumbleupon" aria-hidden="true"></i> share on stumbleupon</a></div>
-                    <div class="col-md-6"><a ng-href="{{shareLivePageLink}}" target="_blank"><i class="fa fa-weixin" aria-hidden="true"></i> share on moment</a></div>
+                    <!--<div class="col-md-6"><a ng-href="{{shareLivePageLink}}" target="_blank"><i class="fa fa-weixin" aria-hidden="true"></i> share on moment</a></div>-->
+                    <div class="col-md-6"><a ng-href="{{sharePageLink}}" target="_blank"><i class="fa fa-weixin" aria-hidden="true"></i> share on moment</a></div>
                 </div>
             </div>
 

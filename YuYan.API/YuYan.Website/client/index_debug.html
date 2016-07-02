@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
+<html data-ng-app="choriceApp" data-ng-cloak>
+<head data-ng-controller="headCtrl">
+    <title>{{title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
@@ -9,7 +9,7 @@
     <link href="css/build.css" rel="stylesheet" />
     <link href="css/gapcss.css" rel="stylesheet" />
 </head>
-<body data-ng-app="choriceApp" data-ng-cloak>
+<body>
     <div class="container">
         <div ui-view></div>
     </div>
@@ -40,5 +40,6 @@
     <script src="js/service.chorice.js"></script>
     <script src="js/controller.chorice.js"></script>
     <script src="js/controller.page.chorice.js"></script>
+    <script src="js/controller.head.js"></script>
 </body>
 </html>
