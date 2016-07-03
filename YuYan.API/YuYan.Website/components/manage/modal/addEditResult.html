@@ -13,13 +13,14 @@
                 <label class="control-label" for="resultDesc">{{'TEXT_RESULT' | translate}} {{'TEXT_DESC' | translate}}</label>
                 <textarea class="form-control" id="resultDesc" data-ng-model="result.Description" placeholder="Description" rows="4"></textarea>
             </div>
-            <div class="form-group">
+            <!-- temp suspend for image upload -->
+            <!--<div class="form-group">
                 <div ngf-drop="upload($file)" ngf-select="upload($file)" class="drop-box"
                      ngf-drag-over-class="'dragover'"
                      ngf-pattern="'image/*'" style="height:100px; border:dashed; border-color:red">Drop Images file here</div>
 
                 <progressbar class="progress-striped m-b-10" value="progressPercentage" type="success"></progressbar>
-            </div>
+            </div>-->
             <div class="form-group has-success">
                 <label class="control-label">{{'TEXT_SCORE' | translate}} {{'TEXT_RANGE' | translate}}</label>
                 <rzslider rz-slider-model="result.MinScore"
