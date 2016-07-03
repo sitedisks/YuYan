@@ -344,6 +344,16 @@
     <Content Include="bower_components\lodash\vendor\backbone\LICENSE" />
     <Content Include="bower_components\lodash\vendor\benchmark.js\LICENSE" />
     <Content Include="bower_components\lodash\vendor\underscore\LICENSE" />
+    <Content Include="bower_components\ng-file-upload\FileAPI.flash.swf" />
+    <Content Include="bower_components\ng-file-upload\FileAPI.js" />
+    <Content Include="bower_components\ng-file-upload\FileAPI.min.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload-all.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload-all.min.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload-shim.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload-shim.min.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload.js" />
+    <Content Include="bower_components\ng-file-upload\ng-file-upload.min.js" />
+    <Content Include="bower_components\ng-file-upload\package.js" />
     <Content Include="bower_components\toastr\.bower.json" />
     <Content Include="bower_components\toastr\bower.json" />
     <Content Include="bower_components\toastr\README.md" />
@@ -365,6 +375,11 @@
     <Content Include="bower_components\angular-social-links\Gruntfile.coffee" />
     <Content Include="bower_components\angular-social-links\package.json" />
     <Content Include="bower_components\angular-social-links\README.md" />
+    <Content Include="bower_components\ng-file-upload\.bower.json" />
+    <Content Include="bower_components\ng-file-upload\.versions" />
+    <Content Include="bower_components\ng-file-upload\bower.json" />
+    <Content Include="bower_components\ng-file-upload\LICENSE" />
+    <Content Include="bower_components\ng-file-upload\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -8,7 +8,8 @@ angular.module('yuyanApp', [
     'socialLinks',
     'ngResource',
     'ngMessages',
-    'rzModule'
+    'rzModule',
+    'ngFileUpload'
 ]);
 
 angular.module('yuyanApp').run(['$rootScope', 'localStorageService', 'yuyanAPISvc', 'yuyanAuthSvc',

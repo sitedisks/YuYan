@@ -2,12 +2,13 @@
     'use strict';
 
     angular.module('yuyanApp')
-        .controller('addEditResultCtrl', ['$scope', '$uibModalInstance', '$timeout', 'result', 'localStorageService', 'yuyanAPISvc',
-            function ($scope, $uibModalInstance, $timeout, result, localStorageService, yuyanAPISvc) {
+        .controller('addEditResultCtrl', ['$scope', '$uibModalInstance', '$timeout', 'Upload', 'result', 'localStorageService', 'yuyanAPISvc',
+            function ($scope, $uibModalInstance, $timeout, Upload, result, localStorageService, yuyanAPISvc) {
 
                 $scope.saving = false;
 
                 $scope.result = result;
+                $scope.progressPercentage = 0;
 
                 $timeout(function () {
                     $scope.slider = {
@@ -20,6 +21,21 @@
                     };
                 }, 100);
         
+                $scope.upload = function (file) {
+                    Upload.upload({
+                        url: WEBAPI_ENDPOINT.Live + 'image/upload',
+                        method: 'POST',
+                        data: { file: file }
+                    }).then(function (resp) {
+                        console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.Id);
+                    }, function (resp) {
+                        console.log('Error status: ' + resp.status);
+                    }, function (evt) {
+                        $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                        console.log('progress: ' + $scope.progressPercentage + '% ' + evt.config.data.file.name);
+                    });
+                };
+
                 $scope.ok = function () {
                     $scope.saving = true;
 
