@@ -4,8 +4,8 @@
     angular.module('yuyanApp').service('yuyanAPISvc', ['$resource', 'endpoint',
         function ($resource, endpoint) {
 
-            var useEndpoint = endpoint.LiveAPI;
-            //var useEndpoint = endpoint.LocalAPI;
+            //var useEndpoint = endpoint.LiveAPI;
+            var useEndpoint = endpoint.LocalAPI;
 
             var userAPI = useEndpoint + 'users';
             var surveyAPI = useEndpoint + 'surveys';

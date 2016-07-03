@@ -12,6 +12,7 @@ namespace YuYan.Domain.DTO
         public string ShortDesc { get; set; }
         public string LongDesc { get; set; } 
         public Nullable<Guid> UserId { get; set; }
+        public bool? ShowReport { get; set; }
         public int VisitCount { get; set; }
         public int CompleteCount { get; set; }
 

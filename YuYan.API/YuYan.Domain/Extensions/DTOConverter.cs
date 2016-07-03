@@ -21,6 +21,7 @@ namespace YuYan.Domain.Extensions
             data.URLToken = source.URLToken;
             data.ShortDescription = source.ShortDesc;
             data.LongDescription = source.LongDesc;
+            data.ShowReport = source.ShowReport;
             data.UserId = source.UserId;
             data.IsActive = source.IsActive;
             data.IsDeleted = source.IsDeleted;
@@ -137,6 +138,7 @@ namespace YuYan.Domain.Extensions
             data.ShortDesc = source.ShortDescription;
             data.LongDesc = source.LongDescription;
             data.UserId = source.UserId;
+            data.ShowReport = source.ShowReport;
             data.IsActive = source.IsActive;
             data.IsDeleted = source.IsDeleted;
 

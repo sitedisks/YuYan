@@ -24,7 +24,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyId}"),HttpGet]
-        [AuthenticationFilter(AllowAnonymous = false)]
+        [AuthenticationFilter(AllowAnonymous = true)]
         public async Task<IHttpActionResult> GetClientDetailsBySurveyId(int surveyId)
         {
 
@@ -47,7 +47,7 @@ namespace YuYan.API.Controllers
         }
 
         [Route("{surveyId}/answerdic"), HttpGet]
-        [AuthenticationFilter(AllowAnonymous = false)]
+        [AuthenticationFilter(AllowAnonymous = true)]
         public async Task<IHttpActionResult> GetAnswerStatusBySurveyId(int surveyId) {
             IDictionary<int, int> clientAnswerDictionary = new Dictionary<int, int>();
 
