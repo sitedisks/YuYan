@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\ip2location_db3.cs" />
+    <Compile Include="Database\tbImage.cs" />
     <Compile Include="Database\tbSession.cs" />
     <Compile Include="Database\tbSurvey.cs" />
     <Compile Include="Database\tbSurveyClient.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Database\tbSurveyShare.cs" />
     <Compile Include="Database\tbTbase.cs" />
     <Compile Include="Database\tbUser.cs" />
+    <Compile Include="DTO\dtoImage.cs" />
     <Compile Include="DTO\dtoLocationGeo.cs" />
     <Compile Include="DTO\dtoSession.cs" />
     <Compile Include="DTO\dtoSurvey.cs" />
