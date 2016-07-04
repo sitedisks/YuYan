@@ -45,9 +45,10 @@
                 </div>
                 <div class="text-success" style="margin-top: 30px;" data-ng-show="submitSuccess">
                     <h1 ng-non-bindable><strong>{{chorice}}</strong></h1>
-                    <br class="xs-20 hidden-xs" />
-                    <div class="alert alert-success" role="alert">
-                        <div data-ng-show="!result.SurveyResultId"><h3>Thanks for your participation.<!--<code><i class="fa fa-heart"></i></code>--></h3></div>
+                    <h4>Quick &amp; Easy Survey</h4>
+                
+                    <div class="">
+                        <div data-ng-show="!result.SurveyResultId"><h3>Thanks for your participation.</h3></div>
                         <div data-ng-show="result.SurveyResultId">
                             <h3>{{result.Title}}</h3>
                             <h4>{{result.Description}}</h4>
@@ -81,13 +82,13 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div class="text-center">
                         <!-- replace to client log or OR code late -->
                         <img class="img-responsive" style="margin: 0px auto;" src="/img/QRcode.png" />
+
+                        <button type="button" class="btn btn-link" data-ng-click="backHome()">Back</button>
                     </div>
-                   
-                    <button type="button" class="btn btn-success" data-ng-click="backHome()">Home</button>
-                    
+
                     <br class="xs-10" />
                 </div>
 
