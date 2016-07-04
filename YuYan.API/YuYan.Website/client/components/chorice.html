@@ -1,6 +1,6 @@
 ﻿<div class="text-center text-primary" style="margin-top: 30px;" data-ng-show="APIMini > APIResolved">
     <h1 ng-non-bindable><strong>{{chorice}}</strong></h1>
-    <h3>You have a <code>Choice</code>! Please Wait...</h3>
+    <h3>You have a <code>Choice</code>! Loading...</h3>
     <br class="xs-10" />
     <!--<i class="fa fa-refresh fa-spin" style="font-size:48px"></i>-->
     <uib-progressbar class="progress-striped active" max="100" value="100" type="success"><i>progressing...</i></uib-progressbar>
@@ -12,10 +12,9 @@
                 <div data-ng-show="!submitSuccess">
                     <br class="xs-30" />
                     <div class="well">
-                        <blockquote>
-                            <h2>{{survey.Title}}</h2>
 
-                        </blockquote>
+                        <h2>{{survey.Title}}</h2>
+
                         <h4>{{survey.ShortDesc}}</h4>
                         <h5>{{survey.LongDesc}}</h5>
                         <div class="form-group" data-ng-repeat="q in survey.dtoQuestions">
@@ -34,14 +33,14 @@
                         <button type="button" class="btn btn-success pull-right" data-ng-disabled="surveyForm.$invalid" data-ng-click="submitSurvey()">Submit</button>
                         <div class="clearfix"></div>
                     </div>
-                    
+
                     <br class="xs-10" />
                     <uib-alert type="info" close="bCloseAlert=1" ng-hide="bCloseAlert">Radio button requires at least one selection.</uib-alert>
                 </div>
                 <div class="text-success" style="margin-top: 30px;" data-ng-show="submitSuccess">
                     <h1 ng-non-bindable><strong>{{chorice}}</strong></h1>
                     <h4>Quick &amp; Easy Survey</h4>
-       
+
                     <div class="">
                         <div data-ng-show="!result.SurveyResultId"><h3>Thanks for your participation.</h3></div>
                         <div data-ng-show="result.SurveyResultId">
@@ -51,9 +50,9 @@
                         <br class="xs-10" />
                     </div>
                     <div class="well" data-ng-show="survey.ShowReport">
-                        <blockquote>
-                            <h2>{{survey.Title}}</h2>
-                        </blockquote>
+
+                        <h2>{{survey.Title}}</h2>
+
                         <h4>{{survey.ShortDesc}}</h4>
                         <h5>{{survey.LongDesc}}</h5>
                         <div class="form-group" data-ng-repeat="q in survey.dtoQuestions">
@@ -81,7 +80,7 @@
 
                         <button type="button" class="btn btn-link" data-ng-click="backHome()">Home</button>
                     </div>
-                   
+
                     <br class="xs-10" />
                 </div>
 

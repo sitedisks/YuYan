@@ -360,6 +360,7 @@
     <Content Include="bower_components\toastr\toastr.js.map" />
     <Content Include="bower_components\toastr\toastr.less" />
     <Content Include="bower_components\toastr\toastr.scss" />
+    <Content Include="chat.html" />
     <Content Include="client\js\controller.chorice.back" />
     <Content Include="client\js\controller.head.js" />
     <Content Include="data\locale-cn.json" />
