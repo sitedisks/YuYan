@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('yuyanApp')
-        .controller('addEditResultCtrl', ['$scope', '$uibModalInstance', '$timeout', 'Upload', 'result', 'localStorageService', 'yuyanAPISvc',
-            function ($scope, $uibModalInstance, $timeout, Upload, result, localStorageService, yuyanAPISvc) {
+        .controller('addEditResultCtrl', ['$scope', '$uibModalInstance', '$timeout', 'Upload', 'result', 'localStorageService', 'yuyanAPISvc', 'endpoint',
+            function ($scope, $uibModalInstance, $timeout, Upload, result, localStorageService, yuyanAPISvc, endpoint) {
 
                 $scope.saving = false;
 
@@ -23,7 +23,7 @@
         
                 $scope.upload = function (file) {
                     Upload.upload({
-                        url: WEBAPI_ENDPOINT.Live + 'image/upload',
+                        url: endpoint.LocalAPI + 'images/upload',
                         method: 'POST',
                         data: { file: file }
                     }).then(function (resp) {
