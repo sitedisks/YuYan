@@ -70,6 +70,10 @@ namespace YuYan.Interface.Repository
         Task DeactiveSurveyResult(int resultId);
         #endregion
 
+        #region image
+        Task<tbImage> InsertNewImage(dtoImage image);
+        #endregion
+
         #region geo2ip
         Task<ip2location_db3> GetGeoLocationByIpAddress(string ipaddress);
         #endregion

@@ -20,6 +20,7 @@
                      ngf-pattern="'image/*'" style="height:100px; border:dashed; border-color:red">Drop Images file here</div>
 
                 <progressbar class="progress-striped m-b-10" value="progressPercentage" type="success"></progressbar>
+                <div data-ng-show="imageId">{{imageId}}</div>
             </div>
             <div class="form-group has-success">
                 <label class="control-label">{{'TEXT_SCORE' | translate}} {{'TEXT_RANGE' | translate}}</label>

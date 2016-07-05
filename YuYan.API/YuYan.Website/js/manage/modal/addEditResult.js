@@ -9,6 +9,7 @@
 
                 $scope.result = result;
                 $scope.progressPercentage = 0;
+                $scope.imageId = null;
 
                 $timeout(function () {
                     $scope.slider = {
@@ -23,11 +24,12 @@
         
                 $scope.upload = function (file) {
                     Upload.upload({
-                        url: endpoint.LocalAPI + 'images/upload',
+                        url: endpoint.LocalAPI + 'images/survey/upload',
                         method: 'POST',
-                        data: { file: file }
+                        data: { file: file, 'id': $scope.result.SurveyId }
                     }).then(function (resp) {
-                        console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.Id);
+                        $scope.imageId = resp.data.ImageId;
+                        console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
                     }, function (resp) {
                         console.log('Error status: ' + resp.status);
                     }, function (evt) {

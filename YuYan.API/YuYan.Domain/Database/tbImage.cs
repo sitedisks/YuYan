@@ -13,6 +13,7 @@ namespace YuYan.Domain.Database
         public int ImageType { get; set; }
         [Column("UploaderUserId")]
         public Guid UserId { get; set; }
+        public string FileName { get; set; }
         public int RefId { get; set; }
     }
 }

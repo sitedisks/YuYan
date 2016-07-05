@@ -39,6 +39,7 @@ namespace YuYan.Data.DbContext
         public DbSet<tbSurveyShare> tbSurveyShares { get; set; }
         public DbSet<tbSurveyResult> tbSurveyResults { get; set; }
         public DbSet<ip2location_db3> ip2locations { get; set; }
+        public DbSet<tbImage> tbImages { get; set; }
         #endregion
 
         public System.Data.Entity.Core.Objects.ObjectContext BaseContext

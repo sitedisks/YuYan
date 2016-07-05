@@ -88,6 +88,10 @@ namespace YuYan.Interface.Service
         Task DeactiveSurveyResult(int resultId);
         #endregion
 
+        #region image
+        Task<dtoImage> InsertImage(dtoImage image);
+        #endregion
+
         #region geo2ip
         Task<dtoLocationGeo> GetGeoLocationByIpAddress(string ipaddress);
         #endregion

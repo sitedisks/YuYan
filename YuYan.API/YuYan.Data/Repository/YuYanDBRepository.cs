@@ -1085,6 +1085,37 @@ namespace YuYan.Data.Repository
         }
         #endregion
 
+        #region image
+        public async Task<tbImage> InsertNewImage(dtoImage image)
+        {
+            tbImage newImage = new tbImage();
+
+            try
+            {
+                newImage.ImageId = Guid.NewGuid();
+                newImage.ImageType = (int)image.ImageType;
+                newImage.UserId = image.UserId;
+                newImage.FileName = image.FileName;
+                newImage.RefId = image.RefId;
+                newImage.CreatedDate = DateTime.UtcNow;
+                newImage.UpdatedDate = DateTime.UtcNow;
+                newImage.IsActive = true;
+                newImage.IsDeleted = false;
+
+                _db.tbImages.Add(newImage);
+                await _db.SaveChangesAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return newImage;
+
+        }
+
+        #endregion
+
         #region geo2ip
         public async Task<ip2location_db3> GetGeoLocationByIpAddress(string ipaddress)
         {

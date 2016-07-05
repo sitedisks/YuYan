@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using YuYan.Domain.Database;
 using YuYan.Domain.DTO;
+using YuYan.Domain.Enum;
 
 namespace YuYan.Domain.Extensions
 {
@@ -197,7 +198,7 @@ namespace YuYan.Domain.Extensions
             {
                 foreach (tbSurveyClientAnswer answer in source.tbClientAnswers)
                 {
-                    if(answer.IsChecked)
+                    if (answer.IsChecked)
                         answerList.Add(answer.ConvertToDtoAnswwer());
                 }
             }
@@ -240,7 +241,8 @@ namespace YuYan.Domain.Extensions
             return data;
         }
 
-        public static dtoSurveyResult ConvertToDtoSurveyResult(this tbSurveyResult source, dtoSurveyResult data = null) {
+        public static dtoSurveyResult ConvertToDtoSurveyResult(this tbSurveyResult source, dtoSurveyResult data = null)
+        {
             if (data == null)
                 data = new dtoSurveyResult();
 
@@ -257,7 +259,8 @@ namespace YuYan.Domain.Extensions
             return data;
         }
 
-        public static dtoLocationGeo ConvertToLocationGeo(this ip2location_db3 source, dtoLocationGeo data = null) {
+        public static dtoLocationGeo ConvertToLocationGeo(this ip2location_db3 source, dtoLocationGeo data = null)
+        {
             if (data == null)
                 data = new dtoLocationGeo();
             if (source == null)
@@ -267,6 +270,22 @@ namespace YuYan.Domain.Extensions
             data.City = source.city_name;
             data.CountryCode = source.country_code;
             data.Country = source.country_name;
+
+            return data;
+        }
+
+        public static dtoImage ConvertToDtoImage(this tbImage source, dtoImage data = null)
+        {
+            if (data == null)
+                data = new dtoImage();
+            if (source == null)
+                return null;
+
+            data.ImageId = source.ImageId;
+            data.ImageType = (ImageType)source.ImageType;
+            data.UserId = source.UserId;
+            data.FileName = source.FileName;
+            data.RefId = source.RefId;
 
             return data;
         }

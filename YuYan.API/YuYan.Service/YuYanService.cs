@@ -845,6 +845,29 @@ namespace YuYan.Service
         }
         #endregion
 
+        #region image
+        public async Task<dtoImage> InsertImage(dtoImage image)
+        {
+            dtoImage imageObj = null;
+
+            try
+            {
+                var img = await _yuyanRepos.InsertNewImage(image);
+                imageObj = img.ConvertToDtoImage();
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error insert new image", ex);
+            }
+
+            return imageObj;
+        }
+        #endregion
+
         #region geo2ip
         public async Task<dtoLocationGeo> GetGeoLocationByIpAddress(string ipaddress)
         {
