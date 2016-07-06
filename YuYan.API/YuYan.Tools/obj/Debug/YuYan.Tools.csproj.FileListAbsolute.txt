@@ -1,0 +1,11 @@
+D:\Git\YuYan\YuYan.API\YuYan.Tools\bin\Debug\YuYan.Tools.dll
+D:\Git\YuYan\YuYan.API\YuYan.Tools\bin\Debug\YuYan.Tools.pdb
+D:\Git\YuYan\YuYan.API\YuYan.Tools\bin\Debug\ImageResizer.dll
+D:\Git\YuYan\YuYan.API\YuYan.Tools\bin\Debug\ImageResizer.Plugins.SqlReader.dll
+D:\Git\YuYan\YuYan.API\YuYan.Tools\bin\Debug\ImageResizer.Storage.dll
+D:\Git\YuYan\YuYan.API\YuYan.Tools\bin\Debug\ImageResizer.xml
+D:\Git\YuYan\YuYan.API\YuYan.Tools\bin\Debug\ImageResizer.Plugins.SqlReader.xml
+D:\Git\YuYan\YuYan.API\YuYan.Tools\bin\Debug\ImageResizer.Storage.pdb
+D:\Git\YuYan\YuYan.API\YuYan.Tools\bin\Debug\ImageResizer.Storage.xml
+D:\Git\YuYan\YuYan.API\YuYan.Tools\obj\Debug\YuYan.Tools.dll
+D:\Git\YuYan\YuYan.API\YuYan.Tools\obj\Debug\YuYan.Tools.pdb

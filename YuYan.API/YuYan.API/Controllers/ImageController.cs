@@ -46,7 +46,8 @@ namespace YuYan.API.Controllers
 
                 int id = int.Parse(result.FormData["id"]);
 
-                dtoImage image = new dtoImage { 
+                dtoImage image = new dtoImage
+                {
                     ImageType = Domain.Enum.ImageType.SurveyRef,
                     UserId = user.UserId,
                     FileName = originalFileName,
@@ -67,6 +68,24 @@ namespace YuYan.API.Controllers
             return Ok(theImage);
         }
 
+        [HttpGet]
+        [Route("{imageId:guid}")]
+        [AuthenticationFilter(AllowAnonymous = true)]
+        public async Task<IHttpActionResult> ImageRetrieve() {
+
+            try { }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+            return Ok();
+        }
+
+        #region private
         private MultipartFormDataStreamProvider GetMultipartProvider(string imageGroup)
         {
             var uploadFolder = "~/FileUploads/" + imageGroup;
@@ -80,7 +99,7 @@ namespace YuYan.API.Controllers
             var fileName = fileData.Headers.ContentDisposition.FileName;
             return JsonConvert.DeserializeObject(fileName).ToString();
         }
-
+        #endregion
     }
 
 
