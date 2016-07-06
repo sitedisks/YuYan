@@ -1,11 +1,7 @@
 ﻿using ImageResizer;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace YuYan.Tools
@@ -55,6 +51,8 @@ namespace YuYan.Tools
 
 
                 //ImageBuilder.Current.Build(source.Clone(), output, settings);
+                // http://imageresizing.net/docs/v4/managed
+                //Image b = ImageBuilder.Current.Build(source.Clone(), settings);
 
                 ImageBuilder.Current.Build(new ImageJob(source.Clone(), output, settings));
                 

@@ -90,6 +90,8 @@ namespace YuYan.Interface.Service
 
         #region image
         Task<dtoImage> InsertImage(dtoImage image);
+        Task<dtoImage> GetImage(Guid imgId);
+
         #endregion
 
         #region geo2ip

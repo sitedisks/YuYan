@@ -14,6 +14,7 @@ namespace YuYan.Domain.Database
         [Column("UploaderUserId")]
         public Guid UserId { get; set; }
         public string FileName { get; set; }
+        public string Uri { get; set; }
         public int RefId { get; set; }
     }
 }

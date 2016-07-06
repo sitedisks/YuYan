@@ -11,6 +11,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Net;
 using System.Linq;
+using YuYan.Tools;
 
 namespace YuYan.API.Controllers
 {
@@ -51,6 +52,7 @@ namespace YuYan.API.Controllers
                     ImageType = Domain.Enum.ImageType.SurveyRef,
                     UserId = user.UserId,
                     FileName = originalFileName,
+                    Uri = uploadedFileInfo.Name,
                     RefId = id
                 };
 
@@ -71,9 +73,30 @@ namespace YuYan.API.Controllers
         [HttpGet]
         [Route("{imageId:guid}")]
         [AuthenticationFilter(AllowAnonymous = true)]
-        public async Task<IHttpActionResult> ImageRetrieve() {
+        public async Task<IHttpActionResult> ImageRetrieve([FromUri] Guid imageId, int width = 0)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            ImageManager im = new ImageManager();
+            System.Drawing.Image image = null;
 
-            try { }
+            try
+            {
+                var img = await _yuyanSvc.GetImage(imageId);
+
+                if (img == null)
+                    image = im.NotFoundImage();
+                else
+                    image = im.RetrieveImage(img.Uri);
+
+                response.StatusCode = HttpStatusCode.OK;
+
+                if (width != 0)
+                    response.Content = new StreamContent(image.Resize(null, width, null).ToStream());
+                else
+                    response.Content = new StreamContent(image.ToStream());
+
+                response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpg");
+            }
             catch (ApplicationException aex)
             {
                 return BadRequest(aex.Message);
@@ -82,7 +105,8 @@ namespace YuYan.API.Controllers
             {
                 return InternalServerError(ex);
             }
-            return Ok();
+
+            return ResponseMessage(response);
         }
 
         #region private

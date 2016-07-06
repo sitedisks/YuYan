@@ -72,6 +72,7 @@ namespace YuYan.Interface.Repository
 
         #region image
         Task<tbImage> InsertNewImage(dtoImage image);
+        Task<tbImage> GetImageByImageId(Guid imgId);
         #endregion
 
         #region geo2ip

@@ -866,6 +866,27 @@ namespace YuYan.Service
 
             return imageObj;
         }
+
+        public async Task<dtoImage> GetImage(Guid imgId)
+        {
+            dtoImage image = new dtoImage();
+
+            try
+            {
+                var imageObj = await _yuyanRepos.GetImageByImageId(imgId);
+                image = imageObj.ConvertToDtoImage();
+            }
+            catch (ApplicationException aex)
+            {
+                throw aex;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error get image", ex);
+            }
+
+            return image;
+        }
         #endregion
 
         #region geo2ip

@@ -285,6 +285,7 @@ namespace YuYan.Domain.Extensions
             data.ImageType = (ImageType)source.ImageType;
             data.UserId = source.UserId;
             data.FileName = source.FileName;
+            data.Uri = source.Uri;
             data.RefId = source.RefId;
 
             return data;

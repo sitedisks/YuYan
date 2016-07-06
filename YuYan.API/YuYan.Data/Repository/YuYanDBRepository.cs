@@ -1096,6 +1096,7 @@ namespace YuYan.Data.Repository
                 newImage.ImageType = (int)image.ImageType;
                 newImage.UserId = image.UserId;
                 newImage.FileName = image.FileName;
+                newImage.Uri = image.Uri;
                 newImage.RefId = image.RefId;
                 newImage.CreatedDate = DateTime.UtcNow;
                 newImage.UpdatedDate = DateTime.UtcNow;
@@ -1111,7 +1112,23 @@ namespace YuYan.Data.Repository
             }
 
             return newImage;
+        }
 
+        public async Task<tbImage> GetImageByImageId(Guid imgId)
+        {
+            tbImage image = null;
+
+            try
+            {
+                image = await _db.tbImages.FirstOrDefaultAsync(x => x.ImageId == imgId
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return image;
         }
 
         #endregion
