@@ -192,6 +192,10 @@
       <Project>{fcf3eb00-3943-457e-a613-96e2e391163e}</Project>
       <Name>YuYan.Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\YuYan.Tools\YuYan.Tools.csproj">
+      <Project>{7d52fe31-88a6-4840-a5d1-a19e40a912f7}</Project>
+      <Name>YuYan.Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
