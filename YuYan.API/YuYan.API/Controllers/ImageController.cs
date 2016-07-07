@@ -26,7 +26,7 @@ namespace YuYan.API.Controllers
         }
 
         [HttpPost]
-        [Route("survey/upload")]
+        [Route("upload/survey")]
         //[ResponseType(typeof(tohow.Models.Image))]
         [AuthenticationFilter(AllowAnonymous = false)]
         public async Task<IHttpActionResult> ImageUpload()
@@ -45,7 +45,7 @@ namespace YuYan.API.Controllers
                 var originalFileName = GetDeserializedFileName(result.FileData.First());
                 var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
 
-                int id = int.Parse(result.FormData["id"]);
+                int refId = int.Parse(result.FormData["refId"]);
 
                 dtoImage image = new dtoImage
                 {
@@ -53,7 +53,7 @@ namespace YuYan.API.Controllers
                     UserId = user.UserId,
                     FileName = originalFileName,
                     Uri = uploadedFileInfo.Name,
-                    RefId = id
+                    RefId = refId
                 };
 
                 theImage = await _yuyanSvc.InsertImage(image);

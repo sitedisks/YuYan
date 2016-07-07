@@ -23,11 +23,9 @@
                 }, 100);
         
                 $scope.upload = function (file) {
-                    Upload.upload({
-                        url: endpoint.LocalAPI + 'images/survey/upload',
-                        method: 'POST',
-                        data: { file: file, 'id': $scope.result.SurveyId }
-                    }).then(function (resp) {
+                    yuyanAPISvc
+                        .imageUploadSvc(file, 'survey', $scope.result.SurveyId)
+                    .then(function (resp) {
                         $scope.imageId = resp.data.ImageId;
                         console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
                     }, function (resp) {

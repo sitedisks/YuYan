@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    angular.module('yuyanApp').service('yuyanAPISvc', ['$resource', 'endpoint',
-        function ($resource, endpoint) {
+    angular.module('yuyanApp').service('yuyanAPISvc', ['$resource', 'Upload', 'endpoint',
+        function ($resource, Upload, endpoint) {
 
             //var useEndpoint = endpoint.LiveAPI;
             var useEndpoint = endpoint.LocalAPI;
@@ -10,6 +10,7 @@
             var userAPI = useEndpoint + 'users';
             var surveyAPI = useEndpoint + 'surveys';
             var reportAPI = useEndpoint + 'report';
+            var imageAPI = useEndpoint + 'images';
 
             var service = {
                 // user
@@ -28,7 +29,9 @@
                 surveyResultCrudSvc: surveyResultCrudSvc,
                 // report
                 surveyClientReportSvc: surveyClientReportSvc,
-                surveyClientAnswerDicSvc: surveyClientAnswerDicSvc
+                surveyClientAnswerDicSvc: surveyClientAnswerDicSvc,
+                // image
+                imageUploadSvc: imageUploadSvc
             };
 
             return service;
@@ -97,6 +100,15 @@
             function surveyClientAnswerDicSvc() {
                 return $resource(reportAPI + '/:surveyId/answerdic',
                      { surveyId: '@sid' });
+            }
+
+            // image
+            function imageUploadSvc(file, imageGroup, refId) {
+                return Upload.upload({
+                    url: imageAPI + '/upload/' + imageGroup,
+                    method: 'POST',
+                    data: { file: file, 'refId': refId }
+                });
             }
         }]);
 
