@@ -46,10 +46,11 @@ namespace YuYan.API.Controllers
                 var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
 
                 int refId = int.Parse(result.FormData["refId"]);
+                int typeId = int.Parse(result.FormData["typeId"]);
 
                 dtoImage image = new dtoImage
                 {
-                    ImageType = Domain.Enum.ImageType.SurveyRef,
+                    ImageType = (Domain.Enum.ImageType)typeId,
                     UserId = user.UserId,
                     FileName = originalFileName,
                     Uri = uploadedFileInfo.Name,

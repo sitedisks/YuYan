@@ -103,11 +103,11 @@
             }
 
             // image
-            function imageUploadSvc(file, imageGroup, refId) {
+            function imageUploadSvc(file, type, refId) {
                 return Upload.upload({
-                    url: imageAPI + '/upload/' + imageGroup,
+                    url: imageAPI + '/upload/' + type.group,
                     method: 'POST',
-                    data: { file: file, 'refId': refId }
+                    data: { file: file, 'typeId': type.id, 'refId': refId }
                 });
             }
         }]);

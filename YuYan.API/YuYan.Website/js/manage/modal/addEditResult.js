@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('yuyanApp')
-        .controller('addEditResultCtrl', ['$scope', '$uibModalInstance', '$timeout', 'Upload', 'result', 'localStorageService', 'yuyanAPISvc', 'endpoint',
-            function ($scope, $uibModalInstance, $timeout, Upload, result, localStorageService, yuyanAPISvc, endpoint) {
+        .controller('addEditResultCtrl', ['$scope', '$uibModalInstance', '$timeout', 'Upload', 'result', 'localStorageService', 'yuyanAPISvc', 'endpoint', 'imageType',
+            function ($scope, $uibModalInstance, $timeout, Upload, result, localStorageService, yuyanAPISvc, endpoint, imageType) {
 
                 $scope.saving = false;
 
@@ -24,7 +24,7 @@
         
                 $scope.upload = function (file) {
                     yuyanAPISvc
-                        .imageUploadSvc(file, 'survey', $scope.result.SurveyId)
+                        .imageUploadSvc(file, imageType.SurveyLogo, $scope.result.SurveyId)
                     .then(function (resp) {
                         $scope.imageId = resp.data.ImageId;
                         console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
