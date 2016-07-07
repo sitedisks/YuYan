@@ -14,7 +14,6 @@ namespace YuYan.Tools
 
             try
             {
-                //ResizeSettings settings = new ResizeSettings();
                 Instructions settings = new Instructions();
 
                 settings.Scale = ScaleMode.Both;
@@ -49,13 +48,9 @@ namespace YuYan.Tools
                 if (quality.HasValue)
                     settings.JpegQuality = quality.Value;
 
-
-                //ImageBuilder.Current.Build(source.Clone(), output, settings);
-                // http://imageresizing.net/docs/v4/managed
-                //Image b = ImageBuilder.Current.Build(source.Clone(), settings);
-
-                ImageBuilder.Current.Build(new ImageJob(source.Clone(), output, settings));
-                
+                ImageJob j = new ImageJob(source.Clone(), typeof(Bitmap), settings);
+                ImageBuilder.Current.Build(j);
+                output = j.Result as Image;
             }
             catch (Exception ex)
             {
