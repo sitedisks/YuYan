@@ -2,12 +2,28 @@
     'use strick';
 
     angular.module('yuyanApp')
-        .controller('addEditSurveyCtrl', ['$scope', '$uibModalInstance', 'survey', 'localStorageService', 'yuyanAPISvc',
-            function ($scope, $uibModalInstance, survey, localStorageService, yuyanAPISvc) {
+        .controller('addEditSurveyCtrl', ['$scope', '$uibModalInstance', 'survey', 'yuyanAPISvc', 'imageType',
+            function ($scope, $uibModalInstance, survey, yuyanAPISvc, imageType) {
 
                 $scope.saving = false;
 
                 $scope.survey = survey;
+                $scope.progressPercentage = 0;
+
+                //banner
+                $scope.uploadBanner = function (file) {
+                    yuyanAPISvc
+                      .imageUploadSvc(file, imageType.SurveyBanner, $scope.survey.SurveyId)
+                    .then(function (resp) {
+                        $scope.imageId = resp.data.ImageId;
+                        console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
+                    }, function (resp) {
+                        console.log('Error status: ' + resp.status);
+                    }, function (evt) {
+                        $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                        console.log('progress: ' + $scope.progressPercentage + '% ' + evt.config.data.file.name);
+                    });
+                }
 
                 $scope.ok = function () {
                     $scope.saving = true;

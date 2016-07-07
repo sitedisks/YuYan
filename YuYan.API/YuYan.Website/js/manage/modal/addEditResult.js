@@ -2,14 +2,14 @@
     'use strict';
 
     angular.module('yuyanApp')
-        .controller('addEditResultCtrl', ['$scope', '$uibModalInstance', '$timeout', 'Upload', 'result', 'localStorageService', 'yuyanAPISvc', 'endpoint', 'imageType',
-            function ($scope, $uibModalInstance, $timeout, Upload, result, localStorageService, yuyanAPISvc, endpoint, imageType) {
+        .controller('addEditResultCtrl', ['$scope', '$uibModalInstance', '$timeout', 'result', 'yuyanAPISvc', 'imageType',
+            function ($scope, $uibModalInstance, $timeout, result, yuyanAPISvc, imageType) {
 
                 $scope.saving = false;
 
                 $scope.result = result;
-                $scope.progressPercentage = 0;
-                $scope.imageId = null;
+                //$scope.progressPercentage = 0;
+                //$scope.imageId = null;
 
                 $timeout(function () {
                     $scope.slider = {
@@ -21,7 +21,7 @@
                         }
                     };
                 }, 100);
-        
+
                 $scope.upload = function (file) {
                     yuyanAPISvc
                         .imageUploadSvc(file, imageType.SurveyLogo, $scope.result.SurveyId)
