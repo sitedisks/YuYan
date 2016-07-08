@@ -1,15 +1,16 @@
 (function () {
     'use strict';
 
-    angular.module('yuyanApp').service('yuyanAPISvc', ['$resource', 'endpoint',
-        function ($resource, endpoint) {
+    angular.module('yuyanApp').service('yuyanAPISvc', ['$resource', 'Upload', 'endpoint',
+        function ($resource, Upload, endpoint) {
 
-            var useEndpoint = endpoint.LiveAPI;
-            //var useEndpoint = endpoint.LocalAPI;
+            //var useEndpoint = endpoint.LiveAPI;
+            var useEndpoint = endpoint.LocalAPI;
 
             var userAPI = useEndpoint + 'users';
             var surveyAPI = useEndpoint + 'surveys';
             var reportAPI = useEndpoint + 'report';
+            var imageAPI = useEndpoint + 'images';
 
             var service = {
                 // user
@@ -28,7 +29,10 @@
                 surveyResultCrudSvc: surveyResultCrudSvc,
                 // report
                 surveyClientReportSvc: surveyClientReportSvc,
-                surveyClientAnswerDicSvc: surveyClientAnswerDicSvc
+                surveyClientAnswerDicSvc: surveyClientAnswerDicSvc,
+                // image
+                imageUploadSvc: imageUploadSvc,
+                imageGetUrl: imageGetUrl
             };
 
             return service;
@@ -98,6 +102,21 @@
                 return $resource(reportAPI + '/:surveyId/answerdic',
                      { surveyId: '@sid' });
             }
+
+            // image
+            function imageUploadSvc(file, type, refId) {
+                return Upload.upload({
+                    url: imageAPI + '/upload/' + type.group,
+                    method: 'POST',
+                    data: { file: file, 'typeId': type.id, 'refId': refId }
+                });
+            }
+
+            function imageGetUrl(imageId, width) {
+                //http://localhost:5613/images/0E71160C-28F3-49BD-ABB8-63594E615FB8?width=300
+                return imageAPI + '/' + imageId + '?width=' + width;
+            }
+
         }]);
 
 })();

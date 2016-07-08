@@ -1,4 +1,5 @@
-﻿toastr.options = {
+﻿//global setting
+toastr.options = {
     "progressBar": false,
     "positionClass": "toast-top-left",
     "showDuration": "300",
@@ -6,3 +7,7 @@
     "timeOut": "5000",
     "extendedTimeOut": "1000"
 };
+
+function isNullOrEmpty(s) {
+    return (s == null || s === "");
+}

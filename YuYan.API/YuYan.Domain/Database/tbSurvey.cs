@@ -20,6 +20,9 @@ namespace YuYan.Domain.Database
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
         public Nullable<Guid> UserId { get; set; }
+        public bool? ShowReport { get; set; }
+        public Guid? BannerId { get; set; }
+        public Guid? LogoId { get; set; }
 
         public virtual ICollection<tbSurveyQuestion> tbSurveyQuestions { get; set; }
         //public virtual ICollection<tbSurveyResult> tbSurveyResults { get; set; }

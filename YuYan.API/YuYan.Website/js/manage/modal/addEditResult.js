@@ -2,13 +2,14 @@
     'use strict';
 
     angular.module('yuyanApp')
-        .controller('addEditResultCtrl', ['$scope', '$uibModalInstance', '$timeout', 'Upload', 'result', 'localStorageService', 'yuyanAPISvc',
-            function ($scope, $uibModalInstance, $timeout, Upload, result, localStorageService, yuyanAPISvc) {
+        .controller('addEditResultCtrl', ['$scope', '$uibModalInstance', '$timeout', 'result', 'yuyanAPISvc', 'imageType',
+            function ($scope, $uibModalInstance, $timeout, result, yuyanAPISvc, imageType) {
 
                 $scope.saving = false;
 
                 $scope.result = result;
-                $scope.progressPercentage = 0;
+                //$scope.progressPercentage = 0;
+                //$scope.imageId = null;
 
                 $timeout(function () {
                     $scope.slider = {
@@ -20,21 +21,21 @@
                         }
                     };
                 }, 100);
-        
+
+                /*
                 $scope.upload = function (file) {
-                    Upload.upload({
-                        url: WEBAPI_ENDPOINT.Live + 'image/upload',
-                        method: 'POST',
-                        data: { file: file }
-                    }).then(function (resp) {
-                        console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.Id);
+                    yuyanAPISvc
+                        .imageUploadSvc(file, imageType.SurveyLogo, $scope.result.SurveyId)
+                    .then(function (resp) {
+                        $scope.imageId = resp.data.ImageId;
+                        console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
                     }, function (resp) {
                         console.log('Error status: ' + resp.status);
                     }, function (evt) {
                         $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                         console.log('progress: ' + $scope.progressPercentage + '% ' + evt.config.data.file.name);
                     });
-                };
+                };*/
 
                 $scope.ok = function () {
                     $scope.saving = true;
