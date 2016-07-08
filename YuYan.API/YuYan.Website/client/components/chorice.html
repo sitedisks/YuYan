@@ -12,13 +12,13 @@
                 <div data-ng-show="!submitSuccess">
                     <br class="xs-30" />
                     <div class="well">
-
+                        <img data-ng-show="bannerUrl" data-ng-src="{{bannerUrl}}" class="img-responsive" />
                         <h2>{{survey.Title}}</h2>
 
                         <h4>{{survey.ShortDesc}}</h4>
                         <h5>{{survey.LongDesc}}</h5>
                         <div class="form-group" data-ng-repeat="q in survey.dtoQuestions">
-                            <!--{{q | json}}-->
+
                             <h3>
                                 <span class="badge alert-success" style="font-size:16px">{{q.QuestionOrder}}</span> {{q.Question}}
                             </h3>
@@ -33,13 +33,17 @@
                         <button type="button" class="btn btn-success pull-right" data-ng-disabled="surveyForm.$invalid" data-ng-click="submitSurvey()">Submit</button>
                         <div class="clearfix"></div>
                     </div>
-
+                    <!--<br class="xs-10" />
+                    <uib-alert type="info" close="bCloseAlert=1" ng-hide="bCloseAlert">Radio button requires at least one selection.</uib-alert>-->
                     <br class="xs-10" />
-                    <uib-alert type="info" close="bCloseAlert=1" ng-hide="bCloseAlert">Radio button requires at least one selection.</uib-alert>
+                    <img data-ng-show="logoUrl" data-ng-src="{{logoUrl}}" class="img-thumbnail img-responsive" />
+                    <br class="xs-40" />
                 </div>
-                <div class="text-success" style="margin-top: 30px;" data-ng-show="submitSuccess">
-                    <h1 ng-non-bindable><strong>{{chorice}}</strong></h1>
-                    <h4>Quick &amp; Easy Survey</h4>
+
+                <div class="" style="margin-top: 30px;" data-ng-show="submitSuccess">
+                    <img data-ng-show="bannerUrl" data-ng-src="{{bannerUrl}}" class="img-responsive" />
+                    <!--<h1 ng-non-bindable><strong>{{chorice}}</strong></h1>
+                    <h4>Quick &amp; Easy Survey</h4>-->
 
                     <div class="">
                         <div data-ng-show="!result.SurveyResultId"><h3>Thanks for your participation.</h3></div>
@@ -76,6 +80,9 @@
                         </div>
                     </div>
                     <div class="text-center">
+                        <br class="xs-10" />
+                        <img data-ng-show="logoUrl" data-ng-src="{{logoUrl}}" class="img-thumbnail img-responsive" />
+                        <br class="xs-10" />
                         <img class="img-responsive" style="margin: 0px auto;" src="/img/QRcode.png" />
 
                         <button type="button" class="btn btn-link" data-ng-click="backHome()">Home</button>

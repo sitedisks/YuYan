@@ -81,6 +81,11 @@
                             }
                         });
                         $scope.survey = data;
+
+                        if (!isNullOrEmpty(data.BannerId))
+                            $scope.bannerUrl = choriceAPISvc.imageGetUrl(data.BannerId, 760);
+                        if (!isNullOrEmpty(data.LogoId))
+                            $scope.logoUrl = choriceAPISvc.imageGetUrl(data.LogoId, 760);
                     }
                     //toastr.success('Enjoy!');
                 },

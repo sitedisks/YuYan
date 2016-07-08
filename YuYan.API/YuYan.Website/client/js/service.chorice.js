@@ -8,6 +8,7 @@
 
             var clientAPI = useEndpoint + 'client';
             var reportAPI = useEndpoint + 'report';
+            var imageAPI = useEndpoint + 'images';
          
             var service = {
                 // survey
@@ -17,7 +18,9 @@
                 surveyResultSvc: surveyResultSvc,
                 // report
                 surveyClientReportSvc: surveyClientReportSvc,
-                surveyClientAnswerDicSvc: surveyClientAnswerDicSvc
+                surveyClientAnswerDicSvc: surveyClientAnswerDicSvc,
+                // image
+                imageGetUrl: imageGetUrl
             };
 
             return service;
@@ -58,6 +61,11 @@
             function surveyClientAnswerDicSvc() {
                 return $resource(reportAPI + '/:surveyId/answerdic',
                      { surveyId: '@sid' });
+            }
+
+            // images
+            function imageGetUrl(imageId, width) {
+                return imageAPI + '/' + imageId + '?width=' + width;
             }
 
         }]);
