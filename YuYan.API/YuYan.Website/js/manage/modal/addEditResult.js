@@ -22,6 +22,7 @@
                     };
                 }, 100);
 
+                /*
                 $scope.upload = function (file) {
                     yuyanAPISvc
                         .imageUploadSvc(file, imageType.SurveyLogo, $scope.result.SurveyId)
@@ -34,7 +35,7 @@
                         $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                         console.log('progress: ' + $scope.progressPercentage + '% ' + evt.config.data.file.name);
                     });
-                };
+                };*/
 
                 $scope.ok = function () {
                     $scope.saving = true;
