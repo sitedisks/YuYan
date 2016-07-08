@@ -9,20 +9,24 @@
     <div>
         <form name="surveyForm" data-ng-submit novalidate>
             <div class="form-group">
-                <button data-ng-disabled="bannerUploading" type="button" class="btn btn-primary btn-lg btn-block" ngf-drop="uploadBanner($file)" ngf-select="uploadBanner($file)" ngf-pattern="'image/*'">
+                <button data-ng-disabled="bannerUploading" type="button"
+                        class="btn btn-primary btn-lg btn-block"
+                        ngf-drag-over-class="'btn-default'"
+                        ngf-drop="uploadBanner($file)"
+                        ngf-select="uploadBanner($file)"
+                        ngf-pattern="'image/*'">
                     <i data-ng-hide="bannerUploading" class="fa fa-plus"></i>
                     <i data-ng-show="bannerUploading" class="fa fa-spinner fa-pulse fa-fw"></i>
                     &nbsp;Survey Banner
                 </button>
                 <!--<div ngf-drop="uploadBanner($file)" ngf-select="uploadBanner($file)" class="drop-box"
-             ngf-drag-over-class="'dragover'" ngf-pattern="'image/*'" style="height:100px; border:dashed; border-color:red">Drop Images file here</div>-->
+                ngf-drag-over-class="'dragover'" ngf-pattern="'image/*'" style="height:100px; border:dashed; border-color:red">Drop Images file here</div>-->
             </div>
             <div class="form-group">
-                <uib-progressbar data-ng-show="bannerUploading" class="progress-striped m-b-10" value="progressPercentage" type="success"></uib-progressbar>
+                <uib-progressbar data-ng-show="bannerUploading" class="progress-striped m-b-10" value="bannerProgress" type="success"></uib-progressbar>
                 <img data-ng-show="bannerUrl" data-ng-src="{{bannerUrl}}" class="img-thumbnail img-responsive" />
             </div>
             <div class="form-group has-success has-feedback">
-
                 <label class="control-label" for="surveyTitle">{{'BTN_SURVEY' | translate}} {{'TEXT_TITLE' | translate}}</label>
                 <input type="text" class="form-control input-lg" id="surveyTitle" name="surveyTitle" autofocus="autofocus"
                        data-ng-model="survey.Title" placeholder="Title" required />
@@ -35,6 +39,22 @@
             <div class="form-group has-success">
                 <label class="control-label" for="surveyLongDesc">{{'TEXT_LONG' | translate}} {{'TEXT_DESC' | translate}}</label>
                 <textarea class="form-control" id="surveyLongDesc" data-ng-model="survey.LongDesc" placeholder="Long Description" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <button data-ng-disabled="logoUploading" type="button"
+                        class="btn btn-primary btn-lg btn-block"
+                        ngf-drag-over-class="'btn-default'"
+                        ngf-drop="uploadLogo($file)"
+                        ngf-select="uploadLogo($file)"
+                        ngf-pattern="'image/*'">
+                    <i data-ng-hide="logoUploading" class="fa fa-plus"></i>
+                    <i data-ng-show="logoUploading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                    &nbsp;Logo
+                </button>
+            </div>
+            <div class="form-group">
+                <uib-progressbar data-ng-show="logoUploading" class="progress-striped m-b-10" value="logoProgress" type="success"></uib-progressbar>
+                <img data-ng-show="logoUrl" data-ng-src="{{logoUrl}}" class="img-thumbnail img-responsive" />
             </div>
 
             <button type="submit" class="btn btn-primary btn-sm" data-ng-disabled="surveyForm.$invalid" data-ng-click="ok()" style="opacity:0;"></button>

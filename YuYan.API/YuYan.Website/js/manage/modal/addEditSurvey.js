@@ -8,7 +8,8 @@
                 $scope.saving = false;
 
                 $scope.survey = survey;
-                $scope.progressPercentage = 0;
+                $scope.bannerProgress = 0;
+                $scope.logoProgress = 0;
 
                 //banner
                 $scope.uploadBanner = function (file) {
@@ -22,8 +23,25 @@
                     }, function (resp) {
                         console.log('Error status: ' + resp.status);
                     }, function (evt) {
-                        $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                        console.log('progress: ' + $scope.progressPercentage + '% ' + evt.config.data.file.name);
+                        $scope.bannerProgress = parseInt(100.0 * evt.loaded / evt.total);
+                        console.log('progress: ' + $scope.bannerProgress + '% ' + evt.config.data.file.name);
+                    });
+                }
+
+                //logo
+                $scope.uploadLogo = function (file) {
+                    $scope.logoUploading = true;
+                    yuyanAPISvc
+                      .imageUploadSvc(file, imageType.SurveyLogo, $scope.survey.SurveyId)
+                    .then(function (resp) {
+                        $scope.logoUploading = false;
+                        $scope.logoUrl = yuyanAPISvc.imageGetUrl(resp.data.ImageId, 760);
+                        console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
+                    }, function (resp) {
+                        console.log('Error status: ' + resp.status);
+                    }, function (evt) {
+                        $scope.logoProgress = parseInt(100.0 * evt.loaded / evt.total);
+                        console.log('progress: ' + $scope.logoProgress + '% ' + evt.config.data.file.name);
                     });
                 }
 
