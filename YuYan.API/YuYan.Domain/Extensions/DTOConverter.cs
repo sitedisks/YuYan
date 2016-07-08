@@ -23,6 +23,8 @@ namespace YuYan.Domain.Extensions
             data.ShortDescription = source.ShortDesc;
             data.LongDescription = source.LongDesc;
             data.ShowReport = source.ShowReport;
+            data.BannerId = source.BannerId;
+            data.LogoId = source.LogoId;
             data.UserId = source.UserId;
             data.IsActive = source.IsActive;
             data.IsDeleted = source.IsDeleted;
@@ -140,6 +142,8 @@ namespace YuYan.Domain.Extensions
             data.LongDesc = source.LongDescription;
             data.UserId = source.UserId;
             data.ShowReport = source.ShowReport;
+            data.BannerId = source.BannerId;
+            data.LogoId = source.LogoId;
             data.IsActive = source.IsActive;
             data.IsDeleted = source.IsDeleted;
 

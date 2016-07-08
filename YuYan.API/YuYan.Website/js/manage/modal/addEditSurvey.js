@@ -11,6 +11,11 @@
                 $scope.bannerProgress = 0;
                 $scope.logoProgress = 0;
 
+                if (!isNullOrEmpty(survey.BannerId))
+                    $scope.bannerUrl = yuyanAPISvc.imageGetUrl(survey.BannerId, 760);
+                if (!isNullOrEmpty(survey.LogoId))
+                    $scope.logoUrl = yuyanAPISvc.imageGetUrl(survey.LogoId, 760);
+
                 //banner
                 $scope.uploadBanner = function (file) {
                     $scope.bannerUploading = true;
@@ -20,6 +25,7 @@
                         $scope.bannerUploading = false;
                         $scope.bannerUrl = yuyanAPISvc.imageGetUrl(resp.data.ImageId, 760);
                         console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
+                        $scope.survey.BannerId = resp.data.ImageId;
                     }, function (resp) {
                         console.log('Error status: ' + resp.status);
                     }, function (evt) {
@@ -37,6 +43,7 @@
                         $scope.logoUploading = false;
                         $scope.logoUrl = yuyanAPISvc.imageGetUrl(resp.data.ImageId, 760);
                         console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
+                        $scope.survey.LogoId = resp.data.ImageId;
                     }, function (resp) {
                         console.log('Error status: ' + resp.status);
                     }, function (evt) {

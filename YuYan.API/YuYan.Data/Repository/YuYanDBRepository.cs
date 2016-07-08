@@ -532,6 +532,8 @@ namespace YuYan.Data.Repository
                 newSurvey.UserId = survey.UserId;
                 newSurvey.ShortDescription = survey.ShortDesc;
                 newSurvey.LongDescription = survey.LongDesc;
+                newSurvey.BannerId = survey.BannerId;
+                newSurvey.LogoId = survey.LogoId;
                 newSurvey.CreatedDate = DateTime.UtcNow;
                 newSurvey.UpdatedDate = DateTime.UtcNow;
                 newSurvey.IsActive = true;
@@ -575,6 +577,8 @@ namespace YuYan.Data.Repository
                 {
                     theSurvey.Title = survey.Title;
                     theSurvey.ShortDescription = survey.ShortDesc;
+                    theSurvey.BannerId = survey.BannerId;
+                    theSurvey.LogoId = survey.LogoId;
                     theSurvey.LongDescription = survey.LongDesc;
                     theSurvey.UpdatedDate = DateTime.UtcNow;
                     await _db.SaveChangesAsync();
@@ -1129,6 +1133,44 @@ namespace YuYan.Data.Repository
             }
 
             return image;
+        }
+
+        public async Task<IList<tbImage>> GetImagesByTypeRef(int typeId, Guid userId, int refId)
+        {
+            IList<tbImage> images = new List<tbImage>();
+
+            try
+            {
+                images = await _db.tbImages.Where(x => x.ImageType == typeId && x.UserId == userId && x.RefId == refId
+                    && (x.IsActive ?? true) && !(x.IsDeleted ?? false)).ToListAsync();
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return images;
+        }
+
+        public async Task DeleteImageByImageId(Guid imgId) {
+            try
+            {
+                tbImage theImage = await _db.tbImages.FirstOrDefaultAsync(x => x.ImageId == imgId
+                      && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (theImage != null)
+                {
+                    theImage.IsDeleted = true;
+                    theImage.IsActive = false;
+                    theImage.UpdatedDate = DateTime.UtcNow;
+
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex)
+            {
+                throw new ApplicationException("Data error!", dex);
+            }
         }
 
         #endregion
