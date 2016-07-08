@@ -87,7 +87,7 @@ namespace YuYan.API.Controllers
                 if (img == null)
                     image = im.NotFoundImage();
                 else
-                    image = im.RetrieveImage(img.Uri);
+                    image = im.RetrieveImage(img.Uri, img.FileFolder);
 
                 response.StatusCode = HttpStatusCode.OK;
 

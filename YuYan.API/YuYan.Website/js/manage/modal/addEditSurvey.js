@@ -12,10 +12,12 @@
 
                 //banner
                 $scope.uploadBanner = function (file) {
+                    $scope.bannerUploading = true;
                     yuyanAPISvc
                       .imageUploadSvc(file, imageType.SurveyBanner, $scope.survey.SurveyId)
                     .then(function (resp) {
-                        $scope.imageId = resp.data.ImageId;
+                        $scope.bannerUploading = false;
+                        $scope.bannerUrl = yuyanAPISvc.imageGetUrl(resp.data.ImageId, 760);
                         console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
                     }, function (resp) {
                         console.log('Error status: ' + resp.status);

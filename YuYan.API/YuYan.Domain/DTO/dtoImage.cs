@@ -11,5 +11,6 @@ namespace YuYan.Domain.DTO
         public string FileName { get; set; }
         public string Uri { get; set; }
         public int RefId { get; set; }
+        public string FileFolder { get; set; }
     }
 }

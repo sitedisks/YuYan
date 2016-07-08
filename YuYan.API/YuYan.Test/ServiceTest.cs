@@ -109,5 +109,19 @@ namespace YuYan.Test
         }
 
         #endregion
+
+        #region image
+        [TestMethod]
+        public async Task TestService_GetImage()
+        {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+                YuYanService svc = new YuYanService(repos);
+                var image = await svc.GetImage(new Guid("0E71160C-28F3-49BD-ABB8-63594E615FB8"));
+                Assert.IsNotNull(image);
+            } 
+        }
+        #endregion
     }
 }

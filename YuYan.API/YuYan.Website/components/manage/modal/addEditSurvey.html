@@ -8,26 +8,25 @@
     </div>-->
     <div>
         <form name="surveyForm" data-ng-submit novalidate>
+            <div class="form-group">
+                <button data-ng-disabled="bannerUploading" type="button" class="btn btn-primary btn-lg btn-block" ngf-drop="uploadBanner($file)" ngf-select="uploadBanner($file)" ngf-pattern="'image/*'">
+                    <i data-ng-hide="bannerUploading" class="fa fa-plus"></i>
+                    <i data-ng-show="bannerUploading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                    &nbsp;Survey Banner
+                </button>
+                <!--<div ngf-drop="uploadBanner($file)" ngf-select="uploadBanner($file)" class="drop-box"
+             ngf-drag-over-class="'dragover'" ngf-pattern="'image/*'" style="height:100px; border:dashed; border-color:red">Drop Images file here</div>-->
+            </div>
+            <div class="form-group">
+                <uib-progressbar data-ng-show="bannerUploading" class="progress-striped m-b-10" value="progressPercentage" type="success"></uib-progressbar>
+                <img data-ng-show="bannerUrl" data-ng-src="{{bannerUrl}}" class="img-thumbnail img-responsive" />
+            </div>
             <div class="form-group has-success has-feedback">
 
                 <label class="control-label" for="surveyTitle">{{'BTN_SURVEY' | translate}} {{'TEXT_TITLE' | translate}}</label>
                 <input type="text" class="form-control input-lg" id="surveyTitle" name="surveyTitle" autofocus="autofocus"
                        data-ng-model="survey.Title" placeholder="Title" required />
                 <span class="fa fa-quote-right form-control-feedback"></span>
-            </div>
-           
-           
-            <div class="form-group">
-                <button type="button" class="btn btn-primary btn-lg btn-block" ngf-drop="uploadBanner($file)" ngf-select="uploadBanner($file)" ngf-pattern="'image/*'">
-                    <i class="fa fa-plus"></i>&nbsp;Logo
-                </button>
-
-                <!--<div ngf-drop="uploadBanner($file)" ngf-select="uploadBanner($file)" class="drop-box"
-                     ngf-drag-over-class="'dragover'" ngf-pattern="'image/*'" style="height:100px; border:dashed; border-color:red">Drop Images file here</div>-->
-            </div>
-            <div class="form-group">
-                <uib-progressbar class="progress-striped m-b-10" value="progressPercentage" type="success"></uib-progressbar>
-                <div data-ng-show="imageId">{{imageId}}</div>
             </div>
             <div class="form-group has-success">
                 <label class="control-label" for="surveyShortDesc">{{'TEXT_SHORT' | translate}} {{'TEXT_DESC' | translate}}</label>

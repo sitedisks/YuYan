@@ -31,7 +31,8 @@
                 surveyClientReportSvc: surveyClientReportSvc,
                 surveyClientAnswerDicSvc: surveyClientAnswerDicSvc,
                 // image
-                imageUploadSvc: imageUploadSvc
+                imageUploadSvc: imageUploadSvc,
+                imageGetUrl: imageGetUrl
             };
 
             return service;
@@ -110,6 +111,12 @@
                     data: { file: file, 'typeId': type.id, 'refId': refId }
                 });
             }
+
+            function imageGetUrl(imageId, width) {
+                //http://localhost:5613/images/0E71160C-28F3-49BD-ABB8-63594E615FB8?width=300
+                return imageAPI + '/' + imageId + '?width=' + width;
+            }
+
         }]);
 
 })();

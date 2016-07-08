@@ -69,9 +69,9 @@ namespace YuYan.Tools
             return Image.FromStream(stream);
         }
 
-        public Image RetrieveImage(string filename)
+        public Image RetrieveImage(string filename, string filefolder)
         {
-            var uploadFolder = "~/FileUploads/";
+            var uploadFolder = "~/FileUploads/" + filefolder;
             var root = HttpContext.Current.Server.MapPath(uploadFolder);
             var stream = new FileStream(root + "/" + filename, FileMode.Open, FileAccess.Read);
             return Image.FromStream(stream);

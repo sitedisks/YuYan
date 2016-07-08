@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Database\ip2location_db3.cs" />
     <Compile Include="Database\tbImage.cs" />
+    <Compile Include="Database\tbImageType.cs" />
     <Compile Include="Database\tbSession.cs" />
     <Compile Include="Database\tbSurvey.cs" />
     <Compile Include="Database\tbSurveyClient.cs" />

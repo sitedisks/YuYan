@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace YuYan.Domain.Database
 {
     [Table("Image")]
-    public class tbImage:tbTbase
+    public class tbImage : tbTbase
     {
         [Key, Column("Id")]
         public Guid ImageId { get; set; }
@@ -16,5 +16,8 @@ namespace YuYan.Domain.Database
         public string FileName { get; set; }
         public string Uri { get; set; }
         public int RefId { get; set; }
+
+        [ForeignKey("ImageType")]
+        public virtual tbImageType tbImageType { get; set; }
     }
 }

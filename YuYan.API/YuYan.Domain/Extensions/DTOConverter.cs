@@ -287,6 +287,8 @@ namespace YuYan.Domain.Extensions
             data.FileName = source.FileName;
             data.Uri = source.Uri;
             data.RefId = source.RefId;
+            if (source.tbImageType != null)
+                data.FileFolder = source.tbImageType.FileFolder;
 
             return data;
         }
