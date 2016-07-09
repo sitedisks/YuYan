@@ -11,6 +11,59 @@
                 $scope.APIMini = 2;
                 $scope.APIResolved = 0;
 
+                // --- google chart start
+                $scope.myChartObject = {};
+
+                //$scope.myChartObject.type = "BarChart";
+                //$scope.myChartObject.type = "PieChart";
+                $scope.myChartObject.type = "ColumnChart";
+
+
+                $scope.myChartObject.data = {
+                    "cols": [
+                        { id: "t", label: "Items", type: "string" },
+                        { id: "s", label: "Value", type: "number" }
+                    ],
+                    "rows": [
+                        {
+                            c: [
+                               { v: "Mushrooms" },
+                               { v: 3 },
+                            ]
+                        },
+                        {
+                            c: [
+                                { v: "Onions" },
+                                { v: 3 },
+                            ]
+                        },
+                        {
+                            c: [
+                               { v: "Olives" },
+                               { v: 31 }
+                            ]
+                        },
+                        {
+                            c: [
+                               { v: "Zucchini" },
+                               { v: 1 },
+                            ]
+                        },
+                        {
+                            c: [
+                               { v: "Pepperoni" },
+                               { v: 2 },
+                            ]
+                        }
+                    ]
+                };
+
+                $scope.myChartObject.options = {
+                    'title': 'How Much Pizza I Ate Last Night'
+                };
+
+                // --- google chart end
+
                 yuyanAPISvc.surveyClientReportSvc().query({ surveyId: survey.SurveyId },
                     function (data) {
                         $scope.surveyClient = data;
@@ -35,7 +88,6 @@
                     }, function (error) {
                         toastr.error("Error please refresh the page.");
                     });
-
 
 
                 $scope.ok = function () {

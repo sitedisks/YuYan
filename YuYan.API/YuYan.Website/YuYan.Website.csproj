@@ -69,6 +69,29 @@
     <Content Include="bower_components\angular-cookies\bower.json" />
     <Content Include="bower_components\angular-cookies\package.json" />
     <Content Include="bower_components\angular-cookies\README.md" />
+    <Content Include="bower_components\angular-google-chart\Gruntfile.js" />
+    <Content Include="bower_components\angular-google-chart\karma.conf.js" />
+    <Content Include="bower_components\angular-google-chart\ng-google-chart.js" />
+    <Content Include="bower_components\angular-google-chart\ng-google-chart.min.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcBeforeDraw.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcOnClick.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcOnError.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcOnMouseout.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcOnMouseover.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcOnReady.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcOnSelect.js" />
+    <Content Include="bower_components\angular-google-chart\src\FormatManager.js" />
+    <Content Include="bower_components\angular-google-chart\src\googleChart.js" />
+    <Content Include="bower_components\angular-google-chart\src\googlechart.module.js" />
+    <Content Include="bower_components\angular-google-chart\src\googleChartApiConfig.js" />
+    <Content Include="bower_components\angular-google-chart\src\googleChartApiPromise.js" />
+    <Content Include="bower_components\angular-google-chart\src\GoogleChartController.js" />
+    <Content Include="bower_components\angular-google-chart\src\googleChartService.js" />
+    <Content Include="bower_components\angular-google-chart\src\googleJsapiUrl.js" />
+    <Content Include="bower_components\angular-google-chart\test\google.mock.js" />
+    <Content Include="bower_components\angular-google-chart\test\googleChartApiPromise.spec.js" />
+    <Content Include="bower_components\angular-google-chart\test\googleChartService.spec.js" />
+    <Content Include="bower_components\angular-google-chart\test\googleJsapiUrl.spec.js" />
     <Content Include="bower_components\angular-google-maps\.bower.json" />
     <Content Include="bower_components\angular-google-maps\.travis.yml" />
     <Content Include="bower_components\angular-google-maps\bower.json" />
@@ -381,6 +404,11 @@
     <Content Include="bower_components\ng-file-upload\bower.json" />
     <Content Include="bower_components\ng-file-upload\LICENSE" />
     <Content Include="bower_components\ng-file-upload\README.md" />
+    <Content Include="bower_components\angular-google-chart\.bower.json" />
+    <Content Include="bower_components\angular-google-chart\bower.json" />
+    <Content Include="bower_components\angular-google-chart\CHANGELOG.md" />
+    <Content Include="bower_components\angular-google-chart\CONTRIBUTING.md" />
+    <Content Include="bower_components\angular-google-chart\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

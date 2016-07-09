@@ -9,18 +9,7 @@
         <div data-ng-show="APIMini <= APIResolved">
           
             <uib-tabset active="activeJustified" justified="true">
-                <!--<uib-tab index="0" heading="Raw Data">
-                    <br class="xs-10" />
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form name="surveyForm" data-ng-submit novalidate>
-                                Survey:  {{survey | json}}
-                                <br />
-                                survey client: {{surveyClient | json}}
-                            </form>
-                        </div>
-                    </div>
-                </uib-tab>-->
+            
                 <uib-tab index="1" heading="General">
              
                     <div class="form-group">
@@ -98,6 +87,10 @@
 
                     </div>
                    
+                </uib-tab>
+                <uib-tab tabindex="3" heading="Google Chart">
+                    <h3>Google Chart</h3>
+                    <div google-chart chart="myChartObject" style="height:600px; width:100%;"></div>
                 </uib-tab>
             </uib-tabset>
         </div>
