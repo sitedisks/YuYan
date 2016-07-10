@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ImageResizer.Storage</name>
+    </assembly>
+    <members>
+        <member name="P:ImageResizer.Storage.BlobProviderBase.LicenseFeatureCodes">
+            <summary>
+            Returns the license key feature codes that are able to activate this plugins.
+            </summary>
+        </member>
+        <member name="M:ImageResizer.Storage.BlobProviderBase.RedactFrom(ImageResizer.Configuration.Xml.Node)">
+            <summary>
+            Redacts any connectionString attribute from the diaglostics page.
+            </summary>
+            <param name="resizer"></param>
+            <returns></returns>
+        </member>
+        <member name="P:ImageResizer.Storage.BlobProviderBase.CacheMetadata">
+            <summary>
+            If true, metadata (such as modified dates and existence) will be cached.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Storage.BlobProviderBase.MetadataCache">
+            <summary>
+            The caching system responsible for caching metadata (like existence and modified dates)
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Storage.BlobProviderBase.CheckForModifiedFiles">
+            <summary>
+            If true, will cause additional requests to verify the remote resource is up-to-date.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Storage.BlobProviderBase.LazyExistenceCheck">
+            <summary>
+            To avoid an extra request, it is possible to 'fail late', throwing FileNotFound when Open() is called instead of earlier.
+            Upside: faster. Downside: no other provider can handle the request if there are route conflicts.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Storage.BlobProviderBase.UntrustedData">
+            <summary>
+            (default: false) When true, all requests will be re-encoded before being served to the client. Invalid or malicious images will fail with an error if they cannot be read as images.
+            This should prevent malicious files from being served to the client.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Storage.BlobProviderBase.CacheUnmodifiedFiles">
+            <summary>
+            (default false). When true, files and unmodified images (i.e, no querystring) will be cached to disk (if they are requested that way) instead of only caching requests for resized images.
+            DiskCache plugin must be installed for this to have any effect.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Storage.BlobProviderBase.RequireImageExtension">
+            <summary>
+            (default true) When false, all requests inside the VirtualFilesystemPrefix folder will be handled by this plugin.
+            You should still use image extensions, otherwise we don't know what content type to send with the response, and browsers will choke. 
+            It's  also the cleanest way to tell the image resizer what kind of file type you'd like back when you request resizing.
+            This setting is designed to support non-image file serving
+            It will also cause conflicts if VirtualFilesystemPrefix overlaps with a folder name used for something else.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Storage.BlobProviderBase.ExposeAsVpp">
+            <summary>
+            If true, the blob provide will be accessible through the ASP.NET VirtualPathProvider system.
+            </summary>
+        </member>
+        <member name="M:ImageResizer.Storage.BlobProviderBase.Belongs(System.String)">
+            <summary>
+            Returns true if the request  is within the VirtualFilesystemPrefix. Override to provide more granular heuristics
+            </summary>
+            <param name="virtualPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Storage.BlobProviderBase.FetchMetadataAsync(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Should perform an immediate (uncached) query of blob metadata (such as existence and modified date information)
+            </summary>
+            <param name="virtualPath"></param>
+            <param name="queryString"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ImageResizer.Storage.BlobProviderBase.FetchMetadataCachedAsync(System.String,System.Collections.Specialized.NameValueCollection)" -->
+        <member name="M:ImageResizer.Storage.BlobProviderBase.FileExists(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            If LazyExistenceCheck = true, same as Belongs(virtualPath). Otherwise also performs actual BlobExists() call.
+            </summary>
+            <param name="virtualPath"></param>
+            <param name="queryString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Storage.BlobProviderBase.BlobExistsAsync(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Performs a cached existence check to verify the blob actually exists.
+            </summary>
+            <param name="subPath"></param>
+            <param name="queryString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Storage.BlobProviderBase.GetModifiedDateUtcAsync(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Performs a cached metadata query to get the last modified date (UTC). 
+            </summary>
+            <param name="virtualPath"></param>
+            <param name="q"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Storage.BlobProviderBase.VppExposeFile(System.String)">
+            <summary>
+            Returns true if the given file should be made available to the VirtualPathProvider system.
+            </summary>
+            <param name="virtualPath"></param>
+            <returns></returns>
+        </member>
+        <member name="P:ImageResizer.Storage.StandardMetadataCache.MetadataAbsoluteExpiration">
+            <summary>
+            Existence and modified date metadata about files is cached for, at longest, this amount of time after it is first stored.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Storage.StandardMetadataCache.MetadataSlidingExpiration">
+            <summary>
+            Existence and modified date metadata about files is cached for this long after it is last accessed.
+            </summary>
+        </member>
+    </members>
+</doc>

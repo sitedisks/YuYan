@@ -4,7 +4,7 @@
         function ($scope, $http, $log, $stateParams, choriceAPISvc, endpoint) {
 
             var tokenUrl = $stateParams.tokenUrl;
-          
+
             $scope.APIMini = 1;
             $scope.APIResolved = 0;
             $scope.submitSuccess = false;
@@ -81,6 +81,11 @@
                             }
                         });
                         $scope.survey = data;
+
+                        if (!isNullOrEmpty(data.BannerId))
+                            $scope.bannerUrl = choriceAPISvc.imageGetUrl(data.BannerId, 760);
+                        if (!isNullOrEmpty(data.LogoId))
+                            $scope.logoUrl = choriceAPISvc.imageGetUrl(data.LogoId, 760);
                     }
                     //toastr.success('Enjoy!');
                 },
@@ -135,6 +140,12 @@
                                 $scope.submitSuccess = true;
                                 $scope.result = result;
 
+                                if ($scope.survey.ShowReport) {
+                                    // load the answer status 
+                                    $scope.APIMini++;
+                                    loadAnswerDic();
+                                }
+
                             },
                             function (error) {
                                 toastr.error('ZZZ sleep');
@@ -144,6 +155,16 @@
                         toastr.error('Suvry Submit Failed. Please fresh the page.');
                     });
 
+            }
+
+            function loadAnswerDic() {
+                choriceAPISvc.surveyClientAnswerDicSvc().get({ surveyId: $scope.survey.SurveyId },
+                    function (data) {
+                        $scope.checkedHashtb = data;
+                        $scope.APIResolved++;
+                    }, function () {
+                        toastr.error("Error please refresh the page.");
+                    });
             }
 
             function pageOrder(question) {

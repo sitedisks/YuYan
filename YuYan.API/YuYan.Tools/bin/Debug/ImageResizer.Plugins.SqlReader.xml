@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ImageResizer.Plugins.SqlReader</name>
+    </assembly>
+    <members>
+        <member name="T:ImageResizer.Plugins.SqlReader.SqlReaderPlugin">
+            <summary>
+            Specialized VirtualPathProvider that allows accessing database images as if they are on disk.
+            </summary>
+        </member>
+        <member name="E:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.BeforeAccess">
+            <summary>
+            Called before accessing any row in the database. The row ID is passed as a string argument.
+            If the current user should not access the row, throw an HttpException(403, "message")
+            </summary>
+        </member>
+        <member name="M:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.FireBeforeAccess(System.String)">
+            <summary>
+            Fires the BeforeAccess event
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="P:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.StripFileExtension">
+            <summary>
+            When true, the last file extension segment will be removed from the URL before the SQL Id is parsed. Only relevant when ImageIdType is a string type. Always true for other values.
+            Configured by setting 'extensionPartOfId' to the opposite value.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.ConnectionString">
+            <summary>
+            The database connection string. Defaults to null. You can specify an existing web.config connection string using
+            the "ConnectionStrings:namedKey" convention.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.QueriesAreStoredProcedures">
+            <summary>
+            If true, the queries will executed as if they are sproc names.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.ImageBlobQuery">
+            <summary>
+            The query that returns the binary image data based on the ID. Defaults to "SELECT Content FROM Images WHERE ImageID=@id"
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.ModifiedDateQuery">
+            <summary>
+            The query that returns the modified and created date of the image.  Defaults to "Select ModifiedDate, CreatedDate From Images WHERE ImageID=@id".
+            Of all the dates returned by the query, the first non-empty date is used.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.ImageIdType">
+            <summary>
+            Specifies the type of ID used for images. Int, string, and GUID types are the only valid values.
+            Throws an ArgumentOutOfRange exception if set to an invalid value.
+            </summary>
+        </member>
+        <member name="M:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.IsStringType(System.Data.SqlDbType)">
+            <summary>
+            Returns true if the specified type is a kind of strings
+            </summary>
+        </member>
+        <member name="M:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.IsIntType(System.Data.SqlDbType)">
+            <summary>
+            Returns true if the specified type is a kind of integer
+            </summary>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.FireAuthorizeEvent(System.String)">
+            <summary>
+            Called before any database op. Fires the BeforeAccess event
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.GetStream(System.String)">
+            <summary>
+            Returns a stream to the 
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.CreateIdParameter(System.String)">
+            <summary>
+            Creates a SQL paramater of the correct type for the row id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.GetConnectionObj">
+            <summary>
+            Creates and returns a SqlConnection object for the database based on the configuration.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.GetCacheDependencyQuery(System.String)">
+            <summary>
+            Returns a SqlCommand cache dependency using the modifiedQuery.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.ParseIdFromVirtualPath(System.String)">
+            <summary>
+            Supports int, string, and GUID IDs. Override this to modify ID parsing if you can't do it with rewrite rules.
+            </summary>
+            <param name="virtualPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.SqlReader.SqlReaderPlugin.GetIssues">
+            <summary>
+            Provides the diagnostics system with a list of configuration issues
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

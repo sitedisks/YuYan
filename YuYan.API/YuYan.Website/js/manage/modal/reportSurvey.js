@@ -2,8 +2,8 @@
     'use strick';
 
     angular.module('yuyanApp')
-        .controller('reportSurveyCtrl', ['$scope', '$uibModalInstance', 'survey', 'localStorageService', 'yuyanAPISvc',
-            function ($scope, $uibModalInstance, survey, localStorageService, yuyanAPISvc) {
+        .controller('reportSurveyCtrl', ['$scope', '$uibModalInstance', '$timeout', 'survey', 'localStorageService', 'yuyanAPISvc',
+            function ($scope, $uibModalInstance, $timeout, survey, localStorageService, yuyanAPISvc) {
 
                 $scope.survey = survey;
                 $scope.geoStatus = {};
@@ -11,6 +11,55 @@
                 $scope.APIMini = 2;
                 $scope.APIResolved = 0;
 
+
+                // --- google chart start
+
+                $scope.charType = "BarChart";
+                $scope.chartGroup = [];
+
+
+                yuyanAPISvc.surveyClientAnswerDicSvc().get({ surveyId: survey.SurveyId },
+                    function (data) {
+                        $scope.checkedHashtb = data;
+
+                        $timeout(function () {
+                            //preparing the chart data
+                            angular.forEach($scope.survey.dtoQuestions, function (question) {
+
+                                var rows = [];
+
+                                angular.forEach(question.dtoItems, function (item) {
+                                    var row = { c: [{ v: item.ItemDescription }, { v: data[item.QuestionItemId] == null ? 0 : data[item.QuestionItemId] }, ] };
+                                    rows.push(row);
+                                });
+
+                                var questionChart = {
+                                    type: $scope.charType,
+                                    data: {
+                                        "cols": [{ id: "t", label: "Items", type: "string" }, { id: "s", label: "Counts", type: "number" }],
+                                        "rows": rows
+                                    },
+                                    options: { 'title': question.Question }
+                                };
+
+                                $scope.chartGroup.push(questionChart);
+
+                            });
+
+                        }, 300);
+                        
+ 
+                        $scope.APIResolved++;
+                    }, function () {
+                        toastr.error("Error please refresh the page.");
+                    });
+
+                //$scope.myChartObject.type = "PieChart";
+                //$scope.myChartObject.type = "ColumnChart";
+
+                // --- google chart end
+
+                // geo location
                 yuyanAPISvc.surveyClientReportSvc().query({ surveyId: survey.SurveyId },
                     function (data) {
                         $scope.surveyClient = data;
@@ -24,18 +73,24 @@
                         });
 
                         $scope.APIResolved++;
-                        yuyanAPISvc.surveyClientAnswerDicSvc().get({ surveyId: survey.SurveyId },
-                           function (data) {
-                               $scope.checkedHashtb = data;
-                               $scope.APIResolved++;
-                           }, function () {
-                               toastr.error("Error please refresh the page.");
-                           });
-
                     }, function (error) {
                         toastr.error("Error please refresh the page.");
                     });
 
+                // question result 
+                /*
+                yuyanAPISvc.surveyClientAnswerDicSvc().get({ surveyId: survey.SurveyId },
+                    function (data) {
+                        $scope.checkedHashtb = data;
+
+                        //preparing the chart data
+
+
+                        $scope.APIResolved++;
+                    }, function () {
+                        toastr.error("Error please refresh the page.");
+                    });
+                    */
 
 
                 $scope.ok = function () {

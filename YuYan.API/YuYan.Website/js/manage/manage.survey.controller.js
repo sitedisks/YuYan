@@ -155,7 +155,7 @@
                     animation: true,
                     templateUrl: 'components/manage/modal/reportSurvey.html',
                     controller: 'reportSurveyCtrl',
-                    size: 'md',
+                    size: 'lg',
                     resolve: {
                         survey: angular.copy(survey)
                     }

@@ -28,6 +28,8 @@ namespace YuYan.Interface.DbContext
         DbSet<tbSurveyShare> tbSurveyShares { get; set; }
         DbSet<tbSurveyResult> tbSurveyResults { get; set; }
         DbSet<ip2location_db3> ip2locations { get; set; }
+        DbSet<tbImage> tbImages { get; set; }
+        DbSet<tbImageType> tbImageTypes { get; set; }
         #endregion
     }
 }

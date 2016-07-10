@@ -7,12 +7,20 @@
             //var useEndpoint = endpoint.LocalAPI;
 
             var clientAPI = useEndpoint + 'client';
+            var reportAPI = useEndpoint + 'report';
+            var imageAPI = useEndpoint + 'images';
          
             var service = {
+                // survey
                 surveyRetreiveSvc: surveyRetreiveSvc,
                 surveyTitleSvc: surveyTitleSvc, 
                 surveySaveSvc: surveySaveSvc,
-                surveyResultSvc: surveyResultSvc
+                surveyResultSvc: surveyResultSvc,
+                // report
+                surveyClientReportSvc: surveyClientReportSvc,
+                surveyClientAnswerDicSvc: surveyClientAnswerDicSvc,
+                // image
+                imageGetUrl: imageGetUrl
             };
 
             return service;
@@ -43,5 +51,22 @@
                 return $resource(clientAPI + '/:surveyId/:score',
                     { surveyId: '@surveyId', score: '@score' });
             }
+
+            // report
+            function surveyClientReportSvc() {
+                return $resource(reportAPI + '/:surveyId',
+                    { surveyId: '@sid' });
+            }
+
+            function surveyClientAnswerDicSvc() {
+                return $resource(reportAPI + '/:surveyId/answerdic',
+                     { surveyId: '@sid' });
+            }
+
+            // images
+            function imageGetUrl(imageId, width) {
+                return imageAPI + '/' + imageId + '?width=' + width;
+            }
+
         }]);
 })();
