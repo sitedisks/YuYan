@@ -10,7 +10,18 @@
           
             <uib-tabset active="activeJustified" justified="true">
             
-                <uib-tab index="1" heading="General">
+                <uib-tab tabindex="1" heading="Google Chart">
+                    <h3>Google Chart</h3>
+                    <div google-chart chart="myChartObject1" style="height:600px; width:100%;"></div>
+
+                    <div data-ng-repeat="chart in chartGroup track by $index">
+
+                        <div google-chart chart="chart" style="height:600px; width:100%;"></div>
+                        <br />
+                    </div>
+
+                </uib-tab>
+                <uib-tab index="2" heading="General">
              
                     <div class="form-group">
                         <h3>{{survey.Title}}</h3>
@@ -59,7 +70,7 @@
                         </table>
                     </div>
                 </uib-tab>
-                <uib-tab index="2" heading="Status">
+                <uib-tab index="3" heading="Status">
                   
                     <h3>{{survey.Title}}</h3>
                     <h4>{{survey.ShortDesc}}</h4>
@@ -88,10 +99,7 @@
                     </div>
                    
                 </uib-tab>
-                <uib-tab tabindex="3" heading="Google Chart">
-                    <h3>Google Chart</h3>
-                    <div google-chart chart="myChartObject" style="height:600px; width:100%;"></div>
-                </uib-tab>
+              
             </uib-tabset>
         </div>
 
@@ -100,9 +108,7 @@
 </div>
 <div class="modal-footer">
     <div class="pull-right">
-        <!--<button type="submit" class="btn btn-primary btn-sm" data-ng-click="ok()">
-            <i class="glyphicon glyphicon-floppy-save"></i> Save
-        </button>-->
+      
         <button type="button" class="btn btn-link btn-sm" data-ng-click="cancel()">
             {{'BTN_CANCEL' | translate}}
         </button>

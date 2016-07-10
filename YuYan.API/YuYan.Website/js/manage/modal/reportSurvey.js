@@ -11,59 +11,53 @@
                 $scope.APIMini = 2;
                 $scope.APIResolved = 0;
 
+
                 // --- google chart start
-                $scope.myChartObject = {};
+                $scope.chartGroup = [myChartObject1, myChartObject2];
 
-                //$scope.myChartObject.type = "BarChart";
+                var myChartObject1 = {
+                    type: "BarChart",
+                    data: {
+                        "cols": [
+                                    { id: "t", label: "Items", type: "string" },
+                                    { id: "s", label: "Value", type: "number" }
+                        ],
+                        "rows": [
+                                    { c: [{ v: "Mushrooms" }, { v: 3 }, ] },
+                                    { c: [{ v: "Onions" }, { v: 3 }, ] },
+                                    { c: [{ v: "Olives" }, { v: 31 }] },
+                                    { c: [{ v: "Zucchini" }, { v: 1 }, ] },
+                                    { c: [{ v: "Pepperoni" }, { v: 2 }, ] }
+                        ]
+                    },
+                    options: { 'title': 'How Much Pizza I Ate Last Night' }
+                };
+
+                var myChartObject2 = {
+                    type: "BarChart",
+                    data: {
+                        "cols": [
+                                    { id: "t", label: "Items", type: "string" },
+                                    { id: "s", label: "Value", type: "number" }
+                        ],
+                        "rows": [
+                                    { c: [{ v: "Mushrooms" }, { v: 3 }, ] },
+                                    { c: [{ v: "Onions" }, { v: 3 }, ] },
+                                    { c: [{ v: "Olives" }, { v: 31 }] },
+                                    { c: [{ v: "Zucchini" }, { v: 1 }, ] },
+                                    { c: [{ v: "Pepperoni" }, { v: 2 }, ] }
+                        ]
+                    },
+                    options: { 'title': 'Second' }
+                };
+
+
                 //$scope.myChartObject.type = "PieChart";
-                $scope.myChartObject.type = "ColumnChart";
-
-
-                $scope.myChartObject.data = {
-                    "cols": [
-                        { id: "t", label: "Items", type: "string" },
-                        { id: "s", label: "Value", type: "number" }
-                    ],
-                    "rows": [
-                        {
-                            c: [
-                               { v: "Mushrooms" },
-                               { v: 3 },
-                            ]
-                        },
-                        {
-                            c: [
-                                { v: "Onions" },
-                                { v: 3 },
-                            ]
-                        },
-                        {
-                            c: [
-                               { v: "Olives" },
-                               { v: 31 }
-                            ]
-                        },
-                        {
-                            c: [
-                               { v: "Zucchini" },
-                               { v: 1 },
-                            ]
-                        },
-                        {
-                            c: [
-                               { v: "Pepperoni" },
-                               { v: 2 },
-                            ]
-                        }
-                    ]
-                };
-
-                $scope.myChartObject.options = {
-                    'title': 'How Much Pizza I Ate Last Night'
-                };
+                //$scope.myChartObject.type = "ColumnChart";
 
                 // --- google chart end
 
+                // geo location
                 yuyanAPISvc.surveyClientReportSvc().query({ surveyId: survey.SurveyId },
                     function (data) {
                         $scope.surveyClient = data;
@@ -77,15 +71,20 @@
                         });
 
                         $scope.APIResolved++;
-                        yuyanAPISvc.surveyClientAnswerDicSvc().get({ surveyId: survey.SurveyId },
-                           function (data) {
-                               $scope.checkedHashtb = data;
-                               $scope.APIResolved++;
-                           }, function () {
-                               toastr.error("Error please refresh the page.");
-                           });
-
                     }, function (error) {
+                        toastr.error("Error please refresh the page.");
+                    });
+
+                // question result 
+                yuyanAPISvc.surveyClientAnswerDicSvc().get({ surveyId: survey.SurveyId },
+                    function (data) {
+                        $scope.checkedHashtb = data;
+
+                        //preparing the chart data
+
+
+                        $scope.APIResolved++;
+                    }, function () {
                         toastr.error("Error please refresh the page.");
                     });
 
