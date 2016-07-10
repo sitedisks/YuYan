@@ -11,13 +11,15 @@
             <uib-tabset active="activeJustified" justified="true">
             
                 <uib-tab tabindex="1" heading="Google Chart">
-                    <h3>Google Chart</h3>
-                    <div google-chart chart="myChartObject1" style="height:600px; width:100%;"></div>
-
+                    <h3>{{survey.Title}}</h3>
+                    <h4>{{survey.ShortDesc}}</h4>
+                    <h5>{{survey.LongDesc}}</h5>
+                    <br class="xs-10" />
                     <div data-ng-repeat="chart in chartGroup track by $index">
-
+                        <h4>{{chart.options.title}}</h4>
+                         
                         <div google-chart chart="chart" style="height:600px; width:100%;"></div>
-                        <br />
+                       
                     </div>
 
                 </uib-tab>

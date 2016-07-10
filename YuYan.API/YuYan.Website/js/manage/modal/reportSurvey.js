@@ -2,8 +2,8 @@
     'use strick';
 
     angular.module('yuyanApp')
-        .controller('reportSurveyCtrl', ['$scope', '$uibModalInstance', 'survey', 'localStorageService', 'yuyanAPISvc',
-            function ($scope, $uibModalInstance, survey, localStorageService, yuyanAPISvc) {
+        .controller('reportSurveyCtrl', ['$scope', '$uibModalInstance', '$timeout', 'survey', 'localStorageService', 'yuyanAPISvc',
+            function ($scope, $uibModalInstance, $timeout, survey, localStorageService, yuyanAPISvc) {
 
                 $scope.survey = survey;
                 $scope.geoStatus = {};
@@ -13,44 +13,46 @@
 
 
                 // --- google chart start
-                $scope.chartGroup = [myChartObject1, myChartObject2];
 
-                var myChartObject1 = {
-                    type: "BarChart",
-                    data: {
-                        "cols": [
-                                    { id: "t", label: "Items", type: "string" },
-                                    { id: "s", label: "Value", type: "number" }
-                        ],
-                        "rows": [
-                                    { c: [{ v: "Mushrooms" }, { v: 3 }, ] },
-                                    { c: [{ v: "Onions" }, { v: 3 }, ] },
-                                    { c: [{ v: "Olives" }, { v: 31 }] },
-                                    { c: [{ v: "Zucchini" }, { v: 1 }, ] },
-                                    { c: [{ v: "Pepperoni" }, { v: 2 }, ] }
-                        ]
-                    },
-                    options: { 'title': 'How Much Pizza I Ate Last Night' }
-                };
+                $scope.charType = "BarChart";
+                $scope.chartGroup = [];
 
-                var myChartObject2 = {
-                    type: "BarChart",
-                    data: {
-                        "cols": [
-                                    { id: "t", label: "Items", type: "string" },
-                                    { id: "s", label: "Value", type: "number" }
-                        ],
-                        "rows": [
-                                    { c: [{ v: "Mushrooms" }, { v: 3 }, ] },
-                                    { c: [{ v: "Onions" }, { v: 3 }, ] },
-                                    { c: [{ v: "Olives" }, { v: 31 }] },
-                                    { c: [{ v: "Zucchini" }, { v: 1 }, ] },
-                                    { c: [{ v: "Pepperoni" }, { v: 2 }, ] }
-                        ]
-                    },
-                    options: { 'title': 'Second' }
-                };
 
+                yuyanAPISvc.surveyClientAnswerDicSvc().get({ surveyId: survey.SurveyId },
+                    function (data) {
+                        $scope.checkedHashtb = data;
+
+                        $timeout(function () {
+                            //preparing the chart data
+                            angular.forEach($scope.survey.dtoQuestions, function (question) {
+
+                                var rows = [];
+
+                                angular.forEach(question.dtoItems, function (item) {
+                                    var row = { c: [{ v: item.ItemDescription }, { v: data[item.QuestionItemId] == null ? 0 : data[item.QuestionItemId] }, ] };
+                                    rows.push(row);
+                                });
+
+                                var questionChart = {
+                                    type: $scope.charType,
+                                    data: {
+                                        "cols": [{ id: "t", label: "Items", type: "string" }, { id: "s", label: "Counts", type: "number" }],
+                                        "rows": rows
+                                    },
+                                    options: { 'title': question.Question }
+                                };
+
+                                $scope.chartGroup.push(questionChart);
+
+                            });
+
+                        }, 300);
+                        
+ 
+                        $scope.APIResolved++;
+                    }, function () {
+                        toastr.error("Error please refresh the page.");
+                    });
 
                 //$scope.myChartObject.type = "PieChart";
                 //$scope.myChartObject.type = "ColumnChart";
@@ -76,6 +78,7 @@
                     });
 
                 // question result 
+                /*
                 yuyanAPISvc.surveyClientAnswerDicSvc().get({ surveyId: survey.SurveyId },
                     function (data) {
                         $scope.checkedHashtb = data;
@@ -87,6 +90,7 @@
                     }, function () {
                         toastr.error("Error please refresh the page.");
                     });
+                    */
 
 
                 $scope.ok = function () {
