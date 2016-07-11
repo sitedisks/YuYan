@@ -1343,7 +1343,7 @@
     <Content Include="js\map\map.controller.js" />
     <Content Include="js\services.auth.js" />
     <Content Include="js\services.js" />
-    <Content Include="js\toastr.option.js" />
+    <Content Include="js\global.js" />
     <Content Include="templates\footer.html" />
     <Content Include="templates\header.html" />
     <Content Include="templates\messages.html" />

@@ -96,7 +96,8 @@ gulp.task('ngCodes', function(){
 		,'bower_components/angular-messages/angular-messages.min.js'
 		,'bower_components/ng-file-upload/ng-file-upload-shim.min.js'
 		,'bower_components/ng-file-upload/ng-file-upload.min.js'
-		,'bower_components/angularjs-slider/dist/rzslider.min.js'])
+		,'bower_components/angularjs-slider/dist/rzslider.min.js'
+		,'bower_components/angular-google-chart/ng-google-chart.min.js'])
 		.pipe($.if('*.js', $.concat('ngCodes.js'))) 
 		.pipe($.uglify())
 		.pipe(gulp.dest('dist/bower_components'));
@@ -235,7 +236,8 @@ gulp.task('ngCodes_debug', function(){
 		,'bower_components/angular-messages/angular-messages.min.js'
 		,'bower_components/ng-file-upload/ng-file-upload-shim.min.js'
 		,'bower_components/ng-file-upload/ng-file-upload.min.js'
-		,'bower_components/angularjs-slider/dist/rzslider.min.js'])
+		,'bower_components/angularjs-slider/dist/rzslider.min.js'
+		,'bower_components/angular-google-chart/ng-google-chart.min.js'])
 		// .pipe($.if('*.js', $.concat('ngCodes.js'))) 
 		// .pipe($.uglify())
 		.pipe(gulp.dest('debug/bower_components'));
