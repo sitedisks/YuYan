@@ -5,6 +5,8 @@
         .controller('reportSurveyCtrl', ['$scope', '$uibModalInstance', '$timeout', 'survey', 'localStorageService', 'yuyanAPISvc', 'uiGmapGoogleMapApi', 'uiGmapIsReady',
             function ($scope, $uibModalInstance, $timeout, survey, localStorageService, yuyanAPISvc, uiGmapGoogleMapApi, uiGmapIsReady) {
 
+                var geocoder = new google.maps.Geocoder();
+
                 $scope.survey = survey;
                 $scope.geoStatus = {};
                 $scope.checkedHashtb;
@@ -17,7 +19,21 @@
                 $scope.charType = "BarChart";
                 $scope.chartGroup = [];
 
-                
+                var lat = -37.8140000, lng = 144.9633200; // default melbourne 
+                $scope.marker = { id: 6, coords: { latitude: lat, longitude: lng } };
+
+                var i = 3;
+                $scope.markers = [
+					{ id: 0, coords: { latitude: lat, longitude: lng }, info: "marker1" },
+					{ id: 1, coords: { latitude: lat + 0.2, longitude: lng }, info: "marker2" },
+					{ id: 2, coords: { latitude: lat + 0.3, longitude: lng }, info: "marker3" }
+                ];
+
+                $scope.clickMe = clickMe;
+
+                function clickMe() {
+                    toastr.success("Docker it!");
+                }
 
                 yuyanAPISvc.surveyClientAnswerDicSvc().get({ surveyId: survey.SurveyId },
                     function (data) {
@@ -48,8 +64,8 @@
                             });
 
                         }, 300);
-                        
- 
+
+
                         $scope.APIResolved++;
                     }, function () {
                         toastr.error("Error please refresh the page.");
@@ -71,6 +87,18 @@
                                 $scope.geoStatus[address] = { name: address, count: 1 };
                             else
                                 $scope.geoStatus[address] = { name: address, count: $scope.geoStatus[address].count + 1 };
+
+                            // geo location reverse
+                            geocoder.geocode({ 'address': address }, function (results, status) {
+                                if (status == google.maps.GeocoderStatus.OK) {
+                                    var center = results[0].geometry.location;
+                                    var lat = center.lat();
+                                    var lng = center.lng();
+                                }
+
+                                $scope.markers.push({ id: i++, coords: { latitude: lat, longitude: lng }, info: "marker" + i });
+
+                            });
                         });
 
                         doMap();
@@ -80,14 +108,14 @@
                         toastr.error("Error please refresh the page.");
                     });
 
-              
+
                 function doMap() {
 
                     uiGmapGoogleMapApi.then(function (maps) {
 
                         //lodashFix();
                         //geocoder.geocode({});
-                        var lat = -37.8140000, lng = 144.9633200; // default melbourne 
+
                         $scope.map = {
                             center: { latitude: lat, longitude: lng },
                             zoom: 12,
