@@ -29,6 +29,12 @@
       QUnit.config.hidepassed = true;
       QUnit.config.excused = {
         'Arrays': {
+          'chunk': [
+            'defaults to empty array (chunk size 0)'
+          ],
+          'difference': [
+            'can perform an OO-style difference'
+          ],
           'drop': [
             'is an alias for rest'
           ],
@@ -99,11 +105,15 @@
             'is an alias for first'
           ],
           'uniq': [
-            'can find the unique values of an array using a custom iterator',
-            'can find the unique values of an array using a custom iterator without specifying whether array is sorted',
-            'string iterator works with sorted array',
-            'can use pluck like iterator',
+            'uses the result of `iterator` for uniqueness comparisons (unsorted case)',
+            '`sorted` argument defaults to false when omitted',
+            'when `iterator` is a string, uses that key for comparisons (unsorted case)',
+            'uses the result of `iterator` for uniqueness comparisons (sorted case)',
+            'when `iterator` is a string, uses that key for comparisons (sorted case)',
             'can use falsey pluck like iterator'
+          ],
+          'union': [
+            'can perform an OO-style union'
           ]
         },
         'Chaining': {
@@ -284,6 +294,9 @@
           'isMatch': [
             'doesnt falsey match constructor on undefined/null'
           ],
+          'isSet': [
+            'Died on test #9'
+          ],
           'findKey': [
             'called with context'
           ],
@@ -374,8 +387,6 @@
 
       // Only excuse in Sauce Labs.
       if (!ui.isSauceLabs) {
-        delete QUnit.config.excused.Functions['throttle repeatedly with results'];
-        delete QUnit.config.excused.Functions['more throttle does not trigger leading call when leading is set to false'];
         delete QUnit.config.excused.Functions['throttle does not trigger trailing call when trailing is set to false'];
         delete QUnit.config.excused.Utility.now;
       }
@@ -455,10 +466,6 @@
 
         require(getConfig(), [moduleId], function(lodash) {
           mixinPrereqs(lodash);
-
-          if (ui.isModularize) {
-            window._ = lodash;
-          }
           require(getConfig(), [
             'test/collections',
             'test/arrays',

@@ -2,8 +2,8 @@
     'use strick';
 
     angular.module('yuyanApp')
-        .controller('reportSurveyCtrl', ['$scope', '$uibModalInstance', '$timeout', 'survey', 'localStorageService', 'yuyanAPISvc', 'uiGmapGoogleMapApi',
-            function ($scope, $uibModalInstance, $timeout, survey, localStorageService, yuyanAPISvc, uiGmapGoogleMapApi) {
+        .controller('reportSurveyCtrl', ['$scope', '$uibModalInstance', '$timeout', 'survey', 'localStorageService', 'yuyanAPISvc', 'uiGmapGoogleMapApi', 'uiGmapIsReady',
+            function ($scope, $uibModalInstance, $timeout, survey, localStorageService, yuyanAPISvc, uiGmapGoogleMapApi, uiGmapIsReady) {
 
                 $scope.survey = survey;
                 $scope.geoStatus = {};
@@ -17,6 +17,7 @@
                 $scope.charType = "BarChart";
                 $scope.chartGroup = [];
 
+                
 
                 yuyanAPISvc.surveyClientAnswerDicSvc().get({ surveyId: survey.SurveyId },
                     function (data) {
@@ -72,25 +73,37 @@
                                 $scope.geoStatus[address] = { name: address, count: $scope.geoStatus[address].count + 1 };
                         });
 
+                        doMap();
+
                         $scope.APIResolved++;
                     }, function (error) {
                         toastr.error("Error please refresh the page.");
                     });
 
-                // question result 
-                /*
-                yuyanAPISvc.surveyClientAnswerDicSvc().get({ surveyId: survey.SurveyId },
-                    function (data) {
-                        $scope.checkedHashtb = data;
+              
+                function doMap() {
 
-                        //preparing the chart data
+                    uiGmapGoogleMapApi.then(function (maps) {
 
+                        //lodashFix();
+                        //geocoder.geocode({});
+                        var lat = -37.8140000, lng = 144.9633200; // default melbourne 
+                        $scope.map = {
+                            center: { latitude: lat, longitude: lng },
+                            zoom: 12,
+                            options: { scrollwheel: true },
+                            control: {},
+                            events: {
+                                tilesloaded: function (map) {
+                                    $scope.$apply(function () {
+                                        google.maps.event.trigger(map, 'resize');
+                                    });
+                                }
+                            }
+                        };
 
-                        $scope.APIResolved++;
-                    }, function () {
-                        toastr.error("Error please refresh the page.");
                     });
-                    */
+                }
 
 
                 $scope.ok = function () {

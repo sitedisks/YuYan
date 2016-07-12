@@ -17,3 +17,11 @@ function validateEmail($email) {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     return emailReg.test($email);
 }
+
+//fix of lodash.js
+function lodashFix() {
+    if (typeof _.contains === 'undefined')
+        _.contains = _.includes;
+    if (typeof _.object === 'undefined')
+        _.object = _.zipObject;
+}

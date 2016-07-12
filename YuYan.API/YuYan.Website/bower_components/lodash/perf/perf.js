@@ -43,11 +43,11 @@
     if (!amd) {
       try {
         result = require('fs').realpathSync(result);
-      } catch(e) {}
+      } catch (e) {}
 
       try {
         result = require.resolve(result);
-      } catch(e) {}
+      } catch (e) {}
     }
     return result;
   }());
@@ -82,12 +82,6 @@
   /** Used to queue benchmark suites. */
   var suites = [];
 
-  /** Used to resolve a value's internal [[Class]]. */
-  var toString = Object.prototype.toString;
-
-  /** Detect if in a browser environment. */
-  var isBrowser = isHostType(root, 'document') && isHostType(root, 'navigator');
-
   /** Use a single "load" function. */
   var load = (typeof require == 'function' && !amd)
     ? require
@@ -109,7 +103,7 @@
 
   /** Load Benchmark.js. */
   var Benchmark = root.Benchmark || (root.Benchmark = (
-    Benchmark = load('../vendor/benchmark.js/benchmark.js') || root.Benchmark,
+    Benchmark = load('../node_modules/benchmark/benchmark.js') || root.Benchmark,
     Benchmark = Benchmark.Benchmark || Benchmark,
     Benchmark.runInContext(lodash.extend({}, root, { '_': lodash }))
   ));
@@ -565,11 +559,11 @@
   suites.push(
     Benchmark.Suite('`_.assign`')
       .add(buildName, {
-        'fn': 'lodashAssign({}, object)',
+        'fn': 'lodashAssign({}, { "a": 1, "b": 2, "c": 3 })',
         'teardown': 'function assign(){}'
       })
       .add(otherName, {
-        'fn': '_assign({}, object)',
+        'fn': '_assign({}, { "a": 1, "b": 2, "c": 3 })',
         'teardown': 'function assign(){}'
       })
   );
@@ -577,11 +571,11 @@
   suites.push(
     Benchmark.Suite('`_.assign` with multiple sources')
       .add(buildName, {
-        'fn': 'lodashAssign({}, object, object)',
+        'fn': 'lodashAssign({}, { "a": 1, "b": 2 }, { "c": 3, "d": 4 })',
         'teardown': 'function assign(){}'
       })
       .add(otherName, {
-        'fn': '_assign({}, object, object)',
+        'fn': '_assign({}, { "a": 1, "b": 2 }, { "c": 3, "d": 4 })',
         'teardown': 'function assign(){}'
       })
   );

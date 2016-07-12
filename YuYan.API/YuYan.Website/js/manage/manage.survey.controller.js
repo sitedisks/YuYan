@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('yuyanApp').controller('manageCtrl', ['$scope', '$rootScope', '$state', '$uibModal', 'yuyanAPISvc', 'yuyanAuthSvc',
-        function ($scope, $rootScope, $state, $uibModal, yuyanAPISvc, yuyanAuthSvc) {
+    angular.module('yuyanApp').controller('manageCtrl', ['$scope', '$rootScope', '$state', '$uibModal', 'yuyanAPISvc', 'yuyanAuthSvc', 'uiGmapGoogleMapApi',
+        function ($scope, $rootScope, $state, $uibModal, yuyanAPISvc, yuyanAuthSvc, uiGmapGoogleMapApi) {
 
             $scope.APIMini = 2;
             $scope.APIResolved = 0;
@@ -24,6 +24,7 @@
 
 
             suveryListInit(true);
+            //doMap();
 
             $scope.$watch("currentPage", function (newValue, oldValue) {
 
@@ -167,6 +168,22 @@
                     // dismissed log
                 });
             }
+
+            // google map Test
+            /*
+            function doMap() {
+                uiGmapGoogleMapApi.then(function (maps) {
+ 
+                    var lat = -37.8140000, lng = 144.9633200; // default melbourne 
+                    $scope.map = {
+                        center: { latitude: lat, longitude: lng },
+                        zoom: 12,
+                        options: { scrollwheel: true },
+                        control: {}
+                    };
+
+                });
+            }*/
 
         }]);
 
