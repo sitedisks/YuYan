@@ -2,8 +2,8 @@
     'use strick';
 
     angular.module('yuyanApp')
-        .controller('reportSurveyCtrl', ['$scope', '$uibModalInstance', '$timeout', 'survey', 'localStorageService', 'yuyanAPISvc',
-            function ($scope, $uibModalInstance, $timeout, survey, localStorageService, yuyanAPISvc) {
+        .controller('reportSurveyCtrl', ['$scope', '$uibModalInstance', '$timeout', 'survey', 'localStorageService', 'yuyanAPISvc', 'uiGmapGoogleMapApi',
+            function ($scope, $uibModalInstance, $timeout, survey, localStorageService, yuyanAPISvc, uiGmapGoogleMapApi) {
 
                 $scope.survey = survey;
                 $scope.geoStatus = {};

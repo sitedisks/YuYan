@@ -11,3 +11,9 @@ toastr.options = {
 function isNullOrEmpty(s) {
     return (s == null || s === "");
 }
+
+// validate email
+function validateEmail($email) {
+    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    return emailReg.test($email);
+}

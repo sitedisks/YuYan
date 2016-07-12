@@ -7,9 +7,9 @@
             <i class="fa fa-refresh fa-spin" style="font-size:48px"></i>
         </div>
         <div data-ng-show="APIMini <= APIResolved">
-          
+
             <uib-tabset active="activeJustified" justified="true">
-            
+
                 <uib-tab tabindex="1" heading="Google Chart">
                     <h3>{{survey.Title}}</h3>
                     <h4>{{survey.ShortDesc}}</h4>
@@ -17,14 +17,14 @@
                     <br class="xs-10" />
                     <div data-ng-repeat="chart in chartGroup track by $index">
                         <h4>{{chart.options.title}}</h4>
-                         
+
                         <div google-chart chart="chart" style="height:600px; width:100%;"></div>
-                       
+
                     </div>
 
                 </uib-tab>
                 <uib-tab index="2" heading="General">
-             
+
                     <div class="form-group">
                         <h3>{{survey.Title}}</h3>
                         <h4>{{survey.ShortDesc}}</h4>
@@ -73,7 +73,7 @@
                     </div>
                 </uib-tab>
                 <uib-tab index="3" heading="Status">
-                  
+
                     <h3>{{survey.Title}}</h3>
                     <h4>{{survey.ShortDesc}}</h4>
                     <h5>{{survey.LongDesc}}</h5>
@@ -94,14 +94,31 @@
                                     <span class="label label-info">{{checkedHashtb[i.QuestionItemId]}}</span>
                                 </div>
                             </div>
-
-
                         </div>
 
                     </div>
-                   
                 </uib-tab>
-              
+                <uib-tab index="4" heading="Map Test">
+                    <!-- Map -->
+                    <ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options" control="map.control">
+                        <!--<ui-gmap-marker coords="marker.coords" options="marker.options" idkey="marker.id" events="marker.events" data-ng-if="marker">
+                            <ui-gmap-window>
+                                <div>
+                                    IP: {{clocation.ip}} <br />
+                                    {{clocation.city}}, {{clocation.region_name}} {{clocation.country_code}} {{clocation.zip_code}}
+                                    <br />
+                                    <button class="btn btn-default" data-ng-click="$parent.clickMe()">Click me</button>
+                                </div>
+                            </ui-gmap-window>
+                        </ui-gmap-marker>-->
+                        <!-- <ui-gmap-marker data-ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id" events="marker.events">
+                            <ui-gmap-window>
+                                <div>{{marker.info}} + {{clocation}}</div>
+                            </ui-gmap-window>
+                        </ui-gmap-marker> -->
+                    </ui-gmap-google-map>
+                </uib-tab>
+
             </uib-tabset>
         </div>
 
@@ -110,7 +127,9 @@
 </div>
 <div class="modal-footer">
     <div class="pull-right">
-      
+
+        <button ty
+
         <button type="button" class="btn btn-link btn-sm" data-ng-click="cancel()">
             {{'BTN_CANCEL' | translate}}
         </button>
