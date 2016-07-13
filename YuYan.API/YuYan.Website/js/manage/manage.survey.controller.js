@@ -4,6 +4,8 @@
     angular.module('yuyanApp').controller('manageCtrl', ['$scope', '$rootScope', '$state', '$uibModal', 'yuyanAPISvc', 'yuyanAuthSvc', 'uiGmapGoogleMapApi',
         function ($scope, $rootScope, $state, $uibModal, yuyanAPISvc, yuyanAuthSvc, uiGmapGoogleMapApi) {
 
+            //var geocoder = new google.maps.Geocoder();
+
             $scope.APIMini = 2;
             $scope.APIResolved = 0;
 
@@ -25,6 +27,15 @@
 
             suveryListInit(true);
             //doMap();
+            /* test google map key
+            geocoder.geocode({ 'address': '127 Balwyn Road, Balwyn, VIC' }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var center = results[0].geometry.location;
+                    var lat = center.lat();
+                    var lng = center.lng();
+                }
+
+            });*/
 
             $scope.$watch("currentPage", function (newValue, oldValue) {
 

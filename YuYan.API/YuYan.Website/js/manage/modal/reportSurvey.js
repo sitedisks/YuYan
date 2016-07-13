@@ -6,6 +6,8 @@
             function ($scope, $uibModalInstance, $timeout, survey, localStorageService, yuyanAPISvc, uiGmapGoogleMapApi, uiGmapIsReady) {
 
                 var geocoder = new google.maps.Geocoder();
+                var lat = -37.8140000, lng = 144.9633200; // default melbourne 
+                var i = 0;
 
                 $scope.survey = survey;
                 $scope.geoStatus = {};
@@ -13,27 +15,19 @@
                 $scope.APIMini = 2;
                 $scope.APIResolved = 0;
 
-
                 // --- google chart start
-
-                $scope.charType = "BarChart";
+                $scope.charType = "BarChart"; // "PieChart"; "ColumnChart";
                 $scope.chartGroup = [];
 
-                var lat = -37.8140000, lng = 144.9633200; // default melbourne 
-                $scope.marker = { id: 6, coords: { latitude: lat, longitude: lng } };
+                // --- google map markers
+                $scope.markers = [];
 
-                var i = 3;
-                $scope.markers = [
-					{ id: 0, coords: { latitude: lat, longitude: lng }, info: "marker1" },
-					{ id: 1, coords: { latitude: lat + 0.2, longitude: lng }, info: "marker2" },
-					{ id: 2, coords: { latitude: lat + 0.3, longitude: lng }, info: "marker3" }
-                ];
-
+                // --- functions
                 $scope.clickMe = clickMe;
+                $scope.ok = ok;
+                $scope.cancel = cancel;
 
-                function clickMe() {
-                    toastr.success("Docker it!");
-                }
+
 
                 yuyanAPISvc.surveyClientAnswerDicSvc().get({ surveyId: survey.SurveyId },
                     function (data) {
@@ -60,7 +54,6 @@
                                 };
 
                                 $scope.chartGroup.push(questionChart);
-
                             });
 
                         }, 300);
@@ -70,11 +63,6 @@
                     }, function () {
                         toastr.error("Error please refresh the page.");
                     });
-
-                //$scope.myChartObject.type = "PieChart";
-                //$scope.myChartObject.type = "ColumnChart";
-
-                // --- google chart end
 
                 // geo location
                 yuyanAPISvc.surveyClientReportSvc().query({ surveyId: survey.SurveyId },
@@ -87,18 +75,6 @@
                                 $scope.geoStatus[address] = { name: address, count: 1 };
                             else
                                 $scope.geoStatus[address] = { name: address, count: $scope.geoStatus[address].count + 1 };
-
-                            // geo location reverse
-                            geocoder.geocode({ 'address': address }, function (results, status) {
-                                if (status == google.maps.GeocoderStatus.OK) {
-                                    var center = results[0].geometry.location;
-                                    var lat = center.lat();
-                                    var lng = center.lng();
-                                }
-
-                                $scope.markers.push({ id: i++, coords: { latitude: lat, longitude: lng }, info: "marker" + i });
-
-                            });
                         });
 
                         doMap();
@@ -111,11 +87,10 @@
 
                 function doMap() {
 
+                    // set map
                     uiGmapGoogleMapApi.then(function (maps) {
-
                         //lodashFix();
                         //geocoder.geocode({});
-
                         $scope.map = {
                             center: { latitude: lat, longitude: lng },
                             zoom: 12,
@@ -131,14 +106,37 @@
                         };
 
                     });
+
+                    // set marker
+                    angular.forEach($scope.geoStatus, function (geoMarker) {
+                        geocoder.geocode({ 'address': geoMarker.name }, function (results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                var center = results[0].geometry.location;
+                                var lat = center.lat();
+                                var lng = center.lng();
+                            }
+
+                            $scope.markers.push({
+                                id: i++,
+                                coords: { latitude: lat, longitude: lng },
+                                area: geoMarker.name,
+                                count: geoMarker.count
+                            });
+
+                        });
+                    });
                 }
 
+                
+                function clickMe() {
+                    toastr.success("Docker it!");
+                }
 
-                $scope.ok = function () {
+                function ok () {
                     $uibModalInstance.close(surveyClient);
                 };
 
-                $scope.cancel = function () {
+                function cancel () {
                     $uibModalInstance.dismiss('cancel');
                 };
 
