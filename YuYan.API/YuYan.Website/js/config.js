@@ -5,7 +5,7 @@
         function ($httpProvider, $urlRouterProvider, $stateProvider, $locationProvider, cfpLoadingBarProvider) {
             $httpProvider.interceptors.push('authInterceptorSvc'); // Set the global $http interceptor - http header
             cfpLoadingBarProvider.includeSpinner = false;  // angular loading bar no spinner
-            
+
             $urlRouterProvider.otherwise("/");
             $stateProvider
                 .state("home", {
@@ -34,6 +34,15 @@
                     url: "/result",
                     templateUrl: "/components/manage/manage.result.html",
                     controller: "manageResultCtrl",
+                    params: {
+                        survey: null
+                    }
+                })
+
+                .state("statistic", {
+                    url: "/statistic",
+                    templateUrl: "/components/manage/manage.statistic.html",
+                    controller: "manageStatisticCtrl",
                     params: {
                         survey: null
                     }

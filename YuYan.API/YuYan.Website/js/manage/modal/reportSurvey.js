@@ -107,7 +107,7 @@
 
                     });
 
-                    // set marker
+                    // set markers
                     angular.forEach($scope.geoStatus, function (geoMarker) {
                         geocoder.geocode({ 'address': geoMarker.name }, function (results, status) {
                             if (status == google.maps.GeocoderStatus.OK) {

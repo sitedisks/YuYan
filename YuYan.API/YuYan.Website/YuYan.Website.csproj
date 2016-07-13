@@ -387,12 +387,14 @@
     <Content Include="chat.html" />
     <Content Include="client\js\controller.chorice.back" />
     <Content Include="client\js\controller.head.js" />
+    <Content Include="components\manage\manage.statistic.html" />
     <Content Include="data\locale-cn.json" />
     <Content Include="data\locale-en.json" />
     <Content Include="howto_dist.html" />
     <Content Include="img\howto\chorice_step2.jpg" />
     <Content Include="img\howto\chorice_step3.jpg" />
     <Content Include="img\pic_angular.jpg" />
+    <Content Include="js\manage\manage.statistic.controller.js" />
     <Content Include="package.json" />
     <Content Include="bower_components\angular-social-links\.bower.json" />
     <Content Include="bower_components\angular-social-links\angular-social-links.coffee" />

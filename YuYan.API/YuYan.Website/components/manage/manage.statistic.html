@@ -1,0 +1,22 @@
+﻿<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <button type="button" class="btn btn-link" data-ng-click="goHome()">
+            &laquo; {{'BTN_HOME' | translate}}
+        </button>
+        <span class="text-primary"> | </span>
+        <button type="button" class="btn btn-link" data-ng-click="goSurvey()">
+            {{'BTN_SURVEY' | translate}}
+        </button>
+
+        <div>
+            <div class="text-center text-primary" style="margin-top: 30px;" data-ng-show="APIMini > APIResolved">
+                <br class="xs-20" />
+                <i class="fa fa-spinner fa-pulse" style="font-size:48px"></i>
+            </div>
+            <div data-ng-show="APIMini <= APIResolved">
+                <h2 class="text-primary">{{survey.Title}}</h2>
+            </div>
+        </div>
+
+    </div>
+</div>

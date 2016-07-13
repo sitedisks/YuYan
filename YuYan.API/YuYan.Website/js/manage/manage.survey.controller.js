@@ -13,6 +13,7 @@
             $scope.goHome = goHome;
             $scope.goQuestion = goQuestion;
             $scope.goResult = goResult;
+            $scope.goStatistic = goStatistic;
             $scope.previewSurvey = previewSurvey;
             $scope.deleteSurvey = deleteSurvey;
             $scope.addEditSurvey = addEditSurvey;
@@ -88,6 +89,10 @@
 
             function goResult(survey) {
                 $state.go('result', { survey: survey }, { location: false });
+            }
+
+            function goStatistic(survey) {
+                $state.go('statistic', { survey: survey }, { location: false });
             }
 
             function previewSurvey(survey) {
