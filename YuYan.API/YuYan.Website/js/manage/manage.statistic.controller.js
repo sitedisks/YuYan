@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('yuyanApp').controller('manageStatisticCtrl', ['$scope', '$stateParams', '$state', '$timeout', '$uibModal', 'yuyanAPISvc',
-        function ($scope, $stateParams, $state, $timeout, $uibModal, yuyanAPISvc) {
+    angular.module('yuyanApp').controller('manageStatisticCtrl', ['$scope', '$stateParams', '$state', '$timeout', '$uibModal', 'yuyanAPISvc', 'uiGmapGoogleMapApi', 'uiGmapIsReady',
+        function ($scope, $stateParams, $state, $timeout, $uibModal, yuyanAPISvc, uiGmapGoogleMapApi, uiGmapIsReady) {
 
             var geocoder = new google.maps.Geocoder();
             var lat = -37.8140000, lng = 144.9633200; // default melbourne 
@@ -14,11 +14,12 @@
             $scope.survey = $stateParams.survey;
             var survey = $scope.survey;
 
-            // --- google chart start
+
             $scope.charType = "BarChart"; // "PieChart"; "ColumnChart";
             $scope.chartGroup = [];
 
-            // --- google map markers
+            // --- google map
+            $scope.geoStatus = {};
             $scope.markers = [];
 
             // functions
@@ -70,7 +71,7 @@
             function RetrieveClientReport() {
                 yuyanAPISvc.surveyClientReportSvc().query({ surveyId: survey.SurveyId },
                     function (data) {
-  
+
                         angular.forEach(data, function (client) {
                             var address = client.City + ' ' + client.State + ', ' + client.Country;
                             if ($scope.geoStatus[address] === undefined)

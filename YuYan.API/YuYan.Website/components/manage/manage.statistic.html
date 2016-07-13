@@ -14,7 +14,36 @@
                 <i class="fa fa-spinner fa-pulse" style="font-size:48px"></i>
             </div>
             <div data-ng-show="APIMini <= APIResolved">
-                <h2 class="text-primary">{{survey.Title}}</h2>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h3>{{survey.Title}}</h3>
+                        <h4>{{survey.ShortDesc}}</h4>
+                        <h5>{{survey.LongDesc}}</h5>
+                        <!-- Chart -->
+                        <div data-ng-repeat="chart in chartGroup track by $index">
+                            <h4>{{chart.options.title}}</h4>
+                            <div google-chart chart="chart" style="width:100%;"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <!-- Map -->
+                        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options" control="map.control">
+
+                            <ui-gmap-marker data-ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id" events="marker.events">
+                                <ui-gmap-window>
+                                    <div>
+                                        <b>Area: </b>{{marker.area}}
+                                        <br class="xs-10" />
+                                        <b>Count: </b>{{marker.count}}
+                                        <br class="xs-10" />
+                                        <button class="btn btn-link pull-right" data-ng-click="$parent.clickMe()">Dock It</button>
+                                    </div>
+                                </ui-gmap-window>
+                            </ui-gmap-marker>
+                        </ui-gmap-google-map>
+                    </div>
+
+                </div>
             </div>
         </div>
 
