@@ -109,6 +109,11 @@
                         }
                     };
 
+                    uiGmapIsReady.promise().then(function () {
+                        var map = $scope.map.control.getGMap();
+                        google.maps.event.trigger(map, 'resize');
+                    });
+
                 });
 
                 // set markers

@@ -7,25 +7,21 @@
         <button type="button" class="btn btn-link" data-ng-click="goSurvey()">
             {{'BTN_SURVEY' | translate}}
         </button>
-
+        <!--<div class="pull-right">
+            <button type="button" class="btn btn-link">Location</button>
+            <span class="text-primary"> | </span>
+            <button type="button" class="btn btn-link">Answer Statistic</button>
+        </div>-->
+       
         <div>
             <div class="text-center text-primary" style="margin-top: 30px;" data-ng-if="APIMini > APIResolved">
                 <br class="xs-20" />
                 <i class="fa fa-spinner fa-pulse" style="font-size:48px"></i>
             </div>
             <div data-ng-if="APIMini <= APIResolved">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <h3>{{survey.Title}}</h3>
-                        <h4>{{survey.ShortDesc}}</h4>
-                        <h5>{{survey.LongDesc}}</h5>
-                        <!-- Chart -->
-                        <div data-ng-repeat="chart in chartGroup track by $index">
-                            <h4>{{chart.options.title}}</h4>
-                            <div google-chart chart="chart" style="width:100%;"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
+                <uib-tabset>
+                    <uib-tab tabindex="1" heading="Location Statistic">
+                        <h3>User answer area location</h3>
                         <!-- Map -->
                         <ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options" control="map.control">
 
@@ -41,9 +37,50 @@
                                 </ui-gmap-window>
                             </ui-gmap-marker>
                         </ui-gmap-google-map>
-                    </div>
+                    </uib-tab>
+                    <uib-tab tabindex="2" heading="Answer Statistic">
+                        <h3>Answer counts for each question items</h3>
+                        <div class="row">
+                            <h3>{{survey.Title}}</h3>
+                            <h4>{{survey.ShortDesc}}</h4>
+                            <h5>{{survey.LongDesc}}</h5>
+                            <br class="xs-10" />
+                            <div class="col-sm-4">
 
-                </div>
+                                <div class="form-group" data-ng-repeat="q in survey.dtoQuestions">
+                                    <h3>
+                                        <span class="badge alert-success" style="font-size:16px">{{q.QuestionOrder}}</span> {{q.Question}}
+                                    </h3>
+
+                                    <div data-ng-repeat="i in q.dtoItems" data-ng-class="{'checkbox checkbox-success':q.QuestionType==1, 'radio radio-success':q.QuestionType==2}">
+                                        <div class="row">
+                                            <div class="col-xs-5 col-xs-offset-1">
+                                                <input type="checkbox" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==1" />
+                                                <input type="radio" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==2" />
+                                                <label for="item{{i.QuestionItemId}}">{{i.ItemDescription}}</label>
+
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <span class="label label-info">{{checkedHashtb[i.QuestionItemId]}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                         
+                                <!-- Chart -->
+                                <div data-ng-repeat="chart in chartGroup track by $index">
+                                    <h4>{{chart.options.title}}</h4>
+                                    <div google-chart chart="chart" style="width:100%;"></div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+                
             </div>
         </div>
 
