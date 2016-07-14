@@ -9,11 +9,11 @@
         </button>
 
         <div>
-            <div class="text-center text-primary" style="margin-top: 30px;" data-ng-show="APIMini > APIResolved">
+            <div class="text-center text-primary" style="margin-top: 30px;" data-ng-if="APIMini > APIResolved">
                 <br class="xs-20" />
                 <i class="fa fa-spinner fa-pulse" style="font-size:48px"></i>
             </div>
-            <div data-ng-show="APIMini <= APIResolved">
+            <div data-ng-if="APIMini <= APIResolved">
                 <div class="row">
                     <div class="col-sm-4">
                         <h3>{{survey.Title}}</h3>
