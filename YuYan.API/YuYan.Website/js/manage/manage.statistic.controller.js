@@ -15,7 +15,16 @@
             var survey = $scope.survey;
 
 
-            $scope.charType = "BarChart"; // "PieChart"; "ColumnChart";
+            //$scope.charType = "BarChart"; // "PieChart"; "ColumnChart";
+            $scope.charType = {
+                options: [
+                            { id: '1', name: 'BarChart' },
+                            { id: '2', name: 'PieChart' },
+                            { id: '3', name: 'ColumnChart' }
+                            ],
+                selectedOption: { id: '1', name: 'BarChart' }
+            };
+  
             $scope.chartGroup = [];
 
             // --- google map
@@ -26,6 +35,7 @@
             $scope.goHome = goHome;
             $scope.goSurvey = goSurvey;
             $scope.clickMe = clickMe;
+            $scope.rerenderChart = rerenderChart;
 
             // initial page
             RetrieveAnswerDictionary();
@@ -47,7 +57,7 @@
                                 });
 
                                 var questionChart = {
-                                    type: $scope.charType,
+                                    type: $scope.charType.selectedOption.name,
                                     data: {
                                         "cols": [{ id: "t", label: "Items", type: "string" }, { id: "s", label: "Counts", type: "number" }],
                                         "rows": rows
@@ -137,14 +147,20 @@
 
                     //var map = $scope.map.control.getGMap();
                     $timeout(function () {
-                        
+
                         map.setCenter(bounds.getCenter());
                         map.fitBounds(bounds);
                         map.setZoom(map.getZoom() - 1);
-                       
+
                     }, 100);
 
                     google.maps.event.trigger(map, 'resize');
+                });
+            }
+
+            function rerenderChart() {
+                angular.forEach($scope.chartGroup, function (questionChart) {
+                    questionChart.type = $scope.charType.selectedOption.name;
                 });
             }
 

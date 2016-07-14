@@ -36,7 +36,13 @@
                     <uib-tab tabindex="2" heading="Answer Statistic">
                         <!--<h3>Answer counts for each question items</h3>-->
 
-                        <div></div>
+                        <div class="pull-right">
+                            <br class="xs-10" />
+                            Chart Options:&nbsp;
+                            <select name="mySelect" id="mySelect"
+                                    data-ng-options="option.name for option in charType.options track by option.id"
+                                    data-ng-model="charType.selectedOption" data-ng-change="rerenderChart()"></select>
+                        </div>
 
                         <div class="row">
                             <h3>{{survey.Title}}</h3>
