@@ -18,13 +18,13 @@
             //$scope.charType = "BarChart"; // "PieChart"; "ColumnChart";
             $scope.charType = {
                 options: [
-                            { id: '1', name: 'BarChart' },
-                            { id: '2', name: 'PieChart' },
-                            { id: '3', name: 'ColumnChart' }
-                            ],
-                selectedOption: { id: '1', name: 'BarChart' }
+                            { id: '1', name: 'PieChart', value: 'Pie Chart' },
+                            { id: '2', name: 'BarChart', value: 'Bar Chart' },
+                            { id: '3', name: 'ColumnChart', value: 'Column Chart' }
+                ],
+                selectedOption: { id: '1', name: 'PieChart', value: 'Pie Chart' }
             };
-  
+
             $scope.chartGroup = [];
 
             // --- google map
@@ -152,7 +152,7 @@
                         map.fitBounds(bounds);
                         map.setZoom(map.getZoom() - 1);
 
-                    }, 100);
+                    }, 300);
 
                     google.maps.event.trigger(map, 'resize');
                 });

@@ -40,7 +40,7 @@
                             <br class="xs-10" />
                             Chart Options:&nbsp;
                             <select name="mySelect" id="mySelect"
-                                    data-ng-options="option.name for option in charType.options track by option.id"
+                                    data-ng-options="option.value for option in charType.options track by option.id"
                                     data-ng-model="charType.selectedOption" data-ng-change="rerenderChart()"></select>
                         </div>
 
@@ -49,9 +49,9 @@
                             <h4>{{survey.ShortDesc}}</h4>
                             <h5>{{survey.LongDesc}}</h5>
                             <br class="xs-10" />
-                            <div class="col-sm-4">
 
-                                <div class="form-group" data-ng-repeat="q in survey.dtoQuestions">
+                            <div class="form-group" data-ng-repeat="q in survey.dtoQuestions">
+                                <div class="col-sm-4">
                                     <h3>
                                         <span class="badge alert-success" style="font-size:16px">{{q.QuestionOrder}}</span> {{q.Question}}
                                     </h3>
@@ -71,20 +71,17 @@
                                     </div>
 
                                 </div>
-                            </div>
-                            <div class="col-sm-8">
-                         
-                                <!-- Chart -->
-                                <div data-ng-repeat="chart in chartGroup track by $index">
-                                    <!--<h4>{{chart.options.title}}</h4>-->
-                                    <div google-chart chart="chart" style="width:100%;"></div>
+                                <div class="col-sm-8">
+                                    <div google-chart chart="chartGroup[{{$index}}]" style="width:100%;"></div>
                                 </div>
+
                             </div>
-                           
+
                         </div>
+
                     </uib-tab>
                 </uib-tabset>
-                
+
             </div>
         </div>
 
