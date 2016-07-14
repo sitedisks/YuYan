@@ -1,11 +1,16 @@
 {
   "name": "angular-google-maps",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "main": "./dist/angular-google-maps.js",
   "dependencies": {
     "angular": "1.2 - 1.5",
     "angular-simple-logger": ">=0.0.1",
-    "lodash": "3.X - 4.X"
+    "lodash": "3.X - 4.X",
+    "markerclustererplus": "^2.1.4",
+    "google-maps-utility-library-v3-markerwithlabel": "git://github.com/nmccready/google-maps-utility-library-v3-markerwithlabel.git",
+    "google-maps-utility-library-v3-infobox": "^1.1.14",
+    "google-maps-utility-library-v3-keydragzoom": "^2.0.9",
+    "js-rich-marker": "*"
   },
   "ignore": [
     "*.json",
@@ -36,14 +41,13 @@
     "uuid": "http://github.com/LiosK/UUID.js/archive/v3.2.tar.gz"
   },
   "homepage": "https://github.com/angular-ui/angular-google-maps",
-  "_release": "2.3.2",
+  "_release": "2.3.3",
   "_resolution": {
     "type": "version",
-    "tag": "2.3.2",
-    "commit": "bea23676c7a3bf5097cb605d54e61748c34a0ee8"
+    "tag": "2.3.3",
+    "commit": "e9e767e8cc4ddeac9b90bbe14736a831d38e9356"
   },
   "_source": "https://github.com/angular-ui/angular-google-maps.git",
-  "_target": "2.3.2",
-  "_originalSource": "angular-google-maps",
-  "_direct": true
+  "_target": "^2.3.2",
+  "_originalSource": "angular-google-maps"
 }
