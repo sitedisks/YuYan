@@ -44,13 +44,14 @@
                                     data-ng-model="charType.selectedOption" data-ng-change="rerenderChart()"></select>
                         </div>
 
-                        <div class="row">
-                            <h3>{{survey.Title}}</h3>
-                            <h4>{{survey.ShortDesc}}</h4>
-                            <h5>{{survey.LongDesc}}</h5>
-                            <br class="xs-10" />
 
-                            <div class="form-group" data-ng-repeat="q in survey.dtoQuestions">
+                        <h3>{{survey.Title}}</h3>
+                        <h4>{{survey.ShortDesc}}</h4>
+                        <h5>{{survey.LongDesc}}</h5>
+                        <br class="xs-10" />
+
+                        <div class="form-group" data-ng-repeat="q in survey.dtoQuestions">
+                            <div class="row">
                                 <div class="col-sm-4">
                                     <h3>
                                         <span class="badge alert-success" style="font-size:16px">{{q.QuestionOrder}}</span> {{q.Question}}
@@ -74,7 +75,6 @@
                                 <div class="col-sm-8">
                                     <div google-chart chart="chartGroup[{{$index}}]" style="width:100%;"></div>
                                 </div>
-
                             </div>
 
                         </div>

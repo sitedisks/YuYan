@@ -393,6 +393,10 @@
     <Content Include="howto_dist.html" />
     <Content Include="img\howto\chorice_step2.jpg" />
     <Content Include="img\howto\chorice_step3.jpg" />
+    <Content Include="img\howto\chorice_step4.jpg" />
+    <Content Include="img\howto\chorice_step5.jpg" />
+    <Content Include="img\howto\chorice_step6.jpg" />
+    <Content Include="img\howto\chorice_step7.jpg" />
     <Content Include="img\pic_angular.jpg" />
     <Content Include="js\manage\manage.statistic.controller.js" />
     <Content Include="package.json" />
@@ -1313,12 +1317,6 @@
     <Content Include="gulpfile.js" />
     <Content Include="howto.html" />
     <Content Include="img\chorice-logo.jpg" />
-    <Content Include="img\howto\chorice_howto_step1.jpg" />
-    <Content Include="img\howto\chorice_howto_step2.jpg" />
-    <Content Include="img\howto\chorice_howto_step3.jpg" />
-    <Content Include="img\howto\chorice_howto_step4.jpg" />
-    <Content Include="img\howto\chorice_howto_step5.jpg" />
-    <Content Include="img\howto\chorice_howto_step6.jpg" />
     <Content Include="img\howto\chorice_step1.jpg" />
     <Content Include="img\QRcode.png" />
     <Content Include="index.html" />

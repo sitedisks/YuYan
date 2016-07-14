@@ -22,7 +22,7 @@
                             { id: '2', name: 'BarChart', value: 'Bar Chart' },
                             { id: '3', name: 'ColumnChart', value: 'Column Chart' }
                 ],
-                selectedOption: { id: '1', name: 'PieChart', value: 'Pie Chart' }
+                selectedOption: { id: '2', name: 'BarChart', value: 'Bar Chart' }
             };
 
             $scope.chartGroup = [];
