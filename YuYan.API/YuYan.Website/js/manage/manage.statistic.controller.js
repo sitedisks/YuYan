@@ -90,7 +90,6 @@
             }
 
             function doMap() {
-
                 // set map
                 uiGmapGoogleMapApi.then(function (maps) {
                     //lodashFix();
@@ -108,31 +107,44 @@
                             }
                         }
                     };
-
-                    uiGmapIsReady.promise().then(function () {
-                        var map = $scope.map.control.getGMap();
-                        google.maps.event.trigger(map, 'resize');
-                    });
-
                 });
 
-                // set markers
-                angular.forEach($scope.geoStatus, function (geoMarker) {
-                    geocoder.geocode({ 'address': geoMarker.name }, function (results, status) {
-                        if (status == google.maps.GeocoderStatus.OK) {
-                            var center = results[0].geometry.location;
-                            var lat = center.lat();
-                            var lng = center.lng();
-                        }
 
-                        $scope.markers.push({
-                            id: i++,
-                            coords: { latitude: lat, longitude: lng },
-                            area: geoMarker.name,
-                            count: geoMarker.count
+                uiGmapIsReady.promise().then(function (maps) {
+
+                    var bounds = new google.maps.LatLngBounds();
+                    var map = maps[0].map;
+
+                    // set markers
+                    angular.forEach($scope.geoStatus, function (geoMarker) {
+                        geocoder.geocode({ 'address': geoMarker.name }, function (results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                var center = results[0].geometry.location;
+                                var lat = center.lat();
+                                var lng = center.lng();
+                                bounds.extend(new google.maps.LatLng(lat, lng));
+                            }
+
+                            $scope.markers.push({
+                                id: i++,
+                                coords: { latitude: lat, longitude: lng },
+                                area: geoMarker.name,
+                                count: geoMarker.count
+                            });
+
                         });
-
                     });
+
+                    //var map = $scope.map.control.getGMap();
+                    $timeout(function () {
+                        
+                        map.setCenter(bounds.getCenter());
+                        map.fitBounds(bounds);
+                        map.setZoom(map.getZoom() - 1);
+                       
+                    }, 100);
+
+                    google.maps.event.trigger(map, 'resize');
                 });
             }
 

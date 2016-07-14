@@ -7,12 +7,7 @@
         <button type="button" class="btn btn-link" data-ng-click="goSurvey()">
             {{'BTN_SURVEY' | translate}}
         </button>
-        <!--<div class="pull-right">
-            <button type="button" class="btn btn-link">Location</button>
-            <span class="text-primary"> | </span>
-            <button type="button" class="btn btn-link">Answer Statistic</button>
-        </div>-->
-       
+
         <div>
             <div class="text-center text-primary" style="margin-top: 30px;" data-ng-if="APIMini > APIResolved">
                 <br class="xs-20" />
@@ -30,16 +25,19 @@
                                     <div>
                                         <b>Area: </b>{{marker.area}}
                                         <br class="xs-10" />
-                                        <b>Count: </b>{{marker.count}}
+                                        <b>Answer Counts: </b><span style="font-size:36px;">{{marker.count}}</span>
                                         <br class="xs-10" />
-                                        <button class="btn btn-link pull-right" data-ng-click="$parent.clickMe()">Dock It</button>
+                                        <!--<button class="btn btn-link pull-right" data-ng-click="$parent.clickMe()">Dock It</button>-->
                                     </div>
                                 </ui-gmap-window>
                             </ui-gmap-marker>
                         </ui-gmap-google-map>
                     </uib-tab>
                     <uib-tab tabindex="2" heading="Answer Statistic">
-                        <h3>Answer counts for each question items</h3>
+                        <!--<h3>Answer counts for each question items</h3>-->
+
+                        <div></div>
+
                         <div class="row">
                             <h3>{{survey.Title}}</h3>
                             <h4>{{survey.ShortDesc}}</h4>
@@ -72,7 +70,7 @@
                          
                                 <!-- Chart -->
                                 <div data-ng-repeat="chart in chartGroup track by $index">
-                                    <h4>{{chart.options.title}}</h4>
+                                    <!--<h4>{{chart.options.title}}</h4>-->
                                     <div google-chart chart="chart" style="width:100%;"></div>
                                 </div>
                             </div>
