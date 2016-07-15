@@ -8,11 +8,11 @@
             else
                 var tokenUrl = creditUrl.split('/')[1];
 
-            $scope.title = "Chorice - Easy Survey Online";
+            $scope.chorice = "Chorice - Easy Survey Online";
 
             choriceAPISvc.surveyTitleSvc().get({ urltoken: tokenUrl },
                 function (data) {
-                    $scope.title = data.title;
+                    $scope.chorice = data.title;
                 },
                 function (error) {
                     toastr.error('Error load Survey');
