@@ -97,6 +97,7 @@
                             r.SurveyId = data.SurveyId;
                             r.Title = data.Title;
                             r.Description = data.Description;
+                            r.ShowStatistics = data.ShowStatistics;
 
                             isNew = false;
                         }

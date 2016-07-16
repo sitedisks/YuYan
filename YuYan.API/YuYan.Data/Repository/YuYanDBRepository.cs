@@ -1003,7 +1003,7 @@ namespace YuYan.Data.Repository
                 newResult.SurveyId = result.SurveyId;
                 newResult.Title = result.Title;
                 newResult.Description = result.Description;
-                newResult.ShowStatistics = result.ShowStatistics;
+                newResult.ShowStatistics = result.ShowStatistics ?? false;
                 newResult.CreatedDate = DateTime.UtcNow;
                 newResult.UpdatedDate = DateTime.UtcNow;
                 newResult.IsActive = true;
@@ -1036,7 +1036,7 @@ namespace YuYan.Data.Repository
                     theResult.SurveyId = result.SurveyId;
                     theResult.Title = result.Title;
                     theResult.Description = result.Description;
-                    theResult.ShowStatistics = result.ShowStatistics;
+                    theResult.ShowStatistics = result.ShowStatistics ?? false;
                     theResult.UpdatedDate = DateTime.UtcNow;
 
                     await _db.SaveChangesAsync();
@@ -1156,7 +1156,8 @@ namespace YuYan.Data.Repository
             return images;
         }
 
-        public async Task DeleteImageByImageId(Guid imgId) {
+        public async Task DeleteImageByImageId(Guid imgId)
+        {
             try
             {
                 tbImage theImage = await _db.tbImages.FirstOrDefaultAsync(x => x.ImageId == imgId

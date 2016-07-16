@@ -7,7 +7,7 @@
                 <label class="control-label" for="resultTitle">{{'TEXT_RESULT' | translate}} {{'TEXT_TITLE' | translate}}</label>
                 <input type="text" class="form-control" id="resultTitle" name="resultTitle" autofocus="autofocus"
                        data-ng-model="result.Title" placeholder="Title" required />
-                
+
             </div>
             <div class="form-group has-success">
                 <label class="control-label" for="resultDesc">{{'TEXT_RESULT' | translate}} {{'TEXT_DESC' | translate}}</label>
@@ -22,13 +22,22 @@
                 <progressbar class="progress-striped m-b-10" value="progressPercentage" type="success"></progressbar>
                 <div data-ng-show="imageId">{{imageId}}</div>
             </div>-->
+            <div class="checkbox checkbox-success has-success">
+                
+                <input type="checkbox" name="resultShowStatistic" id="resultShowStatistic" ng-model="result.ShowStatistics" />
+                <label class="control-label" for="resultShowStatistic">{{'TEXT_SHOWSTA' | translate}}</label>
+            </div>
+            <!--<div class="form-group has-success">
+                <label for="resultShowStatistic">{{'TEXT_SHOWSTA' | translate}}</label>
+                <input type="checkbox" ng-model="result.ShowStatistics">
+            </div>-->
             <div class="form-group has-success">
                 <label class="control-label">{{'TEXT_SCORE' | translate}} {{'TEXT_RANGE' | translate}}</label>
                 <rzslider rz-slider-model="result.MinScore"
                           rz-slider-high="result.MaxScore"
                           rz-slider-options="slider.options"></rzslider>
             </div>
-           
+
         </form>
     </div>
 </div>

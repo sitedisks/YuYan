@@ -113,7 +113,8 @@ namespace YuYan.API.Controllers
                         Title = "Thank you!",
                         Description = "We would like to thank you for your participation and attendance at "
                         + "our survey at CHORICE. Your presence together with your active contributions, "
-                        + "feedback and ideas was greatly appreciated and has gone towards making us a great success."
+                        + "feedback and ideas was greatly appreciated and has gone towards making us a great success.",
+                        ShowStatistics = false // default not show the statistic
                     };
                     var dtoResult = await _yuyanSvc.CreateSurveyResult(firstSurveyResult);
                 }
