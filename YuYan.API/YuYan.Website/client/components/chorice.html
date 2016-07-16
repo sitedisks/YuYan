@@ -46,7 +46,9 @@
                     <h4>Quick &amp; Easy Survey</h4>-->
 
                     <div class="">
-                        <div data-ng-show="!result.SurveyResultId"><h3>Thanks for your participation.</h3></div>
+                        <div data-ng-show="!result.SurveyResultId">
+                            <h3>Thanks for your participation.</h3>
+                        </div>
                         <div data-ng-show="result.SurveyResultId">
                             <h3>{{result.Title}}</h3>
                             <h4>{{result.Description}}</h4>

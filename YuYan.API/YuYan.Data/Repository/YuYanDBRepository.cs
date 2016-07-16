@@ -534,6 +534,7 @@ namespace YuYan.Data.Repository
                 newSurvey.LongDescription = survey.LongDesc;
                 newSurvey.BannerId = survey.BannerId;
                 newSurvey.LogoId = survey.LogoId;
+                newSurvey.ShowReport = survey.ShowReport;
                 newSurvey.CreatedDate = DateTime.UtcNow;
                 newSurvey.UpdatedDate = DateTime.UtcNow;
                 newSurvey.IsActive = true;
@@ -580,6 +581,7 @@ namespace YuYan.Data.Repository
                     theSurvey.BannerId = survey.BannerId;
                     theSurvey.LogoId = survey.LogoId;
                     theSurvey.LongDescription = survey.LongDesc;
+                    theSurvey.ShowReport = survey.ShowReport;
                     theSurvey.UpdatedDate = DateTime.UtcNow;
                     await _db.SaveChangesAsync();
                 }
@@ -1001,6 +1003,7 @@ namespace YuYan.Data.Repository
                 newResult.SurveyId = result.SurveyId;
                 newResult.Title = result.Title;
                 newResult.Description = result.Description;
+                newResult.ShowStatistics = result.ShowStatistics;
                 newResult.CreatedDate = DateTime.UtcNow;
                 newResult.UpdatedDate = DateTime.UtcNow;
                 newResult.IsActive = true;
@@ -1033,6 +1036,7 @@ namespace YuYan.Data.Repository
                     theResult.SurveyId = result.SurveyId;
                     theResult.Title = result.Title;
                     theResult.Description = result.Description;
+                    theResult.ShowStatistics = result.ShowStatistics;
                     theResult.UpdatedDate = DateTime.UtcNow;
 
                     await _db.SaveChangesAsync();
