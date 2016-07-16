@@ -79,7 +79,11 @@
 
     "CHO_STEP6_H1": "Statistics & Analysis",
     "CHO_STEP6_H2": "Big Data",
-    "CHO_STEP6_TEXT": "Check the survey report by times of answer and shared statistics; analyse the market based on the user location.",
+    "CHO_STEP6_TEXT": "Check the survey report by times of answer and shared statistics; A variety of statistical charts at a glance.",
+
+    "CHO_STEP7_H1": "Customer & Location",
+    "CHO_STEP7_H2": "Accurate market targeting",
+    "CHO_STEP7_TEXT": "'CHORICE' makes reports based on real user location, clients and market at your fingertips.",
 
     "CHO_START_NOW": "Start Your Survey Now",
     "CHO_START": "Start",
