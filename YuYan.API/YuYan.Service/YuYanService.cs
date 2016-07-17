@@ -441,22 +441,30 @@ namespace YuYan.Service
                 if (surveyObj.BannerId != null)
                 {
                     var bannerImage = await _yuyanRepos.GetImageByImageId(surveyObj.BannerId ?? new Guid());
-                    if(bannerImage.RefId == -1){
-                        bannerImage.RefId = surveyObj.SurveyId;
-                        dtoImage bannerDto = bannerImage.ConvertToDtoImage();
-                        var updatedBanner = await _yuyanRepos.UpdateImage(bannerDto);
+                    if (bannerImage != null)
+                    {
+                        if (bannerImage.RefId == -1)
+                        {
+                            bannerImage.RefId = surveyObj.SurveyId;
+                            dtoImage bannerDto = bannerImage.ConvertToDtoImage();
+                            var updatedBanner = await _yuyanRepos.UpdateImage(bannerDto);
+                        }
                     }
+
                 }
 
                 // check if the logo refId was -1
                 if (surveyObj.LogoId != null)
                 {
-                    var bannerImage = await _yuyanRepos.GetImageByImageId(surveyObj.LogoId ?? new Guid());
-                    if (bannerImage.RefId == -1)
+                    var logoImage = await _yuyanRepos.GetImageByImageId(surveyObj.LogoId ?? new Guid());
+                    if (logoImage != null)
                     {
-                        bannerImage.RefId = surveyObj.SurveyId;
-                        dtoImage bannerDto = bannerImage.ConvertToDtoImage();
-                        var updatedBanner = await _yuyanRepos.UpdateImage(bannerDto);
+                        if (logoImage.RefId == -1)
+                        {
+                            logoImage.RefId = surveyObj.SurveyId;
+                            dtoImage logoDto = logoImage.ConvertToDtoImage();
+                            var updatedBanner = await _yuyanRepos.UpdateImage(logoDto);
+                        }
                     }
                 }
 
