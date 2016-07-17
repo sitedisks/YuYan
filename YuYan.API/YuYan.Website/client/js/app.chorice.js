@@ -1,7 +1,8 @@
 ﻿angular.module('choriceApp', [
     'ui.bootstrap',
     'ui.router',
-    'ngResource'
+    'ngResource',
+    'googlechart'
 ]);
 
 // global function

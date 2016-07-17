@@ -150,7 +150,8 @@ gulp.task('ngCodesClient', function(){
 		,'bower_components/angular/angular.min.js'
 		,'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
 		,'bower_components/angular-resource/angular-resource.min.js'
-		,'bower_components/angular-ui-router/release/angular-ui-router.min.js'])
+		,'bower_components/angular-ui-router/release/angular-ui-router.min.js'
+		,'bower_components/angular-google-chart/ng-google-chart.min.js'])
 		.pipe($.if('*.js', $.concat('ngCodesClient.js'))) 
 		.pipe($.uglify())
 		.pipe(gulp.dest('dist/client/bower_components'));
@@ -277,7 +278,8 @@ gulp.task('ngCodesClient_debug', function(){
 		,'bower_components/angular/angular.min.js'
 		,'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
 		,'bower_components/angular-resource/angular-resource.min.js'
-		,'bower_components/angular-ui-router/release/angular-ui-router.min.js'])
+		,'bower_components/angular-ui-router/release/angular-ui-router.min.js'
+		,'bower_components/angular-google-chart/ng-google-chart.min.js'])
 		.pipe(gulp.dest('debug/client/bower_components'));
 });
 

@@ -58,16 +58,13 @@
                                     </h3>
 
                                     <div data-ng-repeat="i in q.dtoItems" data-ng-class="{'checkbox checkbox-success':q.QuestionType==1, 'radio radio-success':q.QuestionType==2}">
-                                        <div class="row">
-                                            <div class="col-xs-5 col-xs-offset-1">
-                                                <input type="checkbox" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==1" />
-                                                <input type="radio" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==2" />
-                                                <label for="item{{i.QuestionItemId}}">{{i.ItemDescription}}</label>
 
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <span class="label label-info">{{checkedHashtb[i.QuestionItemId]}}</span>
-                                            </div>
+                                        <div class="col-xs-11 col-xs-offset-1">
+                                            <input type="checkbox" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==1" />
+                                            <input type="radio" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==2" />
+                                            <label for="item{{i.QuestionItemId}}">{{i.ItemDescription}}</label>
+
+
                                         </div>
                                     </div>
 
