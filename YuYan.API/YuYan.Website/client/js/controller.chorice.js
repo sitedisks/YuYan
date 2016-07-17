@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
-    angular.module('choriceApp').controller('choriceCtrl', ['$scope', '$http', '$log', '$stateParams', 'choriceAPISvc', 'endpoint',
-        function ($scope, $http, $log, $stateParams, choriceAPISvc, endpoint) {
+    angular.module('choriceApp').controller('choriceCtrl', ['$scope', '$http', '$log', '$stateParams', '$timeout', 'choriceAPISvc', 'endpoint',
+        function ($scope, $http, $log, $stateParams, $timeout, choriceAPISvc, endpoint) {
 
             var tokenUrl = $stateParams.tokenUrl;
             var location;
@@ -16,6 +16,7 @@
                 geo_country: null
             };
             $scope.result = null;
+            $scope.chartGroup = [];
 
             // function register
             $scope.radioChecked = radioChecked;
@@ -132,7 +133,7 @@
                                 $scope.submitSuccess = true;
                                 $scope.result = result;
                                 
-                                if ($scope.survey.ShowReport) {
+                                if ($scope.result.ShowStatistics) {
                                     // load the answer status 
                                     $scope.APIMini++;
                                     loadAnswerDic();
@@ -151,6 +152,31 @@
             function loadAnswerDic() {
                 choriceAPISvc.surveyClientAnswerDicSvc().get({ surveyId: $scope.survey.SurveyId },
                     function (data) {
+
+                        $timeout(function () {
+                            angular.forEach($scope.survey.dtoQuestions, function (question) {
+
+                                var rows = [];
+
+                                angular.forEach(question.dtoItems, function (item) {
+                                    var row = { c: [{ v: item.ItemDescription }, { v: data[item.QuestionItemId] == null ? 0 : data[item.QuestionItemId] }] };
+                                    rows.push(row);
+                                });
+
+                                var questionChart = {
+                                    type: "BarChart",
+                                    data: {
+                                        "cols": [{ id: "t", label: "Items", type: "string" }, { id: "s", label: "Counts", type: "number" }],
+                                        "rows": rows
+                                    },
+                                    options: { 'title': question.Question, backgroundColor: '#f5f5f5', colors: ['#5bc0de'] }
+                                };
+
+                                $scope.chartGroup.push(questionChart);
+
+                            });
+                        }, 300);
+
                         $scope.checkedHashtb = data;
                         $scope.APIResolved++;
                     }, function () {

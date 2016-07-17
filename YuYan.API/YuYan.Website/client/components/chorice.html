@@ -58,7 +58,8 @@
                         </div>
                         <br class="xs-10" />
                     </div>
-                    <div class="well" data-ng-show="survey.ShowReport">
+                    <div class="well" data-ng-show="result.ShowStatistics">
+                    <!--<div class="well">-->
 
                         <h2>{{survey.Title}}</h2>
 
@@ -82,6 +83,11 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div>
+                                <div google-chart chart="chartGroup[{{$index}}]" style="width:100%;"></div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="text-center">
