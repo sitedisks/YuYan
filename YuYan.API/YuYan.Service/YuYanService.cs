@@ -418,6 +418,48 @@ namespace YuYan.Service
             try
             {
                 var surveyObj = await _yuyanRepos.CreateNewSurvey(survey);
+                // create default result
+                if (surveyObj.SurveyId > 0)
+                {
+
+                    dtoSurveyResult firstSurveyResult = new dtoSurveyResult
+                    {
+                        MinScore = 0,
+                        MaxScore = 100,
+                        SurveyId = surveyObj.SurveyId,
+                        Title = "Thank you!",
+                        Description = "We would like to thank you for your participation and attendance at "
+                        + "our survey at CHORICE. Your presence together with your active contributions, "
+                        + "feedback and ideas was greatly appreciated and has gone towards making us a great success.",
+                        ShowStatistics = false // default not show the statistic
+                    };
+
+                    var result = await _yuyanRepos.CreateNewSurveyResult(firstSurveyResult);
+                }
+
+                // check if the banner refId was -1 
+                if (surveyObj.BannerId != null)
+                {
+                    var bannerImage = await _yuyanRepos.GetImageByImageId(surveyObj.BannerId ?? new Guid());
+                    if(bannerImage.RefId == -1){
+                        bannerImage.RefId = surveyObj.SurveyId;
+                        dtoImage bannerDto = bannerImage.ConvertToDtoImage();
+                        var updatedBanner = await _yuyanRepos.UpdateImage(bannerDto);
+                    }
+                }
+
+                // check if the logo refId was -1
+                if (surveyObj.LogoId != null)
+                {
+                    var bannerImage = await _yuyanRepos.GetImageByImageId(surveyObj.LogoId ?? new Guid());
+                    if (bannerImage.RefId == -1)
+                    {
+                        bannerImage.RefId = surveyObj.SurveyId;
+                        dtoImage bannerDto = bannerImage.ConvertToDtoImage();
+                        var updatedBanner = await _yuyanRepos.UpdateImage(bannerDto);
+                    }
+                }
+
                 s = surveyObj.ConvertToDtoSurvey();
             }
             catch (ApplicationException aex)

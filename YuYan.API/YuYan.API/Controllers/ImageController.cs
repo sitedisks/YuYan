@@ -45,7 +45,7 @@ namespace YuYan.API.Controllers
                 var originalFileName = GetDeserializedFileName(result.FileData.First());
                 var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
 
-                int refId = 0;
+                int refId = -1;
                 if (result.FormData.AllKeys.Contains("refId")) {
                     refId = int.Parse(result.FormData["refId"]);
                 }

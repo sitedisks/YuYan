@@ -1178,6 +1178,25 @@ namespace YuYan.Data.Repository
             }
         }
 
+        public async Task<tbImage> UpdateImage(dtoImage image) {
+            tbImage updatedImage = null;
+
+            try {
+                updatedImage = await _db.tbImages.FirstOrDefaultAsync(x => x.ImageId == image.ImageId
+                         && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (updatedImage != null) {
+                    updatedImage.RefId = image.RefId;
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex) {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return updatedImage;
+        }
+
         #endregion
 
         #region geo2ip

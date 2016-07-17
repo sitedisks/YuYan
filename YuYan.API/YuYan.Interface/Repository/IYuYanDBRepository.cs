@@ -75,7 +75,7 @@ namespace YuYan.Interface.Repository
         Task<tbImage> GetImageByImageId(Guid imgId);
         Task<IList<tbImage>> GetImagesByTypeRef(int typeId, Guid userId, int refId);
         Task DeleteImageByImageId(Guid imgId);
-
+        Task<tbImage> UpdateImage(dtoImage image);
         #endregion
 
         #region geo2ip

@@ -104,20 +104,8 @@ namespace YuYan.API.Controllers
                 if (user != null)
                     survey.UserId = user.UserId;
                 dtoSurvey = await _yuyanSvc.CreateSurvey(survey);
-                if (dtoSurvey.SurveyId > 0) {
-                    // create default result 
-                    dtoSurveyResult firstSurveyResult = new dtoSurveyResult { 
-                        MinScore = 0,
-                        MaxScore = 100,
-                        SurveyId = dtoSurvey.SurveyId,
-                        Title = "Thank you!",
-                        Description = "We would like to thank you for your participation and attendance at "
-                        + "our survey at CHORICE. Your presence together with your active contributions, "
-                        + "feedback and ideas was greatly appreciated and has gone towards making us a great success.",
-                        ShowStatistics = false // default not show the statistic
-                    };
-                    var dtoResult = await _yuyanSvc.CreateSurveyResult(firstSurveyResult);
-                }
+              
+
             }
             catch (ApplicationException aex)
             {
