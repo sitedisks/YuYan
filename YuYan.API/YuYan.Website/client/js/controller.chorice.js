@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
-    angular.module('choriceApp').controller('choriceCtrl', ['$scope', '$http', '$log', '$stateParams', '$timeout', 'choriceAPISvc', 'endpoint',
-        function ($scope, $http, $log, $stateParams, $timeout, choriceAPISvc, endpoint) {
+    angular.module('choriceApp').controller('choriceCtrl', ['$scope', '$http', '$log', '$stateParams', '$timeout', 'chartColor', 'choriceAPISvc', 'endpoint',
+        function ($scope, $http, $log, $stateParams, $timeout, chartColor, choriceAPISvc, endpoint) {
 
             var tokenUrl = $stateParams.tokenUrl;
             var location;
@@ -169,7 +169,7 @@
                                         "cols": [{ id: "t", label: "Items", type: "string" }, { id: "s", label: "Counts", type: "number" }],
                                         "rows": rows
                                     },
-                                    options: { 'title': question.Question, backgroundColor: '#f5f5f5', colors: ['#5bc0de'] }
+                                    options: { 'title': question.Question, backgroundColor: chartColor.well, colors: [chartColor.info, chartColor.success, chartColor.warning, chartColor.danger, chartColor.primary] }
                                 };
 
                                 $scope.chartGroup.push(questionChart);

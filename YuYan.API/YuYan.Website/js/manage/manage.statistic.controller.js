@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('yuyanApp').controller('manageStatisticCtrl', ['$scope', '$stateParams', '$state', '$timeout', '$uibModal', 'yuyanAPISvc', 'uiGmapGoogleMapApi', 'uiGmapIsReady',
-        function ($scope, $stateParams, $state, $timeout, $uibModal, yuyanAPISvc, uiGmapGoogleMapApi, uiGmapIsReady) {
+    angular.module('yuyanApp').controller('manageStatisticCtrl', ['$scope', '$stateParams', '$state', '$timeout', '$uibModal', 'chartColor', 'yuyanAPISvc', 'uiGmapGoogleMapApi', 'uiGmapIsReady',
+        function ($scope, $stateParams, $state, $timeout, $uibModal, chartColor, yuyanAPISvc, uiGmapGoogleMapApi, uiGmapIsReady) {
 
             var geocoder = new google.maps.Geocoder();
             var lat = -37.8140000, lng = 144.9633200; // default melbourne 
@@ -62,7 +62,7 @@
                                         "cols": [{ id: "t", label: "Items", type: "string" }, { id: "s", label: "Counts", type: "number" }],
                                         "rows": rows
                                     },
-                                    options: { 'title': question.Question }
+                                    options: { 'title': question.Question, colors: [chartColor.info, chartColor.success, chartColor.warning, chartColor.danger, chartColor.primary] }
                                 };
 
                                 $scope.chartGroup.push(questionChart);
