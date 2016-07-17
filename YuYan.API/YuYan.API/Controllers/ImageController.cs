@@ -45,7 +45,10 @@ namespace YuYan.API.Controllers
                 var originalFileName = GetDeserializedFileName(result.FileData.First());
                 var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
 
-                int refId = int.Parse(result.FormData["refId"]);
+                int refId = 0;
+                if (result.FormData.AllKeys.Contains("refId")) {
+                    refId = int.Parse(result.FormData["refId"]);
+                }
                 int typeId = int.Parse(result.FormData["typeId"]);
 
                 dtoImage image = new dtoImage
