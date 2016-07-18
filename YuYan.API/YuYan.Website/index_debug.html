@@ -18,6 +18,7 @@
 
     <div data-ng-controller="masterCtrl">
         <div class="btn-group pull-right">
+            <a type="button" href="#" class="btn btn-link btn-sm" data-ng-if="email"><i class="fa fa-user"></i> {{email}}</a>
             <a type="button" href="howto.html" class="btn btn-link btn-sm"><i class="fa fa-question" aria-hidden="true"></i> How to</a>
             <button type="button" class="btn btn-link btn-md" ng-click="changeLanguage('en')"><span class="flag-icon flag-icon-gb"></span></button>
             <button type="button" class="btn btn-link btn-md" ng-click="changeLanguage('cn')"><span class="flag-icon flag-icon-cn"></span></button>        
