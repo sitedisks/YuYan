@@ -2,8 +2,8 @@
     'use strick';
 
     angular.module('yuyanApp')
-        .controller('reportSurveyCtrl', ['$scope', '$uibModalInstance', '$timeout', 'survey', 'localStorageService', 'yuyanAPISvc', 'uiGmapGoogleMapApi', 'uiGmapIsReady',
-            function ($scope, $uibModalInstance, $timeout, survey, localStorageService, yuyanAPISvc, uiGmapGoogleMapApi, uiGmapIsReady) {
+        .controller('reportSurveyCtrl', ['$scope', '$uibModalInstance', '$timeout', 'survey', 'yuyanAPISvc', 'uiGmapGoogleMapApi', 'uiGmapIsReady',
+            function ($scope, $uibModalInstance, $timeout, survey, yuyanAPISvc, uiGmapGoogleMapApi, uiGmapIsReady) {
 
                 var geocoder = new google.maps.Geocoder();
                 var lat = -37.8140000, lng = 144.9633200; // default melbourne 
