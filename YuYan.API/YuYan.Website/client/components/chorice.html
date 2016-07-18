@@ -11,8 +11,9 @@
             <div class="col-md-6 col-md-offset-3">
                 <div data-ng-show="!submitSuccess">
                     <br class="xs-30" />
+                    <img data-ng-show="bannerUrl" data-ng-src="{{bannerUrl}}" class="img-responsive" />
+                    <br class="xs-10" />
                     <div class="well">
-                        <img data-ng-show="bannerUrl" data-ng-src="{{bannerUrl}}" class="img-responsive" />
                         <h2>{{survey.Title}}</h2>
 
                         <h4>{{survey.ShortDesc}}</h4>
@@ -33,9 +34,7 @@
                         <button type="button" class="btn btn-success pull-right" data-ng-disabled="surveyForm.$invalid" data-ng-click="submitSurvey()">Submit</button>
                         <div class="clearfix"></div>
                     </div>
-                    <!--<br class="xs-10" />
-                    <uib-alert type="info" close="bCloseAlert=1" ng-hide="bCloseAlert">Radio button requires at least one selection.</uib-alert>-->
-                    <br class="xs-10" />
+
                     <img data-ng-show="logoUrl" data-ng-src="{{logoUrl}}" class="img-thumbnail img-responsive" />
                     <br class="xs-40" />
                 </div>
@@ -47,19 +46,21 @@
 
                     <div class="">
                         <div data-ng-show="!result.SurveyResultId">
-                            <h3>Thanks you!</h3>
-                            <h4>We would like to thank you for your participation and attendance at our survey 
-                                at CHORICE. Your presence together with your active contributions, feedback and 
-                                ideas was greatly appreciated and has gone towards making us a great success.</h4>
+                            <h2>Thanks you!</h2>
+                            <h4>
+                                We would like to thank you for your participation and attendance at our survey
+                                at CHORICE. Your presence together with your active contributions, feedback and
+                                ideas was greatly appreciated and has gone towards making us a great success.
+                            </h4>
                         </div>
                         <div data-ng-show="result.SurveyResultId">
-                            <h3>{{result.Title}}</h3>
+                            <h2>{{result.Title}}</h2>
                             <h4>{{result.Description}}</h4>
                         </div>
                         <br class="xs-10" />
                     </div>
                     <div class="well" data-ng-show="result.ShowStatistics">
-                    <!--<div class="well">-->
+                        <!--<div class="well">-->
 
                         <h2>{{survey.Title}}</h2>
 
@@ -90,13 +91,15 @@
 
                         </div>
                     </div>
+
                     <div class="text-center">
+                        <button type="button" class="btn btn-link" data-ng-click="backHome()">Home</button>
                         <br class="xs-10" />
                         <img data-ng-show="logoUrl" data-ng-src="{{logoUrl}}" class="img-thumbnail img-responsive" />
                         <br class="xs-10" />
                         <img class="img-responsive" style="margin: 0px auto;" src="/img/QRcode.png" />
 
-                        <button type="button" class="btn btn-link" data-ng-click="backHome()">Home</button>
+
                     </div>
 
                     <br class="xs-10" />
