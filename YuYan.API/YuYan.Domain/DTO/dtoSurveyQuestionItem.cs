@@ -12,7 +12,8 @@ namespace YuYan.Domain.DTO
         public int QuestionId { get; set; }
         public string ItemDescription { get; set; }
         public int ItemOrder { get; set; }
-        public Nullable<int> Score { get; set; }
-        public Nullable<int> GotoQuestionId { get; set; }
+        public int? Score { get; set; }
+        public int? GotoQuestionId { get; set; }
+        public Guid? ImageId { get; set; }
     }
 }

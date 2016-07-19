@@ -873,6 +873,7 @@ namespace YuYan.Data.Repository
                 newItem.ItemDescription = item.ItemDescription;
                 newItem.ItemOrder = item.ItemOrder != 0 ? item.ItemOrder : itemCount + 1;
                 newItem.Score = item.Score;
+                newItem.ImageId = item.ImageId;
                 newItem.CreatedDate = DateTime.UtcNow;
                 newItem.UpdatedDate = DateTime.UtcNow;
                 newItem.IsActive = true;
@@ -901,6 +902,7 @@ namespace YuYan.Data.Repository
                     theItem.ItemDescription = item.ItemDescription;
                     theItem.ItemOrder = item.ItemOrder;
                     theItem.Score = item.Score;
+                    theItem.ImageId = item.ImageId;
                     theItem.UpdatedDate = DateTime.UtcNow;
                     await _db.SaveChangesAsync();
                 }

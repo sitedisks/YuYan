@@ -2,21 +2,52 @@
     'use strick';
 
     angular.module('yuyanApp')
-        .controller('addEditQuestionCtrl', ['$scope', '$uibModalInstance', 'question', 'yuyanAPISvc',
-            function ($scope, $uibModalInstance, question, yuyanAPISvc) {
+        .controller('addEditQuestionCtrl', ['$scope', '$uibModalInstance', 'question', 'yuyanAPISvc', 'imageType',
+            function ($scope, $uibModalInstance, question, yuyanAPISvc, imageType) {
 
                 $scope.saving = false;
 
                 $scope.isItemCountValid = false;
+                $scope.imageProcess = 0;
+                $scope.tempImageId = null;
 
                 $scope.question = question;
 
+                // functions
                 $scope.addItem = addItem;
                 $scope.removeItem = removeItem;
+                $scope.getImageUrl = getImageUrl;
+
+            
+
+                $scope.uploadItemImage = function (file) {
+                    $scope.ImageUploading = true;
+                    yuyanAPISvc
+                        .imageUploadSvc(file, imageType.ItemRef, -1)
+                     .then(function (resp) {
+                         $scope.ImageUploading = false;
+                         $scope.imageProcess = 0;
+                         $scope.imageUrl = yuyanAPISvc.imageGetUrl(resp.data.ImageId, 400);
+                         console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
+                         $scope.tempImageId = resp.data.ImageId;
+                     }, function (resp) {
+                         console.log('Error status: ' + resp.status);
+                     }, function (evt) {
+                         $scope.imageProcess = parseInt(100.0 * evt.loaded / evt.total);
+                         //console.log('progress: ' + $scope.imageProcess + '% ' + evt.config.data.file.name);
+                     });
+                }
 
 
                 if (question.dtoItems.length >= 2)
                     $scope.isItemCountValid = true;
+
+                function getImageUrl(imageId) {
+                    if (imageId != null)
+                        return yuyanAPISvc.imageGetUrl(imageId, 400);
+                    else
+                        return "";
+                }
 
                 function addItem() {
 
@@ -24,11 +55,14 @@
                     var item = {
                         QuestionId: $scope.question.QuestionId,
                         ItemDescription: $scope.item,
-                        ItemOrder: order
+                        ItemOrder: order,
+                        ImageId: $scope.tempImageId
                     }
 
                     $scope.question.dtoItems.push(item);
+                    $scope.tempImageId = null;
                     $scope.item = "";
+                    $scope.imageUrl = null;
                     ItemCountValid();
                 }
 

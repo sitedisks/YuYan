@@ -89,6 +89,7 @@ namespace YuYan.Domain.Extensions
             data.ItemOrder = source.ItemOrder;
             data.Score = source.Score;
             data.GotoQuestionId = source.GotoQuestionId;
+            data.ImageId = source.ImageId;
             data.IsActive = source.IsActive;
             data.IsDeleted = source.IsDeleted;
 

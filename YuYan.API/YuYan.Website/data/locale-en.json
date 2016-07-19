@@ -14,6 +14,7 @@
     "BTN_CONFIRM": "Confirm",
     "BTN_MORE": "More",
     "BTN_NEXT": "Next",
+    "BTN_ATTACH": "Attach",
 
     "TEXT_CHORICE": "chorice",
     "TEXT_FIRST": "First",
@@ -48,6 +49,7 @@
     "TEXT_ITEM": "Item",
     "TEXT_NEXT": "Next",
     "TEXT_SCORE": "Score",
+    "TEXT_STATISTIC": "Statistic",
     "TEXT_RANGE": "Range",
 
     "CHO_FEATURE1": "Quick & Easy",

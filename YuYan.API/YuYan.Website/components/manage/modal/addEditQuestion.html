@@ -38,7 +38,9 @@
                             <div style="padding: 5px 10px;">
                                 <input class="form-control" type="checkbox" name="question{{i.QuestionId}}" id="item{{i.ItemOrder}}" data-ng-if="question.QuestionType==1" />
                                 <input class="form-control" type="radio" name="question{{i.QuestionId}}" id="item{{i.ItemOrder}}" data-ng-if="question.QuestionType==2" />
-                                <label class="break-word" for="item{{i.ItemOrder}}">{{i.ItemDescription}}</label>
+                                <label class="break-word" for="item{{i.ItemOrder}}">{{i.ItemDescription}}
+                                    <div><img data-ng-show="i.ImageId" data-ng-src="{{getImageUrl(i.ImageId)}}" class="img-thumbnail img-responsive" /></div>
+                                </label>
                             </div>
                         </div>
                         <div class="col-xs-3">
@@ -64,11 +66,15 @@
                             <div class="col-xs-1">
                                 <button class="btn btn-link btn-sm"><i class="fa fa-chevron-right"></i>&nbsp;</button>
                             </div>
-                            <div class="col-xs-8">
+                            <div class="col-xs-7">
                                 <input type="text" class="form-control input-sm" name="itemInput" data-ng-model="item" placeholder="Add item" data-ng-minlength="1" data-ng-maxlength="150" />
+                                <br/>
+                                <uib-progressbar data-ng-show="ImageUploading && imageProcess != 0" class="progress-striped m-b-10" value="imageProcess" type="success"></uib-progressbar>
+                                <img data-ng-show="imageUrl" data-ng-src="{{imageUrl}}" class="img-thumbnail img-responsive" />
                             </div>
-                            <div class="col-xs-3">
-                                <button class="btn btn-link btn-sm" data-ng-click="addItem()" data-ng-disabled="!item"><i class="glyphicon glyphicon-plus"></i> {{'BTN_ADD' | translate}}</button>
+                            <div class="col-xs-4">
+                                <button class="btn btn-link btn-sm" data-ng-click="addItem()" data-ng-disabled="!item && tempImageId==null"><i class="glyphicon glyphicon-plus"></i> {{'BTN_ADD' | translate}}</button>
+                                <button class="btn btn-link btn-sm" ngf-select="uploadItemImage($file)" ngf-pattern="'image/*'"><i class="glyphicon glyphicon-picture"></i> {{'BTN_ATTACH' | translate}}</button>
                             </div>
                         </div>
                     </div>

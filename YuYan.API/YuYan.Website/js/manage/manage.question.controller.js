@@ -14,6 +14,14 @@
             $scope.goSurvey = goSurvey;
             $scope.deleteQuestion = deleteQuestion;
             $scope.addEditQuestion = addEditQuestion;
+            $scope.getImageUrl = getImageUrl;
+
+            function getImageUrl(imageId) {
+                if (imageId != null)
+                    return yuyanAPISvc.imageGetUrl(imageId, 400);
+                else
+                    return "";
+            }
 
             function goHome() {
                 $state.go('home');
