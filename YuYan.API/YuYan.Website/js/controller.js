@@ -9,7 +9,7 @@
             $scope.changeLanguage = changeLanguage;
             $rootScope.isLogin = null;
             $rootScope.sessionChecking = false;
-
+ 
             checkSession();
 
             function userLogin(mode, survey) {
@@ -27,12 +27,13 @@
 
                 modalInstance.result.then(function (user) {
 
-                    localStorageService.set('authorizationData', { token: user.CurrentSession.SessionId });
+                    localStorageService.set('authorizationData', { token: user.CurrentSession.SessionId, email: user.Email });
                     if (mode == 'login')
                         toastr.success('Welcome back!', user.Email);
                     else
                         toastr.success('Welcome to Chorice!', user.Email);
 
+                    $scope.email = user.Email;
                     $rootScope.isLogin = true;
                     yuyanAuthSvc.isLogin = true;
 
@@ -64,6 +65,7 @@
                             toastr.success('See ya later!');
                             $rootScope.isLogin = false;
                             yuyanAuthSvc.isLogin = false;
+                            $scope.email = null;
 
                             $state.go('home');
 
@@ -98,6 +100,7 @@
             function checkSession() {
 
                 var localSessionToken = localStorageService.get('authorizationData');
+
                 if (localSessionToken) {
 
                     $rootScope.sessionChecking = true;
@@ -106,6 +109,7 @@
                         function (data) {
                             $rootScope.sessionChecking = false;
                             if (data.SessionId && data.IsActive) {
+                                $scope.email = localSessionToken.email;
                                 $rootScope.isLogin = true;
                                 yuyanAuthSvc.isLogin = true;
                             } else {

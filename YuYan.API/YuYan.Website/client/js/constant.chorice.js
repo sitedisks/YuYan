@@ -6,6 +6,13 @@
         "geoip": "http://ip-api.com/json/",
         "LocalAPI": "http://localhost:5613/",
         "LiveAPI": "http://choriceapi.azurewebsites.net/"
+    }).constant("chartColor", {
+        "info": "#5bc0de",
+        "success": "#5cb85c",
+        "warning": "#f0ad4e",
+        "danger": "#d9534f",
+        "primary": "#337ab7",
+        "well": "#f5f5f5"
     });
 
 })();

@@ -34,7 +34,8 @@
     "TEXT_QUESTIONS": "问题",
     "TEXT_RESULT": "结果信息",
     "TEXT_RESULTS": "结果信息",
-    "TEXT_REPORT": "报告",
+    "TEXT_SHOWSTA": "展示统计数据给用户",
+    "TEXT_REPORT": "统计",
     "TEXT_SHARE": "分享",
     "TEXT_SHORT": "短",
     "TEXT_LONG": "长",
@@ -79,7 +80,11 @@
 
     "CHO_STEP6_H1": "统筹和分析",
     "CHO_STEP6_H2": "大数据和统计",
-    "CHO_STEP6_TEXT": "您的问卷调查分享次数和被问卷回答次数尽在掌握, ‘潮米’还能根据用户地点做出报告更方便您对于市场的把握。",
+    "CHO_STEP6_TEXT": "您的问卷调查分享次数和被问卷回答次数尽在掌握, 多种统计图表一目了然。",
+
+    "CHO_STEP7_H1": "用户及分布",
+    "CHO_STEP7_H2": "精准市场定位",
+    "CHO_STEP7_TEXT": "‘潮米’还能根据用户地点做出报告，客户及其市场规律尽在掌握。",
 
     "CHO_START_NOW": "现在就开始",
     "CHO_START": "开始",

@@ -94,7 +94,10 @@ gulp.task('ngCodes', function(){
 		,'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js'
 		,'bower_components/angular-social-links/angular-social-links.js'
 		,'bower_components/angular-messages/angular-messages.min.js'
-		,'bower_components/angularjs-slider/dist/rzslider.min.js'])
+		,'bower_components/ng-file-upload/ng-file-upload-shim.min.js'
+		,'bower_components/ng-file-upload/ng-file-upload.min.js'
+		,'bower_components/angularjs-slider/dist/rzslider.min.js'
+		,'bower_components/angular-google-chart/ng-google-chart.min.js'])
 		.pipe($.if('*.js', $.concat('ngCodes.js'))) 
 		.pipe($.uglify())
 		.pipe(gulp.dest('dist/bower_components'));
@@ -147,7 +150,8 @@ gulp.task('ngCodesClient', function(){
 		,'bower_components/angular/angular.min.js'
 		,'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
 		,'bower_components/angular-resource/angular-resource.min.js'
-		,'bower_components/angular-ui-router/release/angular-ui-router.min.js'])
+		,'bower_components/angular-ui-router/release/angular-ui-router.min.js'
+		,'bower_components/angular-google-chart/ng-google-chart.min.js'])
 		.pipe($.if('*.js', $.concat('ngCodesClient.js'))) 
 		.pipe($.uglify())
 		.pipe(gulp.dest('dist/client/bower_components'));
@@ -231,7 +235,10 @@ gulp.task('ngCodes_debug', function(){
 		,'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js'
 		,'bower_components/angular-social-links/angular-social-links.js'
 		,'bower_components/angular-messages/angular-messages.min.js'
-		,'bower_components/angularjs-slider/dist/rzslider.min.js'])
+		,'bower_components/ng-file-upload/ng-file-upload-shim.min.js'
+		,'bower_components/ng-file-upload/ng-file-upload.min.js'
+		,'bower_components/angularjs-slider/dist/rzslider.min.js'
+		,'bower_components/angular-google-chart/ng-google-chart.min.js'])
 		// .pipe($.if('*.js', $.concat('ngCodes.js'))) 
 		// .pipe($.uglify())
 		.pipe(gulp.dest('debug/bower_components'));
@@ -271,7 +278,8 @@ gulp.task('ngCodesClient_debug', function(){
 		,'bower_components/angular/angular.min.js'
 		,'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
 		,'bower_components/angular-resource/angular-resource.min.js'
-		,'bower_components/angular-ui-router/release/angular-ui-router.min.js'])
+		,'bower_components/angular-ui-router/release/angular-ui-router.min.js'
+		,'bower_components/angular-google-chart/ng-google-chart.min.js'])
 		.pipe(gulp.dest('debug/client/bower_components'));
 });
 

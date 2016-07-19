@@ -7,7 +7,7 @@
         <div>
             <div class="text-center text-primary" style="margin-top: 30px;" data-ng-show="APIMini > APIResolved">
                 <br />
-                <i class="fa fa-refresh fa-spin" style="font-size:48px"></i>
+                <i class="fa fa-spinner fa-pulse" style="font-size:48px"></i>
             </div>
             <div data-ng-show="APIMini <= APIResolved">
 
@@ -51,7 +51,8 @@
                                             <li role="menuitem"><a href="" data-ng-click="goQuestion(s)"><i class="fa fa-list-ol"></i> {{'TEXT_QUESTIONS' | translate}} <span class="label label-info">{{s.dtoQuestions.length}}</span></a></li>
                                             <li role="menuitem"><a href="" data-ng-click="goResult(s)"><i class="fa fa-newspaper-o"></i> {{'TEXT_RESULTS' | translate}}</a></li>
                                             <li class="divider"></li>
-                                            <li role="menuitem"><a href="" data-ng-click="report(s)"><i class="fa fa-bar-chart"></i> {{'TEXT_REPORT' | translate}}</a></li>
+                                            <!--<li role="menuitem"><a href="" data-ng-click="report(s)"><i class="fa fa-bar-chart"></i> {{'TEXT_REPORT' | translate}}</a></li>-->
+                                            <li role="menuitem" data-ng-show="s.CompleteCount>0"><a href="" data-ng-click="goStatistic(s)"><i class="fa fa-bar-chart"></i> {{'TEXT_REPORT' | translate}}</a></li>
                                             <!--<li role="menuitem"><a href="" data-ng-click="previewSurvey(s)"><i class="fa fa-share"></i> {{'TEXT_SHARE' | translate}}</a></li>-->
                                         </ul>
                                     </div>
@@ -71,6 +72,9 @@
                     <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" data-ng-show="surveys.length>0"
                                     previous-text="&lsaquo;" next-text="&rsaquo;" boundary-link-numbers="true"></uib-pagination>
                 </div>
+ 
+                <!--<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options" control="map.control">
+                </ui-gmap-google-map>-->
             </div>
         </div>
     </div>

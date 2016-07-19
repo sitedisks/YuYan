@@ -534,6 +534,7 @@ namespace YuYan.Data.Repository
                 newSurvey.LongDescription = survey.LongDesc;
                 newSurvey.BannerId = survey.BannerId;
                 newSurvey.LogoId = survey.LogoId;
+                newSurvey.ShowReport = survey.ShowReport;
                 newSurvey.CreatedDate = DateTime.UtcNow;
                 newSurvey.UpdatedDate = DateTime.UtcNow;
                 newSurvey.IsActive = true;
@@ -580,6 +581,7 @@ namespace YuYan.Data.Repository
                     theSurvey.BannerId = survey.BannerId;
                     theSurvey.LogoId = survey.LogoId;
                     theSurvey.LongDescription = survey.LongDesc;
+                    theSurvey.ShowReport = survey.ShowReport;
                     theSurvey.UpdatedDate = DateTime.UtcNow;
                     await _db.SaveChangesAsync();
                 }
@@ -1001,6 +1003,7 @@ namespace YuYan.Data.Repository
                 newResult.SurveyId = result.SurveyId;
                 newResult.Title = result.Title;
                 newResult.Description = result.Description;
+                newResult.ShowStatistics = result.ShowStatistics ?? false;
                 newResult.CreatedDate = DateTime.UtcNow;
                 newResult.UpdatedDate = DateTime.UtcNow;
                 newResult.IsActive = true;
@@ -1033,6 +1036,7 @@ namespace YuYan.Data.Repository
                     theResult.SurveyId = result.SurveyId;
                     theResult.Title = result.Title;
                     theResult.Description = result.Description;
+                    theResult.ShowStatistics = result.ShowStatistics ?? false;
                     theResult.UpdatedDate = DateTime.UtcNow;
 
                     await _db.SaveChangesAsync();
@@ -1152,7 +1156,8 @@ namespace YuYan.Data.Repository
             return images;
         }
 
-        public async Task DeleteImageByImageId(Guid imgId) {
+        public async Task DeleteImageByImageId(Guid imgId)
+        {
             try
             {
                 tbImage theImage = await _db.tbImages.FirstOrDefaultAsync(x => x.ImageId == imgId
@@ -1171,6 +1176,25 @@ namespace YuYan.Data.Repository
             {
                 throw new ApplicationException("Data error!", dex);
             }
+        }
+
+        public async Task<tbImage> UpdateImage(dtoImage image) {
+            tbImage updatedImage = null;
+
+            try {
+                updatedImage = await _db.tbImages.FirstOrDefaultAsync(x => x.ImageId == image.ImageId
+                         && (x.IsActive ?? true) && !(x.IsDeleted ?? false));
+
+                if (updatedImage != null) {
+                    updatedImage.RefId = image.RefId;
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (DataException dex) {
+                throw new ApplicationException("Data error!", dex);
+            }
+
+            return updatedImage;
         }
 
         #endregion

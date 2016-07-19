@@ -4,7 +4,7 @@
     <br class="xs-10" />
     <!--<div class="text-center text-primary" data-ng-show="saving">
         <br />
-        <i class="fa fa-refresh fa-spin" style="font-size:48px"></i>
+        <i class="fa fa-spinner fa-pulse" style="font-size:48px"></i>
     </div>-->
     <div>
         <form name="surveyForm" data-ng-submit novalidate>
@@ -65,7 +65,7 @@
 <div class="modal-footer">
     <div class="pull-right">
         <button type="submit" class="btn btn-primary btn-sm" data-ng-disabled="surveyForm.$invalid || saving" data-ng-click="ok()">
-            <i data-ng-show="!saving" class="glyphicon glyphicon-floppy-save"></i><i data-ng-show="saving" class="fa fa-refresh fa-spin"></i> {{'BTN_SAVE' | translate}}
+            <i data-ng-show="!saving" class="glyphicon glyphicon-floppy-save"></i><i data-ng-show="saving" class="fa fa-spinner fa-pulse"></i> {{'BTN_SAVE' | translate}}
         </button>
         <button type="button" class="btn btn-link btn-sm" data-ng-click="cancel()">
             {{'BTN_CANCEL' | translate}}

@@ -259,6 +259,7 @@ namespace YuYan.Domain.Extensions
             data.SurveyId = source.SurveyId;
             data.Title = source.Title;
             data.Description = source.Description;
+            data.ShowStatistics = source.ShowStatistics ?? false;
 
             return data;
         }

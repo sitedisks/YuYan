@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('yuyanApp').controller('manageQuestionCtrl', ['$scope', '$rootScope', '$stateParams', '$state', '$uibModal', 'yuyanAPISvc',
-        function ($scope, $rootScope, $stateParams, $state, $uibModal, yuyanAPISvc) {
+    angular.module('yuyanApp').controller('manageQuestionCtrl', ['$scope', '$stateParams', '$state', '$uibModal', 'yuyanAPISvc',
+        function ($scope, $stateParams, $state, $uibModal, yuyanAPISvc) {
 
             $scope.survey = $stateParams.survey;
             $scope.APIMini = 1;

@@ -1,8 +1,10 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('yuyanApp').controller('manageCtrl', ['$scope', '$rootScope', '$state', '$uibModal', 'yuyanAPISvc', 'yuyanAuthSvc',
-        function ($scope, $rootScope, $state, $uibModal, yuyanAPISvc, yuyanAuthSvc) {
+    angular.module('yuyanApp').controller('manageCtrl', ['$scope', '$rootScope', '$state', '$uibModal', 'yuyanAPISvc', 'yuyanAuthSvc', 'uiGmapGoogleMapApi',
+        function ($scope, $rootScope, $state, $uibModal, yuyanAPISvc, yuyanAuthSvc, uiGmapGoogleMapApi) {
+
+            //var geocoder = new google.maps.Geocoder();
 
             $scope.APIMini = 2;
             $scope.APIResolved = 0;
@@ -11,6 +13,7 @@
             $scope.goHome = goHome;
             $scope.goQuestion = goQuestion;
             $scope.goResult = goResult;
+            $scope.goStatistic = goStatistic;
             $scope.previewSurvey = previewSurvey;
             $scope.deleteSurvey = deleteSurvey;
             $scope.addEditSurvey = addEditSurvey;
@@ -24,6 +27,16 @@
 
 
             suveryListInit(true);
+            //doMap();
+            /* test google map key
+            geocoder.geocode({ 'address': '127 Balwyn Road, Balwyn, VIC' }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var center = results[0].geometry.location;
+                    var lat = center.lat();
+                    var lng = center.lng();
+                }
+
+            });*/
 
             $scope.$watch("currentPage", function (newValue, oldValue) {
 
@@ -76,6 +89,10 @@
 
             function goResult(survey) {
                 $state.go('result', { survey: survey }, { location: false });
+            }
+
+            function goStatistic(survey) {
+                $state.go('statistic', { survey: survey }, { location: false });
             }
 
             function previewSurvey(survey) {
@@ -155,7 +172,7 @@
                     animation: true,
                     templateUrl: 'components/manage/modal/reportSurvey.html',
                     controller: 'reportSurveyCtrl',
-                    size: 'md',
+                    size: 'lg',
                     resolve: {
                         survey: angular.copy(survey)
                     }
@@ -167,6 +184,22 @@
                     // dismissed log
                 });
             }
+
+            // google map Test
+            /*
+            function doMap() {
+                uiGmapGoogleMapApi.then(function (maps) {
+ 
+                    var lat = -37.8140000, lng = 144.9633200; // default melbourne 
+                    $scope.map = {
+                        center: { latitude: lat, longitude: lng },
+                        zoom: 12,
+                        options: { scrollwheel: true },
+                        control: {}
+                    };
+
+                });
+            }*/
 
         }]);
 

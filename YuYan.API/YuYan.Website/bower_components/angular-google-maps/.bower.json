@@ -1,11 +1,16 @@
 {
   "name": "angular-google-maps",
-  "version": "2.2.1",
+  "version": "2.3.3",
   "main": "./dist/angular-google-maps.js",
   "dependencies": {
-    "angular": "1.2 - 1.4",
-    "angular-simple-logger": "~0.0.1",
-    "lodash": ">=3.8.0"
+    "angular": "1.2 - 1.5",
+    "angular-simple-logger": ">=0.0.1",
+    "lodash": "3.X - 4.X",
+    "markerclustererplus": "^2.1.4",
+    "google-maps-utility-library-v3-markerwithlabel": "git://github.com/nmccready/google-maps-utility-library-v3-markerwithlabel.git",
+    "google-maps-utility-library-v3-infobox": "^1.1.14",
+    "google-maps-utility-library-v3-keydragzoom": "^2.0.9",
+    "js-rich-marker": "*"
   },
   "ignore": [
     "*.json",
@@ -22,24 +27,27 @@
     "spec/coffee/directives",
     "spec/coffee/providers",
     "spec/coffee/usage",
-    "tmp"
+    "tmp",
+    "dist/coverage/",
+    "dist/architecture/"
   ],
   "devDependencies": {
-    "angular-mocks": "1.2 - 1.4",
-    "uuid": "http://github.com/LiosK/UUID.js/archive/v3.2.tar.gz",
-    "angular-route": "1.2 - 1.4",
+    "angular-mocks": "1.2 - 1.5",
+    "angular-route": "1.2 - 1.5",
     "bootstrap-without-jquery": "git://github.com/tagawa/bootstrap-without-jquery.git",
     "data-structures": "~1.4.2",
-    "OverlappingMarkerSpiderfier": "git://github.com/nmccready/OverlappingMarkerSpiderfier.git"
+    "OverlappingMarkerSpiderfier": "git://github.com/nmccready/OverlappingMarkerSpiderfier.git",
+    "underscore": "~1.8.3",
+    "uuid": "http://github.com/LiosK/UUID.js/archive/v3.2.tar.gz"
   },
   "homepage": "https://github.com/angular-ui/angular-google-maps",
-  "_release": "2.2.1",
+  "_release": "2.3.3",
   "_resolution": {
     "type": "version",
-    "tag": "2.2.1",
-    "commit": "8de0f337e795e5937f88b579459811a578537d77"
+    "tag": "2.3.3",
+    "commit": "e9e767e8cc4ddeac9b90bbe14736a831d38e9356"
   },
-  "_source": "git://github.com/angular-ui/angular-google-maps.git",
-  "_target": "~2.2.1",
+  "_source": "https://github.com/angular-ui/angular-google-maps.git",
+  "_target": "^2.3.2",
   "_originalSource": "angular-google-maps"
 }

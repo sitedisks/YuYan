@@ -104,6 +104,8 @@ namespace YuYan.API.Controllers
                 if (user != null)
                     survey.UserId = user.UserId;
                 dtoSurvey = await _yuyanSvc.CreateSurvey(survey);
+              
+
             }
             catch (ApplicationException aex)
             {

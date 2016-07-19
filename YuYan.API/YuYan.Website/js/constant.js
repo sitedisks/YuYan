@@ -15,6 +15,12 @@
         "QuestionRef": { id: 6, group: "Question" },
         "ItemRef": { id: 7, group: "QuestionItem" },
 
+    }).constant("chartColor", {
+        "info": "#5bc0de",
+        "success": "#5cb85c",
+        "warning": "#f0ad4e",
+        "danger": "#d9534f",
+        "primary": "#337ab7",
     });
 
     //http://www.lowata.com.au/tohowapi/ipaddress

@@ -565,6 +565,14 @@
     assert.equal(_.isEqual({a: 0}, {a: -0}), false);
     assert.equal(_.isEqual([NaN], [NaN]), true);
     assert.equal(_.isEqual({a: NaN}, {a: NaN}), true);
+
+    if (typeof Symbol !== 'undefined') {
+      var symbol = Symbol('x');
+      assert.strictEqual(_.isEqual(symbol, symbol), true, 'A symbol is equal to itself');
+      assert.strictEqual(_.isEqual(symbol, Object(symbol)), true, 'Even when wrapped in Object()');
+      assert.strictEqual(_.isEqual(symbol, null), false, 'Different types are not equal');
+    }
+
   });
 
   QUnit.test('isEmpty', function(assert) {
@@ -639,6 +647,17 @@
     assert.strictEqual(_.isString(1), false);
   });
 
+  QUnit.test('isSymbol', function(assert) {
+    assert.ok(!_.isSymbol(0), 'numbers are not symbols');
+    assert.ok(!_.isSymbol(''), 'strings are not symbols');
+    assert.ok(!_.isSymbol(_.isSymbol), 'functions are not symbols');
+    if (typeof Symbol === 'function') {
+      assert.ok(_.isSymbol(Symbol()), 'symbols are symbols');
+      assert.ok(_.isSymbol(Symbol('description')), 'described symbols are symbols');
+      assert.ok(_.isSymbol(Object(Symbol())), 'boxed symbols are symbols');
+    }
+  });
+
   QUnit.test('isNumber', function(assert) {
     assert.ok(!_.isNumber('string'), 'a string is not a number');
     assert.ok(!_.isNumber(arguments), 'the arguments object is not a number');
@@ -660,6 +679,100 @@
     assert.ok(!_.isBoolean(null), 'null is not a boolean');
     assert.ok(_.isBoolean(true), 'but true is');
     assert.ok(_.isBoolean(false), 'and so is false');
+  });
+
+  QUnit.test('isMap', function(assert) {
+    assert.ok(!_.isMap('string'), 'a string is not a map');
+    assert.ok(!_.isMap(2), 'a number is not a map');
+    assert.ok(!_.isMap({}), 'an object is not a map');
+    assert.ok(!_.isMap(false), 'a boolean is not a map');
+    assert.ok(!_.isMap(void 0), 'undefined is not a map');
+    assert.ok(!_.isMap([1, 2, 3]), 'an array is not a map');
+    if (typeof Set === 'function') {
+      assert.ok(!_.isMap(new Set()), 'a set is not a map');
+    }
+    if (typeof WeakSet === 'function') {
+      assert.ok(!_.isMap(new WeakSet()), 'a weakset is not a map');
+    }
+    if (typeof WeakMap === 'function') {
+      assert.ok(!_.isMap(new WeakMap()), 'a weakmap is not a map');
+    }
+    if (typeof Map === 'function') {
+      var keyString = 'a string';
+      var obj = new Map();
+      obj.set(keyString, 'value');
+      assert.ok(_.isMap(obj), 'but a map is');
+    }
+  });
+
+  QUnit.test('isWeakMap', function(assert) {
+    assert.ok(!_.isWeakMap('string'), 'a string is not a weakmap');
+    assert.ok(!_.isWeakMap(2), 'a number is not a weakmap');
+    assert.ok(!_.isWeakMap({}), 'an object is not a weakmap');
+    assert.ok(!_.isWeakMap(false), 'a boolean is not a weakmap');
+    assert.ok(!_.isWeakMap(void 0), 'undefined is not a weakmap');
+    assert.ok(!_.isWeakMap([1, 2, 3]), 'an array is not a weakmap');
+    if (typeof Set === 'function') {
+      assert.ok(!_.isWeakMap(new Set()), 'a set is not a weakmap');
+    }
+    if (typeof WeakSet === 'function') {
+      assert.ok(!_.isWeakMap(new WeakSet()), 'a weakset is not a weakmap');
+    }
+    if (typeof Map === 'function') {
+      assert.ok(!_.isWeakMap(new Map()), 'a map is not a weakmap');
+    }
+    if (typeof WeakMap === 'function') {
+      var keyObj = {}, obj = new WeakMap();
+      obj.set(keyObj, 'value');
+      assert.ok(_.isWeakMap(obj), 'but a weakmap is');
+    }
+  });
+
+  QUnit.test('isSet', function(assert) {
+    assert.ok(!_.isSet('string'), 'a string is not a set');
+    assert.ok(!_.isSet(2), 'a number is not a set');
+    assert.ok(!_.isSet({}), 'an object is not a set');
+    assert.ok(!_.isSet(false), 'a boolean is not a set');
+    assert.ok(!_.isSet(void 0), 'undefined is not a set');
+    assert.ok(!_.isSet([1, 2, 3]), 'an array is not a set');
+    if (typeof Map === 'function') {
+      assert.ok(!_.isSet(new Map()), 'a map is not a set');
+    }
+    if (typeof WeakMap === 'function') {
+      assert.ok(!_.isSet(new WeakMap()), 'a weakmap is not a set');
+    }
+    if (typeof WeakSet === 'function') {
+      assert.ok(!_.isSet(new WeakSet()), 'a weakset is not a set');
+    }
+    if (typeof Set === 'function') {
+      var obj = new Set();
+      obj.add(1).add('string').add(false).add({});
+      assert.ok(_.isSet(obj), 'but a set is');
+    }
+  });
+
+  QUnit.test('isWeakSet', function(assert) {
+
+    assert.ok(!_.isWeakSet('string'), 'a string is not a weakset');
+    assert.ok(!_.isWeakSet(2), 'a number is not a weakset');
+    assert.ok(!_.isWeakSet({}), 'an object is not a weakset');
+    assert.ok(!_.isWeakSet(false), 'a boolean is not a weakset');
+    assert.ok(!_.isWeakSet(void 0), 'undefined is not a weakset');
+    assert.ok(!_.isWeakSet([1, 2, 3]), 'an array is not a weakset');
+    if (typeof Map === 'function') {
+      assert.ok(!_.isWeakSet(new Map()), 'a map is not a weakset');
+    }
+    if (typeof WeakMap === 'function') {
+      assert.ok(!_.isWeakSet(new WeakMap()), 'a weakmap is not a weakset');
+    }
+    if (typeof Set === 'function') {
+      assert.ok(!_.isWeakSet(new Set()), 'a set is not a weakset');
+    }
+    if (typeof WeakSet === 'function') {
+      var obj = new WeakSet();
+      obj.add({x: 1}, {y: 'string'}).add({y: 'string'}).add({z: [1, 2, 3]});
+      assert.ok(_.isWeakSet(obj), 'but a weakset is');
+    }
   });
 
   QUnit.test('isFunction', function(assert) {
@@ -717,6 +830,11 @@
     assert.ok(_.isFinite(0), '0 is finite');
     assert.ok(_.isFinite(123), 'Ints are finite');
     assert.ok(_.isFinite(-12.44), 'Floats are finite');
+    if (typeof Symbol === 'function') {
+      assert.ok(!_.isFinite(Symbol()), 'symbols are not numbers');
+      assert.ok(!_.isFinite(Symbol('description')), 'described symbols are not numbers');
+      assert.ok(!_.isFinite(Object(Symbol())), 'boxed symbols are not numbers');
+    }
   });
 
   QUnit.test('isNaN', function(assert) {

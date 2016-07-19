@@ -64,7 +64,7 @@
 <div class="modal-footer">
     <div class="pull-right">
         <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid || !userAvailable || saving" data-ng-click="ok()">
-            <i class="glyphicon" data-ng-show="!saving" ng-class="{'glyphicon-log-in': mode=='login', 'glyphicon-user': mode=='register'}"></i><i data-ng-show="saving" class="fa fa-refresh fa-spin"></i>&nbsp;{{mode}} &raquo;
+            <i class="glyphicon" data-ng-show="!saving" ng-class="{'glyphicon-log-in': mode=='login', 'glyphicon-user': mode=='register'}"></i><i data-ng-show="saving" class="fa fa-spinner fa-pulse"></i>&nbsp;{{mode}} &raquo;
         </button>
     </div>
     <div class="clearfix"></div>

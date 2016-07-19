@@ -9,7 +9,8 @@ angular.module('yuyanApp', [
     'ngResource',
     'ngMessages',
     'rzModule',
-    'ngFileUpload'
+    'ngFileUpload',
+    'googlechart'
 ]);
 
 angular.module('yuyanApp').run(['$rootScope', 'localStorageService', 'yuyanAPISvc', 'yuyanAuthSvc',

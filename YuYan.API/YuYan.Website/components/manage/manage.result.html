@@ -11,7 +11,7 @@
         <div>
             <div class="text-center text-primary" style="margin-top: 30px;" data-ng-show="APIMini > APIResolved">
                 <br class="xs-20" />
-                <i class="fa fa-refresh fa-spin" style="font-size:48px"></i>
+                <i class="fa fa-spinner fa-pulse" style="font-size:48px"></i>
             </div>
             <div data-ng-show="APIMini <= APIResolved">
                 <h2 class="text-primary">{{survey.Title}}</h2>
@@ -29,14 +29,20 @@
                                 <th style="width: 20%">Title</th>
                                 <th style="width: 30%" class="text-center hidden-xs">{{'TEXT_DESC' | translate}}</th>
                                 <th style="width: 20%" class="text-center hidden-xs">{{'TEXT_SCORE' | translate}} {{'TEXT_RANGE' | translate}}</th>
-                                <th style="width: 30%" class="text-center"><i class="fa fa-cogs"></i> {{'TEXT_ACTION' | translate}}</th>
+                                <th style="width: 10%">Statistic</th>
+                                <th style="width: 20%" class="text-center"><i class="fa fa-cogs"></i> {{'TEXT_ACTION' | translate}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr data-ng-repeat="r in results">
                                 <td class="text-primary">{{r.Title}}</td>
                                 <td class="text-center text-primary hidden-xs">{{r.Description}}</td>
-                                <td class="text-center hidden-xs"><span class="badge alert-success">{{r.MinScore}}</span> - <span class="badge alert-danger">{{r.MaxScore}}</span></td>
+                                <td class="text-center hidden-xs">
+                                    <span class="badge alert-success">{{r.MinScore}}</span> - <span class="badge alert-danger">{{r.MaxScore}}</span>
+                                </td>
+                                <td class="text-center hidden-xs">
+                                    <i class="fa text-success fa-check-square-o" data-ng-class="{'fa-check-square-o': r.ShowStatistics, 'fa-square-o': !r.ShowStatistics}" aria-hidden="true"></i>&nbsp;
+                                </td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-link btn-sm" data-ng-click="addEditResult(r)"><i class="fa fa-edit"></i> <span class="hidden-xs hidden-sm">{{'TEXT_EDIT' | translate}}</span></button>
                                     <button type="button" class="btn btn-danger btn-sm" data-ng-click="deleteResult(r)"><i class="fa fa-remove"></i> <span class="hidden-xs hidden-sm">{{'TEXT_DELETE' | translate}}</span></button>

@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="backup\reportSurvey_tabs.html" />
     <Content Include="bower.json" />
     <Content Include="bower_components\angular-bootstrap\.bower.json" />
     <Content Include="bower_components\angular-bootstrap\.gitignore" />
@@ -69,6 +70,29 @@
     <Content Include="bower_components\angular-cookies\bower.json" />
     <Content Include="bower_components\angular-cookies\package.json" />
     <Content Include="bower_components\angular-cookies\README.md" />
+    <Content Include="bower_components\angular-google-chart\Gruntfile.js" />
+    <Content Include="bower_components\angular-google-chart\karma.conf.js" />
+    <Content Include="bower_components\angular-google-chart\ng-google-chart.js" />
+    <Content Include="bower_components\angular-google-chart\ng-google-chart.min.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcBeforeDraw.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcOnClick.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcOnError.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcOnMouseout.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcOnMouseover.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcOnReady.js" />
+    <Content Include="bower_components\angular-google-chart\src\agcOnSelect.js" />
+    <Content Include="bower_components\angular-google-chart\src\FormatManager.js" />
+    <Content Include="bower_components\angular-google-chart\src\googleChart.js" />
+    <Content Include="bower_components\angular-google-chart\src\googlechart.module.js" />
+    <Content Include="bower_components\angular-google-chart\src\googleChartApiConfig.js" />
+    <Content Include="bower_components\angular-google-chart\src\googleChartApiPromise.js" />
+    <Content Include="bower_components\angular-google-chart\src\GoogleChartController.js" />
+    <Content Include="bower_components\angular-google-chart\src\googleChartService.js" />
+    <Content Include="bower_components\angular-google-chart\src\googleJsapiUrl.js" />
+    <Content Include="bower_components\angular-google-chart\test\google.mock.js" />
+    <Content Include="bower_components\angular-google-chart\test\googleChartApiPromise.spec.js" />
+    <Content Include="bower_components\angular-google-chart\test\googleChartService.spec.js" />
+    <Content Include="bower_components\angular-google-chart\test\googleJsapiUrl.spec.js" />
     <Content Include="bower_components\angular-google-maps\.bower.json" />
     <Content Include="bower_components\angular-google-maps\.travis.yml" />
     <Content Include="bower_components\angular-google-maps\bower.json" />
@@ -363,12 +387,18 @@
     <Content Include="chat.html" />
     <Content Include="client\js\controller.chorice.back" />
     <Content Include="client\js\controller.head.js" />
+    <Content Include="components\manage\manage.statistic.html" />
     <Content Include="data\locale-cn.json" />
     <Content Include="data\locale-en.json" />
     <Content Include="howto_dist.html" />
     <Content Include="img\howto\chorice_step2.jpg" />
     <Content Include="img\howto\chorice_step3.jpg" />
+    <Content Include="img\howto\chorice_step4.jpg" />
+    <Content Include="img\howto\chorice_step5.jpg" />
+    <Content Include="img\howto\chorice_step6.jpg" />
+    <Content Include="img\howto\chorice_step7.jpg" />
     <Content Include="img\pic_angular.jpg" />
+    <Content Include="js\manage\manage.statistic.controller.js" />
     <Content Include="package.json" />
     <Content Include="bower_components\angular-social-links\.bower.json" />
     <Content Include="bower_components\angular-social-links\angular-social-links.coffee" />
@@ -381,6 +411,11 @@
     <Content Include="bower_components\ng-file-upload\bower.json" />
     <Content Include="bower_components\ng-file-upload\LICENSE" />
     <Content Include="bower_components\ng-file-upload\README.md" />
+    <Content Include="bower_components\angular-google-chart\.bower.json" />
+    <Content Include="bower_components\angular-google-chart\bower.json" />
+    <Content Include="bower_components\angular-google-chart\CHANGELOG.md" />
+    <Content Include="bower_components\angular-google-chart\CONTRIBUTING.md" />
+    <Content Include="bower_components\angular-google-chart\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1282,12 +1317,6 @@
     <Content Include="gulpfile.js" />
     <Content Include="howto.html" />
     <Content Include="img\chorice-logo.jpg" />
-    <Content Include="img\howto\chorice_howto_step1.jpg" />
-    <Content Include="img\howto\chorice_howto_step2.jpg" />
-    <Content Include="img\howto\chorice_howto_step3.jpg" />
-    <Content Include="img\howto\chorice_howto_step4.jpg" />
-    <Content Include="img\howto\chorice_howto_step5.jpg" />
-    <Content Include="img\howto\chorice_howto_step6.jpg" />
     <Content Include="img\howto\chorice_step1.jpg" />
     <Content Include="img\QRcode.png" />
     <Content Include="index.html" />
@@ -1315,7 +1344,7 @@
     <Content Include="js\map\map.controller.js" />
     <Content Include="js\services.auth.js" />
     <Content Include="js\services.js" />
-    <Content Include="js\toastr.option.js" />
+    <Content Include="js\global.js" />
     <Content Include="templates\footer.html" />
     <Content Include="templates\header.html" />
     <Content Include="templates\messages.html" />
