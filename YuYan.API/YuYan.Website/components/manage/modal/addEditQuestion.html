@@ -73,7 +73,7 @@
                                 <img data-ng-show="imageUrl" data-ng-src="{{imageUrl}}" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="col-xs-4">
-                                <button class="btn btn-link btn-sm" data-ng-click="addItem()" data-ng-disabled="!item && tempImageId==null"><i class="glyphicon glyphicon-plus"></i> {{'BTN_ADD' | translate}}</button>
+                                <button class="btn btn-link btn-sm" data-ng-click="addItem()" data-ng-disabled="!item"><i class="glyphicon glyphicon-plus"></i> {{'BTN_ADD' | translate}}</button>
                                 <button class="btn btn-link btn-sm" ngf-select="uploadItemImage($file)" ngf-pattern="'image/*'"><i class="glyphicon glyphicon-picture"></i> {{'BTN_ATTACH' | translate}}</button>
                             </div>
                         </div>
