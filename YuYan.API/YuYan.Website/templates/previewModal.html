@@ -39,7 +39,9 @@
                 <div style="padding-left: 40px;" data-ng-repeat="i in q.dtoItems" data-ng-class="{'checkbox checkbox-success':q.QuestionType==1, 'radio radio-success':q.QuestionType==2}">
                     <input type="checkbox" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==1" />
                     <input type="radio" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==2" />
-                    <label for="item{{i.QuestionItemId}}">{{i.ItemDescription}}</label>
+                    <label for="item{{i.QuestionItemId}}">{{i.ItemDescription}}
+                        <div><img data-ng-show="i.ImageId" data-ng-src="{{getImageUrl(i.ImageId)}}" class="img-thumbnail img-responsive" /></div>
+                    </label>
                 </div>
             </div>
             <br class="xs-20" />

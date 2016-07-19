@@ -8,6 +8,8 @@
 			    $scope.survey = survey;
 			    $scope.openLink = openLink;
 
+			    $scope.getImageUrl = getImageUrl;
+
 			    if (!isNullOrEmpty(survey.BannerId))
 			        $scope.bannerUrl = yuyanAPISvc.imageGetUrl(survey.BannerId, 760);
 			    if (!isNullOrEmpty(survey.LogoId))
@@ -20,6 +22,13 @@
 
 			    function openLink(url) {
 			        window.open('http://' + url, '_blank');
+			    }
+
+			    function getImageUrl(imageId) {
+			        if (imageId != null)
+			            return yuyanAPISvc.imageGetUrl(imageId, 400);
+			        else
+			            return "";
 			    }
 
 			    $scope.ok = function () {

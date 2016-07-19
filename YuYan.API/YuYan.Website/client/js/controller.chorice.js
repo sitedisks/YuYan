@@ -22,6 +22,7 @@
             $scope.radioChecked = radioChecked;
             $scope.submitSurvey = submitSurvey;
             $scope.backHome = backHome;
+            $scope.getImageUrl = getImageUrl;
 
             // --------- start use geolocation API ------------
             if (navigator && navigator.geolocation) {
@@ -187,6 +188,14 @@
             function backHome() {
                 window.location = '/';
             }
+
+            function getImageUrl(imageId) {
+                if (imageId != null)
+                    return choriceAPISvc.imageGetUrl(imageId, 400);
+                else
+                    return "";
+            }
+
         }]);
 
 })();
