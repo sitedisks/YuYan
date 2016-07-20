@@ -101,6 +101,7 @@
                             q.QuestionType = data.QuestionType;
                             q.dtoItems = data.dtoItems;
                             q.SurveyId = data.SurveyId;
+                            q.RefImageId = data.RefImageId;
 
                             isNew = false;
                         }

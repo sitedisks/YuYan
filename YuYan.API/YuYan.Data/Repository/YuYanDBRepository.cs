@@ -686,6 +686,7 @@ namespace YuYan.Data.Repository
                 newQuestion.SurveyId = question.SurveyId;
                 newQuestion.Question = question.Question;
                 newQuestion.QuestionType = question.QuestionType;
+                newQuestion.RefImageId = question.RefImageId;
                 newQuestion.QuestionOrder = questionCount + 1;
                 newQuestion.CreatedDate = DateTime.UtcNow;
                 newQuestion.UpdatedDate = DateTime.UtcNow;
@@ -729,6 +730,7 @@ namespace YuYan.Data.Repository
                 {
                     theQuestion.Question = question.Question;
                     theQuestion.QuestionType = question.QuestionType;
+                    theQuestion.RefImageId = question.RefImageId;
                     theQuestion.UpdatedDate = DateTime.UtcNow;
 
                     if (theQuestion.tbSurveyQuestionItems != null)

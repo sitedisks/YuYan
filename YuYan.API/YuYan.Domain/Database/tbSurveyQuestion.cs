@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using YuYan.Domain.Enum;
@@ -17,6 +18,7 @@ namespace YuYan.Domain.Database
         public string Question { get; set; }
         public int QuestionOrder { get; set; }
         public QuestionType QuestionType { get; set; }
+        public Guid? RefImageId { get; set; }
 
         [ForeignKey("SurveyId")]
         public virtual tbSurvey tbSurvey { get; set; }

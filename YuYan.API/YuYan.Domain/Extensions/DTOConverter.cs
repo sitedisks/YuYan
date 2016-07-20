@@ -110,6 +110,7 @@ namespace YuYan.Domain.Extensions
             data.Question = source.Question;
             data.QuestionOrder = source.QuestionOrder;
             data.QuestionType = source.QuestionType;
+            data.RefImageId = source.RefImageId;
             data.IsActive = source.IsActive;
             data.IsDeleted = source.IsDeleted;
 

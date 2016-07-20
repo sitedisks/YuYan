@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using YuYan.Domain.Enum;
 namespace YuYan.Domain.DTO
@@ -10,6 +11,7 @@ namespace YuYan.Domain.DTO
         public string Question { get; set; }
         public int QuestionOrder { get; set; }
         public QuestionType QuestionType { get; set; }
+        public Guid? RefImageId { get; set; }
 
         public virtual ICollection<dtoSurveyQuestionItem> dtoItems { get; set; }
     }

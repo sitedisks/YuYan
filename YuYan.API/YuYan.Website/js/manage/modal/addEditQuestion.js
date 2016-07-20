@@ -8,7 +8,8 @@
                 $scope.saving = false;
 
                 $scope.isItemCountValid = false;
-                $scope.imageProcess = 0;
+                $scope.imageProgress = 0;
+                $scope.refImageProgress = 0;
                 $scope.tempImageId = null;
 
                 $scope.question = question;
@@ -18,7 +19,8 @@
                 $scope.removeItem = removeItem;
                 $scope.getImageUrl = getImageUrl;
 
-            
+                // if there is refImageUrl
+                $scope.refImageUrl = getImageUrl(question.RefImageId, imageSize.question);
 
                 $scope.uploadItemImage = function (file) {
                     $scope.ImageUploading = true;
@@ -26,25 +28,46 @@
                         .imageUploadSvc(file, imageType.ItemRef, -1)
                      .then(function (resp) {
                          $scope.ImageUploading = false;
-                         $scope.imageProcess = 0;
+                         $scope.imageProgress = 0;
                          $scope.imageUrl = yuyanAPISvc.imageGetUrl(resp.data.ImageId, imageSize.questionItem);
                          console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
                          $scope.tempImageId = resp.data.ImageId;
                      }, function (resp) {
                          console.log('Error status: ' + resp.status);
                      }, function (evt) {
-                         $scope.imageProcess = parseInt(100.0 * evt.loaded / evt.total);
+                         $scope.imageProgress = parseInt(100.0 * evt.loaded / evt.total);
                          //console.log('progress: ' + $scope.imageProcess + '% ' + evt.config.data.file.name);
                      });
+                }
+
+                $scope.uploadRefImage = function (file) {
+                    $scope.RefImageUploading = true;
+                    yuyanAPISvc
+                      .imageUploadSvc(file, imageType.QuestionRef, -1)
+                   .then(function (resp) {
+                       $scope.RefImageUploading = false;
+                       $scope.refImageProgress = 0;
+                       $scope.refImageUrl = yuyanAPISvc.imageGetUrl(resp.data.ImageId, imageSize.question);
+                       console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
+                       $scope.question.RefImageId = resp.data.ImageId;
+                   }, function (resp) {
+                       console.log('Error status: ' + resp.status);
+                   }, function (evt) {
+                       $scope.refImageProgress = parseInt(100.0 * evt.loaded / evt.total);
+                       //console.log('progress: ' + $scope.imageProcess + '% ' + evt.config.data.file.name);
+                   });
                 }
 
 
                 if (question.dtoItems.length >= 2)
                     $scope.isItemCountValid = true;
 
-                function getImageUrl(imageId) {
-                    if (imageId != null)
-                        return yuyanAPISvc.imageGetUrl(imageId, imageSize.questionItem);
+                function getImageUrl(imageId, size) {
+                    if (!size)
+                        size = imageSize.questionItem; // default
+                    
+                    if (!isNullOrEmpty(imageId))
+                        return yuyanAPISvc.imageGetUrl(imageId, size);
                     else
                         return "";
                 }

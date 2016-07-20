@@ -27,6 +27,23 @@
                 <span class="fa fa-pencil form-control-feedback"></span>
             </div>
 
+            <div class="form-group">
+                <button data-ng-disabled="RefImageUploading" type="button"
+                        class="btn btn-primary btn-lg btn-block"
+                        ngf-drop="uploadRefImage($file)"
+                        ngf-select="uploadRefImage($file)"
+                        ngf-pattern="'image/*'">
+                    <i data-ng-hide="RefImageUploading" class="fa fa-plus"></i>
+                    <i data-ng-show="RefImageUploading" class="fa fa-spinner fa-pulse fa-fw"></i>
+                    &nbsp;Question Image
+                </button>
+            </div>
+
+            <div class="form-group">
+                <uib-progressbar data-ng-show="RefImageUploading" class="progress-striped m-b-10" value="refImageProgress" type="success"></uib-progressbar>
+                <img data-ng-show="refImageUrl" data-ng-src="{{refImageUrl}}" class="img-thumbnail img-responsive" />
+            </div>
+
             <div class="form-group has-success">
                 <lable class="control-label"><strong>{{'TEXT_QUESTION' | translate}} {{'TEXT_ITEMS' | translate}} </strong></lable>
                 <div class="clearfix"></div>
@@ -69,12 +86,12 @@
                             <div class="col-xs-7">
                                 <input type="text" class="form-control input-sm" name="itemInput" data-ng-model="item" placeholder="Add item" data-ng-minlength="1" data-ng-maxlength="150" />
                                 <br/>
-                                <uib-progressbar data-ng-show="ImageUploading && imageProcess != 0" class="progress-striped m-b-10" value="imageProcess" type="success"></uib-progressbar>
+                                <uib-progressbar data-ng-show="ImageUploading && imageProgress != 0" class="progress-striped m-b-10" value="imageProgress" type="success"></uib-progressbar>
                                 <img data-ng-show="imageUrl" data-ng-src="{{imageUrl}}" class="img-thumbnail img-responsive" />
                             </div>
                             <div class="col-xs-4">
-                                <button class="btn btn-link btn-sm" data-ng-click="addItem()" data-ng-disabled="!item"><i class="glyphicon glyphicon-plus"></i> {{'BTN_ADD' | translate}}</button>
                                 <button class="btn btn-link btn-sm" ngf-select="uploadItemImage($file)" ngf-pattern="'image/*'"><i class="glyphicon glyphicon-picture"></i> {{'BTN_ATTACH' | translate}}</button>
+                                <button class="btn btn-link btn-sm" data-ng-click="addItem()" data-ng-disabled="!item"><i class="glyphicon glyphicon-plus"></i> {{'BTN_ADD' | translate}}</button>
                             </div>
                         </div>
                     </div>

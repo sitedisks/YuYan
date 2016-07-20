@@ -124,6 +124,56 @@ namespace YuYan.API.Controllers
             return Ok(theImage);
         }
 
+        [HttpPost]
+        [Route("upload/question")]
+        //[ResponseType(typeof(tohow.Models.Image))]
+        [AuthenticationFilter(AllowAnonymous = false)]
+        public async Task<IHttpActionResult> QuestionImageUpload()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.UnsupportedMediaType));
+
+            dtoImage theImage = new dtoImage();
+
+            try
+            {
+                var user = ControllerContext.RequestContext.Principal as YYUser;
+
+                var provider = GetMultipartProvider("Question");
+                var result = await Request.Content.ReadAsMultipartAsync(provider);
+                var originalFileName = GetDeserializedFileName(result.FileData.First());
+                var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
+
+                int refId = -1;
+                if (result.FormData.AllKeys.Contains("refId"))
+                {
+                    refId = int.Parse(result.FormData["refId"]);
+                }
+                int typeId = int.Parse(result.FormData["typeId"]);
+
+                dtoImage image = new dtoImage
+                {
+                    ImageType = (Domain.Enum.ImageType)typeId,
+                    UserId = user.UserId,
+                    FileName = originalFileName,
+                    Uri = uploadedFileInfo.Name,
+                    RefId = refId
+                };
+
+                theImage = await _yuyanSvc.InsertImage(image);
+            }
+            catch (ApplicationException aex)
+            {
+                return BadRequest(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(theImage);
+        }
+
 
         [HttpGet]
         [Route("{imageId:guid}")]
