@@ -134,7 +134,9 @@
                                 $scope.APIResolved++;
                                 $scope.submitSuccess = true;
                                 $scope.result = result;
-                                
+                                if (result.ShowScore)
+                                    $scope.totalScore = totalScore;
+
                                 if ($scope.result.ShowStatistics) {
                                     // load the answer status 
                                     $scope.APIMini++;

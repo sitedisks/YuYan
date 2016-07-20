@@ -46,6 +46,12 @@
                     <!--<h1 ng-non-bindable><strong>{{chorice}}</strong></h1>
                     <h4>Quick &amp; Easy Survey</h4>-->
 
+                    <br class="xs-20" />
+                    <div class="text-center" data-ng-show="totalScore">
+                        <div>Your Score: </div>
+                        <span style="font-size:72px">{{totalScore}}</span>
+                    </div>
+
                     <div class="">
                         <div data-ng-show="!result.SurveyResultId">
                             <h2>Thanks you!</h2>
@@ -95,11 +101,16 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="button" class="btn btn-link" data-ng-click="backHome()">Home</button>
+                        <!--<button type="button" class="btn btn-link" data-ng-click="backHome()">Home</button>-->
                         <br class="xs-10" />
                         <img data-ng-show="logoUrl" data-ng-src="{{logoUrl}}" class="img-thumbnail img-responsive" />
                         <br class="xs-10" />
-                        <img class="img-responsive" style="margin: 0px auto;" src="/img/QRcode.png" />
+                        <div class="row">
+                            <div class="col-xs-6 col-xs-offset-3">
+                                Powered By
+                                <img class="img-responsive" style="margin: 0px auto;" src="/img/QRcode.png" />
+                            </div>
+                        </div>
 
 
                     </div>
