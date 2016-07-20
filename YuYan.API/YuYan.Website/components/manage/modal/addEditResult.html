@@ -23,7 +23,10 @@
                 <div data-ng-show="imageId">{{imageId}}</div>
             </div>-->
             <div class="checkbox checkbox-success has-success">
-                
+                <input type="checkbox" name="resultShowScore" id="resultShowScore" ng-model="result.ShowScore" />
+                <label class="control-label" for="resultShowScore">{{'TEXT_SHOWSCORE' | translate}}</label>
+            </div>
+            <div class="checkbox checkbox-success has-success">
                 <input type="checkbox" name="resultShowStatistic" id="resultShowStatistic" ng-model="result.ShowStatistics" />
                 <label class="control-label" for="resultShowStatistic">{{'TEXT_SHOWSTA' | translate}}</label>
             </div>

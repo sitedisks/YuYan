@@ -1006,6 +1006,7 @@ namespace YuYan.Data.Repository
                 newResult.Title = result.Title;
                 newResult.Description = result.Description;
                 newResult.ShowStatistics = result.ShowStatistics ?? false;
+                newResult.ShowScore = result.ShowScore ?? false;
                 newResult.CreatedDate = DateTime.UtcNow;
                 newResult.UpdatedDate = DateTime.UtcNow;
                 newResult.IsActive = true;
@@ -1039,6 +1040,7 @@ namespace YuYan.Data.Repository
                     theResult.Title = result.Title;
                     theResult.Description = result.Description;
                     theResult.ShowStatistics = result.ShowStatistics ?? false;
+                    theResult.ShowScore = result.ShowScore ?? false;
                     theResult.UpdatedDate = DateTime.UtcNow;
 
                     await _db.SaveChangesAsync();

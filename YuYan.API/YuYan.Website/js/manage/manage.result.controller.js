@@ -98,7 +98,7 @@
                             r.Title = data.Title;
                             r.Description = data.Description;
                             r.ShowStatistics = data.ShowStatistics;
-
+                            r.ShowScore = data.ShowScore;
                             isNew = false;
                         }
                     });

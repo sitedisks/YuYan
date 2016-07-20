@@ -261,6 +261,7 @@ namespace YuYan.Domain.Extensions
             data.Title = source.Title;
             data.Description = source.Description;
             data.ShowStatistics = source.ShowStatistics ?? false;
+            data.ShowScore = source.ShowScore ?? false;
 
             return data;
         }
