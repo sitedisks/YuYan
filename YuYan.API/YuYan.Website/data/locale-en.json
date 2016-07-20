@@ -50,7 +50,8 @@
     "TEXT_ITEM": "Item",
     "TEXT_NEXT": "Next",
     "TEXT_SCORE": "Score",
-    "TEXT_STATISTIC": "Statistic",
+    "TEXT_SHOWSTATISTIC": "Show Statistic",
+    "TEXT_SHOWSCORE": "Show Score",
     "TEXT_RANGE": "Range",
 
     "CHO_FEATURE1": "Quick & Easy",

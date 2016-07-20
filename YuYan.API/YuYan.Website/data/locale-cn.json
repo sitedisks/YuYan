@@ -50,7 +50,8 @@
     "TEXT_ITEM": "选项",
     "TEXT_NEXT": "下一个",
     "TEXT_SCORE": "分值",
-    "TEXT_STATISTIC": "统计",
+    "TEXT_SHOWSTATISTIC": "显示统计",
+    "TEXT_SHOWSCORE": "显示分数",
     "TEXT_RANGE": "范围",
 
     "CHO_FEATURE1": "简单快捷",
