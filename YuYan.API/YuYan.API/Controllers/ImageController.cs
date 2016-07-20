@@ -158,6 +158,7 @@ namespace YuYan.API.Controllers
             }
             catch (Exception ex)
             {
+                response.StatusCode = HttpStatusCode.NotFound;
                 return InternalServerError(ex);
             }
 

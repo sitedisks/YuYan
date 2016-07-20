@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
-    angular.module('choriceApp').controller('choricePageCtrl', ['$scope', '$http', '$log', '$stateParams', '$timeout', 'chartColor', 'choriceAPISvc', 'endpoint',
-        function ($scope, $http, $log, $stateParams, $timeout, chartColor, choriceAPISvc, endpoint) {
+    angular.module('choriceApp').controller('choricePageCtrl', ['$scope', '$http', '$log', '$stateParams', '$timeout', 'chartColor', 'choriceAPISvc', 'endpoint', 'imageSize',
+        function ($scope, $http, $log, $stateParams, $timeout, chartColor, choriceAPISvc, endpoint, imageSize) {
 
             var tokenUrl = $stateParams.tokenUrl;
 
@@ -29,7 +29,6 @@
             $scope.pageOrder = pageOrder;
             $scope.prePage = prePage;
             $scope.nextPage = nextPage;
-            $scope.getImageUrl = getImageUrl;
 
             // --------- start use geolocation API ------------
             if (navigator && navigator.geolocation) {
@@ -79,15 +78,17 @@
                             if (q.dtoItems.length > 0) {
                                 angular.forEach(q.dtoItems, function (i) {
                                     i.IsChecked = false;
+                                    if (!isNullOrEmpty(i.ImageId))
+                                        i.ImageUrl = choriceAPISvc.imageGetUrl(i.ImageId, imageSize.questionItem);
                                 });
                             }
                         });
                         $scope.survey = data;
 
                         if (!isNullOrEmpty(data.BannerId))
-                            $scope.bannerUrl = choriceAPISvc.imageGetUrl(data.BannerId, 760);
+                            $scope.bannerUrl = choriceAPISvc.imageGetUrl(data.BannerId, imageSize.survey);
                         if (!isNullOrEmpty(data.LogoId))
-                            $scope.logoUrl = choriceAPISvc.imageGetUrl(data.LogoId, 760);
+                            $scope.logoUrl = choriceAPISvc.imageGetUrl(data.LogoId, imageSize.survey);
                     }
                     //toastr.success('Enjoy!');
                 },
@@ -213,12 +214,6 @@
                 window.location = '/';
             }
 
-            function getImageUrl(imageId) {
-                if (imageId != null)
-                    return choriceAPISvc.imageGetUrl(imageId, 400);
-                else
-                    return "";
-            }
         }]);
 
 })();

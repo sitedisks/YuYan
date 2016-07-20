@@ -13,6 +13,11 @@
         "danger": "#d9534f",
         "primary": "#337ab7",
         "well": "#f5f5f5"
+    }).constant("imageSize", {
+        "survey": 760,
+        "question": 760,
+        "questionItem": 400,
+        "result": 760
     });
 
 })();

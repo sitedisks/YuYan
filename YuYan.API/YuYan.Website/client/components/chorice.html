@@ -29,7 +29,7 @@
                                 <input type="radio" data-ng-model="q.QuestionSelectedItemId" data-ng-value="i.QuestionItemId" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}"
                                        data-ng-if="q.QuestionType==2" data-ng-click="radioChecked(q, i)" data-ng-required="!q.QuestionSelectedItemId" />
                                 <label for="item{{i.QuestionItemId}}">{{i.ItemDescription}}
-                                    <div><img data-ng-show="i.ImageId" data-ng-src="{{getImageUrl(i.ImageId)}}" class="img-thumbnail img-responsive" /></div>
+                                    <div><img data-ng-show="i.ImageUrl" data-ng-src="{{i.ImageUrl}}" class="img-thumbnail img-responsive" /></div>
                                 </label>
                             </div>
                         </div>
