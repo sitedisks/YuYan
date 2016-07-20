@@ -2,8 +2,8 @@
     'use strick';
 
     angular.module('yuyanApp')
-        .controller('addEditSurveyCtrl', ['$scope', '$uibModalInstance', 'survey', 'yuyanAPISvc', 'imageType',
-            function ($scope, $uibModalInstance, survey, yuyanAPISvc, imageType) {
+        .controller('addEditSurveyCtrl', ['$scope', '$uibModalInstance', 'survey', 'yuyanAPISvc', 'imageType', 'imageSize',
+            function ($scope, $uibModalInstance, survey, yuyanAPISvc, imageType, imageSize) {
 
                 $scope.saving = false;
 
@@ -12,9 +12,9 @@
                 $scope.logoProgress = 0;
 
                 if (!isNullOrEmpty(survey.BannerId))
-                    $scope.bannerUrl = yuyanAPISvc.imageGetUrl(survey.BannerId, 760);
+                    $scope.bannerUrl = yuyanAPISvc.imageGetUrl(survey.BannerId, imageSize.survey);
                 if (!isNullOrEmpty(survey.LogoId))
-                    $scope.logoUrl = yuyanAPISvc.imageGetUrl(survey.LogoId, 760);
+                    $scope.logoUrl = yuyanAPISvc.imageGetUrl(survey.LogoId, imageSize.survey);
 
                 //banner
                 $scope.uploadBanner = function (file) {
@@ -23,7 +23,7 @@
                       .imageUploadSvc(file, imageType.SurveyBanner, $scope.survey.SurveyId)
                     .then(function (resp) {
                         $scope.bannerUploading = false;
-                        $scope.bannerUrl = yuyanAPISvc.imageGetUrl(resp.data.ImageId, 760);
+                        $scope.bannerUrl = yuyanAPISvc.imageGetUrl(resp.data.ImageId, imageSize.survey);
                         console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
                         $scope.survey.BannerId = resp.data.ImageId;
                     }, function (resp) {
@@ -41,7 +41,7 @@
                       .imageUploadSvc(file, imageType.SurveyLogo, $scope.survey.SurveyId)
                     .then(function (resp) {
                         $scope.logoUploading = false;
-                        $scope.logoUrl = yuyanAPISvc.imageGetUrl(resp.data.ImageId, 760);
+                        $scope.logoUrl = yuyanAPISvc.imageGetUrl(resp.data.ImageId, imageSize.survey);
                         console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
                         $scope.survey.LogoId = resp.data.ImageId;
                     }, function (resp) {

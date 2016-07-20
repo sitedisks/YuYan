@@ -21,6 +21,11 @@
         "warning": "#f0ad4e",
         "danger": "#d9534f",
         "primary": "#337ab7",
+    }).constant("imageSize", {
+        "survey": 760,
+        "question": 760,
+        "questionItem": 360,
+        "result": 760
     });
 
     //http://www.lowata.com.au/tohowapi/ipaddress

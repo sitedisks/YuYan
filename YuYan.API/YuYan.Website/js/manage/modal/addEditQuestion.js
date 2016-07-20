@@ -2,8 +2,8 @@
     'use strick';
 
     angular.module('yuyanApp')
-        .controller('addEditQuestionCtrl', ['$scope', '$uibModalInstance', 'question', 'yuyanAPISvc', 'imageType',
-            function ($scope, $uibModalInstance, question, yuyanAPISvc, imageType) {
+        .controller('addEditQuestionCtrl', ['$scope', '$uibModalInstance', 'question', 'yuyanAPISvc', 'imageType', 'imageSize',
+            function ($scope, $uibModalInstance, question, yuyanAPISvc, imageType, imageSize) {
 
                 $scope.saving = false;
 
@@ -27,7 +27,7 @@
                      .then(function (resp) {
                          $scope.ImageUploading = false;
                          $scope.imageProcess = 0;
-                         $scope.imageUrl = yuyanAPISvc.imageGetUrl(resp.data.ImageId, 400);
+                         $scope.imageUrl = yuyanAPISvc.imageGetUrl(resp.data.ImageId, imageSize.questionItem);
                          console.log('Success [' + resp.config.data.file.name + '] uploaded. Response: ' + resp.data.ImageId);
                          $scope.tempImageId = resp.data.ImageId;
                      }, function (resp) {
@@ -44,7 +44,7 @@
 
                 function getImageUrl(imageId) {
                     if (imageId != null)
-                        return yuyanAPISvc.imageGetUrl(imageId, 400);
+                        return yuyanAPISvc.imageGetUrl(imageId, imageSize.questionItem);
                     else
                         return "";
                 }

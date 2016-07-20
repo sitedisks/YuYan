@@ -16,7 +16,7 @@
     }).constant("imageSize", {
         "survey": 760,
         "question": 760,
-        "questionItem": 400,
+        "questionItem": 360,
         "result": 760
     });
 

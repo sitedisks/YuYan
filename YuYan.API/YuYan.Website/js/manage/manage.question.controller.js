@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('yuyanApp').controller('manageQuestionCtrl', ['$scope', '$stateParams', '$state', '$uibModal', 'yuyanAPISvc',
-        function ($scope, $stateParams, $state, $uibModal, yuyanAPISvc) {
+    angular.module('yuyanApp').controller('manageQuestionCtrl', ['$scope', '$stateParams', '$state', '$uibModal', 'yuyanAPISvc', 'imageSize',
+        function ($scope, $stateParams, $state, $uibModal, yuyanAPISvc, imageSize) {
 
             $scope.survey = $stateParams.survey;
             $scope.APIMini = 1;
@@ -18,7 +18,7 @@
 
             function getImageUrl(imageId) {
                 if (imageId != null)
-                    return yuyanAPISvc.imageGetUrl(imageId, 400);
+                    return yuyanAPISvc.imageGetUrl(imageId, imageSize.questionItem);
                 else
                     return "";
             }
