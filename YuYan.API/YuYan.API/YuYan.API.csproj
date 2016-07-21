@@ -161,7 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\choriceapi - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\choriceapi - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\choriceapi - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\choriceapi - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\choriceapi.pubxml" />
     <None Include="Web.Debug.config">
