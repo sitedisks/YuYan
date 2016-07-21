@@ -15,6 +15,12 @@
 			    if (!isNullOrEmpty(survey.LogoId))
 			        $scope.logoUrl = yuyanAPISvc.imageGetUrl(survey.LogoId, imageSize.survey);
 
+			    angular.forEach(survey.dtoQuestions, function (q) {
+			        if (!isNullOrEmpty(q.RefImageId)) {
+			            q.refImgUrl = yuyanAPISvc.imageGetUrl(q.RefImageId, imageSize.question);
+			        }
+			    });
+
 			    $scope.shareLink = 'http://' + location.host + '/client/#/' + survey.URLToken;
 			    $scope.sharePageLink = 'http://' + location.host + '/client/#/page/' + survey.URLToken;
 			    $scope.shareLiveLink = 'http://www.chorice.net/client/#/' + survey.URLToken;
@@ -25,7 +31,7 @@
 			    }
 
 			    function getImageUrl(imageId) {
-			        if (imageId != null)
+			        if (!isNullOrEmpty(imageId))
 			            return yuyanAPISvc.imageGetUrl(imageId, imageSize.questionItem);
 			        else
 			            return "";

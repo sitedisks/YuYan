@@ -36,6 +36,7 @@
                 <h3>
                     <span class="badge alert-success" style="font-size:16px">{{q.QuestionOrder}}</span> {{q.Question}}
                 </h3>
+                <img data-ng-show="q.refImgUrl" data-ng-src="{{q.refImgUrl}}" class="img-thumbnail img-responsive" />
                 <div style="padding-left: 40px;" data-ng-repeat="i in q.dtoItems" data-ng-class="{'checkbox checkbox-success':q.QuestionType==1, 'radio radio-success':q.QuestionType==2}">
                     <input type="checkbox" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==1" />
                     <input type="radio" name="question{{i.QuestionId}}" id="item{{i.QuestionItemId}}" data-ng-if="q.QuestionType==2" />

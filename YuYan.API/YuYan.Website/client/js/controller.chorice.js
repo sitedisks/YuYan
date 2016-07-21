@@ -67,6 +67,10 @@
                     if (data) {
                         angular.forEach(data.dtoQuestions, function (q) {
 
+                            if (!isNullOrEmpty(q.RefImageId)) {
+                                q.refImgUrl = choriceAPISvc.imageGetUrl(q.RefImageId, imageSize.question);
+                            }
+
                             if (q.dtoItems.length > 0) {
                                 angular.forEach(q.dtoItems, function (i) {
                                     i.IsChecked = false;
