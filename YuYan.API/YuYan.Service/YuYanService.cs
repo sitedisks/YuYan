@@ -437,37 +437,12 @@ namespace YuYan.Service
                     var result = await _yuyanRepos.CreateNewSurveyResult(firstSurveyResult);
                 }
 
-                // check if the banner refId was -1 
-                if (surveyObj.BannerId != null)
-                {
-                    var bannerImage = await _yuyanRepos.GetImageByImageId(surveyObj.BannerId ?? new Guid());
-                    if (bannerImage != null)
-                    {
-                        if (bannerImage.RefId == -1)
-                        {
-                            bannerImage.RefId = surveyObj.SurveyId;
-                            dtoImage bannerDto = bannerImage.ConvertToDtoImage();
-                            var updatedBanner = await _yuyanRepos.UpdateImage(bannerDto);
-                        }
-                    }
+                // update survey banner image
+                await _yuyanRepos.UpdateImageWithRefId(surveyObj.BannerId?? new Guid(), surveyObj.SurveyId);
 
-                }
-
-                // check if the logo refId was -1
-                if (surveyObj.LogoId != null)
-                {
-                    var logoImage = await _yuyanRepos.GetImageByImageId(surveyObj.LogoId ?? new Guid());
-                    if (logoImage != null)
-                    {
-                        if (logoImage.RefId == -1)
-                        {
-                            logoImage.RefId = surveyObj.SurveyId;
-                            dtoImage logoDto = logoImage.ConvertToDtoImage();
-                            var updatedBanner = await _yuyanRepos.UpdateImage(logoDto);
-                        }
-                    }
-                }
-
+                // update survey logo
+                await _yuyanRepos.UpdateImageWithRefId(surveyObj.LogoId ?? new Guid(), surveyObj.SurveyId);
+            
                 s = surveyObj.ConvertToDtoSurvey();
             }
             catch (ApplicationException aex)

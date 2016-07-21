@@ -43,7 +43,7 @@
                 $scope.uploadRefImage = function (file) {
                     $scope.RefImageUploading = true;
                     yuyanAPISvc
-                      .imageUploadSvc(file, imageType.QuestionRef, -1)
+                      .imageUploadSvc(file, imageType.QuestionRef, $scope.question.QuestionId)
                    .then(function (resp) {
                        $scope.RefImageUploading = false;
                        $scope.refImageProgress = 0;
