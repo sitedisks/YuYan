@@ -148,11 +148,11 @@
                     //var map = $scope.map.control.getGMap();
                     $timeout(function () {
 
-                        map.setCenter(bounds.getCenter());
                         map.fitBounds(bounds);
                         map.setZoom(map.getZoom() - 1);
+                        map.setCenter(bounds.getCenter());
 
-                    }, 300);
+                    }, 1000);
 
                     google.maps.event.trigger(map, 'resize');
                 });
