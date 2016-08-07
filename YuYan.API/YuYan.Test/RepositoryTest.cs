@@ -116,6 +116,18 @@ namespace YuYan.Test
                 Assert.AreEqual("9292929292", obj.Title, true);
             }
         }
+
+        [TestMethod]
+        public async Task TestRepo_GetAllActiveSurveys() {
+            using (YuYanDBContext db = new YuYanDBContext())
+            using (YuYanDBRepository repos = new YuYanDBRepository(db))
+            {
+
+                var obj = await repos.GetAllActiveSurveys();
+                Assert.IsNotNull(obj);
+      
+            }
+        }
         #endregion
 
         #region question
