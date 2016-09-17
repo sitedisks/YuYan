@@ -1,10 +1,10 @@
-﻿using YuYan.Data.DbContext;
-using YuYan.Data.Repository;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using YuYan.Domain.Database;
-using System.Threading.Tasks;
-using YuYan.Domain.DTO;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Threading.Tasks;
+using YuYan.Data.DbContext;
+using YuYan.Data.Repository;
+using YuYan.Domain.Database;
+using YuYan.Domain.DTO;
 
 namespace YuYan.Test
 {
