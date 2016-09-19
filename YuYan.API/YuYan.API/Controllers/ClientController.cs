@@ -25,6 +25,7 @@ namespace YuYan.API.Controllers
         [Route("{urltoken}"), HttpGet]
         public async Task<IHttpActionResult> GetSurveyByURLToken(string urltoken)
         {
+            // try to use Hashids.net to encode !
             dtoSurvey dtoSurvey = new dtoSurvey();
 
             try
