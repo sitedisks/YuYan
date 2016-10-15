@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YuYan.Domain.Database;
-using YuYan.Interface.DbContext;
-
-namespace YuYan.Data.DbContext
+﻿namespace YuYan.Data.DbContext
 {
-    public class YuYanDBContext : System.Data.Entity.DbContext, IYuYanDBContext
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using YuYan.Domain.Database;
+    using YuYan.Interface.DbContext;
+
+    public class YuYanDBContext : DbContext, IYuYanDBContext
     {
         static YuYanDBContext()
         {
@@ -25,7 +20,10 @@ namespace YuYan.Data.DbContext
 
         public YuYanDBContext() : base("YuYanDbAzureContext") { }
 
-        public YuYanDBContext(string connectionString) : base(connectionString) { }
+        public YuYanDBContext(string connectionString) : base(connectionString) {
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
+        }
 
 
         #region entities

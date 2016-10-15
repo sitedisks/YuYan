@@ -1,12 +1,12 @@
-﻿using System;
-using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Infrastructure;
-using System.Threading.Tasks;
-using YuYan.Domain.Database;
-
-namespace YuYan.Interface.DbContext
+﻿namespace YuYan.Interface.DbContext
 {
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Core.Objects;
+    using System.Data.Entity.Infrastructure;
+    using System.Threading.Tasks;
+    using YuYan.Domain.Database;
+
     public interface IYuYanDBContext : IDisposable
     {
         Database Database { get; }
